@@ -1,0 +1,28 @@
+{
+ "moon_patch_arrays_128.npz": {
+  "size": 276241368,
+  "sha256": "6c98f8dfe59b0fb95d18f897f34b211f128d86aaba36f4b4a90af64053922f30",
+  "parts": [
+   "moon_patch_arrays_128.npz.part00",
+   "moon_patch_arrays_128.npz.part01",
+   "moon_patch_arrays_128.npz.part02"
+  ]
+ },
+ "earth_patch_arrays_128.npz": {
+  "size": 230543577,
+  "sha256": "19b905631dd40d094c2dd4cd7307089f84f43b894efdcf5de2675bd5152f6650",
+  "parts": [
+   "earth_patch_arrays_128.npz.part00",
+   "earth_patch_arrays_128.npz.part01",
+   "earth_patch_arrays_128.npz.part02"
+  ]
+ },
+ "moon_midlat_arrays_128.npz": {
+  "size": 112683387,
+  "sha256": "64b59f1a25f46bcf85b02d378e85c75079ce384ad1a401df625d7a8d282b2a6a",
+  "parts": [
+   "moon_midlat_arrays_128.npz.part00",
+   "moon_midlat_arrays_128.npz.part01"
+  ]
+ }
+}
