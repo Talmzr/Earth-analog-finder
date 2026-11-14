@@ -1,0 +1,44 @@
+15:59:20 4321 candidates, 0 done, 0 failed before; 4321 to process with 32 threads
+15:59:31 200/4321 processed (198 ok, 2 failed)  16.96/s  ETA 4.1 min
+15:59:35   flushed 291 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+15:59:39 400/4321 processed (391 ok, 9 failed)  20.41/s  ETA 3.2 min
+15:59:48 600/4321 processed (591 ok, 9 failed)  21.21/s  ETA 2.9 min
+15:59:48   flushed 591 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:00:08 800/4321 processed (790 ok, 10 failed)  16.54/s  ETA 3.5 min
+16:00:12   flushed 890 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:00:17 1000/4321 processed (990 ok, 10 failed)  17.41/s  ETA 3.2 min
+16:00:26 1200/4321 processed (1190 ok, 10 failed)  18.07/s  ETA 2.9 min
+16:00:26   flushed 1190 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:00:46 1400/4321 processed (1390 ok, 10 failed)  16.17/s  ETA 3.0 min
+16:00:51   flushed 1490 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:00:56 1600/4321 processed (1590 ok, 10 failed)  16.61/s  ETA 2.7 min
+16:01:05 1800/4321 processed (1790 ok, 10 failed)  16.99/s  ETA 2.5 min
+16:01:06   flushed 1790 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:01:15 2000/4321 processed (1990 ok, 10 failed)  17.26/s  ETA 2.2 min
+16:01:22   flushed 2090 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:01:26 2200/4321 processed (2190 ok, 10 failed)  17.44/s  ETA 2.0 min
+16:01:41 2400/4321 processed (2390 ok, 10 failed)  16.97/s  ETA 1.9 min
+16:01:41   flushed 2390 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:01:51 2600/4321 processed (2590 ok, 10 failed)  17.19/s  ETA 1.7 min
+16:01:57   flushed 2690 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:02:01 2800/4321 processed (2790 ok, 10 failed)  17.36/s  ETA 1.5 min
+16:02:10 3000/4321 processed (2990 ok, 10 failed)  17.64/s  ETA 1.2 min
+16:02:10   flushed 2990 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:02:19 3200/4321 processed (3190 ok, 10 failed)  17.85/s  ETA 1.0 min
+16:02:24   flushed 3290 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:02:28 3400/4321 processed (3390 ok, 10 failed)  18.04/s  ETA 0.9 min
+16:02:52 3600/4321 processed (3590 ok, 10 failed)  16.91/s  ETA 0.7 min
+16:02:53   flushed 3590 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:03:05 3800/4321 processed (3790 ok, 10 failed)  16.86/s  ETA 0.5 min
+16:03:12   flushed 3889 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:03:17 4000/4321 processed (3989 ok, 11 failed)  16.87/s  ETA 0.3 min
+16:03:26 4200/4321 processed (4189 ok, 11 failed)  17.02/s  ETA 0.1 min
+16:03:27   flushed 4189 patches -> earth_patches_terrain.csv, earth_patch_arrays.npz
+16:03:44 DONE in 4.4 min: 4310 patches written, 11 failures
+source
+impact_structure     190
+landcover_sample    2999
+named_site            30
+volcano             1091
+permanent  error                     
+True       no Copernicus tile (ocean)    11

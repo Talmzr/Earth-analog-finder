@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Large image-array files (100-280 MB each; GitHub limit is 100 MB).
+# Rebuild with: python tools/build_arrays_128.py --body both  (and tools/build_moon_patches.py / build_earth_patches.py for 64x64)
+*.npz
+
+# Generated / temporary
+colab_upload/
+data/cache/
+*.part
+*.tmp.npz

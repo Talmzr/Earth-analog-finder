@@ -1,0 +1,12 @@
+patch_id,error,permanent,source,stratum,name,lat,lon
+crater_montagnais,no Copernicus tile (ocean),True,impact_structure,impact_structure,Montagnais impact structure,42.883,-64.217
+crater_mj_lnir,no Copernicus tile (ocean),True,impact_structure,impact_structure,Mjølnir impact structure,73.8,29.667
+gvp_213040,no Copernicus tile (ocean),True,volcano,volcano_strato_dome,Ararat,39.7,44.3
+gvp_214050,no Copernicus tile (ocean),True,volcano,volcano_field_cone,Samsari Volcanic Center,41.542,43.7
+gvp_214060,no Copernicus tile (ocean),True,volcano,volcano_strato_dome,Aragats,40.53,44.2
+gvp_214070,no Copernicus tile (ocean),True,volcano,volcano_field_cone,Ghegham Volcanic Ridge,40.283,45.0
+gvp_214080,no Copernicus tile (ocean),True,volcano,volcano_field_cone,Vaiyots-Sar,39.797,45.497
+gvp_214090,no Copernicus tile (ocean),True,volcano,volcano_field_cone,Porak,40.028,45.74
+gvp_214100,no Copernicus tile (ocean),True,volcano,volcano_field_cone,Tskhouk-Karckar,39.742,45.992
+gvp_284091,no Copernicus tile (ocean),True,volcano,volcano_strato_dome,Sofugan,29.794,140.342
+lc_sparse_cold_0030,no Copernicus tile (ocean),True,landcover_sample,sparse_cold,sparse_cold sample 30,39.43441,47.89947

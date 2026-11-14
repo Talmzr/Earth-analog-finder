@@ -1,0 +1,379 @@
+{
+  "version": "0.1-draft (2026-11-14)",
+  "_readme": "Per-category ML/physics spec for Moon <-> Earth analog scores. Read by notebooks/ssl_colab.ipynb. Expressions are Python evaluated over a table whose columns are the patch columns plus the resolved aliases below (helpers: log10, log1p, abs, clip, minimum, maximum, where, exp, sqrt, nan, nsum, nmean, contains). In labeling functions / impossible pairs, suffix _M = Moon patch, _E = Earth patch. A comparison with NaN is False, so a rule with missing data abstains. Feature names are unique across categories on purpose.",
+
+  "data_contract": {
+    "moon": {"table": "data/patches/moon_patches.csv", "extra_tables": ["data/patches/moon_patches_tmin.csv (Diviner GCP diurnal min/max, optional)"], "arrays": "data/patches/moon_patch_arrays.npz", "id": "patch_id", "lat": "center_lat", "lon": "center_lon", "xy": ["x_m", "y_m"],
+             "rows_seen": "3609 = 3600 grid patches (10 km, polar stereographic, -76.3 to -89.8 deg) + 9 Artemis target rows (is_target=1, patch_id = config/targets.csv id)",
+             "array_keys": {"elev": "64x64 m", "slope": "64x64 deg", "sunvis": "64x64 0-1 (Moon only)", "dvn_tmax": "16x16 K", "dvn_tavg": "16x16 K"},
+             "geology_catalog": "data/catalogs/moon_geologic_units.csv (unit, name, unit_class_name, age, description, interpretation)"},
+    "earth": {"tables": ["data/patches/earth_candidates.csv", "data/patches/earth_patches_terrain.csv", "data/patches/earth_patches_env.csv"], "join": "patch_id", "arrays": "data/patches/earth_patch_arrays.npz", "lat": "lat", "lon": "lon",
+              "rows_seen": "3877-4321 candidates (growing while env/terrain builds run): 30 named_site (patch_id = config/earth_sites.csv id), 192 impact_structure, 1099 volcano, 2556 landcover_sample (strata: bare_hot, ice_edge, bare_midlat, lichen_moss, sparse_hot, sparse_cold, bare_polar, ice_sheet, antarctic_ice_free)",
+              "array_keys": {"elev": "64x64 m", "slope": "64x64 deg", "valid": "64x64 uint8 mask (0 = void)"}},
+    "pixel_size_note": "10 km / 64 px = ~156 m on both bodies; slope scalars use a common 500 m baseline."
+  },
+
+  "score_semantics": {
+    "range": [-1, 1],
+    "meaning": {"+1": "Earth reproduces the Moon condition within the stated tolerance, for test purposes",
+                "0": "uninformative or only partly analogous",
+                "-1": "opposite / misleading: a test here would give the wrong answer for the Moon"},
+    "bands": {"sufficient": 0.5, "partial": 0.0},
+    "band_rule": "score >= 0.5 -> sufficient; 0 <= score < 0.5 -> partial; score < 0 -> avoid; NaN -> not_applicable / unknown"
+  },
+
+  "pair_score": {
+    "raw": "raw = alpha_ssl * z(cos(e_M, e_E)) + (1 - alpha_ssl) * z(kernel); z() = standardise with mean/std over random Moon-Earth pairs so the two terms share a scale",
+    "kernel": "kernel = 2*exp(-0.5 * mean_i(((x_M_i - x_E_i)/tau_i)^2)) - 1 over features present on both sides (needs >= min_feature_frac of them). Physical units, pooled across bodies, NOT per-body normalised. one_sided=earth_at_least_moon uses max(0, x_M - x_E). kernel=false features are LF/SSL inputs only. kernel = 0.5 at an average gap of ~0.76 tau and 0 at ~1.18 tau.",
+    "min_feature_frac": 0.5,
+    "score": "score = min(cap_M (Moon-side hard_caps), cap_E (Earth-side earth_caps), score_cap, tanh(a * (raw - b)))",
+    "calibration": {
+      "method": "tanh_platt (2 parameters per category, a > 0 so the map is monotone)",
+      "prior": "score = tanh(kernel): with raw in kernel z-units, a0 = std_k and b0 = -mean_k/std_k over random pairs. Used as-is when a category has fewer than min_anchors_to_fit anchors. Meaning: a pair is sufficient (>= 0.5) when its features lie within ~0.75 tau of each other on average; the tolerances tau are the stated physics assumptions.",
+      "min_anchors_to_fit": 4,
+      "anchor_weight": {"high": 1.0, "med": 0.6, "low": 0.3},
+      "weak_label_weight_total": 0.25,
+      "ridge_to_prior": 0.3,
+      "optional_head": "Prior-Labs/TabPFN-v2-reg on [z_cos, z_kernel, weak_vote, feature gaps] once a category has >= 30 reviewed anchors (check the model-card licence). Default stays tanh_platt."
+    }
+  },
+
+  "ssl": {
+    "image": {"backbone": "facebook/dinov2-small", "fallback_backbone": "facebook/dinov2-base (if VRAM allows) or timm resnet18 (if HF download fails)",
+              "channels": ["(elev - patch_mean)/1000 m, clipped to +-3", "slope_deg/30, clipped to 0-3", "tanh(laplacian(elev)/50 m) (curvature: bowls vs peaks)"],
+              "why_not_sunvis": "sunvis exists only for the Moon; a zero channel for Earth would let the encoder identify the body. Illumination is handled by its own category.",
+              "image_size": 112, "train_last_blocks": 4, "proj_dim": 1024, "embedding": "concat(CLS, mean patch tokens) = 768-d, pooled-mean centred, L2-normalised",
+              "loss": "VICReg(sim=25, var=25, cov=1) on projector outputs + lambda_coral * CORAL(Moon vs Earth) on the 768-d representation", "lambda_coral": 1.0,
+              "batch": "128, half Moon / half Earth (domain-balanced)", "epochs": 30, "lr_backbone": 1e-4, "lr_head": 1e-3, "weight_decay": 0.05, "amp": "fp16",
+              "augment": ["8 dihedral transforms (rot90 x flips)", "random resized crop scale 0.6-1.0 (scale jitter)", "elevation gain x U(0.9,1.1)", "Gaussian noise sigma 0.01"]},
+    "tabular": {"encoder": "MLP in -> 256 -> 256 -> 64 (+ projector 64 -> 256 -> 256)", "loss": "VICReg", "corruption": "SCARF: 30% of features replaced by the same feature from a random patch of the same body, + N(0, 0.05)",
+                "inputs": "category features standardised with POOLED (Moon+Earth) mean/std in physical units, NaN -> 0 plus a missing-indicator per feature", "steps": 3000, "batch": 256, "lr": 1e-3},
+    "text": {"backbone": "BAAI/bge-small-en-v1.5", "fallback_backbone": "sentence-transformers/all-MiniLM-L6-v2", "loss": "MultipleNegativesRankingLoss on (Moon unit text, Earth positive, Earth hard negative) triplets mined with the lithology ontology", "epochs": 3, "batch": 32,
+             "strip_words": ["lunar", "moon", "moon's", "earth", "terrestrial", "selenologic"]},
+    "domain_checks": "Report linear-probe Moon-vs-Earth AUC on held-out spatial blocks for every embedding. AUC > 0.9 means the embedding mostly encodes the body: lower alpha_ssl to 0.3 or fall back to the kernel."
+  },
+
+  "spatial_cv": {
+    "moon_block_km": 50, "earth_block_deg": 5, "folds": 5, "holdout_fold": 0,
+    "why": "Neighbouring 10 km patches are strongly autocorrelated; random splits leak. SSL is trained on folds != holdout; invariance, domain AUC and kNN stability are reported on the holdout blocks."
+  },
+
+  "column_aliases": {
+    "lst_day_max_k":        {"candidates": ["modis_lst_day_max_k", "lst_day_max_k", "lst_day_k_max"], "regex": "lst.*day.*max"},
+    "lst_night_min_k":      {"candidates": ["modis_lst_night_min_k", "lst_night_min_k", "lst_night_k_min"], "regex": "lst.*night.*min"},
+    "lst_mean_k":           {"candidates": ["modis_lst_mean_k", "lst_mean_k"], "regex": "lst.*_mean"},
+    "lst_diurnal_range_k":  {"candidates": ["modis_lst_diurnal_range_k", "lst_day_night_range_k", "lst_diurnal_range_k"], "regex": "lst.*(diurnal|day_night).*range"},
+    "lst_annual_range_k":   {"candidates": ["modis_lst_annual_range_k", "lst_annual_range_k"], "regex": "lst.*annual.*range"},
+    "power_t2m_c":          {"candidates": ["power_t2m_c"]},
+    "power_t2m_min_c":      {"candidates": ["power_t2m_min_c", "power_t2m_coldest_month_min_c"]},
+    "power_t2m_max_c":      {"candidates": ["power_t2m_max_c", "power_t2m_warmest_month_max_c"]},
+    "power_frost_days":     {"candidates": ["power_frost_days"]},
+    "power_rh_pct":         {"candidates": ["power_rh2m_pct", "power_rh_pct"]},
+    "power_uv_index":       {"candidates": ["power_uv_index"]},
+    "power_ps_kpa":         {"candidates": ["power_ps_kpa", "power_psurf_kpa"]},
+    "precip_mm_yr":         {"candidates": ["precip_best_mm_yr", "precip_mm_yr", "jaxa_gsmap_precip_mm_yr", "power_precip_mm_yr"], "regex": "precip.*mm_yr"},
+    "soil_moisture_m3m3":   {"candidates": ["soil_moist_mean", "jaxa_amsr2_soil_moist_mean", "amsr2_soil_moisture_mean", "soil_moisture_mean"], "regex": "(soil_moist|amsr2_sm).*mean", "unit_fix": "percent_to_fraction"},
+    "permafrost_frac":      {"candidates": ["pf_frac_pct", "permafrost_frac", "esa_cci_pfr"], "regex": "(pf_frac|pfr)", "unit_fix": "percent_to_fraction"},
+    "permafrost_flag":      {"candidates": ["permafrost_flag"]},
+    "ground_temp_2m_c":     {"candidates": ["pf_magt_2m_c"]},
+    "active_layer_m":       {"candidates": ["permafrost_alt_m", "active_layer_m", "alt_m"], "regex": "(active_layer|_alt_m)"},
+    "ndvi_mean":            {"candidates": ["modis_ndvi_mean", "ndvi_mean"], "regex": "ndvi.*mean"},
+    "aot_mean":             {"candidates": ["modis_aot_mean", "aot_mean", "aod_mean"], "regex": "(aot|aod|aerosol)"},
+    "sand_pct":             {"candidates": ["sg_sand_pct", "soilgrids_sand_pct", "sand_pct"], "regex": "(^|_)sand", "unit_fix": "gkg_to_pct"},
+    "silt_pct":             {"candidates": ["sg_silt_pct", "soilgrids_silt_pct", "silt_pct"], "regex": "(^|_)silt", "unit_fix": "gkg_to_pct"},
+    "clay_pct":             {"candidates": ["sg_clay_pct", "soilgrids_clay_pct", "clay_pct"], "regex": "(^|_)clay", "unit_fix": "gkg_to_pct"},
+    "bdod_g_cm3":           {"candidates": ["sg_bdod_g_cm3", "soilgrids_bdod_g_cm3", "bdod_g_cm3"], "regex": "(bdod|bulk_dens)", "unit_fix": "cg_to_g"},
+    "cfvo_pct":             {"candidates": ["sg_cfvo_pct", "soilgrids_cfvo_pct", "cfvo_pct"], "regex": "(cfvo|coarse_frag)", "unit_fix": "permille_to_pct"},
+    "wc_frac_tree":         {"candidates": ["wc_frac_tree"]},
+    "wc_frac_shrub":        {"candidates": ["wc_frac_shrub"]},
+    "wc_frac_grass":        {"candidates": ["wc_frac_grass"]},
+    "wc_frac_crop":         {"candidates": ["wc_frac_crop"]},
+    "wc_frac_built":        {"candidates": ["wc_frac_built"]},
+    "wc_frac_bare_sparse":  {"candidates": ["wc_frac_bare_sparse"]},
+    "wc_frac_snow_ice":     {"candidates": ["wc_frac_snow_ice"]},
+    "wc_frac_water":        {"candidates": ["wc_frac_water"]},
+    "wc_frac_wetland":      {"candidates": ["wc_frac_wetland"]},
+    "wc_frac_mangrove":     {"candidates": ["wc_frac_mangrove"]},
+    "wc_frac_moss_lichen":  {"candidates": ["wc_frac_moss_lichen"]},
+    "lith_text":            {"candidates": ["mstrat_lith", "lithology"], "text": true},
+    "lith_desc":            {"candidates": ["mstrat_descrip", "mstrat_text_all", "lithology_description"], "text": true},
+    "context":              {"candidates": ["context"], "text": true},
+    "stratum":              {"candidates": ["stratum"], "text": true},
+    "source":               {"candidates": ["source"], "text": true}
+  },
+
+  "text_flags": {
+    "flag_highland":        {"bodies": ["moon"], "fields": ["geo_text"], "regex": "^(?!.*(\\bmare\\b|dark mantl))", "note": "every non-mare unit: all south-pole units sit in feldspathic highland crust (with SPA-related mafic admixture)"},
+    "flag_crater_unit":     {"bodies": ["moon"], "fields": ["geo_text"], "regex": "crater|catena|ejecta|secondary"},
+    "flag_mare":            {"bodies": ["moon"], "fields": ["geo_text"], "regex": "\\bmare\\b|dark mantl|pyroclastic"},
+    "flag_impact":          {"bodies": ["earth"], "fields": ["source", "context", "lith_text", "lith_desc"], "regex": "impact(?!_crater_like)|suevite|impactite|shatter cone|shock metamorph"},
+    "flag_anorthositic":    {"bodies": ["earth"], "fields": ["context", "lith_text", "lith_desc"], "regex": "anorthosit|plagioclase|gabbro|norite|troctolite"},
+    "flag_basaltic":        {"bodies": ["earth"], "fields": ["context", "lith_text", "lith_desc"], "regex": "basalt|picrite|hawaiite|tholeiit|scoria|cinder"},
+    "flag_tephra":          {"bodies": ["earth"], "fields": ["context", "lith_text", "lith_desc"], "regex": "tephra|cinder|scoria|volcanic ash|pyroclastic|lapilli"},
+    "flag_aqueous_sed":     {"bodies": ["earth"], "fields": ["context", "lith_text", "lith_desc"], "regex": "limestone|dolomit|carbonate|evaporite|halite|gypsum|shale|mudstone|sandstone|siltstone|\\bclay|chert|coal|marl|travertine|\\bsalt|sedimentary|lakebed"},
+    "flag_silicic":         {"bodies": ["earth"], "fields": ["context", "lith_text", "lith_desc"], "regex": "rhyolit|dacit|andesit|trachyt|obsidian|pumice|ignimbrite|granite"},
+    "flag_ice_surface":     {"bodies": ["earth"], "fields": ["stratum", "context"], "regex": "ice_sheet|ice sheet|glacier", "or_expr": "wc_frac_snow_ice >= 0.7"},
+    "flag_lava_tube":       {"bodies": ["earth"], "fields": ["context", "lith_desc"], "regex": "lava.?tube|lava cave|\\bcaves?\\b"},
+    "flag_isolation":       {"bodies": ["earth"], "fields": ["context"], "regex": "isolation|station|habitat"}
+  },
+
+  "categories": {
+
+    "geology": {
+      "id": 1, "name": "Geology, mineralogy, surface materials", "status": "learned (text) + lithology kernel", "bodies": ["moon", "earth"],
+      "inputs": {"moon": {"columns": ["moon_geo_unit", "moon_geo_unit_name", "moon_geo_unit_age", "geo_frac_crater", "geo_frac_basin", "geo_frac_plains", "geo_frac_terra", "geo_frac_mare"], "text": ["unit name + description + interpretation from data/catalogs/moon_geologic_units.csv"]},
+                 "earth": {"columns": ["mstrat_lith", "mstrat_descrip", "mstrat_text_all", "source", "stratum"], "text": ["lith_text", "lith_desc", "context (tags, GVP rock type and summary, impact-catalog row)"]}},
+      "model": {"type": "text_ssl+lithology_kernel", "alpha_ssl": 0.5, "text_backbone": "BAAI/bge-small-en-v1.5"},
+      "lithology_classes": {
+        "feldspathic":  {"moon_regex": "^(?!.*(\\bmare\\b|dark mantl))", "earth_flag": "flag_anorthositic", "moon_weight": 0.5},
+        "impactite":    {"moon_regex": "crater|catena|ejecta|secondary|basin", "earth_flag": "flag_impact", "moon_weight": 0.3},
+        "basaltic":     {"moon_regex": "\\bmare\\b|dark mantl|pyroclastic", "earth_flag": "flag_basaltic", "moon_weight": 0.5},
+        "unconsolidated_fines": {"moon_regex": ".", "earth_flag": "flag_tephra", "moon_weight": 0.2}
+      },
+      "earth_penalties": {"flag_aqueous_sed": 0.7, "flag_silicic": 0.3, "flag_ice_surface": 0.8},
+      "lithology_kernel": "k_lith = clip(sum_c w_c[M] * flag_c[E] / sum_c w_c[M] - sum penalties[E], -1, 1); penalties are not applied to impact structures for flag_aqueous_sed. Earth rows with no lithology text and no class hit get NaN (unknown), not a made-up score.",
+      "features": [],
+      "labeling_functions": [
+        {"id": "G1_anorthosite_highland", "vote": 1, "expr": "flag_highland_M & flag_anorthositic_E", "why": "lunar highlands are feldspathic (anorthositic)"},
+        {"id": "G2_impact_crater_unit", "vote": 1, "expr": "flag_crater_unit_M & flag_impact_E", "why": "impactites, breccias, shock metamorphism"},
+        {"id": "G3_mare_basalt", "vote": 1, "expr": "flag_mare_M & flag_basaltic_E", "why": "mare = basalt (rare at the south pole)"},
+        {"id": "G4_aqueous_sediment", "vote": -1, "expr": "flag_aqueous_sed_E & ~flag_impact_E", "why": "carbonates, evaporites, clays, sandstone need liquid water; absent on the Moon"},
+        {"id": "G5_no_rock_exposed", "vote": -1, "expr": "flag_ice_surface_E", "why": "ice sheet / glacier surface: no rock to test on"},
+        {"id": "G6_silicic_volcanic", "vote": -1, "expr": "flag_silicic_E & ~flag_basaltic_E & ~flag_anorthositic_E", "eval_only": true, "why": "evolved silicic rocks are very rare on the Moon"}
+      ],
+      "impossible_pairs": [{"id": "evaporite_or_carbonate_only", "expr": "flag_aqueous_sed_E & ~flag_impact_E & ~flag_basaltic_E & ~flag_anorthositic_E"}],
+      "hard_caps": [],
+      "score_cap": 0.8,
+      "experiments_supported": ["instrument_spectrometers_mineralogy", "geology_eva_training", "instrument_gpr_drill_subsurface", "regolith_excavation_construction"],
+      "mandatory_caveats": [
+        "No Earth rock is space-weathered (no nanophase iron, agglutinates, solar-wind implantation); spectra and grain surfaces differ.",
+        "Terrestrial anorthosites carry more sodic plagioclase than lunar ferroan anorthosite; Earth rocks also carry hydrous alteration and weathering rinds.",
+        "Macrostrat units are map-scale (km); the lithology at the exact test spot must be checked in the field.",
+        "South-pole Moon units are all highland/crater materials, so Moon-side geology varies little across patches."
+      ]
+    },
+
+    "terrain": {
+      "id": 2, "name": "Terrain / topography", "status": "learned (DEM image SSL + scalar SSL) + kernel", "bodies": ["moon", "earth"],
+      "inputs": {"moon": {"columns": ["relief_m", "slope500_mean_deg", "slope500_p90_deg", "frac_slope500_gt10", "frac_slope500_gt20", "tri500_mean_m", "elev_std_m"], "arrays": ["elev", "slope"]},
+                 "earth": {"columns": ["relief_m", "slope500_mean_deg", "slope500_p90_deg", "frac_slope500_gt10", "frac_slope500_gt20", "tri500_mean_m", "elev_std_m", "wc_frac_tree", "wc_frac_built", "wc_frac_water"], "arrays": ["elev", "slope"]}},
+      "model": {"type": "image_ssl+tabular_ssl+kernel", "alpha_ssl": 0.6, "ssl_parts": {"image": 0.7, "tabular": 0.3}, "image_backbone": "facebook/dinov2-small"},
+      "features": [
+        {"name": "log_relief",  "moon": "log10(1 + relief_m)",       "earth": "log10(1 + relief_m)",       "tau": 0.15, "unit": "log10 m"},
+        {"name": "slope_mean",  "moon": "slope500_mean_deg",          "earth": "slope500_mean_deg",          "tau": 3.0,  "unit": "deg @500 m"},
+        {"name": "slope_p90",   "moon": "slope500_p90_deg",           "earth": "slope500_p90_deg",           "tau": 5.0,  "unit": "deg @500 m"},
+        {"name": "steep10",     "moon": "frac_slope500_gt10",         "earth": "frac_slope500_gt10",         "tau": 0.15, "unit": "fraction"},
+        {"name": "steep20",     "moon": "frac_slope500_gt20",         "earth": "frac_slope500_gt20",         "tau": 0.10, "unit": "fraction"},
+        {"name": "log_tri",     "moon": "log10(1 + tri500_mean_m)",  "earth": "log10(1 + tri500_mean_m)",  "tau": 0.15, "unit": "log10 m"},
+        {"name": "log_estd",    "moon": "log10(1 + elev_std_m)",     "earth": "log10(1 + elev_std_m)",     "tau": 0.15, "unit": "log10 m"}
+      ],
+      "labeling_functions": [
+        {"id": "T1_profile_match", "vote": 1, "expr": "(abs(log_relief_M - log_relief_E) < 0.15) & (abs(slope_mean_M - slope_mean_E) < 3) & (abs(steep10_M - steep10_E) < 0.15)", "why": "relief within x1.4, mean slope within 3 deg, steep share within 15 pp"},
+        {"id": "T2_slope_mismatch", "vote": -1, "expr": "(abs(slope_p90_M - slope_p90_E) > 12) | (abs(steep10_M - steep10_E) > 0.4)"},
+        {"id": "T3_relief_mismatch", "vote": -1, "expr": "abs(log_relief_M - log_relief_E) > 0.6", "why": "relief differs by more than x4"},
+        {"id": "T4_dsm_or_water", "vote": -1, "expr": "nsum(wc_frac_tree_E, wc_frac_built_E, wc_frac_water_E) > 0.3", "why": "Copernicus GLO-30 is a surface model: canopy/buildings add false roughness, water is flattened"},
+        {"id": "T5_crater_vs_impact", "vote": 1, "expr": "flag_crater_unit_M & flag_impact_E & (relief_m_E > 100)", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "flat_vs_rugged", "expr": "(relief_m_E < 50) & (relief_m_M > 1500)"},
+                           {"id": "flat_ice_vs_steep", "expr": "flag_ice_surface_E & (relief_m_E < 100) & (slope500_mean_deg_M > 12)"}],
+      "hard_caps": [],
+      "earth_caps": [{"when_earth": "nsum(wc_frac_tree, wc_frac_built, wc_frac_water) >= 0.5", "cap": 0.0, "why": "DSM canopy/buildings or water dominate the DEM"}],
+      "score_cap": 0.9,
+      "experiments_supported": ["landing_hazard_detection", "rover_mobility_navigation", "illumination_power_planning", "geology_eva_training", "regolith_excavation_construction"],
+      "mandatory_caveats": [
+        "Compared at a 500 m slope baseline and ~156 m pixels: boulders and craters below ~100 m (lander- and rover-scale hazards) are not resolved; check with LROC NAC-scale DEMs.",
+        "Gravity changes landforms: the simple-to-complex crater transition is ~15-20 km on the Moon vs ~2-4 km on Earth, and slope stability differs, so similar statistics can come from different landforms.",
+        "Earth relief is shaped by water, ice and wind and is often soil- or vegetation-covered; lunar relief is impact-dominated and regolith-mantled.",
+        "Copernicus GLO-30 is a surface model: canopy and buildings are in the elevations."
+      ]
+    },
+
+    "thermal_illumination": {
+      "id": 3, "name": "Temperature, illumination, extremes", "status": "physics kernel (SSL optional ablation)", "bodies": ["moon", "earth"],
+      "inputs": {"moon": {"columns": ["dvn_tavg_mean_k", "dvn_tavg_min_k", "dvn_tmax_mean_k", "dvn_tmax_max_k", "dvn_frac_coldtrap_110k", "lola_avg_sun_vis_mean", "lola_frac_psr", "lola_frac_sunlit_gt50pct", "noon_elev_max_deg", "mean_day_elev_deg", "frac_polar_day", "frac_polar_night"], "arrays_moon_only_diagnostics": ["sunvis", "dvn_tmax", "dvn_tavg"]},
+                 "earth": {"columns": ["lst_day_max_k", "lst_night_min_k", "lst_mean_k", "lst_annual_range_k", "lst_diurnal_range_k", "power_t2m_c", "power_t2m_min_c", "power_t2m_max_c", "power_frost_days", "noon_elev_max_deg", "mean_day_elev_deg", "frac_polar_day", "frac_polar_night"]}},
+      "model": {"type": "kernel", "alpha_ssl": 0.0, "ablation_alpha_ssl": 0.3, "why_no_ssl": "8 physical scalars with disjoint Moon/Earth temperature ranges: SSL would only re-learn a distance and cannot say how many kelvin is 'close enough'. Tolerances below + anchors decide that."},
+      "normalisation_rule": "Absolute units, pooled. Do NOT per-body quantile-normalise temperature: every south-pole patch (26-210 K mean) is colder than every Earth surface, so the physically closest Earth site is always the coldest one; quantile matching would wrongly pair a 'warm' Moon patch with a median Earth site.",
+      "features": [
+        {"name": "t_mean_k", "moon": "dvn_tavg_mean_k", "earth": ["lst_mean_k", "(lst_day_max_k + lst_night_min_k) / 2", "power_t2m_c + 273.15"], "tau": 60.0, "unit": "K"},
+        {"name": "t_cold_k", "moon": ["dvn_tbol_min_k", "dvn_tavg_min_k"],  "earth": ["lst_night_min_k", "power_t2m_min_c + 273.15"], "tau": 60.0, "unit": "K", "note": "Moon: Diviner GCP diurnal minimum (moon_patches_tmin.csv), fallback coldest annual-mean cell; Earth: coldest-month mean night LST"},
+        {"name": "t_hot_k",  "moon": "dvn_tmax_max_k",  "earth": ["lst_day_max_k", "power_t2m_max_c + 273.15"], "tau": 40.0, "unit": "K"},
+        {"name": "t_range_k", "moon": "dvn_tmax_mean_k - dvn_tavg_mean_k", "earth": ["lst_annual_range_k", "lst_day_max_k - lst_night_min_k", "power_t2m_max_c - power_t2m_min_c"], "tau": 50.0, "unit": "K", "kernel": false, "note": "definitions differ between bodies; used only by the optional tabular encoder"},
+        {"name": "sun_noon_max", "moon": "noon_elev_max_deg", "earth": "noon_elev_max_deg", "tau": 10.0, "unit": "deg"},
+        {"name": "sun_mean_day", "moon": "mean_day_elev_deg", "earth": "mean_day_elev_deg", "tau": 6.0, "unit": "deg"},
+        {"name": "polar_night", "moon": "frac_polar_night", "earth": "frac_polar_night", "tau": 0.15, "unit": "fraction of year"},
+        {"name": "polar_day",   "moon": "frac_polar_day",   "earth": "frac_polar_day",   "tau": 0.15, "unit": "fraction of year"}
+      ],
+      "labeling_functions": [
+        {"id": "K1_coldest_earth", "vote": 1, "expr": "(t_cold_k_E <= 213) & (t_mean_k_M <= 150)", "why": "closest approach: Earth surface reaching <= -60 C for a cold Moon patch"},
+        {"id": "K2_hot_earth", "vote": -1, "expr": "(t_hot_k_E >= 320) & (t_mean_k_M <= 150)", "why": "Earth surface >= 47 C vs a cold Moon patch"},
+        {"id": "K3_low_sun", "vote": 1, "expr": "(sun_noon_max_E <= 35) & (sun_noon_max_M <= 15)", "why": "low-sun-angle lighting"},
+        {"id": "K4_high_sun", "vote": -1, "expr": "sun_noon_max_E >= 60", "why": "sub-tropical noon sun; Moon south pole stays below ~15 deg"},
+        {"id": "K5_polar_night_both", "vote": 1, "expr": "(polar_night_M >= 0.1) & (polar_night_E >= 0.1)", "eval_only": true},
+        {"id": "K6_warm_mean", "vote": -1, "expr": "t_mean_k_E >= 290", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "hot_desert_vs_psr", "expr": "(t_hot_k_E >= 330) & (t_mean_k_M <= 110)"}],
+      "hard_caps": [{"when_moon": "(dvn_frac_coldtrap_110k >= 0.5) | (lola_frac_psr >= 0.5)", "cap": 0.0, "why": "PSR-dominated patch: 25-110 K surfaces have no Earth counterpart (Earth surface minimum ~180 K)"}],
+      "score_cap": 0.6,
+      "experiments_supported": ["thermal_power_extreme_cold_long_night", "illumination_power_planning", "habitat_human_ops_isolation", "landing_hazard_detection"],
+      "mandatory_caveats": [
+        "PSR surfaces sit at ~25-110 K; Earth's coldest surfaces (East Antarctic plateau) reach only ~180-190 K. Cryogenic behaviour must be tested in cryo-vacuum chambers.",
+        "Vacuum: heat moves by radiation and conduction only. Earth wind and air give the wrong heat-transfer mode.",
+        "Lunar south-pole sun stays within ~1.5 deg of the horizon (plus topography) with black, skylight-free shadows; Earth illumination is scattered by the atmosphere and the sun is never that low for long except near the poles.",
+        "Earth polar night is seasonal (months); lunar permanent shadow lasts geological time and partial shadow periods are set by topography."
+      ]
+    },
+
+    "water_ice": {
+      "id": 4, "name": "Water, ice, permafrost, resources", "status": "physics kernel (SSL optional ablation)", "bodies": ["moon", "earth"],
+      "inputs": {"moon": {"columns": ["dvn_frac_ice_stable", "dvn_frac_ice_within_1m", "dvn_ice_depth_median_m", "dvn_frac_coldtrap_110k", "lola_frac_psr"]},
+                 "earth": {"columns": ["permafrost_frac", "active_layer_m", "wc_frac_snow_ice", "soil_moisture_m3m3", "precip_mm_yr", "power_frost_days", "power_rh_pct", "power_t2m_c", "stratum"]}},
+      "model": {"type": "kernel", "alpha_ssl": 0.0, "ablation_alpha_ssl": 0.3},
+      "features": [
+        {"name": "ice_1m_frac", "moon": "dvn_frac_ice_within_1m", "earth": ["permafrost_frac", "permafrost_flag", "clip((-1 - power_t2m_c) / 6, 0, 1)"], "tau": 0.25, "one_sided": "earth_at_least_moon", "unit": "fraction", "note": "one-sided: an Earth site with MORE ground ice than the Moon patch is not penalised. ESA CCI PFR; else the 0/1 permafrost_flag (CCI or POWER T2M < -2 C proxy); else a MAAT ramp (0 at -1 C, 1 at <= -7 C)"},
+        {"name": "ice_any_frac", "moon": "dvn_frac_ice_stable", "earth": ["permafrost_frac", "permafrost_flag", "clip((-1 - power_t2m_c) / 6, 0, 1)"], "tau": 0.25, "one_sided": "earth_at_least_moon", "unit": "fraction"},
+        {"name": "ice_depth_m", "moon": "dvn_ice_depth_median_m", "earth": ["active_layer_m"], "tau": 0.5, "unit": "m", "note": "often missing on Earth; dropped pair-wise when NaN"},
+        {"name": "surface_ice_frac", "moon": "dvn_frac_coldtrap_110k", "earth": ["wc_frac_snow_ice", "where(contains(stratum, 'ice_sheet'), 0.95, nan)"], "tau": 0.4, "unit": "fraction", "note": "Moon value = where surface ice is thermally stable, not where it is confirmed; hence the loose tolerance"},
+        {"name": "wetness", "moon": "0", "earth": ["nmean(clip(precip_mm_yr / 1000, 0, 1), clip(soil_moisture_m3m3 / 0.4, 0, 1))"], "tau": 0.15, "unit": "0-1 index (liquid water availability)"}
+      ],
+      "labeling_functions": [
+        {"id": "W1_ice_vs_permafrost", "vote": 1, "expr": "(ice_1m_frac_M >= 0.3) & (ice_any_frac_E >= 0.9)", "why": "ice-cemented ground within ~1 m on both"},
+        {"id": "W2_ice_vs_no_ice", "vote": -1, "expr": "(ice_1m_frac_M >= 0.3) & (ice_any_frac_E <= 0.05) & (surface_ice_frac_E < 0.05)"},
+        {"id": "W3_dry_vs_dry", "vote": 1, "expr": "(ice_any_frac_M < 0.05) & (wetness_E <= 0.1)"},
+        {"id": "W4_wet_earth", "vote": -1, "expr": "wetness_E >= 0.6", "why": "liquid-water dominated (precipitation ~>600 mm/yr or wet soils)"},
+        {"id": "W5_glacier_not_regolith", "vote": -1, "expr": "(surface_ice_frac_E >= 0.7) & (ice_1m_frac_M < 0.9)", "why": "bulk glacier ice is not ice-bearing regolith"},
+        {"id": "W6_frost_days", "vote": 1, "expr": "(ice_1m_frac_M >= 0.5) & (power_frost_days_E >= 300)", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "tropical_wet_vs_icy", "expr": "(precip_mm_yr_E >= 2000) & (ice_1m_frac_M >= 0.5)"}],
+      "hard_caps": [{"when_moon": "dvn_frac_coldtrap_110k >= 0.5", "cap": 0.3, "why": "surface frost at < 110 K in vacuum (sublimation-controlled); no Earth counterpart"}],
+      "score_cap": 0.7,
+      "experiments_supported": ["ice_prospecting_instruments", "isru_ice_extraction", "instrument_gpr_drill_subsurface"],
+      "mandatory_caveats": [
+        "Earth ground ice sits at ~250-273 K with liquid films, salts and microbes; lunar ice sits at ~25-110 K in vacuum, so strength, dielectric response and extraction physics differ.",
+        "In vacuum ice sublimates instead of melting.",
+        "LCROSS found water (~5.6 +/- 2.9 wt%) mixed with other volatiles (e.g. CO, CO2, NH3, H2S, CH3OH) at Cabeus; terrestrial permafrost has no such mix.",
+        "Earth permafrost fraction can fall back to an air-temperature proxy when the permafrost map is missing; check the source flag."
+      ]
+    },
+
+    "dust_regolith": {
+      "id": 5, "name": "Dust, regolith fines, surface processes (wind dropped)", "status": "prototype kernel (no SSL: Moon side has no per-patch dust data)", "bodies": ["moon (constant prototype)", "earth"],
+      "inputs": {"moon": {"columns": [], "prototype": {"fines_pct": 45, "coarse_pct": 5, "bulk_density_g_cm3": 1.5, "moisture": 0, "ndvi": 0, "bare_frac": 1}, "prototype_note": "approximate Apollo-era regolith values (fraction < 50 um ~40-50 wt%, bulk density ~1.3-1.6 g/cm3 in the top ~30 cm, dry, no organics); team to verify against a lunar regolith reference"},
+                 "earth": {"columns": ["sand_pct", "silt_pct", "clay_pct", "bdod_g_cm3", "cfvo_pct", "soil_moisture_m3m3", "ndvi_mean", "aot_mean", "precip_mm_yr", "wc_frac_bare_sparse", "wc_frac_snow_ice", "lith_text", "context"]}},
+      "model": {"type": "prototype_kernel", "alpha_ssl": 0.0},
+      "features": [
+        {"name": "fines_pct",     "moon": "45",  "earth": ["nsum(silt_pct, clay_pct)"], "tau": 15.0, "unit": "% < 50 um (silt+clay)"},
+        {"name": "coarse_pct",    "moon": "5",   "earth": ["cfvo_pct"], "tau": 15.0, "unit": "vol % > 2 mm"},
+        {"name": "bulk_density",  "moon": "1.5", "earth": ["bdod_g_cm3"], "tau": 0.2, "unit": "g/cm3"},
+        {"name": "dust_moisture", "moon": "0",   "earth": ["soil_moisture_m3m3"], "tau": 0.08, "unit": "m3/m3 (AMSR2 reads ~0.03-0.08 even on dry desert)"},
+        {"name": "dust_ndvi",     "moon": "0",   "earth": ["maximum(ndvi_mean - 0.1, 0)"], "tau": 0.1, "unit": "NDVI above the ~0.1 bare-soil baseline"},
+        {"name": "bare_frac",     "moon": "1",   "earth": ["wc_frac_bare_sparse"], "tau": 0.25, "unit": "fraction"},
+        {"name": "glassy_fines",  "moon": "1",   "earth": ["flag_tephra * 1.0"], "tau": 1.0, "unit": "0/1 volcanic tephra/cinder/ash (usual lunar-simulant feedstock)"}
+      ],
+      "labeling_functions": [
+        {"id": "D1_dry_loose_fines", "vote": 1, "expr": "(fines_pct_E >= 30) & (coarse_pct_E <= 15) & (precip_mm_yr_E <= 250) & (dust_ndvi_E <= 0.1)"},
+        {"id": "D2_volcanic_tephra", "vote": 1, "expr": "flag_tephra_E & (bare_frac_E >= 0.7)", "why": "glassy basaltic tephra is the usual source of lunar simulants"},
+        {"id": "D3_vegetated_or_wet", "vote": -1, "expr": "(dust_ndvi_E >= 0.3) | (precip_mm_yr_E >= 800) | (wc_frac_tree_E >= 0.2)"},
+        {"id": "D4_snow_ice_surface", "vote": -1, "expr": "wc_frac_snow_ice_E >= 0.5"},
+        {"id": "D5_fines_dry_bare", "vote": 1, "expr": "(fines_pct_E >= 40) & (dust_moisture_E <= 0.1) & (dust_ndvi_E <= 0.1)", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "dense_vegetation", "expr": "dust_ndvi_E >= 0.4"}],
+      "hard_caps": [],
+      "score_cap": 0.7,
+      "experiments_supported": ["dust_mitigation", "regolith_excavation_construction", "rover_mobility_navigation", "isru_ice_extraction"],
+      "mandatory_caveats": [
+        "Lunar fines are space-weathered (agglutinates, glass, nanophase iron), sharp and angular, and charged by UV and solar-wind plasma; Earth dust is weathered, rounded and moist.",
+        "On the Moon dust moves by rocket plume ejecta, impacts and electrostatic effects, not wind; Earth outdoor dust tests are wind-driven.",
+        "Moon-side values are one constant prototype: this score ranks Earth sites, it does not resolve regolith differences between lunar patches.",
+        "SoilGrids is a modelled 250 m product with no data on ice sheets and bare rock."
+      ]
+    },
+
+    "biology_sterility": {
+      "id": 6, "name": "Biology / habitability (Earth-side sterility)", "status": "prototype kernel (Moon is sterile everywhere)", "bodies": ["moon (constant: sterile)", "earth"],
+      "inputs": {"moon": {"columns": [], "prototype": {"ndvi": 0, "vegetated_frac": 0, "precip_mm_yr": 0, "soil_moisture": 0, "no_liquid_water_days": 365}},
+                 "earth": {"columns": ["ndvi_mean", "wc_frac_tree", "wc_frac_shrub", "wc_frac_grass", "wc_frac_crop", "wc_frac_moss_lichen", "wc_frac_wetland", "wc_frac_mangrove", "precip_mm_yr", "soil_moisture_m3m3", "power_frost_days", "lst_night_min_k"]}},
+      "model": {"type": "prototype_kernel", "alpha_ssl": 0.0},
+      "features": [
+        {"name": "bio_ndvi",       "moon": "0",   "earth": ["maximum(ndvi_mean - 0.1, 0)", "where(lat < -60, 0.0, nan)"], "tau": 0.05, "unit": "NDVI above the ~0.1 bare-soil baseline; Antarctic NaN -> 0"},
+        {"name": "veg_frac",       "moon": "0",   "earth": ["nsum(wc_frac_tree, wc_frac_shrub, wc_frac_grass, wc_frac_crop, wc_frac_moss_lichen, wc_frac_wetland, wc_frac_mangrove)", "where(lat < -60, 0.0, nan)"], "tau": 0.05, "unit": "fraction (WorldCover has no data south of 60 S: treated as unvegetated at 10 km scale)"},
+        {"name": "bio_precip",     "moon": "0",   "earth": ["precip_mm_yr"], "tau": 100.0, "unit": "mm/yr"},
+        {"name": "bio_moisture",   "moon": "0",   "earth": ["soil_moisture_m3m3"], "tau": 0.08, "unit": "m3/m3"},
+        {"name": "no_liquid_days", "moon": "365", "earth": ["power_frost_days"], "tau": 120.0, "kernel": false, "unit": "days/yr", "note": "LF input only: frost is not sterility (hyperarid warm deserts are among the most lifeless sites)"}
+      ],
+      "labeling_functions": [
+        {"id": "B1_hyperarid_barren", "vote": 1, "expr": "(bio_ndvi_E <= 0.05) & (bio_precip_E <= 50) & (veg_frac_E <= 0.02)"},
+        {"id": "B2_vegetated", "vote": -1, "expr": "(bio_ndvi_E >= 0.2) | (veg_frac_E >= 0.2)"},
+        {"id": "B3_cold_dry_barren", "vote": 1, "expr": "(t_cold_k_E <= 230) & (no_liquid_days_E >= 300) & (bio_ndvi_E <= 0.05)"},
+        {"id": "B4_visible_biology", "vote": -1, "expr": "(wc_frac_moss_lichen_E >= 0.1) | (wc_frac_wetland_E >= 0.05) | (wc_frac_mangrove_E > 0)"},
+        {"id": "B5_wet_climate", "vote": -1, "expr": "bio_precip_E >= 1000", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "forest_or_cropland", "expr": "(bio_ndvi_E >= 0.4) | (veg_frac_E >= 0.6)"}],
+      "hard_caps": [],
+      "score_cap": 0.6,
+      "experiments_supported": ["planetary_protection_contamination_blanks", "instrument_spectrometers_mineralogy", "habitat_human_ops_isolation"],
+      "mandatory_caveats": [
+        "No Earth surface is sterile: even the hyperarid Atacama core and the Dry Valleys host microbes and organics, so every field blank carries biology.",
+        "Stations and camps (e.g. Concordia) add human-borne contamination around the site.",
+        "The Moon has no liquid water, organics or biosphere; low NDVI on Earth is a proxy for low biomass, not for sterility."
+      ]
+    },
+
+    "caves_subsurface": {
+      "id": 7, "name": "Caves / subsurface (pits, lava tubes)", "status": "RULE ONLY - learned model dropped (1 Moon target, ~5 Earth examples)", "bodies": ["moon (moon_tranquillitatis_pit only)", "earth"],
+      "applies_to_moon_ids": ["moon_tranquillitatis_pit"],
+      "inputs": {"moon": {"columns": [], "note": "the pit (8.3N 33.2E) is outside the south-pole patch grid; south-pole patches get NaN"},
+                 "earth": {"columns": ["context", "lith_text", "lith_desc", "source"]}},
+      "model": {"type": "rule"},
+      "rules_first_match": [
+        {"expr": "flag_lava_tube & flag_basaltic & ~(wc_frac_tree >= 0.5)", "score": 0.6, "why": "known basaltic lava-tube caves, not under forest/woodland"},
+        {"expr": "flag_lava_tube", "score": 0.4},
+        {"expr": "flag_basaltic & contains(source, 'volcano')", "score": 0.1, "why": "basaltic volcanic field: tubes plausible, unconfirmed"},
+        {"expr": "flag_aqueous_sed | flag_ice_surface", "score": -0.6},
+        {"expr": "flag_basaltic", "score": 0.0}
+      ],
+      "default_score": -0.3,
+      "features": [],
+      "labeling_functions": [],
+      "impossible_pairs": [],
+      "hard_caps": [],
+      "score_cap": 0.7,
+      "experiments_supported": ["cave_pit_robotics"],
+      "mandatory_caveats": [
+        "Lunar pits/tubes may be much larger than terrestrial tubes (low gravity allows wider stable roofs).",
+        "Earth caves are humid, hold biology and are shaped by water and roof collapse; lunar caves are dry, in vacuum, and shielded from radiation and micrometeoroids.",
+        "Only one Moon cave target exists in this dataset; this category is a lookup, not a model."
+      ]
+    },
+
+    "ops_landing_mobility": {
+      "id": 8, "name": "Landing, mobility, operations, construction (derived)", "status": "derived from other categories + hazard kernel", "bodies": ["moon", "earth"],
+      "inputs": {"moon": {"columns": ["frac_slope500_gt10", "frac_slope500_gt20", "slope500_p90_deg"]}, "earth": {"columns": ["frac_slope500_gt10", "frac_slope500_gt20", "slope500_p90_deg", "wc_frac_tree", "wc_frac_built", "wc_frac_water", "wc_frac_wetland", "wc_frac_crop"]}},
+      "model": {"type": "derived", "weights": {"terrain": 0.45, "dust_regolith": 0.2, "thermal_illumination": 0.15, "hazard_kernel": 0.2},
+                "rule": "raw = nan-aware weighted mean of the calibrated category scores and the hazard kernel; then tanh_platt calibration on ops anchors (prior = identity when anchors are few)"},
+      "working_thresholds": {"landing_slope_max_deg_500m": 8, "rover_slope_easy_deg": 15, "rover_slope_nogo_deg": 25, "note": "planning assumptions, not mission requirements; the 500 m baseline understates local slopes"},
+      "features": [
+        {"name": "haz_gt10", "moon": "frac_slope500_gt10", "earth": "frac_slope500_gt10", "tau": 0.10, "unit": "fraction"},
+        {"name": "haz_gt20", "moon": "frac_slope500_gt20", "earth": "frac_slope500_gt20", "tau": 0.08, "unit": "fraction"},
+        {"name": "haz_p90",  "moon": "slope500_p90_deg",   "earth": "slope500_p90_deg",   "tau": 4.0,  "unit": "deg"}
+      ],
+      "labeling_functions": [
+        {"id": "O1_both_landable", "vote": 1, "expr": "(haz_gt10_M <= 0.1) & (haz_gt10_E <= 0.1)"},
+        {"id": "O2_both_hazardous", "vote": 1, "expr": "(haz_gt20_M >= 0.2) & (haz_gt20_E >= 0.2)", "why": "both hazard-rich: good for hazard-avoidance tests"},
+        {"id": "O3_hazard_mismatch", "vote": -1, "expr": "abs(haz_gt10_M - haz_gt10_E) >= 0.4"},
+        {"id": "O4_earth_obstacles", "vote": -1, "expr": "nsum(wc_frac_tree_E, wc_frac_built_E, wc_frac_water_E, wc_frac_wetland_E, wc_frac_crop_E) >= 0.3"},
+        {"id": "O5_ice_sheet_vs_rugged", "vote": -1, "expr": "flag_ice_surface_E & (haz_gt10_M >= 0.3)", "eval_only": true}
+      ],
+      "impossible_pairs": [{"id": "forest_town_water", "expr": "nsum(wc_frac_tree_E, wc_frac_built_E, wc_frac_water_E) >= 0.6"}],
+      "hard_caps": [],
+      "earth_caps": [{"when_earth": "nsum(wc_frac_tree, wc_frac_built, wc_frac_water, wc_frac_wetland, wc_frac_crop) >= 0.5", "cap": -0.3, "why": "forest, fields, towns or water: obstacles and surfaces with no lunar counterpart"}],
+      "score_cap": 0.8,
+      "experiments_supported": ["landing_hazard_detection", "rover_mobility_navigation", "habitat_human_ops_isolation", "regolith_excavation_construction", "geology_eva_training"],
+      "mandatory_caveats": [
+        "1/6 g changes traction, sinkage, plume ejecta and human workload; outdoor Earth tests need reduced-gravity or mass-scaled complements.",
+        "No GNSS, ~1.3 s one-way light time, and no direct-to-Earth line of sight behind south-pole terrain.",
+        "Remoteness/isolation is not scored here; use site metadata (isolation tag) for crew-isolation studies."
+      ]
+    }
+  }
+}

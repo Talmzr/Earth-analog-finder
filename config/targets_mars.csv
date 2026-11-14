@@ -1,0 +1,5 @@
+id,body,name,lat,lon,half_width_km,role,tags,coord_note,source
+mars_arcadia_planitia,mars,Arcadia Planitia (shallow ice),47.2,-175.7,15,mars_base,ground_ice;permafrost_polygons;basalt;cold_desert;plain;dust;thin_co2_atmosphere;isolation,approximate region centre; refine to SWIM ice-map zone / sites AP-1 AP-8 AP-9,Leading human landing region for accessible ice (NASA SWIM map; Luzzi et al. 2025)
+mars_jezero,mars,Jezero crater (delta),18.38,77.58,15,mars_science,impact_crater;lakebed_sediment;delta;clays;carbonates;basalt;cold_desert;dust;thin_co2_atmosphere,well-established coordinate,Perseverance site; Lake Salda is NASA's named analog
+mars_deuteronilus,mars,Deuteronilus Mensae (buried glaciers),43.9,22.6,15,mars_base,ground_ice;buried_glacier;mesas;high_relief;cold_desert;dust;thin_co2_atmosphere;isolation,centre from Wikipedia (337.4W = 22.6E),Mid-latitude ice candidate (from memory of NASA EZ workshop - verify)
+mars_arsia_caves,mars,Arsia Mons skylight 'Dena',-6.08,-120.94,10,mars_shelter,lava_tube;basalt;volcanic;high_relief;cold_desert;dust;thin_co2_atmosphere,putative cave entrance (Wikipedia list),Cave / radiation shelter candidate

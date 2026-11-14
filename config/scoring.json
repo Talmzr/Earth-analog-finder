@@ -1,0 +1,21 @@
+{
+  "_comment": "Category weights per mission task. Each row sums to 1. Edit freely.",
+  "tasks": {
+    "overall":          {"terrain": 0.25, "environment": 0.25, "illumination": 0.25, "geology": 0.25},
+    "landing_rover":    {"terrain": 0.60, "environment": 0.10, "illumination": 0.10, "geology": 0.20},
+    "ice_isru":         {"terrain": 0.10, "environment": 0.30, "illumination": 0.10, "geology": 0.50},
+    "cave_shelter":     {"terrain": 0.20, "environment": 0.20, "illumination": 0.00, "geology": 0.60},
+    "habitat_ops":      {"terrain": 0.15, "environment": 0.35, "illumination": 0.35, "geology": 0.15}
+  },
+  "terrain_features": ["relief_m", "slope500_mean_deg", "slope500_p90_deg", "frac_slope500_gt10", "tri500_mean_m"],
+  "illumination_features": ["noon_elev_max_deg", "noon_elev_min_deg", "frac_polar_day", "frac_polar_night", "mean_day_elev_deg"],
+  "environment": {
+    "_comment": "Earth can never be as cold/dry as the Moon or Mars, so each Earth site gets a 'closest approach' percentile: 1 = most extreme Earth site in the target's direction.",
+    "directions": {
+      "ndvi_mean": "low",
+      "precip_mm_yr": "low",
+      "t_mean_c": "low",
+      "lst_day_night_range_k": "high"
+    }
+  }
+}

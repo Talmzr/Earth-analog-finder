@@ -1,0 +1,164 @@
+{
+  "version": "0.1-draft (2026-11-14)",
+  "_readme": "Inference rule table. For a (Moon location, Earth location) pair and each experiment: check moon_precondition, compare category scores (config/categories.json, range -1..1) with the minimums, emit sufficient / partial / avoid / not_applicable, and attach 'also account for' caveats. Expressions use the same helpers as categories.json and are evaluated on the Moon row (moon_precondition) or Earth row (earth_hint).",
+
+  "decision_rule": {
+    "not_applicable": "moon_precondition is false (e.g. no ice at this Moon location), or a required category score is NaN",
+    "avoid": "any required category score < avoid_below (default 0.0)",
+    "sufficient": "every required category score >= its minimum",
+    "partial": "otherwise: no required category below avoid_below, but at least one below its minimum. Report which required categories pass (those sub-tests are valid) and which do not",
+    "supporting": "supporting categories never block; a supporting score below its value adds the note 'weak on <category>'",
+    "always_attach": "experiment.also_account_for + mandatory_caveats of every required category + the global conditions listed in always_include"
+  },
+  "default_avoid_below": 0.0,
+  "always_include": ["gravity", "vacuum", "radiation", "psr_cryogenic"],
+
+  "global_non_reproducible": [
+    {"id": "gravity", "condition": "Gravity", "moon": "1.62 m/s2 (0.165 g)", "earth_best": "9.81 m/s2 everywhere",
+     "consequence": "traction, sinkage, plume ejecta ballistics, excavation reaction forces, structural loads, human gait and EVA workload all differ",
+     "cover_with": "gravity-offload rigs, mass-scaled rovers, parabolic flights, simulation"},
+    {"id": "vacuum", "condition": "Hard vacuum", "moon": "surface exosphere ~1e-10 Pa", "earth_best": "~60-65 kPa at the highest analog sites (e.g. Dome C at 3,233 m)",
+     "consequence": "no convective cooling, ice sublimates instead of melting, outgassing, cold welding, electrostatic dust, no wind; LIBS and other instruments behave differently",
+     "cover_with": "thermal-vacuum (TVAC) and dirty-vacuum chambers with regolith simulant"},
+    {"id": "radiation", "condition": "Unshielded radiation", "moon": "galactic cosmic rays + solar particle events; ~1.4 mSv/day dose equivalent measured by Chang'e-4 (~200x Earth surface background)", "earth_best": "atmosphere and magnetosphere shield every Earth site",
+     "consequence": "electronics single-event effects, materials ageing, crew dose limits",
+     "cover_with": "particle-beam tests, shielding analysis"},
+    {"id": "psr_cryogenic", "condition": "Permanently shadowed region temperatures", "moon": "~25-110 K (Diviner; this dataset reaches ~26 K)", "earth_best": "~180-190 K surface minimum on the East Antarctic plateau",
+     "consequence": "material embrittlement, lubricant and battery failure, cryogenic ice strength, volatile trapping",
+     "cover_with": "cryo-vacuum chambers, LN2 (77 K) cold plates"},
+    {"id": "illumination_geometry", "condition": "Polar illumination", "moon": "sun within ~1.5 deg of the horizon plus topography; black shadows with no skylight", "earth_best": "atmospheric scattering fills shadows; sun never that low for long except near the poles",
+     "consequence": "vision, navigation and solar-power results do not transfer",
+     "cover_with": "night tests with low-angle artificial light; ray-traced lunar illumination (LOLA)"},
+    {"id": "regolith_space_weathering", "condition": "Space-weathered regolith", "moon": "agglutinates, glass, nanophase iron, sharp angular grains, very compact below ~30 cm", "earth_best": "chemically weathered, rounded, moist soils with organics",
+     "consequence": "abrasion, sintering, spectra, geotechnics",
+     "cover_with": "certified simulants (e.g. LHS-1 / NU-LHT highland, LMS-1 / JSC-1A mare, GRC-3 geotechnical)"},
+    {"id": "dust_charging", "condition": "Electrostatic dust", "moon": "UV photoemission and solar-wind plasma charge the surface", "earth_best": "none outdoors",
+     "consequence": "dust adhesion and levitation behave differently",
+     "cover_with": "UV/plasma vacuum chambers"},
+    {"id": "sterility", "condition": "No liquid water, no biosphere", "moon": "sterile", "earth_best": "every Earth surface hosts microbes",
+     "consequence": "contamination blanks and life-detection false positives",
+     "cover_with": "procedural blanks, sterilised tools"},
+    {"id": "comms_latency", "condition": "Communications", "moon": "~1.3 s one-way light time; no direct-to-Earth line of sight behind south-pole terrain", "earth_best": "real-time comms",
+     "consequence": "teleoperation and EVA support differ",
+     "cover_with": "simulated latency and blackout windows in analog ops"}
+  ],
+
+  "experiments": [
+    {"id": "landing_hazard_detection", "name": "Landing hazard detection & terrain-relative navigation",
+     "required": {"terrain": 0.5, "ops_landing_mobility": 0.4}, "supporting": {"thermal_illumination": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "Lander-scale hazards (boulders, small craters) are below the 500 m slope baseline; verify with metre-scale DEMs.",
+       "Plume-surface interaction in vacuum (high-speed ejecta, no drag) cannot be reproduced outdoors on Earth.",
+       "Optical and lidar hazard detection must be tested under low-sun, no-skylight lighting (night tests with artificial light).",
+       "Vegetation, buildings and DSM artefacts can create false hazards on Earth."]},
+
+    {"id": "rover_mobility_navigation", "name": "Rover mobility & navigation",
+     "required": {"terrain": 0.5, "dust_regolith": 0.3}, "supporting": {"ops_landing_mobility": 0.4, "thermal_illumination": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
+       "Moist, vegetated or rounded-grain Earth soils differ from dry, angular, compact lunar regolith.",
+       "No GNSS on the Moon: switch GPS off and navigate visually or by terrain-relative methods.",
+       "Low sun and black shadows degrade stereo vision; ~1.3 s latency and line-of-sight loss at the pole."]},
+
+    {"id": "ice_prospecting_instruments", "name": "Ice prospecting (GPR, neutron spectrometer, drill-based detection)",
+     "required": {"water_ice": 0.4}, "supporting": {"geology": 0.0, "terrain": 0.2},
+     "moon_precondition": "(dvn_frac_ice_within_1m >= 0.1) | (dvn_frac_coldtrap_110k >= 0.1)",
+     "also_account_for": [
+       "Ice at 250-273 K (Earth) vs 25-110 K (Moon) changes GPR velocity/attenuation and drill response.",
+       "Earth's atmosphere blocks the cosmic-ray neutron source used for passive lunar neutron spectroscopy; Earth field tests need an active neutron source.",
+       "Earth permafrost contains liquid films, salts and organics; lunar ice carries other volatiles (CO, CO2, NH3, H2S, CH3OH).",
+       "Lunar ice distribution is set by sublimation in vacuum, not by climate or hydrology."]},
+
+    {"id": "isru_ice_extraction", "name": "ISRU: excavation and extraction of icy regolith",
+     "required": {"water_ice": 0.5, "dust_regolith": 0.3}, "supporting": {"thermal_illumination": 0.0},
+     "moon_precondition": "dvn_frac_ice_within_1m >= 0.3",
+     "also_account_for": [
+       "In vacuum ice sublimates instead of melting: heating and vapour capture must be validated in a thermal-vacuum chamber.",
+       "Ice-cemented regolith at cryogenic temperature is much harder than Earth permafrost near 0 C.",
+       "Volatile contaminants (H2S, NH3, CO2 ...) need handling.",
+       "PSR operations: no sunlight for power, extreme cold soak."]},
+
+    {"id": "regolith_excavation_construction", "name": "Regolith excavation, berms, landing pads, sintering",
+     "required": {"dust_regolith": 0.5, "terrain": 0.3}, "supporting": {"geology": 0.2, "ops_landing_mobility": 0.3},
+     "moon_precondition": null,
+     "also_account_for": [
+       "1/6 g reduces excavator weight and reaction force; lunar regolith is very compact below ~30 cm with interlocking angular grains.",
+       "Sintering and microwave heating depend on glass and nanophase iron absent from Earth tephra.",
+       "No water for concrete; binders outgas in vacuum."]},
+
+    {"id": "thermal_power_extreme_cold_long_night", "name": "Thermal control & power survival (extreme cold, long shadow/night)",
+     "required": {"thermal_illumination": 0.4}, "supporting": {"ops_landing_mobility": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "No convection in vacuum: radiative loss dominates; Earth wind chill is the wrong heat-transfer mode.",
+       "PSR 25-110 K and long cold soaks cannot be reached outdoors (Earth minimum ~180 K): qualify in cryo-TVAC.",
+       "Earth polar night is seasonal and comes with an atmosphere; lunar shadow periods are set by topography."]},
+
+    {"id": "illumination_power_planning", "name": "Illumination & solar-power planning, low-sun-angle vision",
+     "required": {"thermal_illumination": 0.3, "terrain": 0.4}, "supporting": {},
+     "moon_precondition": null,
+     "also_account_for": [
+       "Lunar south-pole sun stays within ~1.5 deg of the horizon; use LOLA illumination maps for numbers and Earth sites for procedures only.",
+       "No atmospheric scattering on the Moon: shadows are black.",
+       "Clouds and weather cut Earth solar input; the Moon has none."]},
+
+    {"id": "habitat_human_ops_isolation", "name": "Habitat, human operations, crew isolation",
+     "required": {"ops_landing_mobility": 0.3}, "supporting": {"thermal_illumination": 0.0, "biology_sterility": 0.0},
+     "moon_precondition": null, "earth_hint": "flag_isolation",
+     "also_account_for": [
+       "Isolation/remoteness is not scored by any category: prefer sites tagged 'isolation' (e.g. Concordia, HMP, MDRS).",
+       "No Earth site forces suited EVA and airlock cycles.",
+       "Lunar surface radiation ~1.4 mSv/day; ~3-day return to Earth; ~2.6 s round-trip comms."]},
+
+    {"id": "dust_mitigation", "name": "Dust mitigation (seals, coatings, filters, suits)",
+     "required": {"dust_regolith": 0.5}, "supporting": {"biology_sterility": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "Lunar dust is charged and moved by plume ejecta and electrostatics, not wind; Earth dust is wind-driven and moist.",
+       "Sharp glassy agglutinates are more abrasive than weathered Earth dust.",
+       "Verify seals and mechanisms in dirty-vacuum chambers with simulant."]},
+
+    {"id": "instrument_spectrometers_mineralogy", "name": "Instrument field tests: spectrometers / mineralogy (VNIR, Raman, LIBS, XRF)",
+     "required": {"geology": 0.5}, "supporting": {"dust_regolith": 0.0, "biology_sterility": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "No space weathering on Earth (no nanophase-iron darkening and reddening).",
+       "Terrestrial anorthosite is more sodic than lunar ferroan anorthosite.",
+       "Atmospheric water bands (VNIR) and different LIBS plasma at 1 atm; lichen/biofilm coatings on Earth rocks."]},
+
+    {"id": "instrument_gpr_drill_subsurface", "name": "Instrument field tests: GPR and drilling",
+     "required": {"geology": 0.3, "water_ice": 0.3}, "supporting": {"dust_regolith": 0.3},
+     "moon_precondition": null,
+     "also_account_for": [
+       "Drilling in vacuum: no air cooling or flushing of cuttings; ice cuttings sublimate.",
+       "Cryogenic ice-regolith is much harder than Earth permafrost.",
+       "Earth subsurface moisture and salts dominate GPR attenuation."]},
+
+    {"id": "planetary_protection_contamination_blanks", "name": "Planetary protection, contamination blanks, life-detection false positives",
+     "required": {"biology_sterility": 0.4}, "supporting": {"dust_regolith": 0.0},
+     "moon_precondition": null,
+     "also_account_for": [
+       "No Earth surface is sterile; every blank still carries microbes and organics.",
+       "Stations and camps raise local contamination.",
+       "COSPAR policy for lunar polar / PSR missions asks for an organic-materials inventory (check the current category definitions)."]},
+
+    {"id": "cave_pit_robotics", "name": "Cave / pit robotics (skylight descent, mapping, comms)",
+     "required": {"caves_subsurface": 0.5}, "supporting": {"geology": 0.3},
+     "moon_precondition": "contains(tags, 'lava_tube')",
+     "also_account_for": [
+       "Lunar pits/tubes may be far larger than terrestrial tubes.",
+       "Diviner-based studies estimate the shaded Tranquillitatis pit floor stays near ~290 K (verify before quoting).",
+       "Underground: no comms or GNSS; skylight descent by tether.",
+       "Earth caves are humid, biologically active and shaped by water."]},
+
+    {"id": "geology_eva_training", "name": "Astronaut field-geology & EVA training",
+     "required": {"geology": 0.4, "terrain": 0.3}, "supporting": {"ops_landing_mobility": 0.2},
+     "moon_precondition": null,
+     "also_account_for": [
+       "Suit dexterity, EVA time limits and 1/6 g gait are not reproduced.",
+       "Low sun and black shadows at the pole change what can be seen.",
+       "Earth outcrops are weathered and often vegetated."]}
+  ]
+}

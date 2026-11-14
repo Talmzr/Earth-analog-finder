@@ -1,0 +1,31 @@
+id,name,country,lat,lon,half_width_km,status,tags,notes
+haughton,Haughton Crater (Devon Island),Canada,75.38,-89.68,10,established,impact_crater;polar_light;permafrost_polygons;ground_ice;cold_desert;isolation;carbonates,Haughton-Mars Project since 1997
+dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),Antarctica,-77.52,161.6,10,established,cold_desert;hyperarid;permafrost_polygons;ground_ice;polar_light;isolation;evaporites,NASA/NSF Mars analog
+beacon_valley,Beacon Valley (buried ice),Antarctica,-77.82,160.65,8,candidate,buried_glacier;ground_ice;permafrost_polygons;hyperarid;cold_desert;polar_light;isolation,Buried Miocene ice - analog for Arcadia / Deuteronilus ice
+concordia,Concordia Station (Dome C),Antarctica,-75.10,123.33,10,established,polar_light;isolation;cold_desert;ice_sheet;plain,Isolation / overwintering habitat analog
+ellesmere_axel_heiberg,Axel Heiberg Island (Expedition Fiord),Canada,79.42,-90.75,10,candidate,permafrost_polygons;ground_ice;polar_light;cold_desert;isolation;evaporites,Cold perennial springs through permafrost
+svalbard_bockfjorden,Bockfjorden volcanic complex (AMASE),Norway,79.42,13.33,8,established,volcanic;basalt;carbonates;permafrost_polygons;ground_ice;polar_light;isolation,AMASE expeditions
+mistastin,Mistastin Lake crater,Canada,55.88,-63.32,10,candidate,impact_crater;anorthosite;impact_melt;high_relief,One of very few anorthosite impact craters - lunar highland analog
+ries,Ries crater,Germany,48.88,10.57,12,established,impact_crater;impact_melt,Apollo 14/17 geology training (vegetated today)
+meteor_crater,Meteor Crater,USA,35.03,-111.02,5,established,impact_crater;arid;regolith,Apollo training; very well preserved
+lonar,Lonar crater,India,19.98,76.51,4,candidate,impact_crater;basalt;regolith,Young impact crater in Deccan basalt - lunar mare analog
+kamil,Kamil crater,Egypt,22.02,26.09,4,candidate,impact_crater;hyperarid;regolith;plain,Pristine small crater in hyperarid desert
+lava_beds,Lava Beds National Monument,USA,41.71,-121.51,8,established,lava_tube;basalt;volcanic,NASA Planetary Analog Explorer lava-cave site
+craters_of_the_moon,Craters of the Moon,USA,43.42,-113.52,10,established,lava_tube;basalt;volcanic;regolith,Volcanic field used for Artemis-era field tests
+mauna_kea_saddle,Mauna Kea saddle (PISCES / ISRU tests),USA,19.76,-155.46,8,established,basalt;volcanic;regolith;high_relief,ISRU field tests on tephra
+lanzarote,Lanzarote (Timanfaya / La Corona tube),Spain,29.0,-13.75,10,established,lava_tube;basalt;volcanic;arid;regolith,ESA PANGAEA training
+undara,Undara lava tubes,Australia,-18.2,144.6,8,candidate,lava_tube;basalt;volcanic,Very long lava tubes (vegetated)
+black_point,Black Point lava flow / SP crater,USA,35.6,-111.6,8,established,basalt;volcanic;arid;regolith,Desert RATS field tests
+holuhraun,Holuhraun (Iceland highlands),Iceland,64.87,-16.83,10,established,basalt;volcanic;cold_desert;regolith;plain,Fresh basalt flow on glacial outwash
+pinacate,Pinacate (El Elegante maar),Mexico,31.85,-113.42,6,established,volcanic;basalt;impact_crater_like;arid,Apollo-era training
+mdrs,Mars Desert Research Station,USA,38.41,-110.79,10,established,sedimentary;clays;arid;isolation,Mars Society habitat
+makhtesh_ramon,Makhtesh Ramon (D-MARS),Israel,30.6,34.8,10,established,sedimentary;arid;high_relief;isolation,D-MARS analog missions
+lake_salda,Lake Salda,Turkey,37.55,29.68,6,established,lakebed_sediment;delta;carbonates;clays,NASA-named analog for Jezero
+rio_tinto,Rio Tinto,Spain,37.7,-6.57,6,established,acidic;iron_sulfates;sedimentary,Jarosite / Meridiani analog
+dallol,Dallol / Danakil,Ethiopia,14.24,40.3,8,candidate,hyperarid;evaporites;brines;volcanic;hydrothermal,Extreme brines
+qaidam_dalangtan,Qaidam Basin (Dalangtan playa),China,38.6,91.4,10,candidate,hyperarid;evaporites;cold_desert;yardangs;high_relief,High cold salt desert
+pilbara_dresser,Pilbara (Dresser Formation),Australia,-21.17,119.4,8,candidate,sedimentary;hydrothermal;arid;ancient_microbial,Ancient stromatolites
+wadi_rum,Wadi Rum,Jordan,29.57,35.42,10,candidate,sedimentary;arid;dust;high_relief,Dune / sandstone desert
+death_valley,Death Valley (Badwater),USA,36.23,-116.77,10,established,hyperarid;evaporites;alluvial_fans;high_relief,Named in challenge brief
+atacama_yungay,Atacama Desert (Yungay),Chile,-24.08,-69.93,10,established,hyperarid;evaporites;high_uv;oxidized_soil;dust;cold_desert,Driest non-polar desert
+tso_kar_ladakh,Tso Kar (Ladakh),India,33.3,78.0,8,candidate,cold_desert;evaporites;permafrost_polygons;high_relief;lakebed_sediment,High-altitude cold evaporite basin

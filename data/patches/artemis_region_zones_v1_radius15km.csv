@@ -1,0 +1,10 @@
+target,name,radius_km,area_km2,landing_km2,landing_vis50_km2,psr_km2,best_landing_vis,min_km_landing_to_psr,median_km_landing_to_psr,landing_tmax_k,landing_tavg_k,psr_tmax_k,psr_tavg_k,psr_ice_stable_frac,single_tile_psr_frac,single_tile_sunvis_max
+moon_shackleton,Shackleton crater (rim + PSR),15.0,706.8,48.2,5.9,242.4,0.9,0.08,0.54,229.0,114.0,101.0,58.0,0.98,1.0,0.0
+moon_peak_cabeus_b,Peak near Cabeus B,15.0,706.8,5.2,0.0,21.4,0.34,0.72,4.4,261.0,136.0,124.0,68.0,0.98,0.01,0.28
+moon_haworth,Haworth,15.0,706.8,0.9,0.0,289.9,0.38,0.08,1.62,218.0,98.0,64.0,40.0,1.0,0.5,0.05
+moon_malapert_massif,Malapert Massif,15.0,706.8,28.8,6.4,5.0,0.85,0.08,1.54,239.0,136.0,178.0,68.0,1.0,0.0,0.85
+moon_mons_mouton,Mons Mouton,15.0,706.8,313.6,6.8,26.0,0.58,0.08,1.48,230.0,128.0,177.0,80.0,0.9,0.05,0.46
+moon_mons_mouton_plateau,Mons Mouton Plateau,15.0,706.8,305.8,6.5,18.0,0.58,0.08,1.29,227.0,126.0,183.0,82.0,0.87,0.01,0.54
+moon_nobile_rim,Nobile Rim 1 & 2,15.0,706.9,107.8,0.0,162.0,0.41,0.08,2.04,233.0,119.0,115.0,69.0,0.99,0.21,0.36
+moon_de_gerlache_rim2,de Gerlache Rim 2,15.0,706.9,3.4,1.0,249.0,0.79,0.16,1.65,239.0,130.0,78.0,52.0,1.0,0.56,0.18
+moon_slater_plain,Slater Plain,15.0,706.9,8.8,0.4,205.9,0.6,0.16,1.22,212.0,99.0,75.0,47.0,1.0,0.92,0.02

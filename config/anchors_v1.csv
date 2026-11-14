@@ -1,0 +1,48 @@
+moon_target,earth_site,category,label,confidence,rationale,needs_review
+moon_haworth,mistastin,geology,0.7,med,Mistastin is one of very few impact structures with anorthosite in the target rocks; south-pole highland units are feldspathic impact materials. Not 1.0: terrestrial plagioclase is more sodic than lunar ferroan anorthosite and the rocks are weathered.,1
+moon_malapert_massif,mistastin,geology,0.6,med,Basin-massif highland material vs anorthosite-bearing impact target. Same caveats on plagioclase composition and alteration.,1
+moon_shackleton,ries,geology,0.3,med,"Ries suevite and impact breccias were used for Apollo-era geology training (impact processes), but the target is sedimentary cover over granitic/gneissic basement, not anorthosite. Site is vegetated and farmed.",1
+moon_shackleton,meteor_crater,geology,0.1,med,"Classic shock features (coesite was found here) but the target rocks are sandstone and limestone/dolomite: impact process yes, lunar mineralogy no.",1
+moon_haworth,haughton,geology,0.0,med,"Impact breccias present, but the target is a Paleozoic carbonate sequence over crystalline basement; carbonate mineralogy is non-lunar.",1
+moon_tranquillitatis_pit,lonar,geology,0.6,med,Impact crater in Deccan flood basalt with shocked plagioclase (maskelynite reported): a recognised mare-basalt impact analog. Continental flood basalt is more oxidised and altered than mare basalt.,1
+moon_tranquillitatis_pit,craters_of_the_moon,geology,0.5,med,"Young basaltic lava field (NASA field research site); mare-like basalt mineralogy, terrestrial oxidation and weathering.",1
+moon_mons_mouton,dallol,geology,-0.8,high,Hydrothermal salt deposits and hyperacidic brines: no lunar counterpart.,1
+moon_haworth,lake_salda,geology,-0.6,high,Carbonate (hydromagnesite) lake sediments formed in water; aqueous mineralogy is absent on the Moon. Lake Salda is a Mars (Jezero) analog.,1
+moon_malapert_massif,rio_tinto,geology,-0.7,high,Acidic iron-sulfate (jarosite) system driven by water and microbes; non-lunar.,1
+moon_slater_plain,concordia,geology,-0.6,high,Dome C is a ~3 km thick ice sheet: no rock exposed to test on.,1
+moon_shackleton,concordia,terrain,-0.7,high,Dome C is almost flat over 10 km (relief of tens of metres); the Shackleton patch has ~1.6 km relief and ~19 deg mean slope at 500 m.,1
+moon_slater_plain,meteor_crater,terrain,-0.2,med,"The 10 km window is mostly the flat plain around the 1.2 km crater (patch relief ~80 m, mean slope <1 deg at 500 m) vs ~500 m relief and ~4 deg on Slater Plain. Crater shape matches, patch statistics do not.",1
+moon_shackleton,meteor_crater,terrain,-0.3,med,Same simple-bowl shape but ~17x smaller (1.2 km vs ~21 km): the 10 km window is flat plain while the Shackleton patch is steep crater interior (~19 deg mean slope).,1
+moon_mons_mouton_plateau,holuhraun,terrain,0.0,low,"Both low-slope, but the plateau has ~3x the relief (~280 m vs ~80 m) and ~4 deg vs <1 deg mean slope at 500 m.",1
+moon_nobile_rim,haughton,terrain,-0.3,med,"The Haughton 10 km window is low relief (~110 m, ~2 deg): erosion has subdued the 23 km crater, while the Nobile rim patch has ~780 m relief.",1
+moon_haworth,dry_valleys_wright,terrain,0.4,low,"Steep glacial valley walls (~1.5 km relief, ~15 deg mean slope at 500 m) vs the steep Haworth crater wall (~2.2 km, ~14 deg): similar steepness, different origin (glacial vs impact).",1
+moon_shackleton,concordia,thermal_illumination,-0.2,med,"Closest Earth approach for cold and polar light (winter surface ~190-200 K, months of polar night), but the Shackleton patch is permanent shadow at ~45-110 K. Would mislead cryogenic tests; capped by the PSR rule anyway.",1
+moon_mons_mouton,concordia,thermal_illumination,0.1,low,"Sunlit massif (mean ~113 K, max ~266 K, almost no PSR): Dome C (~200-250 K surface) overlaps only the warm end of the lunar range, and its noon sun reaches ~38 deg vs <7 deg on the Moon. Near-neutral.",1
+moon_haworth,dry_valleys_wright,thermal_illumination,-0.3,med,Haworth patch is half permanent shadow (mean ~46 K); the Dry Valleys (mean air ~-20 C) are polar and dry but ~200 K warmer.,1
+moon_peak_cabeus_b,haughton,thermal_illumination,0.0,low,"Polar day/night and cold, but the lunar site has no polar night, sun below ~9 deg, and mean ~100 K vs ~260 K. Uninformative.",1
+moon_shackleton,death_valley,thermal_illumination,-0.9,high,One of the hottest places on Earth with high noon sun; opposite of a polar cold trap.,1
+moon_malapert_massif,lonar,thermal_illumination,-0.6,high,"Tropical site (~20 N): noon sun near zenith, warm monsoon climate, no polar light geometry.",1
+moon_haworth,haughton,water_ice,0.4,med,Continuous permafrost with ice-cemented ground on Devon Island (HMP drill tests); Haworth has thermally stable ice within 1 m. Ice temperature (~260 K vs <110 K) and volatile mix differ.,1
+moon_shackleton,beacon_valley,water_ice,0.4,med,"Buried glacier ice under a dry sublimation till: ice preserved under a desiccated cover, conceptually like lunar ice-stability depth. Ice age is debated; temperatures differ by >150 K.",1
+moon_peak_cabeus_b,dry_valleys_wright,water_ice,0.45,med,Ice-cemented permafrost below a dry surface layer in a hyperarid cold desert; Cabeus B has ice ~0.2 m deep. Physics of vapour-diffusion-controlled ice is analogous; temperatures are not.,1
+moon_mons_mouton,mauna_kea_saddle,water_ice,0.0,low,ISRU hardware heritage on tephra (NASA/PISCES field tests) but no ground ice at the saddle; icy simulant has to be emplaced.,1
+moon_haworth,wadi_rum,water_ice,-0.6,med,Warm sandstone desert with no ground ice vs an ice-rich lunar crater.,1
+moon_de_gerlache_rim2,undara,water_ice,-0.7,high,Tropical savanna with a wet season and no ground ice vs a cold-trap-dominated patch.,1
+moon_mons_mouton_plateau,mauna_kea_saddle,dust_regolith,0.3,med,"Glass-rich basaltic tephra used in ISRU / regolith field tests (point sites). The 10 km patch also includes wetter, vegetated ground; basaltic (mare-like) rather than anorthositic, no agglutinates.",1
+moon_haworth,black_point,dust_regolith,0.3,low,"Cinder and basaltic fines in the San Francisco volcanic field (Desert RATS area; the JSC-1 simulant came from a cinder cone in the same field). Mare-like, not highland; the patch is partly vegetated.",1
+moon_malapert_massif,atacama_yungay,dust_regolith,0.3,med,"Hyperarid fine dust with near-zero moisture, but oxidised and salt-rich (nitrates, sulfates, perchlorate), unlike lunar regolith.",1
+moon_slater_plain,ries,dust_regolith,-0.6,high,"Moist, organic-rich agricultural soils under vegetation.",1
+moon_shackleton,concordia,dust_regolith,-0.7,high,Snow and firn surface: no mineral regolith.,1
+moon_haworth,ries,biology_sterility,-0.9,high,Farmland and forest; abundant biology.,1
+moon_shackleton,atacama_yungay,biology_sterility,0.5,med,"Among the driest, lowest-biomass soils on Earth, but not sterile (microbes and organics are detected).",1
+moon_shackleton,dry_valleys_wright,biology_sterility,0.5,med,Cold hyperarid desert with very low biomass; soil microbes and endoliths are present.,1
+moon_peak_cabeus_b,undara,biology_sterility,-0.8,high,Tropical savanna woodland.,1
+moon_haworth,concordia,biology_sterility,0.4,med,"Ice-sheet surface with very low biomass, but a permanently staffed station adds human-borne contamination.",1
+moon_tranquillitatis_pit,lava_beds,caves_subsurface,0.6,med,Hundreds of accessible basaltic lava-tube caves used in planetary cave and robotics analog work; lunar tubes are likely much larger.,1
+moon_tranquillitatis_pit,lanzarote,caves_subsurface,0.6,med,"La Corona lava tube (several km, partly below sea level), used in ESA astronaut training. Humid, partly flooded, scale smaller than lunar tubes.",1
+moon_tranquillitatis_pit,undara,caves_subsurface,0.4,low,"Very long basaltic lava-tube system, but humid, vegetated collapse sections and tropical biology.",1
+moon_tranquillitatis_pit,dallol,caves_subsurface,-0.7,high,No lava tubes; hydrothermal salt terrain.,1
+moon_mons_mouton_plateau,black_point,ops_landing_mobility,0.5,low,Desert RATS rover/EVA traverse site on a basaltic lava flow and cinder terrain; low-slope plateau-like ground. Check patch slope statistics.,1
+moon_haworth,haughton,ops_landing_mobility,0.3,low,"Long-running remote polar rover/EVA analog (HMP), but Haworth's patch is much steeper (~98% of ground >10 deg at 500 m).",1
+moon_mons_mouton,ries,ops_landing_mobility,-0.4,med,"Fields, forest, roads and villages: obstacles and surfaces that do not exist on the Moon.",1
+moon_shackleton,concordia,ops_landing_mobility,0.1,med,"Proven overwintering/isolation operations (ESA uses Concordia for isolation research), but a flat ice surface is nothing like the crater terrain for landing or driving.",1

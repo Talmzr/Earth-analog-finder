@@ -1,0 +1,133 @@
+{
+ "written_at": "2026-11-14 16:22:03",
+ "phase": "final",
+ "rows": 4321,
+ "elapsed_s": 1991,
+ "sources": {
+  "jaxa": {
+   "jaxa": {
+    "lst_day": {
+     "level": 1,
+     "res_deg": 0.05
+    },
+    "lst_night": {
+     "level": 1,
+     "res_deg": 0.05
+    },
+    "ndvi": {
+     "level": 1,
+     "res_deg": 0.05
+    },
+    "aot": {
+     "level": 0,
+     "res_deg": 0.2
+    },
+    "sm": {
+     "level": 1,
+     "res_deg": 0.1
+    },
+    "precip": {
+     "level": 0,
+     "res_deg": 0.2
+    }
+   }
+  },
+  "soil": {
+   "soilgrids_res_m": 5000
+  },
+  "pf": {
+   "permafrost_files": {
+    "PFR_nh": true,
+    "PFR_ant": true,
+    "GTD_nh": true,
+    "GTD_ant": true
+   }
+  }
+ },
+ "api": {
+  "power": {
+   "done": 2326,
+   "total": 3669,
+   "failed": 24,
+   "capped": 1319,
+   "finished": true
+  },
+  "macrostrat": {
+   "done": 4320,
+   "total": 4320,
+   "failed": 0,
+   "capped": 0,
+   "finished": true
+  }
+ },
+ "coverage_pct": {
+  "patch_id": 100.0,
+  "lat": 100.0,
+  "lon": 100.0,
+  "lst_day_max_k": 99.2,
+  "lst_day_mean_k": 99.2,
+  "lst_night_min_k": 99.1,
+  "lst_night_mean_k": 99.1,
+  "lst_mean_k": 99.2,
+  "lst_diurnal_range_k": 99.1,
+  "lst_annual_range_k": 99.2,
+  "lst_day_months_valid": 100.0,
+  "lst_night_months_valid": 100.0,
+  "lst_res_deg": 100.0,
+  "power_t2m_c": 66.7,
+  "power_t2m_min_c": 66.7,
+  "power_t2m_max_c": 66.7,
+  "power_t2m_coldest_month_min_c": 66.7,
+  "power_t2m_warmest_month_max_c": 66.7,
+  "power_t2m_annual_range_c": 66.7,
+  "power_t2m_diurnal_range_c": 66.7,
+  "power_frost_days": 66.7,
+  "power_rh2m_pct": 66.7,
+  "power_ws2m_ms": 66.7,
+  "power_ps_kpa": 66.7,
+  "power_precip_mm_yr": 66.7,
+  "power_sw_allsky_kwh_m2_d": 66.7,
+  "power_sw_clrsky_kwh_m2_d": 66.7,
+  "power_uv_index": 66.7,
+  "power_albedo": 66.7,
+  "power_cell_lat": 66.7,
+  "power_cell_lon": 66.7,
+  "pf_frac_pct": 42.1,
+  "pf_gst_c": 42.1,
+  "pf_magt_2m_c": 42.1,
+  "pf_magt_10m_c": 42.1,
+  "pf_in_cci_domain": 100.0,
+  "permafrost_proxy": 66.7,
+  "permafrost_flag": 73.0,
+  "permafrost_src": 100.0,
+  "soil_moist_mean": 77.4,
+  "soil_moist_max": 77.4,
+  "soil_moist_months_valid": 100.0,
+  "soil_moist_widened_25km": 100.0,
+  "precip_mm_yr": 64.6,
+  "precip_wettest_month_mm": 64.6,
+  "precip_widened_25km": 100.0,
+  "precip_best_mm_yr": 92.9,
+  "precip_best_src": 100.0,
+  "ndvi_mean": 86.6,
+  "ndvi_max": 86.6,
+  "ndvi_res_deg": 100.0,
+  "aot_mean": 91.2,
+  "aot_max": 91.2,
+  "aot_widened_25km": 100.0,
+  "sg_sand_pct": 80.6,
+  "sg_silt_pct": 80.6,
+  "sg_clay_pct": 80.6,
+  "sg_bdod_g_cm3": 79.7,
+  "sg_cfvo_pct": 80.6,
+  "sg_res_m": 100.0,
+  "mstrat_unit": 100.0,
+  "mstrat_lith": 100.0,
+  "mstrat_age": 100.0,
+  "mstrat_descrip": 100.0,
+  "mstrat_scale": 100.0,
+  "mstrat_t_age_ma": 88.6,
+  "mstrat_b_age_ma": 88.6,
+  "mstrat_text_all": 100.0
+ }
+}

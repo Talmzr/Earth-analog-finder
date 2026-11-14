@@ -1,0 +1,742 @@
+{
+ "moon_rows": 5610,
+ "earth_rows": 4310,
+ "moon_targets": 10,
+ "moon_rows_by_region": {
+  "south_pole": 3609,
+  "midlat": 2001
+ },
+ "shared_columns": [
+  "elev_mean_m",
+  "elev_std_m",
+  "frac_daylight",
+  "frac_polar_day",
+  "frac_polar_night",
+  "frac_slope500_gt10",
+  "frac_slope500_gt20",
+  "mean_day_elev_deg",
+  "native_res_m",
+  "noon_elev_max_deg",
+  "noon_elev_mean_deg",
+  "noon_elev_min_deg",
+  "relief_m",
+  "slope500_mean_deg",
+  "slope500_p90_deg",
+  "slope_native_mean_deg",
+  "tri500_mean_m",
+  "valid_frac",
+  "x_frozen_ground_frac",
+  "x_grazing_sun_frac",
+  "x_noon_sun_max_deg",
+  "x_polar_night_frac",
+  "x_surface_ice_frac",
+  "x_temp_max_k",
+  "x_temp_mean_k",
+  "x_temp_min_k",
+  "x_temp_swing_k"
+ ],
+ "categories": {
+  "from_config": {},
+  "default": {
+   "terrain": [
+    "relief_m",
+    "elev_std_m",
+    "slope500_mean_deg",
+    "slope500_p90_deg",
+    "frac_slope500_gt10",
+    "frac_slope500_gt20",
+    "tri500_mean_m"
+   ],
+   "thermal_illumination": [
+    "x_temp_max_k",
+    "x_temp_mean_k",
+    "x_temp_min_k",
+    "x_temp_swing_k",
+    "x_grazing_sun_frac",
+    "x_noon_sun_max_deg",
+    "x_polar_night_frac",
+    "x_sunlit_frac_terrain"
+   ],
+   "water_ice": [
+    "x_frozen_ground_frac",
+    "x_surface_ice_frac",
+    "x_shadowed_frac",
+    "dvn_ice_depth_median_m",
+    "pf_magt_2m_c",
+    "soil_moist_mean",
+    "power_frost_days"
+   ],
+   "geology": [
+    "moon_geo_unit",
+    "moon_geo_unit_name",
+    "geo_frac_crater",
+    "geo_frac_basin",
+    "geo_frac_terra",
+    "geo_frac_plains",
+    "mstrat_lith",
+    "mstrat_descrip",
+    "mstrat_text_all",
+    "sg_sand_pct",
+    "sg_silt_pct",
+    "sg_clay_pct",
+    "sg_bdod_g_cm3",
+    "sg_cfvo_pct",
+    "context"
+   ],
+   "dust_regolith": [
+    "aot_mean",
+    "aot_max",
+    "sg_silt_pct",
+    "sg_clay_pct",
+    "wc_frac_bare_sparse"
+   ],
+   "biology_sterility": [
+    "ndvi_mean",
+    "ndvi_max",
+    "precip_best_mm_yr",
+    "soil_moist_mean",
+    "power_uv_index",
+    "wc_frac_tree",
+    "wc_frac_grass",
+    "wc_frac_crop",
+    "wc_frac_moss_lichen"
+   ],
+   "ops_landing_mobility": [
+    "slope500_p90_deg",
+    "frac_slope500_gt10",
+    "frac_slope500_gt20",
+    "x_sunlit_frac_terrain",
+    "x_shadowed_frac",
+    "x_temp_min_k",
+    "x_temp_swing_k"
+   ]
+  }
+ },
+ "arrays": {
+  "moon_patch_arrays.npz": {
+   "patch_id": [
+    3609
+   ],
+   "center_lat": [
+    3609
+   ],
+   "center_lon": [
+    3609
+   ],
+   "elev": [
+    3609,
+    64,
+    64
+   ],
+   "slope": [
+    3609,
+    64,
+    64
+   ],
+   "sunvis": [
+    3609,
+    64,
+    64
+   ],
+   "dvn_tmax": [
+    3609,
+    16,
+    16
+   ],
+   "dvn_tavg": [
+    3609,
+    16,
+    16
+   ]
+  },
+  "earth_patch_arrays.npz": {
+   "patch_id": [
+    4310
+   ],
+   "center_lat": [
+    4310
+   ],
+   "center_lon": [
+    4310
+   ],
+   "elev": [
+    4310,
+    64,
+    64
+   ],
+   "slope": [
+    4310,
+    64,
+    64
+   ],
+   "valid": [
+    4310,
+    64,
+    64
+   ]
+  },
+  "moon_patch_arrays_128.npz": {
+   "patch_id": [
+    3609
+   ],
+   "center_lat": [
+    3609
+   ],
+   "center_lon": [
+    3609
+   ],
+   "elev": [
+    3609,
+    128,
+    128
+   ],
+   "slope": [
+    3609,
+    128,
+    128
+   ],
+   "sunvis": [
+    3609,
+    128,
+    128
+   ]
+  },
+  "earth_patch_arrays_128.npz": {
+   "patch_id": [
+    4310
+   ],
+   "center_lat": [
+    4310
+   ],
+   "center_lon": [
+    4310
+   ],
+   "elev": [
+    4310,
+    128,
+    128
+   ],
+   "slope": [
+    4310,
+    128,
+    128
+   ],
+   "valid": [
+    4310,
+    128,
+    128
+   ]
+  },
+  "moon_midlat_arrays_128.npz": {
+   "patch_id": [
+    2001
+   ],
+   "center_lat": [
+    2001
+   ],
+   "center_lon": [
+    2001
+   ],
+   "elev": [
+    2001,
+    128,
+    128
+   ],
+   "slope": [
+    2001,
+    128,
+    128
+   ]
+  }
+ },
+ "arrays_meta": {
+  "moon_patch_arrays.npz": {
+   "path": "data/patches/moon_patch_arrays.npz",
+   "size_mb": 153.6,
+   "mtime": "2026-11-14 15:48:00",
+   "dtypes": {
+    "patch_id": "<U24",
+    "center_lat": "float32",
+    "center_lon": "float32",
+    "elev": "float32",
+    "slope": "float32",
+    "sunvis": "float32",
+    "dvn_tmax": "float32",
+    "dvn_tavg": "float32"
+   }
+  },
+  "earth_patch_arrays.npz": {
+   "path": "data/patches/earth_patch_arrays.npz",
+   "size_mb": 120.8,
+   "mtime": "2026-11-14 16:03:44",
+   "dtypes": {
+    "patch_id": "<U32",
+    "center_lat": "float32",
+    "center_lon": "float32",
+    "elev": "float32",
+    "slope": "float32",
+    "valid": "uint8"
+   }
+  },
+  "moon_patch_arrays_128.npz": {
+   "path": "data/patches/moon_patch_arrays_128.npz",
+   "size_mb": 276.2,
+   "mtime": "2026-11-14 17:59:15",
+   "dtypes": {
+    "patch_id": "<U32",
+    "center_lat": "float32",
+    "center_lon": "float32",
+    "elev": "float16",
+    "slope": "float16",
+    "sunvis": "float16"
+   }
+  },
+  "earth_patch_arrays_128.npz": {
+   "path": "data/patches/earth_patch_arrays_128.npz",
+   "size_mb": 230.5,
+   "mtime": "2026-11-14 18:01:10",
+   "dtypes": {
+    "patch_id": "<U32",
+    "center_lat": "float32",
+    "center_lon": "float32",
+    "elev": "float16",
+    "slope": "float16",
+    "valid": "uint8"
+   }
+  },
+  "moon_midlat_arrays_128.npz": {
+   "path": "data/patches/moon_midlat_arrays_128.npz",
+   "size_mb": 112.7,
+   "mtime": "2026-11-14 18:10:50",
+   "dtypes": {
+    "patch_id": "<U32",
+    "center_lat": "float32",
+    "center_lon": "float32",
+    "elev": "float16",
+    "slope": "float16"
+   }
+  }
+ },
+ "merge_inputs": {
+  "moon_midlat_patches.csv": {
+   "present": true,
+   "used": true,
+   "rows": 2001,
+   "mtime": "2026-11-14 18:10:42",
+   "appended": 2001,
+   "columns_only_in_midlat": [
+    "dvn_regolith_temp_anom_k_max",
+    "dvn_regolith_temp_anom_k_mean",
+    "dvn_regolith_temp_anom_k_min",
+    "dvn_regolith_temp_anom_k_n_px",
+    "dvn_regolith_temp_anom_k_p50",
+    "dvn_regolith_temp_anom_k_p95",
+    "dvn_rock_abund_max",
+    "dvn_rock_abund_mean",
+    "dvn_rock_abund_min",
+    "dvn_rock_abund_n_px",
+    "dvn_rock_abund_p50",
+    "dvn_rock_abund_p95",
+    "gcp_clat",
+    "gcp_clon",
+    "geo_frac_copernican_crater",
+    "illum_source",
+    "stratum",
+    "terrain_source"
+   ],
+   "polar_columns_missing_in_midlat": []
+  },
+  "earth_patches_env_powerfill.csv": {
+   "present": true,
+   "used": true,
+   "rows": 4321,
+   "mtime": "2026-11-14 18:05:40",
+   "precip_best_filled": 307,
+   "power_t2m_c_rows_before": 2874,
+   "power_t2m_c_rows_after": 4310,
+   "filled": 1436
+  },
+  "earth_traverse_precise.csv": {
+   "present": true,
+   "used": true,
+   "rows": 400,
+   "mtime": "2026-11-14 18:04:01",
+   "valid_rows": 399,
+   "overrode": 399,
+   "added": 0
+  }
+ },
+ "coverage_summary": {
+  "moon_rows_by_region": {
+   "south_pole": 3609,
+   "midlat": 2001
+  },
+  "moon_targets_by_region": {
+   "midlat": 1,
+   "south_pole": 9
+  },
+  "moon_target_ids": [
+   "moon_de_gerlache_rim2",
+   "moon_haworth",
+   "moon_malapert_massif",
+   "moon_mons_mouton",
+   "moon_mons_mouton_plateau",
+   "moon_nobile_rim",
+   "moon_peak_cabeus_b",
+   "moon_shackleton",
+   "moon_slater_plain",
+   "moon_tranquillitatis_pit"
+  ],
+  "moon_x_coverage_by_region": {
+   "midlat": {
+    "x_m": 0.0,
+    "x_temp_max_k": 1.0,
+    "x_temp_mean_k": 1.0,
+    "x_temp_min_k": 1.0,
+    "x_temp_swing_k": 1.0,
+    "x_grazing_sun_frac": 1.0,
+    "x_noon_sun_max_deg": 1.0,
+    "x_polar_night_frac": 1.0,
+    "x_frozen_ground_frac": 1.0,
+    "x_surface_ice_frac": 1.0,
+    "x_sunlit_frac_terrain": 0.0,
+    "x_shadowed_frac": 1.0,
+    "relief_m": 1.0,
+    "elev_std_m": 1.0,
+    "slope500_mean_deg": 1.0,
+    "slope500_p90_deg": 1.0,
+    "frac_slope500_gt10": 1.0,
+    "frac_slope500_gt20": 1.0,
+    "tri500_mean_m": 1.0
+   },
+   "south_pole": {
+    "x_m": 1.0,
+    "x_temp_max_k": 1.0,
+    "x_temp_mean_k": 1.0,
+    "x_temp_min_k": 1.0,
+    "x_temp_swing_k": 1.0,
+    "x_grazing_sun_frac": 1.0,
+    "x_noon_sun_max_deg": 1.0,
+    "x_polar_night_frac": 1.0,
+    "x_frozen_ground_frac": 1.0,
+    "x_surface_ice_frac": 1.0,
+    "x_sunlit_frac_terrain": 1.0,
+    "x_shadowed_frac": 1.0,
+    "relief_m": 1.0,
+    "elev_std_m": 1.0,
+    "slope500_mean_deg": 1.0,
+    "slope500_p90_deg": 1.0,
+    "frac_slope500_gt10": 1.0,
+    "frac_slope500_gt20": 1.0,
+    "tri500_mean_m": 1.0
+   }
+  },
+  "earth_power_coverage": {
+   "power_t2m_c": 1.0,
+   "power_t2m_min_c": 1.0,
+   "power_t2m_max_c": 1.0,
+   "power_t2m_coldest_month_min_c": 1.0,
+   "power_t2m_warmest_month_max_c": 1.0,
+   "power_t2m_annual_range_c": 1.0,
+   "power_t2m_diurnal_range_c": 1.0,
+   "power_frost_days": 1.0,
+   "power_rh2m_pct": 1.0,
+   "power_ws2m_ms": 1.0,
+   "power_ps_kpa": 1.0,
+   "power_precip_mm_yr": 1.0,
+   "power_sw_allsky_kwh_m2_d": 1.0,
+   "power_sw_clrsky_kwh_m2_d": 1.0,
+   "power_uv_index": 1.0,
+   "power_albedo": 1.0,
+   "power_cell_lat": 1.0,
+   "power_cell_lon": 1.0
+  },
+  "earth_power_t2m_rows": 4310,
+  "earth_trav_coverage": {
+   "trav_flat_bare_frac": 1.0,
+   "trav_ice_frac": 1.0,
+   "trav_valid_frac": 1.0,
+   "trav_source": 1.0,
+   "trav_method": 1.0,
+   "trav_dist_flat_to_ice_km": 0.803,
+   "trav_dist_min_flat_to_ice_km": 0.803,
+   "trav_dist_gt10_flag": 1.0
+  },
+  "earth_trav_method_counts": {
+   "fast_local": 3911,
+   "precise_111m": 399
+  },
+  "earth_trav_precise_rows": 399,
+  "earth_surface_ice": {
+   "coverage": 1.0,
+   "src_counts": {
+    "worldcover": 3691,
+    "traverse_ice_frac": 619
+   }
+  },
+  "earth_frozen_ground": {
+   "coverage": 1.0,
+   "src_counts": {
+    "proxy_power_t2m_lt_-2C": 2497,
+    "esa_cci_pfr_2023": 1813
+   }
+  },
+  "earth_precip_best_coverage": 1.0
+ },
+ "coverage": {
+  "moon": {
+   "patch_id": 1.0,
+   "body": 1.0,
+   "region": 1.0,
+   "center_lat": 1.0,
+   "center_lon": 1.0,
+   "x_m": 0.643,
+   "y_m": 0.643,
+   "is_target": 1.0,
+   "native_res_m": 1.0,
+   "valid_frac": 1.0,
+   "elev_mean_m": 1.0,
+   "elev_std_m": 1.0,
+   "relief_m": 1.0,
+   "slope_native_mean_deg": 1.0,
+   "slope500_mean_deg": 1.0,
+   "slope500_p90_deg": 1.0,
+   "frac_slope500_gt10": 1.0,
+   "frac_slope500_gt20": 1.0,
+   "tri500_mean_m": 1.0,
+   "lola_avg_sun_vis_mean": 0.643,
+   "lola_avg_sun_vis_p90": 0.643,
+   "lola_avg_sun_vis_max": 0.643,
+   "lola_frac_psr": 0.643,
+   "lola_frac_sunlit_gt50pct": 0.643,
+   "noon_elev_max_deg": 1.0,
+   "noon_elev_min_deg": 1.0,
+   "noon_elev_mean_deg": 1.0,
+   "frac_polar_day": 1.0,
+   "frac_polar_night": 1.0,
+   "mean_day_elev_deg": 1.0,
+   "frac_daylight": 1.0,
+   "dvn_tavg_mean_k": 0.643,
+   "dvn_tavg_min_k": 0.643,
+   "dvn_tmax_mean_k": 0.643,
+   "dvn_tmax_max_k": 0.643,
+   "dvn_tmax_min_k": 0.643,
+   "dvn_frac_coldtrap_110k": 1.0,
+   "dvn_frac_ice_stable": 1.0,
+   "dvn_frac_ice_within_1m": 1.0,
+   "dvn_frac_ice_surface": 1.0,
+   "dvn_n_cells": 1.0,
+   "dvn_ice_depth_median_m": 0.573,
+   "moon_geo_unit": 1.0,
+   "moon_geo_unit_frac": 1.0,
+   "moon_geo_unit_name": 1.0,
+   "moon_geo_unit_age": 1.0,
+   "moon_geo_n_units": 1.0,
+   "geo_frac_crater": 1.0,
+   "geo_frac_basin": 1.0,
+   "geo_frac_plains": 1.0,
+   "geo_frac_terra": 1.0,
+   "geo_frac_mare": 1.0,
+   "geo_frac_age_copernican": 1.0,
+   "geo_frac_age_eratosthenian": 1.0,
+   "geo_frac_age_imbrian": 1.0,
+   "geo_frac_age_nectarian": 1.0,
+   "geo_frac_age_prenectarian": 1.0,
+   "geo_valid_frac": 1.0,
+   "dvn_tbol_min_k": 1.0,
+   "dvn_tbol_max_k": 1.0,
+   "dvn_tbol_mean_k": 1.0,
+   "dvn_tbol_noon_k": 1.0,
+   "dvn_tbol_midnight_k": 1.0,
+   "dvn_tbol_ltime_cov": 1.0,
+   "dvn_tbol_n_cells": 1.0,
+   "dvn_tbol_nearest_km": 1.0,
+   "x_temp_max_k": 1.0,
+   "x_temp_mean_k": 1.0,
+   "x_temp_min_k": 1.0,
+   "x_temp_swing_k": 1.0,
+   "x_grazing_sun_frac": 1.0,
+   "x_noon_sun_max_deg": 1.0,
+   "x_polar_night_frac": 1.0,
+   "x_frozen_ground_frac": 1.0,
+   "x_surface_ice_frac": 1.0,
+   "x_sunlit_frac_terrain": 0.643,
+   "x_shadowed_frac": 1.0,
+   "dvn_rock_abund_mean": 0.357,
+   "dvn_rock_abund_min": 0.357,
+   "dvn_rock_abund_max": 0.357,
+   "dvn_rock_abund_p50": 0.357,
+   "dvn_rock_abund_p95": 0.357,
+   "dvn_rock_abund_n_px": 0.357,
+   "dvn_regolith_temp_anom_k_mean": 0.357,
+   "dvn_regolith_temp_anom_k_min": 0.357,
+   "dvn_regolith_temp_anom_k_max": 0.357,
+   "dvn_regolith_temp_anom_k_p50": 0.357,
+   "dvn_regolith_temp_anom_k_p95": 0.357,
+   "dvn_regolith_temp_anom_k_n_px": 0.357,
+   "stratum": 0.357,
+   "geo_frac_copernican_crater": 0.357,
+   "gcp_clat": 0.357,
+   "gcp_clon": 0.357,
+   "terrain_source": 0.357,
+   "illum_source": 0.357
+  },
+  "earth": {
+   "patch_id": 1.0,
+   "body": 1.0,
+   "source": 1.0,
+   "stratum": 1.0,
+   "name": 1.0,
+   "center_lat": 1.0,
+   "center_lon": 1.0,
+   "hw_km": 1.0,
+   "native_res_m": 1.0,
+   "valid_frac": 1.0,
+   "elev_mean_m": 1.0,
+   "elev_std_m": 1.0,
+   "relief_m": 1.0,
+   "slope_native_mean_deg": 1.0,
+   "slope500_mean_deg": 1.0,
+   "slope500_p90_deg": 1.0,
+   "frac_slope500_gt10": 1.0,
+   "frac_slope500_gt20": 1.0,
+   "tri500_mean_m": 1.0,
+   "dem_fetch": 1.0,
+   "n_dem_tiles": 1.0,
+   "elev_min_m": 1.0,
+   "elev_max_m": 1.0,
+   "elev_range_m": 1.0,
+   "frac_elev_zero": 1.0,
+   "noon_elev_max_deg": 1.0,
+   "noon_elev_min_deg": 1.0,
+   "noon_elev_mean_deg": 1.0,
+   "frac_polar_day": 1.0,
+   "frac_polar_night": 1.0,
+   "mean_day_elev_deg": 1.0,
+   "frac_daylight": 1.0,
+   "noon_elev_m01": 1.0,
+   "noon_elev_m02": 1.0,
+   "noon_elev_m03": 1.0,
+   "noon_elev_m04": 1.0,
+   "noon_elev_m05": 1.0,
+   "noon_elev_m06": 1.0,
+   "noon_elev_m07": 1.0,
+   "noon_elev_m08": 1.0,
+   "noon_elev_m09": 1.0,
+   "noon_elev_m10": 1.0,
+   "noon_elev_m11": 1.0,
+   "noon_elev_m12": 1.0,
+   "wc_frac_tree": 0.856,
+   "wc_frac_shrub": 0.856,
+   "wc_frac_grass": 0.856,
+   "wc_frac_crop": 0.856,
+   "wc_frac_built": 0.856,
+   "wc_frac_bare_sparse": 0.856,
+   "wc_frac_snow_ice": 0.856,
+   "wc_frac_water": 0.856,
+   "wc_frac_wetland": 0.856,
+   "wc_frac_mangrove": 0.856,
+   "wc_frac_moss_lichen": 0.856,
+   "wc_valid_frac": 0.856,
+   "wc_note": 0.144,
+   "context": 0.926,
+   "lat": 1.0,
+   "lon": 1.0,
+   "lst_day_max_k": 0.993,
+   "lst_day_mean_k": 0.993,
+   "lst_night_min_k": 0.992,
+   "lst_night_mean_k": 0.992,
+   "lst_mean_k": 0.993,
+   "lst_diurnal_range_k": 0.992,
+   "lst_annual_range_k": 0.993,
+   "lst_day_months_valid": 1.0,
+   "lst_night_months_valid": 1.0,
+   "lst_res_deg": 1.0,
+   "power_t2m_c": 1.0,
+   "power_t2m_min_c": 1.0,
+   "power_t2m_max_c": 1.0,
+   "power_t2m_coldest_month_min_c": 1.0,
+   "power_t2m_warmest_month_max_c": 1.0,
+   "power_t2m_annual_range_c": 1.0,
+   "power_t2m_diurnal_range_c": 1.0,
+   "power_frost_days": 1.0,
+   "power_rh2m_pct": 1.0,
+   "power_ws2m_ms": 1.0,
+   "power_ps_kpa": 1.0,
+   "power_precip_mm_yr": 1.0,
+   "power_sw_allsky_kwh_m2_d": 1.0,
+   "power_sw_clrsky_kwh_m2_d": 1.0,
+   "power_uv_index": 1.0,
+   "power_albedo": 1.0,
+   "power_cell_lat": 1.0,
+   "power_cell_lon": 1.0,
+   "pf_frac_pct": 0.421,
+   "pf_gst_c": 0.421,
+   "pf_magt_2m_c": 0.421,
+   "pf_magt_10m_c": 0.421,
+   "pf_in_cci_domain": 1.0,
+   "permafrost_proxy": 1.0,
+   "permafrost_flag": 1.0,
+   "permafrost_src": 1.0,
+   "soil_moist_mean": 0.774,
+   "soil_moist_max": 0.774,
+   "soil_moist_months_valid": 1.0,
+   "soil_moist_widened_25km": 1.0,
+   "precip_mm_yr": 0.645,
+   "precip_wettest_month_mm": 0.645,
+   "precip_widened_25km": 1.0,
+   "precip_best_mm_yr": 1.0,
+   "precip_best_src": 1.0,
+   "ndvi_mean": 0.866,
+   "ndvi_max": 0.866,
+   "ndvi_res_deg": 1.0,
+   "aot_mean": 0.911,
+   "aot_max": 0.911,
+   "aot_widened_25km": 1.0,
+   "sg_sand_pct": 0.806,
+   "sg_silt_pct": 0.806,
+   "sg_clay_pct": 0.806,
+   "sg_bdod_g_cm3": 0.797,
+   "sg_cfvo_pct": 0.806,
+   "sg_res_m": 1.0,
+   "mstrat_unit": 0.956,
+   "mstrat_lith": 0.901,
+   "mstrat_age": 0.895,
+   "mstrat_descrip": 0.538,
+   "mstrat_scale": 0.958,
+   "mstrat_t_age_ma": 0.886,
+   "mstrat_b_age_ma": 0.886,
+   "mstrat_text_all": 0.958,
+   "trav_flat_bare_frac": 1.0,
+   "trav_ice_frac": 1.0,
+   "trav_valid_frac": 1.0,
+   "trav_source": 1.0,
+   "trav_method": 1.0,
+   "trav_dist_flat_to_ice_km": 0.803,
+   "trav_dist_min_flat_to_ice_km": 0.803,
+   "trav_dist_gt10_flag": 1.0,
+   "x_temp_max_k": 0.993,
+   "x_temp_mean_k": 0.993,
+   "x_temp_min_k": 0.992,
+   "x_temp_swing_k": 0.992,
+   "x_grazing_sun_frac": 1.0,
+   "x_noon_sun_max_deg": 1.0,
+   "x_polar_night_frac": 1.0,
+   "x_frozen_ground_frac": 1.0,
+   "x_surface_ice_frac": 1.0,
+   "x_surface_ice_src": 1.0
+  }
+ },
+ "built_at": "2026-11-14 18:17:27",
+ "notes": [
+  "x_* columns are the same physical quantity on both bodies",
+  "moon_tiles.region: 'south_pole' (76-90S polar-stereographic grid) or 'midlat' (60S-60N extra tiles); columns absent for a region are NaN (mask, do not drop)",
+  "Earth trav_method: 'precise_111m' overrides the coarse 'fast_local' values for the shortlisted tiles",
+  "moon_tiles x_sunlit_frac_terrain is NaN for region='midlat' (no terrain-aware illumination product there)",
+  "Earth x_surface_ice_frac = WorldCover snow/ice, else trav_ice_frac where WorldCover is NaN (x_surface_ice_src)",
+  "Earth power_* topped up from earth_patches_env_powerfill.csv where NaN; permafrost_proxy / x_frozen_ground_frac recomputed (CCI permafrost where present, else POWER T2M < -2 C)",
+  "Earth climate grids are coarser than the 10 km tiles (POWER 0.5 deg, LST 0.05-0.2 deg)",
+  "WorldCover / SoilGrids / GSMaP have no data south of 60S -> NaN (mask, do not drop)",
+  "Artemis targets are crater-centre anchors for 5 of 9 regions: see data/patches/artemis_region_zones.csv"
+ ]
+}
