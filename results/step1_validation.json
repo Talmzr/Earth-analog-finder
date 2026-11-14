@@ -1,0 +1,258 @@
+{
+ "rows": {
+  "moon_tiles": 5610,
+  "earth_tiles": 4310,
+  "moon_zones": 20,
+  "moon_by_region": {
+   "south_pole": 3609,
+   "midlat": 2001
+  }
+ },
+ "x_shared": [
+  "x_frozen_ground_frac",
+  "x_grazing_sun_frac",
+  "x_noon_sun_max_deg",
+  "x_polar_night_frac",
+  "x_surface_ice_frac",
+  "x_temp_max_k",
+  "x_temp_mean_k",
+  "x_temp_min_k",
+  "x_temp_swing_k"
+ ],
+ "x_moon_only": [
+  "x_m",
+  "x_shadowed_frac",
+  "x_sunlit_frac_terrain"
+ ],
+ "x_earth_only": [
+  "x_surface_ice_src"
+ ],
+ "x_ranges": {
+  "x_frozen_ground_frac": {
+   "moon_polar": [
+    0.0,
+    0.23,
+    1.0
+   ],
+   "earth": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 1.0,
+   "moon_in_earth_range": 1.0
+  },
+  "x_grazing_sun_frac": {
+   "moon_polar": [
+    0.7,
+    1.0,
+    1.0
+   ],
+   "earth": [
+    0.14,
+    0.21,
+    0.43
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 1.0,
+   "moon_in_earth_range": 0.0
+  },
+  "x_noon_sun_max_deg": {
+   "moon_polar": [
+    1.77,
+    9.42,
+    15.23
+   ],
+   "earth": [
+    23.81,
+    69.67,
+    90.0
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 1.0,
+   "moon_in_earth_range": 0.0
+  },
+  "x_polar_night_frac": {
+   "moon_polar": [
+    0.0,
+    0.0,
+    0.45
+   ],
+   "earth": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 1.0,
+   "moon_in_earth_range": 0.999
+  },
+  "x_surface_ice_frac": {
+   "moon_polar": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "earth": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 1.0,
+   "moon_in_earth_range": 1.0
+  },
+  "x_temp_max_k": {
+   "moon_polar": [
+    72.53,
+    299.88,
+    348.74
+   ],
+   "earth": [
+    238.27,
+    295.99,
+    333.39
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 0.993,
+   "moon_in_earth_range": 0.908
+  },
+  "x_temp_mean_k": {
+   "moon_polar": [
+    37.95,
+    129.9,
+    183.26
+   ],
+   "earth": [
+    213.31,
+    276.75,
+    312.96
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 0.993,
+   "moon_in_earth_range": 0.0
+  },
+  "x_temp_min_k": {
+   "moon_polar": [
+    24.34,
+    60.33,
+    79.57
+   ],
+   "earth": [
+    200.56,
+    258.35,
+    301.31
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 0.992,
+   "moon_in_earth_range": 0.0
+  },
+  "x_temp_swing_k": {
+   "moon_polar": [
+    42.78,
+    240.88,
+    297.24
+   ],
+   "earth": [
+    1.78,
+    37.92,
+    77.8
+   ],
+   "moon_cov": 1.0,
+   "earth_cov": 0.992,
+   "moon_in_earth_range": 0.004
+  }
+ },
+ "entities": {
+  "total": 30,
+  "zones": 20,
+  "target_tiles": 10
+ },
+ "entity_missing": {},
+ "anchors": {
+  "total": 151,
+  "by_category": {
+   "geology": 22,
+   "terrain": 21,
+   "water_ice": 20,
+   "thermal": 19,
+   "dust": 18,
+   "biology": 18,
+   "operations": 18,
+   "caves": 15
+  },
+  "strong_pos": {
+   "terrain": 9,
+   "geology": 8,
+   "water_ice": 6,
+   "biology": 6,
+   "dust": 5,
+   "operations": 5,
+   "caves": 3
+  },
+  "strong_neg": {
+   "thermal": 14,
+   "terrain": 8,
+   "geology": 7,
+   "biology": 7,
+   "operations": 7,
+   "water_ice": 6,
+   "caves": 6,
+   "dust": 5
+  },
+  "unreviewed": 151
+ },
+ "arrays": {
+  "total": 9940,
+  "shape": [
+   2,
+   128,
+   128
+  ],
+  "by_body": {
+   "moon": 5610,
+   "earth": 4310,
+   "zone": 20
+  }
+ },
+ "arrays_missing": {
+  "moon": 0,
+  "earth": 0,
+  "zones": 0,
+  "not_in_tables": 0
+ },
+ "earth_low_valid_patches": 1,
+ "earth_coverage": {
+  "lst_day_max_k": 0.993,
+  "lst_night_min_k": 0.992,
+  "power_t2m_c": 1.0,
+  "pf_frac_pct": 0.421,
+  "soil_moist_mean": 0.774,
+  "precip_best_mm_yr": 1.0,
+  "ndvi_mean": 0.866,
+  "aot_mean": 0.911,
+  "sg_sand_pct": 0.806,
+  "sg_bdod_g_cm3": 0.797,
+  "wc_frac_bare_sparse": 0.856,
+  "mstrat_text_all": 0.958,
+  "trav_dist_flat_to_ice_km": 0.803,
+  "trav_flat_bare_frac": 1.0
+ },
+ "antarctic_tiles": 601,
+ "antarctic_coverage": {
+  "wc_frac_bare_sparse": 0.0,
+  "sg_sand_pct": 0.0,
+  "ndvi_mean": 0.168,
+  "soil_moist_mean": 0.0,
+  "aot_mean": 0.394
+ },
+ "brief_vs_data": [
+  "Moon tiles: brief says 3,609 x 76; table has 5610 x 95 ({'south_pole': 3609, 'midlat': 2001}): mid-latitude tiles were added for encoder variety and the pit target.",
+  "Earth tiles: brief says 4,310 x 142; table has 4310 x 143.",
+  "Anchors: brief says 47; file has 151 draft anchors (all needs_review).",
+  "Image patches: brief says 64x64; using 128x128 (78 m/px).",
+  "Scoring targets: brief says 29 locations; data has 20 zones (10 regions x landing/ice) + 10 target tiles (9 polar + Tranquillitatis pit) = 30 Moon entities."
+ ],
+ "issues": []
+}

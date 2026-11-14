@@ -12,3 +12,9 @@ colab_upload/
 data/cache/
 *.part
 *.tmp.npz
+
+# ML pipeline artefacts: smoke-test outputs never; real checkpoints/embeddings are added deliberately
+*_smoke*
+models/
+embeddings/
+!data/patches/moon_zone_arrays_128.npz
