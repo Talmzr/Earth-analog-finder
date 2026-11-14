@@ -72,7 +72,31 @@ def load_tables():
     zones = pd.read_csv(ML / "moon_zones.csv")
     if "region" not in moon:
         moon["region"] = "south_pole"
+    earth = fill_volcano_context(earth)
     return moon, earth, zones
+
+
+def fill_volcano_context(earth: pd.DataFrame) -> pd.DataFrame:
+    """Some volcano tiles lost their catalog text upstream (a missing field blanked the whole string).
+    Rebuild it from the Smithsonian GVP catalog so geology text, flags and the cave rule can use it."""
+    gvp_path = DATA / "catalogs" / "earth_volcanoes_gvp.csv"
+    miss = earth["context"].isna() & earth["source"].eq("volcano")
+    if not miss.any() or not gvp_path.exists():
+        return earth
+    g = pd.read_csv(gvp_path).drop_duplicates("Volcano_Number").set_index("Volcano_Number")
+
+    def build(pid):
+        try:
+            r = g.loc[int(str(pid).split("_")[1])]
+        except Exception:  # noqa: BLE001
+            return np.nan
+        f = lambda k: "" if pd.isna(r.get(k)) else str(r.get(k))  # noqa: E731
+        return (f"volcano; type={f('Primary_Volcano_Type')}; landform={f('Volcanic_Landform')}; rock={f('Major_Rock_Type')}; "
+                f"tectonic={f('Tectonic_Setting')}; last_eruption={f('Last_Eruption_Year')}; elev_m={f('Elevation')}; "
+                f"country={f('Country')}; summary={f('Geological_Summary')}")
+    earth = earth.copy()
+    earth.loc[miss, "context"] = earth.loc[miss, "patch_id"].map(build)
+    return earth
 
 
 def stereo_south(lat, lon):
