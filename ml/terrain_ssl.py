@@ -281,6 +281,8 @@ def main():
     ap.add_argument("--coral", type=float, default=0.0,
                     help="weight of the Moon/Earth alignment term (CORAL on the 384-d features); 0 = plain VICReg")
     ap.add_argument("--tag", default="", help="suffix for output files, e.g. 'coral'")
+    ap.add_argument("--eval-every", type=int, default=2,
+                    help="held-out evaluation every N epochs; the checkpoint with the best cross-body agreement is kept")
     a = ap.parse_args()
     C.ensure_dirs()
     torch.manual_seed(a.seed)
@@ -325,6 +327,7 @@ def main():
     metrics["before"] = evaluate(enc, proj, prep, X, meta, tr, va, a.img, device, amp)
     C.log("BEFORE fine-tuning (pretrained DINOv2, untrained projector):", metrics["before"])
     t0 = time.time()
+    best = None
     for ep in range(a.epochs):
         enc.train()
         proj.train()
@@ -351,11 +354,22 @@ def main():
         agg /= steps_per_epoch
         rec = dict(epoch=ep + 1, loss=round(float(agg[0]), 4), inv=round(float(agg[1]), 4), var=round(float(agg[2]), 4), cov=round(float(agg[3]), 4),
                    lr=round(sched.get_last_lr()[0], 7), min=round((time.time() - t0) / 60, 1))
-        if (ep + 1) % 10 == 0 or ep + 1 == a.epochs:
+        if (ep + 1) % a.eval_every == 0 or ep + 1 == a.epochs:
             rec["val"] = evaluate(enc, proj, prep, X, meta, tr, va, a.img, device, amp)
+            xb = rec["val"].get("xbody_top10_vs_random")
+            score = float(np.mean(list(xb["pooled"].values()))) if isinstance(xb, dict) else float("inf")
+            if best is None or score < best[0]:      # unsupervised early stopping: held-out Moon->Earth agreement
+                best = (score, ep + 1, {k: v.detach().clone() for k, v in enc.state_dict().items()},
+                        {k: v.detach().clone() for k, v in proj.state_dict().items()}, rec["val"])
         metrics["history"].append(rec)
         C.log(rec)
-    metrics["after"] = metrics["history"][-1]["val"]
+    if best is not None:
+        enc.load_state_dict(best[2])
+        proj.load_state_dict(best[3])
+        metrics["best_epoch"], metrics["after"] = best[1], best[4]
+        C.log(f"kept checkpoint from epoch {best[1]} (cross-body agreement {best[0]:.3f})")
+    else:
+        metrics["after"] = metrics["history"][-1]["val"]
     metrics["train_minutes"] = round((time.time() - t0) / 60, 1)
 
     # ---- embeddings for every tile, aligned to the tables
