@@ -113,14 +113,14 @@ async function pick() {
 // Place verdict (same rule as the globe): sufficient = a Moon-target-specific experiment is sufficient AND the overall
 // score is >= -0.15; partial = at least one experiment partly possible; avoid = none. Dust mitigation and planetary
 // protection (same for every Moon target) can make a place partial but not sufficient.
-const SUFFICIENT_MIN = -15;
+const SUFFICIENT_MIN = -15, PARTIAL_MIN = -25;   // partial also needs overall >= -0.25, else avoid
 let FREE_EXP = null;                                   // experiments that only use lunar constants (computed once)
 function placeVerdict(i) {
   const inv = new Set(['dust', 'biology']);
   const free = FREE_EXP || (FREE_EXP = new Set(meta.experiments.filter(e => Object.keys(e.required || {}).every(c => inv.has(c))).map(e => e.id)));
   const ent = Object.entries(cur.readiness || {}), comp = cur.composite[i];
   if (comp != null && comp >= SUFFICIENT_MIN && ent.some(([e, a]) => a[i] === 3 && !free.has(e))) return 'sufficient';
-  return ent.some(([, a]) => a[i] >= 2) ? 'partial' : ent.some(([, a]) => a[i] === 1) ? 'avoid' : 'n/a';
+  return comp != null && comp >= PARTIAL_MIN && ent.some(([, a]) => a[i] >= 2) ? 'partial' : ent.some(([, a]) => a[i] >= 1) ? 'avoid' : 'n/a';
 }
 // overall match in absolute mode: sufficient places green (light at -0.15, deeper with the score), others pink-red
 const verdictColour = (i, v) => { if (v == null) return '#555c66';

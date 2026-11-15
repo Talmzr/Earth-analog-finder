@@ -575,13 +575,13 @@ const INVARIANT_REQ = new Set(['dust', 'biology', 'dust_regolith', 'biology_ster
 const TARGET_FREE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).every(c => INVARIANT_REQ.has(c))).map(e => e.id));
 // 'Sufficient' also needs an overall score of at least SUFFICIENT_MIN: a place that passes one test but is far from
 // the Moon target overall is labelled 'partial'.
-const SUFFICIENT_MIN = -0.15;
+const SUFFICIENT_MIN = -0.15, PARTIAL_MIN = -0.25;   // partial also needs overall >= -0.25, else avoid
 const overallVerdict = (tid, j) => {
   if (tid == null || j == null) return 'n/a';
   const r = Object.entries(SC.readyAll(tid, j));
   const codes = r.map(([, c]) => c), comp = SC.score(tid, 'composite', j);
   return comp !== null && comp >= SUFFICIENT_MIN && r.some(([e, c]) => c === 3 && !TARGET_FREE_EXP.has(e)) ? 'sufficient'
-    : codes.some(c => c >= 2) ? 'partial' : codes.includes(1) ? 'avoid' : 'n/a';
+    : comp !== null && comp >= PARTIAL_MIN && codes.some(c => c >= 2) ? 'partial' : codes.some(c => c >= 1) ? 'avoid' : 'n/a';
 };
 const READY = { '-1': 'not relevant', 0: 'not available', 1: 'avoid', 2: 'partial', 3: 'sufficient' };
 
