@@ -41,15 +41,19 @@ LOO = leave-one-out check against the expert anchors (mean error / rank agreemen
 | Illumination | Noon sun height + share of grazing sun in the Earth "light-twin month" (the month whose sun is closest to the Moon target's); real overlap for about 35-40% of Earth sites | .097 / .728 * |
 | Water / ice | Frozen ground (ice sheets do not count as ice-cemented soil), landing-to-ice distance, dryness | .134 / .851 |
 | Dust / regolith | Bare ground + volcanic tephra vs known Apollo regolith (same for every Moon target) | .143 / .893 |
-| Biological sterility | Vegetation and rainfall vs the sterile Moon (same for every Moon target) | .185 / .866 |
+| Biological sterility | Plant cover (vegetation index above the bare-soil level) and rainfall vs the sterile Moon (same for every Moon target) | .134 / .784 \*\* |
 | Caves | Lava-tube rule; Tranquillitatis pit only | .123 / .923 |
 | Operations | Terrain + ice scores + slope hazard, with penalties for forest, towns and open water | .285 / .688 |
 
 \* The 10 illumination anchors are drafts derived from the same sun geometry, so this number is optimistic.
 
+\*\* On the 15 anchors the formula is fitted on; the 3 sites with documented microbial life (Svalbard springs, Rio Tinto, Lake Salda) are set to -0.6 by rule and reported but not fitted. The old raw-vegetation-index formula scored .158 / .77 on the same 15.
+
 ### Overall (composite) score
 
-The overall score for a Moon target is the experiment-weighted mean of the categories that actually compare with that specific Moon site: terrain, geology, illumination, water/ice and operations (plus caves for the pit). Temperature, dust and sterility are scored and drive experiment verdicts, but stay out of the composite because they are identical across targets or have no real overlap. Missing category data counts as the target's median.
+The overall score for a Moon target is the experiment-weighted mean of the categories that actually compare with that specific Moon site: terrain, geology, illumination and water/ice (plus caves for the pit). Operations stays out because it is built from the terrain and ice scores (it would count them twice). Temperature, dust and sterility are scored and drive experiment verdicts, but are not averaged in because they are identical across targets or have no real overlap. Missing category data counts as the target's median.
+
+The mean is then capped by a **ground-cover gate**: overall <= 0.8 - 2 x the share of the tile under plants (including moss and lichen), open water or towns. A tile with 40% or more such cover is at most 0. Without the gate, moss and lichen tundra filled almost half of the polar targets' top-20 lists.
 
 ### Models
 
@@ -63,7 +67,7 @@ Fine-tuning ran on a Colab T4 GPU. Scoring runs on a laptop CPU in about 2 minut
 ## Status: MVP with draft expert calibration
 
 - All 161 expert anchors (`config/anchors.csv`) are drafts (`needs_review=1`). They set the scale of every category, so scores will move when experts review them.
-- 5 anchors disagree with the model by more than 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`).
+- 6 anchors disagree with the model by more than 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`).
 - The geology model was trained before a stricter anorthosite rule. Tiles with only minor anorthosite are capped at 0.3 until the model is retrained.
 - Earth climate layers are 5-50 km, coarser than the tiles.
 - 10 km tiles dilute small test sites (a quarry or a single lava tube is a small part of its tile).
@@ -79,9 +83,10 @@ python tools/reassemble_arrays.py          # rebuild image arrays from their par
 python -W ignore -m ml.step1_validate      # data checks
 python -W ignore -m ml.score_all           # scores + calibration (~2 min, CPU)
 python -W ignore -m ml.export_web          # web/data bundle for the site
+python tools/build_globe.py                # web/globe.html: 3-D globe with all final scores embedded
 python tools/make_results_doc.py           # regenerate docs/ML_RESULTS.md
 python tools/reembed_geology.py            # re-embed changed geology texts (no training)
-python -m http.server 8765 --directory web # local preview at http://localhost:8765
+python -m http.server 8765 --directory web # local preview at http://localhost:8765 (globe: /globe.html)
 ```
 
 Training (Colab T4, optional; the trained models are in `models/`):
@@ -102,7 +107,8 @@ python -m ml.geology_ssl
 | `tools/` | Data building, array reassembly, results doc, geology re-embedding |
 | `models/`, `embeddings/` | Fine-tuned models and their embeddings |
 | `results/` | Scores, calibration, anchor residuals |
-| `web/` | Static map site (GitHub Pages) |
+| `web/` | Static map site (GitHub Pages); `web/globe.html` is the 3-D globe, built by `tools/build_globe.py` |
+| `frontend/` | Globe source: `globe.template.html` (page code), `assess.js` (Similarity Assessment page), `moon_textures.json` |
 | `docs/` | `ML_RESULTS.md` (generated results), `DATA_REPORT.md` (data dictionary), `ANCHORS.md`, `HANDOFF.md` |
 
 **Superseded (kept for history, not used by the pipeline):** `docs/ML_PLAN.md`, `notebooks/*.ipynb`, `data/target_*.csv`, `data/earth_*.csv`. The root scripts `extract.py`, `extract_extra.py` and `compare.py` come from the first data-collection phase, when Mars was still in scope; Mars has since been dropped.

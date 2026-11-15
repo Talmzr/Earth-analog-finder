@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Team Name] Interactive Globe — Earth & Moon Analog Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#06070b;color:#d8dce6;font-family:'Inter',sans-serif}
+
+/* ═══ Tab Bar ═══ */
+#tab-bar{position:fixed;top:0;left:0;right:0;z-index:50;height:52px;display:flex;align-items:center;background:rgba(8,10,18,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(100,180,255,.07);padding:0 20px;gap:2px}
+.tab-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;background:linear-gradient(135deg,#64b4ff,#a78bfa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-right:20px;white-space:nowrap;letter-spacing:.3px}
+.tab-btn{height:34px;padding:0 14px;border:none;border-radius:7px;font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;white-space:nowrap;background:transparent;color:#5a6a7a}
+.tab-btn:hover{background:rgba(100,180,255,.07);color:#8aa0b8}
+.tab-btn.active{background:rgba(100,180,255,.1);color:#d0e0f0;box-shadow:inset 0 -2px 0 0 #64b4ff}
+.tab-icon{font-size:14px}
+.tab-sel{font-size:10px;color:#3a6a8a;margin-left:4px;padding:1px 7px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.15);border-radius:4px;max-width:140px;overflow:hidden;text-overflow:ellipsis;display:none}
+.tab-btn.has-sel .tab-sel{display:inline-block}
+.tab-div{width:1px;height:22px;background:rgba(100,180,255,.07);margin:0 6px}
+
+/* ═══ Pages ═══ */
+.page{display:none;position:absolute;top:52px;left:0;right:0;bottom:0}
+.page.active{display:block}
+#page-compare.active{display:block;overflow-y:auto;background:#030407}
+#cmp-empty{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+#page-compare [hidden]{display:none!important}
+.ph-icon{font-size:56px;margin-bottom:16px;opacity:.3}
+.ph-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#2a3a4a;margin-bottom:8px}
+.ph-sub{font-size:13px;color:#1e2e3e;max-width:340px;line-height:1.6}
+
+/* ═══ Globe ═══ */
+#globe-container,#moon-globe-container{width:100%;height:100%;position:absolute;top:0;left:0}
+canvas{display:block}
+
+/* ═══ Loading ═══ */
+#loading{position:fixed;inset:0;z-index:200;background:#06070b;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s}
+#loading.hidden{opacity:0;pointer-events:none}
+.loader-ring{width:44px;height:44px;border:2px solid rgba(100,180,255,.1);border-top-color:#64b4ff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{margin-top:14px;font-family:'Space Grotesk',sans-serif;font-size:12px;color:#3a5a7a;letter-spacing:.8px}
+
+/* ═══ Legend ═══ */
+#legend,#moon-legend{position:fixed;bottom:16px;left:16px;background:rgba(8,10,18,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,180,255,.07);border-radius:9px;padding:12px 15px;z-index:10;min-width:155px}
+#legend h3,#moon-legend h3{font-family:'Space Grotesk',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#2e4a5e;margin-bottom:9px}
+.legend-item{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:10.5px;color:#5a7080}
+.legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.legend-item:last-child{margin-bottom:0}
+
+/* ═══ Controls hint ═══ */
+#zoom-controls,#moon-zoom-controls{position:fixed;bottom:50px;right:16px;z-index:10;display:flex;flex-direction:column;gap:6px}
+#zoom-controls button,#moon-zoom-controls button{width:32px;height:32px;border-radius:7px;border:1px solid rgba(100,180,255,.12);background:rgba(8,10,18,.85);color:#5a8aaa;font-size:16px;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+#zoom-controls button:hover,#moon-zoom-controls button:hover{background:rgba(30,60,90,.6);color:#7ec8e3}
+#controls-hint,#moon-controls-hint{position:fixed;bottom:16px;right:16px;font-size:10px;color:#1e2e3e;z-index:10;text-align:right;line-height:1.9;pointer-events:none}
+
+/* ═══ Tooltip ═══ */
+#tooltip,#moon-tooltip{position:fixed;z-index:30;pointer-events:none;background:rgba(8,10,18,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(100,180,255,.12);border-radius:7px;padding:9px 13px;font-size:11px;opacity:0;transition:opacity .1s;max-width:250px}
+.tt-name{font-family:'Space Grotesk',sans-serif;font-weight:600;color:#d0e0f0;margin-bottom:2px;font-size:12px}
+.tt-coords{color:#3a6a8a;font-size:10px}
+.tt-type{margin-top:4px;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;padding:2px 7px;border-radius:4px;display:inline-block}
+
+/* ═══ Info Panel ═══ */
+#info-panel,#moon-info-panel{position:fixed;top:68px;right:-370px;width:330px;max-height:calc(100vh - 84px);background:rgba(8,10,18,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(100,180,255,.08);border-radius:12px;z-index:10;transition:right .28s cubic-bezier(.4,0,.2,1);overflow:hidden;display:flex;flex-direction:column}
+#info-panel.open,#moon-info-panel.open{right:16px}
+.ip-hdr{padding:18px 18px 0;flex-shrink:0}
+.ip-close{position:absolute;top:10px;right:12px;background:none;border:none;color:#2a3a4a;font-size:15px;cursor:pointer;padding:4px 7px;border-radius:5px;transition:color .2s}
+.ip-close:hover{color:#8a9aaa}
+.ip-name{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#d8e8ff;padding-right:28px;line-height:1.3}
+.ip-meta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.ip-coords{font-size:10.5px;color:#3a6a8a;font-family:'Space Grotesk',sans-serif;letter-spacing:.2px}
+.ip-country{font-size:10.5px;color:#3a4a5a}
+.ip-badge{font-size:8.5px;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:500;margin-top:7px;display:inline-block}
+.ip-scroll{flex:1;overflow-y:auto;padding:14px 18px 6px;scrollbar-width:thin;scrollbar-color:rgba(100,180,255,.1) transparent}
+.ip-scroll::-webkit-scrollbar{width:3px}
+.ip-scroll::-webkit-scrollbar-thumb{background:rgba(100,180,255,.12);border-radius:3px}
+.ip-sec{margin-bottom:12px}
+.ip-sec-t{font-size:8.5px;text-transform:uppercase;letter-spacing:1.1px;font-family:'Space Grotesk',sans-serif;margin-bottom:4px;display:flex;align-items:center;gap:5px}
+.ip-sec p{font-size:11.5px;color:#6a8090;line-height:1.6}
+.ip-hr{height:1px;background:rgba(100,180,255,.05);margin:12px 0}
+.ip-special-box{background:rgba(100,180,255,.03);border:1px solid rgba(100,180,255,.06);border-radius:7px;padding:9px 11px}
+.ip-special-box p{font-size:11.5px;color:#7aa0bb;line-height:1.6}
+.ip-acts{padding:8px 18px 16px;flex-shrink:0;display:flex;flex-direction:column;gap:7px}
+.ip-btn{display:block;width:100%;padding:10px;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;letter-spacing:.2px;border:none}
+.ip-btn-1{background:linear-gradient(135deg,rgba(100,180,255,.14),rgba(167,139,250,.14));border:1px solid rgba(100,180,255,.18)!important;color:#8ac0ee}
+.ip-btn-1:hover{background:linear-gradient(135deg,rgba(100,180,255,.25),rgba(167,139,250,.25));color:#c0e0ff}
+.ip-btn-1.chosen{background:linear-gradient(135deg,rgba(52,211,153,.14),rgba(100,180,255,.14));border-color:rgba(52,211,153,.25)!important;color:#34d399}
+.ip-btn-2{background:rgba(255,255,255,.02);border:1px solid rgba(100,180,255,.08)!important;color:#3a5a6a}
+.ip-btn-2:hover{background:rgba(255,255,255,.05);color:#6a8a9a}
+
+/* Tile count */
+#tile-count,#region-count{position:fixed;top:68px;left:18px;font-size:10px;color:#1e3a4a;z-index:10;pointer-events:none;letter-spacing:.2px}
+#tile-count span,#region-count span{color:#3a7a9a;font-weight:500}
+
+/* Section colors */
+.c-t{color:#34d399}.c-c{color:#fbbf24}.c-i{color:#60a5fa}.c-s{color:#a78bfa}
+
+/* ═══ Cluster label ═══ */
+
+
+/* ═══ Similarity dashboard (signal spectrum) ═══ */
+#cmp-dash{max-width:1080px;margin:0 auto;padding:30px 24px 70px;animation:dashIn .45s ease both}
+@keyframes dashIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sd-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.sd-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#e4ecff;letter-spacing:.2px}
+.sd-pair{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.sd-place{font-family:'Space Grotesk',sans-serif;font-size:12.5px;color:#aab8d0;padding:6px 11px;border:1px solid rgba(100,180,255,.12);border-radius:7px;background:rgba(255,255,255,.015);cursor:pointer;transition:border-color .2s,color .2s}
+.sd-place:hover{border-color:rgba(100,180,255,.35);color:#dce8ff}
+.sd-place b{color:#e4ecff;font-weight:600}
+.sd-vs{color:#3a4a6a;font-size:13px}
+.sd-place.pending{border-style:dashed;border-color:rgba(100,180,255,.35);color:#64b4ff}
+.sd-place.pending:hover{border-color:rgba(100,180,255,.7);color:#a9d4ff}
+.sd-pill.wait{color:#64b4ff;border-color:rgba(100,180,255,.4)}
+.sp-val.na{color:#2a3448;text-shadow:none}
+.sd-pill{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#a78bfa;padding:5px 10px;border:1px dashed rgba(167,139,250,.45);border-radius:20px}
+/* spectrum panel */
+.sp{--c:100,180,255;background:#000;border:1px solid rgba(var(--c),.75);border-radius:12px;padding:22px 24px 10px;
+  box-shadow:0 0 6px rgba(var(--c),.45),0 0 26px rgba(var(--c),.16),inset 0 0 18px rgba(var(--c),.08)}
+.sp-axis{display:grid;grid-template-columns:200px 1fr 92px;gap:0 18px;margin-bottom:6px}
+.sp-ticks{position:relative;display:flex;justify-content:space-between;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:1.3px;text-transform:uppercase}
+.sp-ticks span:nth-child(1){color:#ff4d8d;text-shadow:0 0 8px rgba(255,77,141,.6)}
+.sp-ticks span:nth-child(2){color:#6b7894}
+.sp-ticks span:nth-child(3){color:#7ef0c4;text-shadow:0 0 8px rgba(52,211,153,.55)}
+.sp-row{border-top:1px solid rgba(255,255,255,.05)}
+.sp-row:first-of-type{border-top:none}
+.sp-main{width:100%;display:grid;grid-template-columns:200px 1fr 92px;gap:0 18px;align-items:center;padding:16px 0;background:none;border:none;cursor:pointer;text-align:left}
+.sp-name{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 8px rgba(var(--c),.5)}
+.sp-chev{width:7px;height:7px;border-right:1.5px solid rgba(var(--c),.8);border-bottom:1.5px solid rgba(var(--c),.8);transform:rotate(-45deg);transition:transform .3s;flex-shrink:0}
+.sp-row.open .sp-chev{transform:rotate(45deg)}
+.sp-track{position:relative;height:12px;border-radius:6px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.sp-track::before{content:'';position:absolute;left:50%;top:-7px;bottom:-7px;width:1px;background:rgba(220,230,255,.55);box-shadow:0 0 6px rgba(220,230,255,.6)}
+.sp-track::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgba(255,255,255,.07) calc(25% - 1px) 25%)}
+.sp-bar{position:absolute;top:1px;bottom:1px;border-radius:5px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1),left .9s cubic-bezier(.2,.8,.2,1)}
+.sp-bar.pos{left:50%;background:rgb(var(--c));box-shadow:0 0 8px rgba(var(--c),.9),0 0 20px rgba(var(--c),.5)}
+.sp-bar.neg{background:#ff4d8d;box-shadow:0 0 8px rgba(255,77,141,.9),0 0 20px rgba(255,77,141,.5)}
+.sp-val{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;color:#fff}
+.sp-val.pos{text-shadow:0 0 4px rgba(var(--c),.95),0 0 16px rgba(var(--c),.6)}
+.sp-val.neg{text-shadow:0 0 4px rgba(255,77,141,.95),0 0 16px rgba(255,77,141,.6)}
+.sp-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.4,0,.2,1)}
+.sp-row.open .sp-body{grid-template-rows:1fr}
+.sp-inner{overflow:hidden}
+.sp-detail{display:grid;grid-template-columns:200px 1fr;gap:0 18px;padding:0 0 18px}
+.sd-brief{font-size:12.5px;line-height:1.65;color:#8a9ab4;margin:0 0 12px}
+.sd-params{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
+.sd-params li{position:relative;padding-left:15px;font-size:12px;line-height:1.55;color:#6f7f98}
+.sd-params li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 6px rgba(var(--c),.8)}
+.sd-params li b{color:#c8d4ea;font-weight:600}
+.sd-unit{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.4px;color:rgb(var(--c));opacity:.85;padding:1px 6px;margin-left:4px;border:1px solid rgba(var(--c),.3);border-radius:4px;white-space:nowrap}
+.sp-foot{font-size:11px;color:#4a5a74;padding:10px 0 8px;border-top:1px solid rgba(255,255,255,.05)}
+/* expandable tiles (compared data / conclusions) */
+.sd-tiles{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.tile{--c:100,180,255;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;background:#000;border:1px solid rgba(var(--c),.45);border-radius:12px;cursor:pointer;text-align:left;
+  box-shadow:0 0 4px rgba(var(--c),.25),inset 0 0 10px rgba(var(--c),.05);transition:border-color .25s,box-shadow .25s}
+.tile:hover{border-color:rgba(var(--c),.75)}
+.tile.on{border-color:rgba(var(--c),.95);box-shadow:0 0 6px rgba(var(--c),.6),0 0 24px rgba(var(--c),.22),inset 0 0 14px rgba(var(--c),.1)}
+.tile.cc-t{--c:167,139,250}
+.tile-t{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 8px rgba(var(--c),.5)}
+.tile-s{font-size:11.5px;color:#55657e;margin-top:4px}
+.tile .acc-chev{border-color:rgb(var(--c))}
+.tile.on .acc-chev{transform:rotate(225deg);margin-top:4px}
+.acc-chev{width:9px;height:9px;border-right:2px solid #64b4ff;border-bottom:2px solid #64b4ff;transform:rotate(45deg);transition:transform .3s;flex-shrink:0;margin-top:-4px}
+.panel-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1)}
+.panel-wrap.on{grid-template-rows:1fr}
+.panel-in{overflow:hidden}
+.panel{--c:100,180,255;margin-top:16px;background:#000;border:1px solid rgba(var(--c),.55);border-radius:12px;padding:20px 22px 22px;box-shadow:0 0 14px rgba(var(--c),.12)}
+.panel.cc-p{--c:167,139,250}
+.dt-group{margin-top:16px}
+.dt-group:first-child{margin-top:0}
+.dt-gtitle{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 6px rgba(var(--c),.45);margin:0 0 8px}
+.dt-wrap{overflow-x:auto}
+.dt{width:100%;border-collapse:collapse;font-size:12px;min-width:560px}
+.dt th{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:#4a5a74;text-align:left;padding:7px 10px;border-bottom:1px solid rgba(var(--c),.35)}
+.dt td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:#c4d0e4;vertical-align:top}
+.dt td.p{color:#8a9ab4;width:30%}
+.dt td.u{color:#55657e;font-size:11px;width:16%}
+.dt td.v{font-family:'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;width:27%}
+.dt td.na{color:#34405a}
+.dt-note{font-size:11px;color:#4a5a74;margin-top:14px;line-height:1.6}
+.cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cc{--c:52,211,153;border:1px solid rgba(var(--c),.55);border-radius:9px;padding:16px 18px;box-shadow:0 0 12px rgba(var(--c),.12),inset 0 0 10px rgba(var(--c),.06)}
+.cc.neg{--c:255,77,141}
+.cc h4{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 6px rgba(var(--c),.45);margin-bottom:6px}
+.cc p{font-size:12px;color:#6f7f98;line-height:1.6;margin-bottom:12px}
+.cx-over{border:1px solid rgba(var(--c),.4);border-radius:9px;padding:14px 18px;margin-bottom:18px;background:rgba(var(--c),.03)}
+.cx-verdict{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.cx-pair{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#e4ecff}
+.cx-label{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 8px rgba(var(--c),.5)}
+.cx-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;color:#fff}
+.cx-verdict .cx-num{font-size:20px}
+.cx-num.pos{text-shadow:0 0 4px rgba(52,211,153,.8),0 0 12px rgba(52,211,153,.4)}
+.cx-num.neg{text-shadow:0 0 4px rgba(255,77,141,.8),0 0 12px rgba(255,77,141,.4)}
+.cx-scores{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.cx-chip{font-family:'Space Grotesk',sans-serif;font-size:11.5px;color:rgb(var(--c));padding:4px 10px;border:1px solid rgba(var(--c),.4);border-radius:6px;background:#000}
+.cx-chip em{font-style:normal;color:#6f7f98;margin-left:4px}
+.cx-chip .cx-num{font-size:12px;margin-left:2px}
+.cx-profile{font-size:12.5px;color:#9aa8c0;line-height:1.6}
+.cx-profile b{color:#dce6f8}
+.cx-note{font-size:11.5px;color:#a78bfa;margin-top:6px}
+.cc h4 .cx-h{font-size:10.5px;letter-spacing:.6px;text-transform:none;color:#8a9ab4;text-shadow:none;margin-left:6px;font-weight:500}
+.cx-p{font-size:12px;color:#8a9ab4;line-height:1.6;margin:0 0 9px}
+.cx-p b{color:#c8d4ea;font-weight:600}
+.cx-dim{color:#6a7890}
+.cx-list{list-style:none;margin:0 0 10px;display:flex;flex-direction:column;gap:6px}
+.cx-list li{position:relative;padding-left:14px;font-size:12px;line-height:1.55;color:#b4c2d8}
+.cx-list li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 6px rgba(var(--c),.8)}
+.cx-sep{height:1px;background:rgba(var(--c),.2);margin:12px 0}
+.cc.cx-diff{--c:100,180,255;margin-top:18px}
+.cx-dl{list-style:none;display:flex;flex-direction:column;gap:10px}
+.cx-dl li{font-size:12px;line-height:1.6;color:#8a9ab4}
+.cx-dl li b{color:#c8e0ff;font-weight:600}
+.cx-how{display:block;color:#64b4ff;margin-top:2px}
+.skel{height:9px;border-radius:5px;margin-top:9px;background:linear-gradient(90deg,rgba(var(--c),.07),rgba(var(--c),.18),rgba(var(--c),.07));background-size:200% 100%;animation:skel 2.2s linear infinite}
+@keyframes skel{to{background-position:-200% 0}}
+@media (max-width:860px){
+  .sp-axis,.sp-main{grid-template-columns:120px 1fr 64px;gap:0 10px}
+  .sp-val{font-size:20px}
+  .sp-detail{grid-template-columns:1fr}.sp-detail>span{display:none}
+  .sd-params,.sd-tiles,.cc-grid{grid-template-columns:1fr}
+}
+
+/* ═══ Conclusions: brief, spacious view ═══ */
+#pnl-concl .panel{padding:34px 34px 36px}
+.vx{--v:52,211,153;text-align:center;padding:34px 24px 30px;border:1px solid rgba(var(--v),.7);border-radius:14px;background:#000;
+  box-shadow:0 0 8px rgba(var(--v),.45),0 0 40px rgba(var(--v),.16),inset 0 0 30px rgba(var(--v),.07)}
+.vx-mid{--v:148,163,196}
+.vx-neg{--v:255,77,141}
+.vx-kicker{font-family:'Space Grotesk',sans-serif;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:#5d6b86}
+.vx-main{display:flex;align-items:baseline;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:10px}
+.vx-label{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;letter-spacing:.5px;text-transform:capitalize;color:#fff;
+  text-shadow:0 0 6px rgba(var(--v),.9),0 0 24px rgba(var(--v),.55)}
+.vx-score{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;font-variant-numeric:tabular-nums;color:rgb(var(--v));text-shadow:0 0 14px rgba(var(--v),.6)}
+.vx-pair{font-family:'Space Grotesk',sans-serif;font-size:13px;color:#8a9ab4;margin-top:8px;letter-spacing:.3px}
+.vx-profile{max-width:620px;margin:22px auto 0;display:flex;flex-direction:column;gap:6px}
+.vx-profile b{font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:rgb(var(--v))}
+.vx-profile span{font-size:14px;line-height:1.7;color:#b8c6dc}
+.vx-chips{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}
+.vx-chip{display:flex;align-items:baseline;gap:8px;padding:8px 14px;border:1px solid rgba(var(--c),.45);border-radius:8px;background:rgba(var(--c),.04);font-family:'Space Grotesk',sans-serif}
+.vx-chip i{font-style:normal;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:rgb(var(--c))}
+.vx-chip b{font-size:15px;color:#fff;font-variant-numeric:tabular-nums}
+.vx-chip b.pos{text-shadow:0 0 8px rgba(var(--c),.7)}
+.vx-chip b.neg{text-shadow:0 0 8px rgba(255,77,141,.7)}
+.vx-chip em{font-style:normal;font-size:11px;color:#5d6b86}
+.vx-note{font-size:12px;color:#a78bfa;margin-top:14px}
+.bx-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:30px}
+.bx{--c:52,211,153;padding:26px 28px 28px;border:1px solid rgba(var(--c),.5);border-radius:12px;background:#000;box-shadow:0 0 16px rgba(var(--c),.1),inset 0 0 14px rgba(var(--c),.05)}
+.bx-neg{--c:255,77,141}
+.bx-kicker{font-family:'Space Grotesk',sans-serif;font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:rgb(var(--c));text-shadow:0 0 8px rgba(var(--c),.5)}
+.bx-title{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;color:#eef3ff;margin-top:8px}
+.bx-lead{font-size:14px;line-height:1.75;color:#b8c6dc;margin:14px 0 0}
+.bx-list{list-style:none;margin:18px 0 0;display:flex;flex-direction:column;gap:10px}
+.bx-list li{position:relative;padding-left:18px;font-size:13px;line-height:1.6;color:#d4deee}
+.bx-list li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 8px rgba(var(--c),.9)}
+.bx-sub{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5d6b86;margin-top:22px}
+.bx-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.bx-tags span{font-size:12px;color:rgb(var(--c));padding:5px 11px;border:1px solid rgba(var(--c),.35);border-radius:20px;background:rgba(var(--c),.05)}
+.bx-act{font-size:13.5px;line-height:1.65;color:#d4deee;margin:8px 0 0}
+.ex{margin-top:30px;padding:26px 28px;border:1px solid rgba(100,180,255,.3);border-radius:12px;background:#000}
+.ex-kicker{font-family:'Space Grotesk',sans-serif;font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:#64b4ff;text-shadow:0 0 8px rgba(100,180,255,.5)}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px;margin-top:20px}
+.ex-item{cursor:help}
+.ex-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#dce8ff;display:flex;align-items:center;gap:8px}
+.ex-ic{width:24px;height:24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#64b4ff;border:1px solid rgba(100,180,255,.35);box-shadow:0 0 8px rgba(100,180,255,.2)}
+.ex-what{font-size:12.5px;line-height:1.6;color:#8a9ab4;margin-top:10px}
+.ex-how{font-size:12.5px;line-height:1.6;color:#64b4ff;margin-top:6px}
+@media (max-width:860px){#pnl-concl .panel{padding:22px 18px}.bx-grid{grid-template-columns:1fr}.vx-label,.vx-score{font-size:26px}}
+
+/* ═══ Moon ═══ */
+#moon-loading{position:absolute;inset:0;z-index:20;background:#06070b;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}
+#moon-loading.hidden{opacity:0;pointer-events:none}
+#moon-loading p{margin-top:14px;font-family:'Space Grotesk',sans-serif;font-size:12px;color:#4a4a7a;letter-spacing:.8px}
+#moon-loading .loader-ring{border-top-color:#a78bfa}
+#moon-zoom-controls{bottom:50px}
+.c-l{color:#f6c453}
+#tab-compare:not(.ready){opacity:.5}
+.cmp-sel{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cmp-chip{font-family:'Space Grotesk',sans-serif;font-size:11.5px;padding:6px 12px;border-radius:7px;border:1px solid rgba(100,180,255,.1);color:#3a4a5a}
+.cmp-chip.ok{color:#34d399;border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.06)}
+/* ═══ Final-data additions: Moon target switch, top analogs, colour-by control, score box ═══ */
+.mt-switch{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.mt-btn{flex:1;min-width:72px;padding:6px 8px;border-radius:6px;border:1px solid rgba(100,180,255,.14);background:rgba(255,255,255,.02);color:#5a7a92;font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;cursor:pointer;transition:all .2s}
+.mt-btn:hover{color:#a9c8e4;border-color:rgba(100,180,255,.3)}
+.mt-btn.on{color:#d8e8ff;background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.45)}
+.mt-btn.chosen::after{content:' \2713';color:#34d399}
+.mt-note{font-size:10.5px;color:#4a6a80;margin-top:6px;line-height:1.5}
+.top-list{list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:4px}
+.top-list li{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#7a92a6;padding:4px 6px;border-radius:5px;cursor:pointer}
+.top-list li:hover{background:rgba(100,180,255,.06);color:#c0d8ee}
+.top-list li em{font-style:normal;color:#4a6a80}
+.top-list li b{font-family:'Space Grotesk',sans-serif;color:#34d399;font-variant-numeric:tabular-nums;font-weight:600}
+.ip-score{background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.12);border-radius:7px;padding:9px 11px;margin-bottom:12px}
+.ip-score .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ip-score .lbl{font-size:8.5px;text-transform:uppercase;letter-spacing:1.1px;font-family:'Space Grotesk',sans-serif;color:#34d399}
+.ip-score .big{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.vd{font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.vd.sufficient{color:#34d399;background:rgba(52,211,153,.1)}.vd.partial{color:#fbbf24;background:rgba(251,191,36,.1)}.vd.avoid{color:#ff4d8d;background:rgba(255,77,141,.1)}.vd.na{color:#5a6a7a;background:rgba(255,255,255,.04)}
+.ip-score .sub{font-size:10.5px;color:#5a7a90;margin-top:4px;line-height:1.5}
+.ip-score .sub b{color:#9ab8d0;font-weight:500}
+.mini{display:grid;grid-template-columns:92px 1fr 34px;gap:6px;align-items:center;font-size:10px;color:#6a8090;margin-top:4px}
+.mini .tr{height:5px;border-radius:3px;background:rgba(255,255,255,.05);position:relative}
+.mini .tr i{position:absolute;top:0;bottom:0;border-radius:3px}
+.mini .tr::before{content:'';position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:rgba(255,255,255,.18)}
+.mini span:last-child{text-align:right;font-family:'Space Grotesk',sans-serif;color:#9ab0c4;font-variant-numeric:tabular-nums}
+#earth-tools{position:fixed;top:88px;left:16px;z-index:10;width:250px;background:rgba(8,10,18,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,180,255,.07);border-radius:9px;padding:11px 13px}
+#earth-tools h3{font-family:'Space Grotesk',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#2e4a5e;margin-bottom:7px}
+#earth-tools select{width:100%;background:#0b0e16;color:#9ab8d0;border:1px solid rgba(100,180,255,.14);border-radius:6px;padding:5px 7px;font-family:'Inter',sans-serif;font-size:11px}
+#earth-tools select:disabled{opacity:.45}
+#earth-tools .et-target{font-size:11px;color:#a78bfa;margin-bottom:8px;line-height:1.45}
+#earth-tools .et-target.none{color:#4a6a80}
+#earth-tools .et-top{max-height:min(30vh,280px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(100,180,255,.1) transparent}
+#score-legend{display:none;position:fixed;bottom:16px;left:16px;background:rgba(8,10,18,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,180,255,.07);border-radius:9px;padding:12px 15px;z-index:10;width:240px}
+#score-legend h3{font-family:'Space Grotesk',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#2e4a5e;margin-bottom:8px}
+#score-legend .grad{height:7px;border-radius:4px;background:linear-gradient(90deg,#ff4d8d 0%,#ff4d8d 20%,#4a5468 50%,#fbbf24 62%,#fbbf24 74%,#34d399 75%,#34d399 100%)}
+#score-legend .ticks{display:flex;justify-content:space-between;font-size:9.5px;color:#5a7080;margin-top:4px}
+#score-legend .foot{font-size:9.5px;color:#3e5a70;margin-top:6px}
+@media (max-width:860px){#earth-tools{width:calc(100vw - 32px);top:96px}#earth-tools .et-top{max-height:22vh}#tile-count{right:18px}}
+</style>
+</head>
+<body>
+
+<div id="loading"><div class="loader-ring"></div><p>Loading 4,310 analog tiles and 30 Moon targets…</p></div>
+
+<!-- ═══════ Tab Bar ═══════ -->
+<div id="tab-bar">
+  <div class="tab-logo">[Team Name] Globe</div>
+  <button class="tab-btn active" data-page="earth" id="tab-earth">
+    <span class="tab-icon">🌍</span> Earth
+    <span class="tab-sel" id="tab-earth-sel"></span>
+  </button>
+  <button class="tab-btn" data-page="moon" id="tab-moon">
+    <span class="tab-icon">🌙</span> Moon
+    <span class="tab-sel" id="tab-moon-sel"></span>
+  </button>
+  <div class="tab-div"></div>
+  <button class="tab-btn" data-page="compare" id="tab-compare">
+    <span class="tab-icon">📊</span> Similarity Assessment
+  </button>
+</div>
+
+<!-- ═══════ Earth Page ═══════ -->
+<div class="page active" id="page-earth">
+  <div id="globe-container"></div>
+  <div id="tile-count"><span id="count-num">4,310</span> analog candidate tiles · scored against <span>30</span> Moon targets</div>
+  <div id="earth-tools">
+    <h3>Analog search</h3>
+    <div class="et-target none" id="et-target">No Moon target chosen yet. Pick one on the 🌙 Moon tab to colour Earth tiles by how well they match it.</div>
+    <select id="color-by" disabled title="Colour Earth tiles by"><option value="source">Colour by tile source</option></select>
+    <div id="et-top-wrap" hidden><h3 style="margin-top:11px">Top Earth analogs · overall match</h3><ol class="top-list et-top" id="et-top"></ol></div>
+  </div>
+  <div id="legend">
+    <h3>Tile Sources</h3>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffd700;box-shadow:0 0 4px #ffd70055"></div>Named Analog Sites (30)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff9f43;box-shadow:0 0 4px #ff9f4355"></div>Impact Structures (190)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b;box-shadow:0 0 4px #ff6b6b55"></div>Volcanic Sites (1,091)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4ecdc4;box-shadow:0 0 4px #4ecdc455"></div>Barren / Polar Samples (2,999)</div>
+  </div>
+  <div id="score-legend">
+    <h3 id="score-legend-t">Score</h3>
+    <div class="grad"></div><div class="ticks"><span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span></div>
+    <div class="foot">Clusters show their best tile · grey = not scored</div>
+  </div>
+  <div id="zoom-controls"><button id="zoom-in-btn" title="Zoom in">+</button><button id="zoom-out-btn" title="Zoom out">−</button><button id="zoom-home-btn" title="Back to the starting view">⌂</button></div>
+  <div id="controls-hint">Drag to rotate · Scroll to zoom · Click tile to inspect</div>
+
+  <div id="tooltip"><div class="tt-name"></div><div class="tt-coords"></div><div class="tt-type"></div></div>
+
+  <div id="info-panel">
+    <div class="ip-hdr">
+      <button class="ip-close" id="close-panel">✕</button>
+      <div class="ip-name" id="ip-name"></div>
+      <div class="ip-meta">
+        <span class="ip-coords" id="ip-coords"></span>
+        <span class="ip-country" id="ip-country"></span>
+      </div>
+      <div><span class="ip-badge" id="ip-badge" style="margin-top:7px"></span></div>
+    </div>
+    <div class="ip-scroll">
+      <div class="ip-score" id="ip-score"></div>
+      <div class="ip-sec"><div class="ip-sec-t c-t"><span>🏔️</span> Terrain Shape</div><p id="ip-terrain"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-c"><span>🪨</span> Ground Composition</div><p id="ip-composition"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-i"><span>💧</span> Ice / Water Access</div><p id="ip-ice"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-l"><span>☀️</span> Sunlight &amp; Temperature</div><p id="ip-light"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-s"><span>🧫</span> Dust, Life &amp; Caves</div><p id="ip-life"></p></div>
+      <div class="ip-hr"></div>
+      <div class="ip-special-box">
+        <div class="ip-sec-t c-s" style="margin-bottom:5px"><span>✦</span> What Makes This Place Special</div>
+        <p id="ip-special"></p>
+      </div>
+    </div>
+    <div class="ip-acts">
+      <button class="ip-btn ip-btn-1" id="btn-choose">✓ Choose This Place</button>
+      <button class="ip-btn ip-btn-2" id="btn-go-moon">→ Go to Moon</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ Moon Page ═══════ -->
+<div class="page" id="page-moon">
+  <div id="moon-globe-container"></div>
+  <div id="moon-loading"><div class="loader-ring"></div><p>Loading lunar surface…</p></div>
+  <div id="region-count"><span>11</span> Moon regions · <span>30</span> scoring targets (landing zone, ice zone and 10 km tile per region)</div>
+  <div id="moon-legend">
+    <h3>Moon Targets</h3>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa;box-shadow:0 0 4px #a78bfa55"></div>Artemis III candidate, Oct 2024 list (9)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#64b4ff;box-shadow:0 0 4px #64b4ff55"></div>Shackleton rim · other south-pole target (1)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f6c453;box-shadow:0 0 4px #f6c45355"></div>Tranquillitatis pit · lava-tube skylight, 8.3°N (1)</div>
+  </div>
+  <div id="moon-zoom-controls"><button id="moon-zoom-in" title="Zoom in">+</button><button id="moon-zoom-out" title="Zoom out">−</button><button id="moon-zoom-home" title="Back to south-pole view">⌂</button></div>
+  <div id="moon-controls-hint">Drag to rotate · Scroll to zoom · Click a region to inspect</div>
+
+  <div id="moon-tooltip"><div class="tt-name"></div><div class="tt-coords"></div><div class="tt-type"></div></div>
+
+  <div id="moon-info-panel">
+    <div class="ip-hdr">
+      <button class="ip-close" id="moon-close-panel">✕</button>
+      <div class="ip-name" id="moon-ip-name"></div>
+      <div class="ip-meta">
+        <span class="ip-coords" id="moon-ip-coords"></span>
+        <span class="ip-country" id="moon-ip-where"></span>
+      </div>
+      <div><span class="ip-badge" id="moon-ip-badge" style="margin-top:7px"></span></div>
+      <div class="mt-switch" id="moon-ip-targets"></div>
+      <div class="mt-note" id="moon-ip-tnote"></div>
+    </div>
+    <div class="ip-scroll">
+      <div class="ip-sec"><div class="ip-sec-t c-t"><span>🏔️</span> Terrain Shape</div><p id="moon-ip-terrain"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-c"><span>🪨</span> Ground Composition</div><p id="moon-ip-composition"></p></div>
+      <div class="ip-sec"><div class="ip-sec-t c-i"><span>💧</span> Ice / Water Access</div><p id="moon-ip-ice"></p></div>
+      <div class="ip-hr"></div>
+      <div class="ip-sec"><div class="ip-sec-t c-l"><span>☀️</span> Illumination &amp; Temperature</div><p id="moon-ip-light"></p></div>
+      <div class="ip-special-box">
+        <div class="ip-sec-t c-s" style="margin-bottom:5px"><span>✦</span> Why This Region Matters</div>
+        <p id="moon-ip-special"></p>
+      </div>
+      <div class="ip-sec" style="margin-top:12px"><div class="ip-sec-t c-t"><span>🌍</span> Best Earth analogs for this target</div><ol class="top-list" id="moon-ip-top"></ol></div>
+    </div>
+    <div class="ip-acts">
+      <button class="ip-btn ip-btn-1" id="moon-btn-choose">✓ Choose This Target</button>
+      <button class="ip-btn ip-btn-2" id="moon-btn-go">← Go to Earth</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ Comparison Page (placeholder) ═══════ -->
+<div class="page" id="page-compare">
+  <div id="cmp-empty">
+    <div class="ph-icon">📊</div>
+    <div class="ph-title">Similarity Assessment</div>
+    <div class="ph-sub">Select one Earth tile and one Moon target to compare nine categories (terrain, geology, sunlight, water ice, operations, caves, temperature, dust and sterility) and see which experiments the Earth site can host.</div>
+    <div class="cmp-sel"><span class="cmp-chip" id="cmp-earth">🌍 Earth: not chosen</span><span class="cmp-chip" id="cmp-moon">🌙 Moon: not chosen</span></div>
+  </div>
+  <div id="cmp-dash" hidden></div>
+</div>
+
+<!-- Three.js -->
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.158.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.158.0/examples/jsm/"}}</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+
+// ══════════════════════════════════════
+// TAB NAVIGATION
+// ══════════════════════════════════════
+let selectedEarthTile = null;
+const tabs = document.querySelectorAll('.tab-btn[data-page]');
+const pages = document.querySelectorAll('.page');
+function goTo(page) {
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.page === page));
+  pages.forEach(p => p.classList.toggle('active', p.id === `page-${page}`));
+  if (page === 'compare') growSpectrum();
+}
+tabs.forEach(tab => tab.addEventListener('click', () => goTo(tab.dataset.page)));
+function setEarthSel(name) {
+  const s = document.getElementById('tab-earth-sel');
+  const b = document.getElementById('tab-earth');
+  if(name){ s.textContent=name; b.classList.add('has-sel'); } else { s.textContent=''; b.classList.remove('has-sel'); }
+}
+function setMoonSel(name) {
+  const s = document.getElementById('tab-moon-sel');
+  const b = document.getElementById('tab-moon');
+  if(name){ s.textContent=name; b.classList.add('has-sel'); } else { s.textContent=''; b.classList.remove('has-sel'); }
+}
+// Wherever the user starts, the "go" button leads to the other body, then to the assessment.
+function updateFlowButtons() {
+  const eOpen = openTile >= 0 ? allTiles[openTile] : null;
+  const mOpen = moonSel >= 0 ? moonTargetOf(MOON_REGIONS[moonSel]) : null;
+  const eb = document.getElementById('btn-go-moon');
+  eb.textContent = selectedMoonTarget
+    ? (selectedEarthTile && eOpen && selectedEarthTile.idx === eOpen.idx ? '→ Go to Similarity Assessment' : '→ Lock in & go to Assessment')
+    : '→ Go to Moon';
+  const mb = document.getElementById('moon-btn-go');
+  mb.textContent = selectedEarthTile
+    ? (selectedMoonTarget && mOpen && selectedMoonTarget.id === mOpen.id ? '→ Go to Similarity Assessment' : '→ Lock in & go to Assessment')
+    : '← Go to Earth';
+  const cb = document.getElementById('moon-btn-choose');
+  const mChosen = selectedMoonTarget && mOpen && selectedMoonTarget.id === mOpen.id;
+  cb.textContent = mChosen ? '✓ Target Selected' : '✓ Choose This Target';
+  cb.classList.toggle('chosen', !!mChosen);
+  document.getElementById('tab-compare').classList.toggle('ready', !!(selectedEarthTile && selectedMoonTarget));
+  const ce = document.getElementById('cmp-earth'), cm = document.getElementById('cmp-moon');
+  ce.textContent = '🌍 Earth: ' + (selectedEarthTile ? selectedEarthTile.name : 'not chosen');
+  cm.textContent = '🌙 Moon: ' + (selectedMoonTarget ? selectedMoonTarget.name : 'not chosen');
+  ce.classList.toggle('ok', !!selectedEarthTile); cm.classList.toggle('ok', !!selectedMoonTarget);
+  renderCompare();
+}
+
+
+// ══════════════════════════════════════
+// REAL TILE DATA — 4,310 Earth analog tiles
+// Fields per tile array:
+//   [0]lat [1]lon [2]src_idx [3]stratum_idx [4]name [5]country
+//   [6]slope [7]relief [8]elev [9]rough [10]lith
+//   [11]sand [12]silt [13]clay [14]bdod [15]geo_age
+//   [16]pf_flag [17]ice_frac [18]soil_moist [19]precip
+//   [20]tmax [21]tmin [22]bare [23]snow
+//   [24]extra_info (catalog data for volcanoes/impacts)
+// ══════════════════════════════════════
+/*@DATA@*/
+
+const SOURCES = TILE_DATA.s;  // ['named_site','impact_structure','volcano','landcover_sample']
+const STRATA = TILE_DATA.t;
+const RAW = TILE_DATA.d;
+
+// ── Parse tiles into objects ──
+function parseTile(r, idx) {
+  const src = SOURCES[r[2]||0];
+  const stratum = STRATA[r[3]||0];
+  const v = (i,d) => (i < r.length && r[i] !== '' && r[i] !== null) ? r[i] : d;
+  return {
+    idx, lat: r[0], lon: r[1], source: src, stratum: stratum,
+    name: v(4,'') || (stratum.replace(/_/g,' ') + ' tile'),
+    country: v(5,''),
+    slope: v(6,null), relief: v(7,null), elev: v(8,null), rough: v(9,null),
+    lith: v(10,''), sand: v(11,null), silt: v(12,null), clay: v(13,null),
+    bdod: v(14,null), geo_age: v(15,''),
+    pf: v(16,0), ice: v(17,0), moist: v(18,null), precip: v(19,null),
+    tmax: v(20,null), tmin: v(21,null),
+    bare: v(22,0), snow: v(23,0),
+    xinfo: v(24,'')
+  };
+}
+
+const allTiles = RAW.map((r,i) => parseTile(r,i));
+
+// ══════════════════════════════════════
+// FINAL DATA API (generated by tools/build_globe.py from the scoring pipeline outputs)
+//   EARTH_X    extra Earth columns, aligned with TILE_DATA order          -> EX(tile, column)
+//   EARTH_SUN  noon sun height (deg) and grazing-sun share per tile+month -> earthSun(tile, month 1-12)
+//   MOON_DB    10 Artemis regions + Tranquillitatis pit, 30 scoring targets
+//   META       categories, experiments, caveats, limitations, calibration quality
+//   SCORE_PACK every (Moon target, Earth tile) score, composite, readiness -> SC.*
+// ══════════════════════════════════════
+const EX = (t, col) => { const i = EARTH_X.c.indexOf(col); if (i < 0) return null; const v = EARTH_X.d[t.idx][i]; return v === undefined || v === '' ? null : v; };
+const earthSun = (t, m) => { if (!m) return { noon: null, graz: null }; const k = t.idx * 12 + m - 1; return { noon: EARTH_SUN.noon[k], graz: EARTH_SUN.graz[k] }; };
+const fmt = (v, d) => (v === null || v === undefined || v === '' || isNaN(+v)) ? null : (+v).toFixed(d);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const noonSun = (lat, tilt) => Math.min(90, 90 - Math.abs(lat) + tilt);   // highest noon sun from latitude and axial tilt
+const fmtScore = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
+const pct = (v, d = 0) => v === null || v === undefined ? null : fmt(v * 100, d);
+const MONTHS = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const CAT = Object.fromEntries(META.categories.map(c => [c.id, c]));        // category id -> metadata
+const EXP = Object.fromEntries(META.experiments.map(e => [e.id, e]));       // experiment id -> metadata
+// Project verdict bands: >= 0.5 sufficient, 0..0.5 partial, < 0 avoid
+const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'sufficient' : v >= 0 ? 'partial' : 'avoid';
+const READY = { '-1': 'not relevant', 0: 'not available', 1: 'avoid', 2: 'partial', 3: 'sufficient' };
+
+const SC = (() => {
+  const P = SCORE_PACK, NT = P.n;
+  const dec = s => { const b = atob(s), a = new Int8Array(b.length); for (let i = 0; i < b.length; i++) a[i] = (b.charCodeAt(i) << 24) >> 24; return a; };
+  const S = dec(P.s), Rb = dec(P.r), Pc = dec(P.p), Mo = dec(P.m);
+  const rd = k => ((Rb[k >> 1] >> ((k & 1) * 4)) & 15) - 1;   // readiness: 4-bit codes, two per byte
+  const cats = [...P.cats, 'composite'], nC = cats.length, nE = P.exps.length;
+  const ti = id => { const i = P.ids.indexOf(typeof id === 'string' ? id : id.id); if (i < 0) throw new Error('unknown Moon target ' + id); return i; };
+  const ci = c => cats.indexOf(c), ei = e => P.exps.indexOf(e);
+  const sc = (t, c, j) => { const v = S[(ti(t) * nC + ci(c)) * NT + j]; return v === -128 ? null : v / 100; };
+  return {
+    cats: P.cats, exps: P.exps, ids: P.ids,
+    score: sc,                                                              // (target, cat | 'composite', tileIdx) -> -1..1 or null
+    scores: (t, j) => Object.fromEntries(cats.map(c => [c, sc(t, c, j)])),  // all 9 categories + composite
+    ready: (t, e, j) => rd((ti(t) * nE + ei(e)) * NT + j),                  // -1 not relevant, 0 n/a, 1 avoid, 2 partial, 3 sufficient
+    readyAll: (t, j) => Object.fromEntries(P.exps.map(e => [e, rd((ti(t) * nE + ei(e)) * NT + j)])),
+    thermalPct: (t, j) => { const v = Pc[ti(t) * NT + j]; return v === -128 ? null : v; },   // 0..100: colder/more polar than v% of Earth tiles
+    twinMonth: (t, j) => Mo[ti(t) * NT + j],                                // Earth month (1-12, 0 none) whose sun is closest to the target's
+    column: (t, c) => { const o = (ti(t) * nC + ci(c)) * NT, a = new Float32Array(NT); for (let j = 0; j < NT; j++) { const v = S[o + j]; a[j] = v === -128 ? NaN : v / 100; } return a; }
+  };
+})();
+// Weakest required category of an experiment for one pair (why it is only partial / avoid)
+function limitingCats(tid, expId, j) {
+  const e = EXP[expId], out = [];
+  for (const [c, thr] of Object.entries(e.required)) { const v = SC.score(tid, c, j); if (v === null || v < thr) out.push({ cat: c, score: v, need: thr }); }
+  return out;
+}
+
+
+// ── Generate description text from real data ──
+function genTerrain(t) {
+  const parts = [];
+  if (t.elev !== null) parts.push(`Elevation ~${Math.round(t.elev)} m`);
+  if (t.slope !== null) parts.push(`mean slope ${t.slope}°`);
+  if (t.relief !== null) parts.push(`relief ${Math.round(t.relief)} m across the 10 km tile`);
+  if (t.rough !== null) parts.push(`roughness index ${t.rough} m`);
+  if (!parts.length) return 'No terrain data available.';
+  let desc = parts.join(', ') + '.';
+  if (t.slope !== null) {
+    if (t.slope < 1) desc += ' Very flat terrain — suitable for landing/base operations.';
+    else if (t.slope < 5) desc += ' Gentle terrain with moderate traversability.';
+    else if (t.slope < 15) desc += ' Moderately rugged — challenging for wheeled rovers.';
+    else desc += ' Steep, highly rugged terrain — significant mobility challenges.';
+  }
+  return desc;
+}
+
+function genComp(t) {
+  const parts = [];
+  if (t.lith) parts.push(`Lithology: ${t.lith}.`);
+  if (t.geo_age) parts.push(`Age: ${t.geo_age}.`);
+  if (t.sand !== null && t.silt !== null && t.clay !== null) {
+    parts.push(`Soil grain size: ${Math.round(t.sand)}% sand, ${Math.round(t.silt)}% silt, ${Math.round(t.clay)}% clay.`);
+  }
+  if (t.bdod !== null) parts.push(`Bulk density: ${t.bdod} g/cm³.`);
+  if (t.xinfo && t.source === 'volcano') {
+    const p = t.xinfo.split('|');
+    if (p[0]) parts.push(`Type: ${p[0]}.`);
+    if (p[1]) parts.push(p[1]);
+  }
+  if (t.xinfo && t.source === 'impact_structure') {
+    const p = t.xinfo.split('|');
+    parts.push(p.join(', ') + '.');
+  }
+  if (!parts.length) return 'No composition data available for this tile.';
+  return parts.join(' ');
+}
+
+function genIce(t) {
+  const parts = [];
+  const fz = EX(t, 'x_frozen_ground_frac'), trav = EX(t, 'trav_dist_flat_to_ice_km'), far = EX(t, 'trav_dist_gt10_flag') === 1;
+  if (t.pf) parts.push(`Permafrost present${fz !== null ? ` (frozen ground over ${Math.round(fz * 100)}% of the tile)` : ''}.`);
+  else parts.push('No permafrost detected.');
+  if (t.ice > 0.01) parts.push(`Surface ice/snow fraction: ${(t.ice*100).toFixed(1)}%.`);
+  if (far) parts.push('No ice within 10 km of flat ground.');
+  else if (trav !== null) parts.push(`Flat bare ground to ice: ${trav.toFixed(1)} km.`);
+  if (t.moist !== null) parts.push(`Soil moisture: ${t.moist}%.`);
+  if (t.precip !== null) {
+    if (t.precip < 50) parts.push(`Hyper-arid (${Math.round(t.precip)} mm/yr).`);
+    else if (t.precip < 250) parts.push(`Arid (${Math.round(t.precip)} mm/yr).`);
+    else if (t.precip < 600) parts.push(`Semi-arid (${Math.round(t.precip)} mm/yr).`);
+    else parts.push(`${Math.round(t.precip)} mm/yr precipitation.`);
+  }
+  if (t.snow > 0.5) parts.push('Predominantly snow/ice covered.');
+  return parts.join(' ') || 'No ice/water data available.';
+}
+
+function genSpecial(t) {
+  if (t.source === 'named_site') {
+    const notes = EX(t, 'site_notes'), tags = (EX(t, 'site_tags') || '').split(';').filter(Boolean).map(x => x.replace(/_/g, ' '));
+    return `Established analog site${notes ? ': ' + notes.replace(/\.?$/, '.') : ' — selected by researchers for planetary comparison studies.'}` +
+      `${tags.length ? ' Known for: ' + tags.join(', ') + '.' : ''} ${t.lith ? 'Bedrock: ' + t.lith + '.' : ''} ${t.country ? 'Located in ' + t.country + '.' : ''}`;
+  }
+  if (t.source === 'impact_structure') {
+    let s = 'Impact crater geology — direct structural comparison to lunar/Mars cratered terrain.';
+    if (t.xinfo) { const p=t.xinfo.split('|'); s += ' ' + p.join(', ') + '.'; }
+    return s;
+  }
+  if (t.source === 'volcano') {
+    let s = 'Volcanic terrain with potential basaltic surface analog for lunar mare.';
+    if (t.xinfo) {
+      const p = t.xinfo.split('|');
+      if (p[0]) s = p[0] + ' — ' + s;
+      if (p[1]) s += ' ' + p[1];
+    }
+    return s;
+  }
+  // landcover
+  const tags = [];
+  if (t.bare > 0.7) tags.push('highly barren');
+  if (t.pf) tags.push('permafrost terrain');
+  if (t.snow > 0.3) tags.push('ice-adjacent');
+  if (t.tmin !== null && t.tmin < 230) tags.push('extreme cold');
+  if (t.precip !== null && t.precip < 100) tags.push('hyper-arid');
+  if (tags.length) return `Satellite-identified candidate: ${tags.join(', ')}. Systematically screened for undiscovered analog potential.`;
+  return 'Barren terrain candidate identified from satellite landcover classification. Potential undiscovered analog site.';
+}
+
+
+function genLight(t) {
+  const parts = [];
+  const noon = EX(t, 'x_noon_sun_max_deg'), graz = EX(t, 'x_grazing_sun_frac'), night = EX(t, 'x_polar_night_frac'), tm = EX(t, 'x_temp_mean_k');
+  if (noon !== null) parts.push(`Highest noon sun ${noon.toFixed(0)}° (lunar south pole: below ~7°).`);
+  if (graz !== null) parts.push(`${Math.round(graz * 100)}% of daylight hours have the sun below 12° over the year.`);
+  if (night !== null && night > 0) parts.push(`Polar night ${Math.round(night * 100)}% of the year.`);
+  if (t.tmin !== null && t.tmax !== null) parts.push(`Surface temperature ${t.tmin}–${t.tmax} K${tm !== null ? ` (mean ${tm} K)` : ''}; the lunar poles reach 25–110 K in shadow.`);
+  return parts.join(' ') || 'No sunlight or temperature data available.';
+}
+
+function genLife(t) {
+  const parts = [];
+  const bare = EX(t, 'bare_f_site'), ndvi = EX(t, 'ndvi_mean'), tree = EX(t, 'wc_frac_tree'), life = EX(t, 'known_life'), cave = EX(t, 'cave_rule');
+  if (bare !== null) parts.push(`Bare ground ${Math.round(bare * 100)}% of the tile${EX(t, 'flag_tephra') ? ', with volcanic tephra (regolith-like ash)' : ''}.`);
+  if (ndvi !== null) parts.push(`Vegetation index (NDVI) ${ndvi.toFixed(2)}${tree ? `, tree cover ${Math.round(tree * 100)}%` : ''}.`);
+  if (life) parts.push(`Documented life: ${life}.`);
+  const CAVE = { 0.5: 'Known lava tubes / caves documented here.', 0.3: 'Lava tubes plausible (basaltic volcanic ground), not documented in this tile.', '-0.5': 'No lava tubes possible (sedimentary or ice-covered ground).' };
+  if (cave !== null && CAVE[cave]) parts.push(CAVE[cave]);
+  return parts.join(' ') || 'No dust, vegetation or cave data available.';
+}
+
+// ── Scores against the chosen Moon target (or the best of the 30 targets) ──
+const tone = v => v === null ? 'na' : verdictOf(v);
+function scoreColorCSS(v) {
+  if (v === null || v === undefined || isNaN(v)) return '#3a4250';
+  return v >= 0.5 ? '#34d399' : v >= 0 ? '#fbbf24' : '#ff4d8d';
+}
+function miniBar(label, v, title) {
+  const w = v === null ? 0 : Math.abs(v) * 50, left = v === null || v >= 0 ? 50 : 50 - w;
+  return `<div class="mini" title="${esc(title || '')}"><span>${esc(label)}</span><span class="tr"><i style="left:${left}%;width:${w}%;background:${scoreColorCSS(v)}"></i></span><span>${v === null ? '—' : fmtScore(v)}</span></div>`;
+}
+function bestMoonFor(t) {
+  let best = null;
+  SC.ids.forEach(id => { const v = SC.score(id, 'composite', t.idx); if (v !== null && (!best || v > best.v)) best = { id, v }; });
+  return best;
+}
+function renderEarthScore(t) {
+  const box = document.getElementById('ip-score');
+  const m = selectedMoonTarget;
+  if (!m) {
+    const b = bestMoonFor(t);
+    box.innerHTML = b ? `<div class="row"><span class="lbl">Best Moon match (of 30 targets)</span><span class="vd ${tone(b.v)}">${verdictOf(b.v)}</span></div>
+      <div class="row"><span class="sub"><b>${esc(MT[b.id].name)}</b></span><span class="big">${fmtScore(b.v)}</span></div>
+      <div class="sub">Choose a Moon target to see this tile's category scores and experiment verdicts.</div>` : '<div class="sub">No scores for this tile.</div>';
+    return;
+  }
+  const sc = SC.scores(m.id, t.idx), rd = SC.readyAll(m.id, t.idx);
+  const nS = Object.values(rd).filter(x => x === 3).length, nP = Object.values(rd).filter(x => x === 2).length;
+  const rank = (m.top || []).findIndex(x => x.tile === t.idx);
+  const order = [...META.composite_categories, ...META.categories.map(c => c.id).filter(c => !META.composite_categories.includes(c))];
+  box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${tone(sc.composite)}">${verdictOf(sc.composite)}</span></div>
+    <div class="row"><span class="sub">${rank >= 0 ? `<b>#${rank + 1}</b> of 4,310 Earth tiles` : 'Experiment-weighted mean of the comparable categories'}</span><span class="big">${sc.composite === null ? '—' : fmtScore(sc.composite)}</span></div>
+    ${order.filter(c => !(c === 'caves' && sc.caves === null)).map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
+    <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}. * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
+}
+
+// ══════════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════════
+const R = 1;
+const SCOL = {
+  named_site: new THREE.Color(0xffd700),
+  impact_structure: new THREE.Color(0xff9f43),
+  volcano: new THREE.Color(0xff6b6b),
+  landcover_sample: new THREE.Color(0x4ecdc4)
+};
+const SLAB = {
+  named_site: 'Named Analog Site',
+  impact_structure: 'Impact Structure',
+  volcano: 'Volcanic Site',
+  landcover_sample: 'Barren / Polar Sample'
+};
+const SCSS = {
+  named_site: 'background:rgba(255,215,0,.12);color:#ffd700',
+  impact_structure: 'background:rgba(255,159,67,.12);color:#ff9f43',
+  volcano: 'background:rgba(255,107,107,.12);color:#ff6b6b',
+  landcover_sample: 'background:rgba(78,205,196,.12);color:#4ecdc4'
+};
+
+
+// ══════════════════════════════════════
+// RENDERER
+// ══════════════════════════════════════
+const W=window.innerWidth, H=window.innerHeight-52;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(W,H);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.2;
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+document.getElementById('globe-container').appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(38,W/H,0.01,200);
+const EARTH_HOME = ll2v(42, 12, Math.hypot(0.4, 2.9));   // facing Europe
+camera.position.copy(EARTH_HOME);
+
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=0.06;
+controls.rotateSpeed=0.35; controls.zoomSpeed=0.6;
+controls.minDistance=1.15; controls.maxDistance=5;
+controls.enablePan=false;
+controls.autoRotate=true; controls.autoRotateSpeed=0.3;
+/* Zoom buttons */
+document.getElementById("zoom-in-btn").addEventListener("click",()=>{const d=camera.position.length();const nd=Math.max(controls.minDistance,d*0.75);const s=nd/d;camera.position.multiplyScalar(s);controls.update();rebuildClusters();});
+/* Home: fly back to the starting view over Europe, then resume the slow rotation */
+function flyEarthCamera(to, ms = 1100, onDone = null) {
+  const from = camera.position.clone(), d0 = from.length(), d1 = to.length(), t0 = performance.now();
+  const a = from.clone().normalize(), tgt0 = controls.target.clone();
+  // rotate along the great circle (safe even when starting on the far side of the globe)
+  let qEnd = new THREE.Quaternion().setFromUnitVectors(a, to.clone().normalize());
+  if (a.dot(to.clone().normalize()) < -0.999) qEnd = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI);
+  const q = new THREE.Quaternion();
+  controls.autoRotate = false;
+  function step(now) {
+    const p = Math.min((now - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+    q.identity().slerp(qEnd, e);
+    camera.position.copy(a.clone().applyQuaternion(q).multiplyScalar(d0 + (d1 - d0) * e));
+    controls.target.lerpVectors(tgt0, new THREE.Vector3(0, 0, 0), e);
+    controls.update();
+    if (p < 1) requestAnimationFrame(step);
+    else {
+      checkClusterUpdate();
+      if (onDone) onDone();
+      else {
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(resumeAutoRotate, 2000);
+      }
+    }
+  }
+  requestAnimationFrame(step);
+}
+document.getElementById("zoom-home-btn").addEventListener("click",()=>flyEarthCamera(EARTH_HOME));
+document.getElementById("zoom-out-btn").addEventListener("click",()=>{const d=camera.position.length();const nd=Math.min(controls.maxDistance,d*1.33);const s=nd/d;camera.position.multiplyScalar(s);controls.update();rebuildClusters();});
+
+
+// ══════════════════════════════════════
+// LIGHTING
+// ══════════════════════════════════════
+scene.add(new THREE.AmbientLight(0xffffff,3.0));
+
+
+// ══════════════════════════════════════
+// STARS
+// ══════════════════════════════════════
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+function makeStars(targetScene){
+  const g=new THREE.BufferGeometry(),N=4000,v=new Float32Array(N*3),sz=new Float32Array(N),br=new Float32Array(N),rng=mulberry32(7);
+  for(let i=0;i<N;i++){
+    const th=rng()*Math.PI*2,ph=Math.acos(2*rng()-1),r=35+rng()*60;
+    v[i*3]=r*Math.sin(ph)*Math.cos(th);v[i*3+1]=r*Math.sin(ph)*Math.sin(th);v[i*3+2]=r*Math.cos(ph);
+    sz[i]=.05+rng()*.20; br[i]=.8+rng()*.2;
+  }
+  g.setAttribute('position',new THREE.BufferAttribute(v,3));
+  g.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  g.setAttribute('brightness',new THREE.BufferAttribute(br,1));
+  const m=new THREE.ShaderMaterial({
+    vertexShader:`
+      attribute float size;
+      attribute float brightness;
+      varying float vB;
+      void main(){
+        vB = brightness;
+        vec4 mv = modelViewMatrix * vec4(position,1.);
+        gl_PointSize = size * (200. / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader:`
+      varying float vB;
+      void main(){
+        float d = length(gl_PointCoord - .5);
+        if(d > .5) discard;
+        float core = smoothstep(.5, .02, d);
+        float glow = smoothstep(.5, .15, d) * .4;
+        float a = (core + glow) * vB;
+        vec3 col = mix(vec3(.85,.88,1.), vec3(1.,.95,.85), vB*.3);
+        gl_FragColor = vec4(col, a);
+      }`,
+    transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
+  });
+  targetScene.add(new THREE.Points(g,m));
+}
+makeStars(scene);
+
+
+// ══════════════════════════════════════
+// EARTH
+// ══════════════════════════════════════
+const tl=new THREE.TextureLoader();
+let earthMesh,cloudMesh,texLoaded=0;
+const texTotal=3;
+function texDone(){texLoaded++;if(texLoaded>=texTotal)setTimeout(()=>document.getElementById('loading').classList.add('hidden'),500)}
+function texErr(){texDone()}
+
+(function createEarth(){
+  const g=new THREE.SphereGeometry(R,192,128);
+  const dayTex=tl.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-blue-marble.jpg',texDone,undefined,texErr);
+  const bumpTex=tl.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-topology.png',texDone,undefined,texErr);
+  dayTex.colorSpace=THREE.SRGBColorSpace;
+  const mx=renderer.capabilities.getMaxAnisotropy();
+  [dayTex,bumpTex].forEach(t=>{t.anisotropy=mx;t.minFilter=THREE.LinearMipMapLinearFilter;t.magFilter=THREE.LinearFilter});
+  const earthMat=new THREE.MeshPhongMaterial({
+    map:dayTex, bumpMap:bumpTex, bumpScale:0.02,
+    shininess:8, specular:new THREE.Color(0x111111),
+    emissive:new THREE.Color(0x1a3050), emissiveIntensity:0.6
+  });
+  earthMesh=new THREE.Mesh(g,earthMat);
+  scene.add(earthMesh);
+})();
+
+(function createClouds(){
+  const g=new THREE.SphereGeometry(R*1.006,128,80);
+  const ct=tl.load('https://unpkg.com/three-globe@2.31.1/example/img/earth-clouds.png',texDone,undefined,texErr);
+  ct.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  cloudMesh=new THREE.Mesh(g,new THREE.MeshPhongMaterial({map:ct,transparent:true,opacity:.22,depthWrite:false,side:THREE.DoubleSide,blending:THREE.NormalBlending}));
+  scene.add(cloudMesh);
+})();
+
+// Atmosphere: the same 300 concentric additive shells, collapsed into ONE draw call.
+// A pixel whose view ray passes the globe centre at distance b sees the back face of every
+// shell with radius > b. Each shell added round(255 * sRGB(colour) * opacity) to the 8-bit
+// framebuffer, so we precompute those per-shell amounts, sum them from the outside in, and
+// look the total up per pixel. Same layers, same colours, same rounding — one pass.
+// The original shells were 64x40-segment spheres whose faceted outlines sit ~0.1% inside their
+// nominal radius (SHELL_FACET), so the lookup uses that effective radius to keep the glow identical.
+(function(){
+  const LAYERS=300, rMin=R*1.003, rMax=R*1.12, peakOpacity=0.012;
+  const dr=(rMax-rMin)/(LAYERS-1), SHELL_FACET=0.999;
+  const enc=c=>c<=0.0031308?c*12.92:1.055*Math.pow(c,0.41666)-0.055;   // three.js LinearTosRGB
+  const step=new Float32Array((LAYERS+1)*3);   // per-shell contribution in 8-bit steps
+  for(let i=0;i<LAYERS;i++){
+    const t=i/(LAYERS-1), opacity=peakOpacity*Math.pow(1-t,2.2);
+    if(opacity<0.0005) continue;
+    const col=[0.25+t*0.15, 0.55+t*0.15, 1.0];
+    for(let c=0;c<3;c++) step[i*3+c]=Math.round(255*enc(col[c])*opacity);
+  }
+  const W=512, cum=new Float32Array(W*4);       // cum[k] = sum over shells i >= k, as 0..1
+  for(let k=LAYERS-1;k>=0;k--) for(let c=0;c<3;c++) cum[k*4+c]=cum[(k+1)*4+c]+step[k*3+c];
+  for(let k=0;k<W;k++){ for(let c=0;c<3;c++) cum[k*4+c]/=255; cum[k*4+3]=1; }
+  const tex=new THREE.DataTexture(cum,W,1,THREE.RGBAFormat,THREE.FloatType);
+  tex.minFilter=tex.magFilter=THREE.NearestFilter; tex.needsUpdate=true;
+  const m=new THREE.ShaderMaterial({
+    uniforms:{cum:{value:tex}, rMin:{value:rMin*SHELL_FACET}, dr:{value:dr*SHELL_FACET}, nL:{value:LAYERS}},
+    vertexShader:`varying vec3 vW; void main(){ vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }`,
+    fragmentShader:`uniform sampler2D cum; uniform float rMin, dr; uniform int nL; varying vec3 vW;
+      void main(){
+        vec3 d=vW-cameraPosition;
+        float b=length(cross(cameraPosition,d))/length(d);
+        int k = b<rMin ? 0 : min(int(floor((b-rMin)/dr))+1, nL);
+        gl_FragColor=vec4(texelFetch(cum,ivec2(k,0),0).rgb,1.);
+      }`,
+    transparent:true, depthWrite:false, side:THREE.BackSide, toneMapped:false,
+    blending:THREE.CustomBlending, blendEquation:THREE.AddEquation,
+    blendSrc:THREE.OneFactor, blendDst:THREE.OneFactor,
+    blendSrcAlpha:THREE.ZeroFactor, blendDstAlpha:THREE.OneFactor   // shells never changed alpha (opacity² rounds to 0)
+  });
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(rMax,64,40),m);
+  mesh.renderOrder=-1;
+  scene.add(mesh);
+})();
+
+
+// ══════════════════════════════════════
+// CLUSTERING ENGINE
+// ══════════════════════════════════════
+function ll2v(lat,lon,r){
+  const p=(90-lat)*Math.PI/180, t=(lon+180)*Math.PI/180;
+  return new THREE.Vector3(-r*Math.sin(p)*Math.cos(t), r*Math.cos(p), r*Math.sin(p)*Math.sin(t));
+}
+
+// Pre-compute 3D positions for all tiles
+const tilePositions = allTiles.map(t => ll2v(t.lat, t.lon, R*1.003));
+
+// Grid-based spherical clustering
+function clusterGrid(camDist) {
+  // Zoom levels: far (>3.2) → ~35 clusters, mid (1.8–3.2) → ~120, close (<1.8) → individual
+  if (camDist > 3.2) return 30;        // ~30° cells → ~35 clusters
+  if (camDist > 2.2) return 15;        // ~15° cells → ~120 clusters
+  if (camDist > 1.6) return 7;         // ~7° cells → ~300 clusters
+  return 0;                            // individual tiles
+}
+function clusterTiles(camDist) {
+  const gridSize = clusterGrid(camDist);
+
+  if (gridSize === 0) {
+    // Return individual tiles
+    return allTiles.map((t, i) => ({
+      tiles: [i],
+      lat: t.lat,
+      lon: t.lon,
+      pos: tilePositions[i],
+      count: 1,
+      source: t.source,
+      name: t.name,
+      isCluster: false
+    }));
+  }
+
+  // Group into grid cells
+  const cells = new Map();
+  allTiles.forEach((t, i) => {
+    const cLat = Math.floor((t.lat + 90) / gridSize);
+    const cLon = Math.floor((t.lon + 180) / gridSize);
+    const key = `${cLat}_${cLon}`;
+    if (!cells.has(key)) cells.set(key, []);
+    cells.get(key).push(i);
+  });
+
+  // Build cluster objects
+  const clusters = [];
+  cells.forEach((indices) => {
+    let sumLat = 0, sumLon = 0;
+    const srcCount = {named_site:0, impact_structure:0, volcano:0, landcover_sample:0};
+    indices.forEach(i => {
+      sumLat += allTiles[i].lat;
+      sumLon += allTiles[i].lon;
+      srcCount[allTiles[i].source]++;
+    });
+    const avgLat = sumLat / indices.length;
+    const avgLon = sumLon / indices.length;
+    // Dominant source
+    let domSrc = 'landcover_sample', domCount = 0;
+    for (const [s, c] of Object.entries(srcCount)) {
+      if (c > domCount) { domSrc = s; domCount = c; }
+    }
+    // If any named_site in cluster, prioritize it
+    if (srcCount.named_site > 0) domSrc = 'named_site';
+    else if (srcCount.impact_structure > 0 && srcCount.impact_structure >= srcCount.volcano) domSrc = 'impact_structure';
+    else if (srcCount.volcano > srcCount.landcover_sample * 0.5) domSrc = 'volcano';
+
+    clusters.push({
+      tiles: indices,
+      lat: avgLat,
+      lon: avgLon,
+      pos: ll2v(avgLat, avgLon, R * 1.003),
+      count: indices.length,
+      source: domSrc,
+      name: indices.length === 1 ? allTiles[indices[0]].name : `${indices.length} tiles`,
+      isCluster: indices.length > 1
+    });
+  });
+
+  return clusters;
+}
+
+
+// ══════════════════════════════════════
+// MARKER RENDERING
+// ══════════════════════════════════════
+const MR_BASE = 0.005;  // base marker radius
+const MR_MAX = 0.018;   // max cluster marker radius
+const markerGeo = new THREE.SphereGeometry(1, 12, 8);
+const markerMat = new THREE.MeshBasicMaterial({color:0xffffff, toneMapped:false});
+let markerMesh = null;
+let currentClusters = [];
+let baseMatrices = [];
+let baseColors = [];
+
+
+function buildMarkers(clusters) {
+  // Remove old mesh
+  if (markerMesh) { scene.remove(markerMesh); markerMesh.dispose(); }
+  // Remove old labels
+
+  currentClusters = clusters;
+  const N = clusters.length;
+  if (N === 0) return;
+
+  markerMesh = new THREE.InstancedMesh(markerGeo, markerMat, N);
+  markerMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+  baseMatrices = [];
+  baseColors = [];
+  const d = new THREE.Object3D();
+
+  clusters.forEach((c, i) => {
+    d.position.copy(c.pos);
+    d.lookAt(0, 0, 0);
+    // Scale based on cluster size
+    let s;
+    if (c.isCluster) {
+      s = MR_BASE + Math.min(Math.log2(c.count + 1) * 0.002, MR_MAX - MR_BASE);
+    } else {
+      s = MR_BASE;
+    }
+    d.scale.set(s, s, s);
+    d.updateMatrix();
+    markerMesh.setMatrixAt(i, d.matrix);
+    baseMatrices.push(d.matrix.clone());
+
+    const col = markerColor(c);
+    markerMesh.setColorAt(i, col);
+    baseColors.push(col.clone());
+  });
+
+  markerMesh.instanceMatrix.needsUpdate = true;
+  markerMesh.instanceColor.needsUpdate = true;
+  scene.add(markerMesh);
+}
+
+function updateLabels() { return; }
+
+// ── Colour-by: tile source (default) or a score column for the chosen Moon target ──
+let colorBy = 'source', colorCol = null;
+const SCORE_COL = { pos: new THREE.Color(0x34d399), mid: new THREE.Color(0xfbbf24), neg: new THREE.Color(0xff4d8d), na: new THREE.Color(0x3a4250), zero: new THREE.Color(0x4a5468) };
+function scoreColor(v) {
+  if (v === null || isNaN(v)) return SCORE_COL.na;
+  if (v >= 0.5) return SCORE_COL.pos.clone().lerp(new THREE.Color(0xb6ffe0), Math.min(1, (v - 0.5) / 0.4) * 0.5);
+  if (v >= 0) return SCORE_COL.zero.clone().lerp(SCORE_COL.mid, Math.min(1, v / 0.5) * 0.85 + 0.15);
+  return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.min(1, -v / 0.6));
+}
+function markerColor(c) {
+  if (colorBy === 'source' || !colorCol) return SCOL[c.source] || new THREE.Color(0x888888);
+  let best = NaN;
+  for (const i of c.tiles) { const v = colorCol[i]; if (!isNaN(v) && !(v <= best)) best = v; }
+  return scoreColor(best);
+}
+function refreshMarkerColors() {
+  if (!markerMesh) return;
+  baseColors = currentClusters.map(c => markerColor(c));
+  baseColors.forEach((col, i) => { if (i !== sId && i !== hId) markerMesh.setColorAt(i, col); });
+  markerMesh.instanceColor.needsUpdate = true;
+  const scoreMode = colorBy !== 'source' && !!colorCol;
+  document.getElementById('legend').style.display = scoreMode ? 'none' : '';
+  document.getElementById('score-legend').style.display = scoreMode ? 'block' : 'none';
+  if (scoreMode) document.getElementById('score-legend-t').textContent =
+    (colorBy === 'composite' ? 'Overall match' : CAT[colorBy].label) + ' · ' + selectedMoonTarget.name;
+}
+function setColorBy(v) {
+  colorBy = v;
+  colorCol = v !== 'source' && selectedMoonTarget ? SC.column(selectedMoonTarget.id, v) : null;
+  refreshMarkerColors();
+}
+// Called whenever the chosen Moon target changes (Moon page, assessment)
+function onMoonTargetChange() {
+  const m = selectedMoonTarget, sel = document.getElementById('color-by'), et = document.getElementById('et-target');
+  if (!m) {
+    sel.disabled = true; sel.innerHTML = '<option value="source">Colour by tile source</option>';
+    et.className = 'et-target none'; document.getElementById('et-top-wrap').hidden = true; setColorBy('source'); return;
+  }
+  et.className = 'et-target'; et.innerHTML = `🌙 <b>${esc(m.name)}</b><br><span style="color:#4a6a80">Colours and ranks below are scores against this target.</span>`;
+  const prev = colorBy === 'source' ? 'composite' : colorBy;
+  const cats = META.categories.filter(c => c.id !== 'caves' || m.pit);
+  sel.disabled = false;
+  sel.innerHTML = `<option value="source">Colour by tile source</option><option value="composite">Colour by overall match</option>` +
+    cats.map(c => `<option value="${c.id}">Colour by ${c.label.toLowerCase()}${c.in_composite ? '' : ' (not in overall)'}</option>`).join('');
+  sel.value = cats.some(c => c.id === prev) || prev === 'composite' ? prev : 'composite';
+  setColorBy(sel.value);
+  const top = document.getElementById('et-top');
+  top.innerHTML = (m.top || []).slice(0, 15).map((x, k) => { const t = allTiles[x.tile];
+    return `<li data-tile="${x.tile}" title="${esc(t.stratum.replace(/_/g, ' '))}"><span>${k + 1}. ${esc(t.name)}${t.country ? ' <em>· ' + esc(t.country) + '</em>' : ''}</span><b>${fmtScore(x.composite)}</b></li>`; }).join('');
+  top.querySelectorAll('li').forEach(li => li.addEventListener('click', () => focusEarthTile(+li.dataset.tile)));
+  document.getElementById('et-top-wrap').hidden = false;
+  if (openTile >= 0) renderEarthScore(allTiles[openTile]);
+}
+document.getElementById('color-by').addEventListener('change', e => setColorBy(e.target.value));
+
+// Fly to one Earth tile, zoom to single-tile level and open its panel
+function focusEarthTile(idx) {
+  const t = allTiles[idx];
+  flyEarthCamera(ll2v(t.lat, t.lon, 1.45), 1100, () => {
+    lastCamDist = -1; checkClusterUpdate();
+    const i = currentClusters.findIndex(c => !c.isCluster && c.tiles[0] === idx);
+    if (i >= 0) selT(i);
+  });
+}
+
+// Initial build
+let hId = -1, sId = -1, openTile = -1;   // openTile = tile index shown in the info panel
+let lastCamDist = -1, lastGrid = -1;
+function checkClusterUpdate() {
+  const camDist = camera.position.length();
+  // Only rebuild if zoom level changed significantly
+  const threshold = 0.15;
+  if (Math.abs(camDist - lastCamDist) > threshold || lastCamDist < 0) {
+    lastCamDist = camDist;
+    // The clusters depend only on the grid level, so an unchanged level would rebuild identical markers
+    const grid = clusterGrid(camDist);
+    if (grid !== lastGrid) {
+      lastGrid = grid;
+      hId = -1;                // cluster indices change with the level
+      buildMarkers(clusterTiles(camDist));
+      sId = openTile >= 0 ? currentClusters.findIndex(c => !c.isCluster && c.tiles[0] === openTile) : -1;
+      if (sId >= 0) { markerMesh.setColorAt(sId, new THREE.Color(0xffffff)); markerMesh.instanceColor.needsUpdate = true; }
+    }
+  }
+  updateLabels();
+}
+
+// Build initial markers
+checkClusterUpdate();
+
+
+// ══════════════════════════════════════
+// INTERACTION
+// ══════════════════════════════════════
+const rc = new THREE.Raycaster(), mv = new THREE.Vector2();
+const ttip = document.getElementById('tooltip'), ipan = document.getElementById('info-panel');
+
+function fmtC(la, lo) {
+  return Math.abs(la).toFixed(2) + '°' + (la >= 0 ? 'N' : 'S') + ', ' + Math.abs(lo).toFixed(2) + '°' + (lo >= 0 ? 'E' : 'W');
+}
+
+function setH(i) {
+  if (!markerMesh) return;
+  if (hId >= 0 && hId !== sId) {
+    markerMesh.setMatrixAt(hId, baseMatrices[hId]);
+    markerMesh.setColorAt(hId, baseColors[hId]);
+  }
+  hId = i;
+  if (i >= 0 && i !== sId) {
+    const m = baseMatrices[i].clone(), p = new THREE.Vector3(), q = new THREE.Quaternion(), s = new THREE.Vector3();
+    m.decompose(p, q, s);
+    s.multiplyScalar(1.8);
+    m.compose(p, q, s);
+    markerMesh.setMatrixAt(i, m);
+    markerMesh.setColorAt(i, new THREE.Color(0xffffff));
+  }
+  markerMesh.instanceMatrix.needsUpdate = true;
+  markerMesh.instanceColor.needsUpdate = true;
+}
+
+function selT(i) {
+  if (!markerMesh) return;
+  if (sId >= 0 && sId < baseMatrices.length) {
+    markerMesh.setMatrixAt(sId, baseMatrices[sId]);
+    markerMesh.setColorAt(sId, baseColors[sId]);
+  }
+  sId = i;
+  if (i >= 0 && i < currentClusters.length) {
+    const c = currentClusters[i];
+
+    if (c.isCluster && c.count > 1) {
+      // Zoom directly to individual-tile level, centered on cluster
+      const clusterDir = c.pos.clone().normalize();
+      const target = clusterDir.multiplyScalar(1.35);
+      const startPos = camera.position.clone();
+      const startTarget = controls.target.clone();
+      const startTime = performance.now();
+      const duration = 900;
+      controls.autoRotate = false;
+      function zoomAnim(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        camera.position.lerpVectors(startPos, target, ease);
+        controls.target.lerpVectors(startTarget, new THREE.Vector3(0, 0, 0), ease);
+        controls.update();
+        if (progress < 1) requestAnimationFrame(zoomAnim);
+        else checkClusterUpdate();
+      }
+      requestAnimationFrame(zoomAnim);
+      sId = -1;
+      return;
+    }
+
+    // Single tile — show info panel
+    const tile = allTiles[c.tiles[0]];
+    openTile = tile.idx;
+    const m = baseMatrices[i].clone(), p = new THREE.Vector3(), q = new THREE.Quaternion(), s = new THREE.Vector3();
+    m.decompose(p, q, s);
+    s.multiplyScalar(2.2);
+    m.compose(p, q, s);
+    markerMesh.setMatrixAt(i, m);
+    markerMesh.setColorAt(i, new THREE.Color(0xffffff));
+
+    document.getElementById('ip-name').textContent = tile.name;
+    document.getElementById('ip-coords').textContent = fmtC(tile.lat, tile.lon);
+    document.getElementById('ip-country').textContent = tile.country || '';
+    const bg = document.getElementById('ip-badge');
+    bg.textContent = SLAB[tile.source];
+    bg.style.cssText = SCSS[tile.source];
+    document.getElementById('ip-terrain').textContent = genTerrain(tile);
+    document.getElementById('ip-composition').textContent = genComp(tile);
+    document.getElementById('ip-ice').textContent = genIce(tile);
+    document.getElementById('ip-light').textContent = genLight(tile);
+    document.getElementById('ip-life').textContent = genLife(tile);
+    document.getElementById('ip-special').textContent = genSpecial(tile);
+    renderEarthScore(tile);
+    ipan.querySelector('.ip-scroll').scrollTop = 0;
+    const cb = document.getElementById('btn-choose');
+    if (selectedEarthTile && selectedEarthTile.idx === tile.idx) {
+      cb.textContent = '✓ Place Selected'; cb.classList.add('chosen');
+    } else {
+      cb.textContent = '✓ Choose This Place'; cb.classList.remove('chosen');
+    }
+    ipan.classList.add('open');
+    controls.autoRotate = false;
+    if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; }
+  } else {
+    ipan.classList.remove('open');
+    openTile = -1;
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(resumeAutoRotate, 2000);
+  }
+  if (markerMesh) {
+    markerMesh.instanceMatrix.needsUpdate = true;
+    markerMesh.instanceColor.needsUpdate = true;
+  }
+  updateFlowButtons();
+}
+
+renderer.domElement.addEventListener('mousemove', e => {
+  mv.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mv.y = -((e.clientY - 52) / (window.innerHeight - 52)) * 2 + 1;
+  rc.setFromCamera(mv, camera);
+  if (!markerMesh) return;
+  const h = rc.intersectObject(markerMesh);
+  if (h.length > 0) {
+    const i = h[0].instanceId;
+    renderer.domElement.style.cursor = 'pointer';
+    if (i !== hId) setH(i);
+    const c = currentClusters[i];
+    if (c) {
+      if (c.isCluster) {
+        ttip.querySelector('.tt-name').textContent = `${c.count} tiles`;
+        ttip.querySelector('.tt-coords').textContent = fmtC(c.lat, c.lon);
+        const ty = ttip.querySelector('.tt-type');
+        ty.textContent = 'Click to zoom in';
+        ty.style.cssText = 'background:rgba(100,180,255,.12);color:#64b4ff';
+      } else {
+        const tile = allTiles[c.tiles[0]];
+        ttip.querySelector('.tt-name').textContent = tile.name;
+        ttip.querySelector('.tt-coords').textContent = fmtC(tile.lat, tile.lon);
+        const ty = ttip.querySelector('.tt-type');
+        ty.textContent = SLAB[tile.source];
+        ty.style.cssText = SCSS[tile.source];
+      }
+      ttip.style.left = Math.min(e.clientX + 14, window.innerWidth - 260) + 'px';
+      ttip.style.top = (e.clientY - 8) + 'px';
+      ttip.style.opacity = '1';
+    }
+  } else {
+    renderer.domElement.style.cursor = 'grab';
+    if (hId >= 0) setH(-1);
+    ttip.style.opacity = '0';
+  }
+});
+
+renderer.domElement.addEventListener('click', () => { if (hId >= 0) selT(hId); });
+document.getElementById('close-panel').addEventListener('click', () => selT(-1));
+
+document.getElementById('btn-choose').addEventListener('click', () => {
+  if (openTile >= 0) {
+    {
+      selectedEarthTile = allTiles[openTile];
+      setEarthSel(selectedEarthTile.name);
+      const b = document.getElementById('btn-choose');
+      b.textContent = '✓ Place Selected'; b.classList.add('chosen');
+    }
+  }
+  updateFlowButtons();
+});
+
+document.getElementById('btn-go-moon').addEventListener('click', () => {
+  if (selectedMoonTarget) {
+    if (openTile >= 0) {
+      selectedEarthTile = allTiles[openTile];
+      setEarthSel(selectedEarthTile.name);
+    }
+    goTo('compare');
+  } else goTo('moon');
+  updateFlowButtons();
+});
+
+// ══════════════════════════════════════
+// MOON — 10 south-pole regions (9 Artemis III candidates of NASA's Oct 2024 list + Shackleton rim)
+//        + the Mare Tranquillitatis pit. Each region has a landing zone, an ice zone and a 10 km target tile:
+//        30 scoring targets in all (MOON_DB.targets). Zone statistics: data/ml/moon_zones.csv (LOLA, Diviner);
+//        tile statistics: data/ml/moon_tiles.csv; geology: USGS Unified Geologic Map of the Moon.
+// Textures: NASA SVS CGI Moon Kit (LROC color + LOLA DEM), NASA Moon Trek
+//           LOLA hillshade reprojected to a south-polar cap (to -79°)
+// ══════════════════════════════════════
+const MOON_TEX = /*@MOON_TEX@*/null;
+const MOON_REGIONS = MOON_DB.regions;
+const MT = MOON_DB.targets;                       // target id -> target
+let selectedMoonTarget = null;                    // the Moon target the assessment and Earth colouring use
+const moonView = {};                              // region idx -> target id shown in the panel
+const moonTargetOf = r => MT[moonView[r.idx] || r.targets[0]];
+const regionOfTarget = t => MOON_REGIONS.find(r => r.targets.includes(t.id) && r.id === t.region) || MOON_REGIONS.find(r => r.targets.includes(t.id));
+
+const MCOL = { a2024: new THREE.Color(0xa78bfa), other: new THREE.Color(0x64b4ff), pit: new THREE.Color(0xf6c453) };
+const MLAB = { a2024: 'Artemis III · 2024 candidate region', other: 'South-pole target · not an Artemis III region', pit: 'Lava-tube skylight · cave target' };
+const MCSS = {
+  a2024: 'background:rgba(167,139,250,.12);color:#a78bfa',
+  other: 'background:rgba(100,180,255,.12);color:#64b4ff',
+  pit: 'background:rgba(246,196,83,.12);color:#f6c453'
+};
+const mKey = r => r.kind;
+const PLACEMENT = {
+  official: 'Zones placed inside the official NASA Moon Trek region outline (2022 outline, name kept in the October 2024 list).',
+  anchor: 'No official outline in our data: zones placed around the published summit / landing coordinate.',
+  criteria_fallback: 'No official outline in our data: zones found by a criteria search (flat, sunlit ground next to cold traps) around the crater anchor.',
+  anchor_tile: 'Scored as a single 10 km tile centred on the target coordinate.'
+};
+const nv = (v, d = 0, u = '') => v === null || v === undefined ? '—' : (+v).toFixed(d) + u;
+
+// ── Description generators (Moon versions of genTerrain / genComp / genIce / genSpecial), per scoring target ──
+function moonGenTerrain(r) {
+  let d = `Mean slope ${nv(r.slope, 1, '°')} (90th percentile ${nv(r.slope_p90, 1, '°')}), relief ~${nv(r.relief, 0, ' m')}, roughness index ${nv(r.tri, 0, ' m')} across the 10 km window. ` +
+    `Mean elevation ${nv(r.elev, 0, ' m')}. ${nv(r.steep10)}% of the ground is steeper than 10°, ${nv(r.steep20)}% steeper than 20°.`;
+  if (r.slope !== null) {
+    if (r.slope < 3) d += ' Smooth plain — easy landing and driving.';
+    else if (r.slope < 10) d += ' Moderately rugged — traversable routes exist between steep features.';
+    else if (r.slope < 12) d += ' Rugged crater-rim terrain — challenging for wheeled rovers.';
+    else d += ' Highly rugged massif terrain — significant mobility challenges.';
+  }
+  if (r.zone === 'landing') d += ` The landing zone itself covers ${nv(r.area_km2, 1, ' km²')}; ${nv(r.haz_gt10)}% of it is steeper than 10°.`;
+  return d;
+}
+
+function moonGenComp(r) {
+  const mix = [];
+  if (r.mix_crater) mix.push(`${r.mix_crater}% crater material`);
+  if (r.mix_basin) mix.push(`${r.mix_basin}% basin material`);
+  if (r.mix_plains) mix.push(`${r.mix_plains}% plains`);
+  if (r.mix_terra) mix.push(`${r.mix_terra}% terra`);
+  if (r.mix_mare) mix.push(`${r.mix_mare}% mare basalt`);
+  return `Map unit: ${r.geo_name || 'unknown'}${r.geo_unit ? ' (' + r.geo_unit + ')' : ''}${r.geo_age ? ', ' + r.geo_age + ' age' : ''}. ` +
+    `${r.geo_desc || ''} ${r.geo_interp ? r.geo_interp.charAt(0).toUpperCase() + r.geo_interp.slice(1).replace(/\.?$/, '.') : ''}` +
+    (mix.length ? ` Surface mix: ${mix.join(', ')}.` : '') +
+    (r.pit ? ' Mare basalt lava plains; the pit is an LRO-imaged skylight into a possible lava tube.'
+           : ' Feldspathic (anorthositic) highland crust on the rim of the South Pole–Aitken basin, mantled by fine regolith.');
+}
+
+function moonGenIce(r) {
+  if (r.pit) return 'Dry equatorial mare: no cold traps and no stable ground ice. The scoring treats icy Earth ground as a mismatch for this target.';
+  let d = `Water ice stable within 1 m of the surface over ${nv(r.ice1m, 1)}% of the ${r.kind === 'zone' ? 'zone' : 'tile'}` +
+    (r.ice_depth !== null ? ` (median depth ${nv(r.ice_depth, 2, ' m')})` : '') + `. Surface cold traps (< 110 K): ${nv(r.coldtrap, 1)}% of area. Permanent shadow: ${nv(r.psr, 1)}%.`;
+  if (r.landing_to_ice_km !== null) d += ` Median landing-to-ice distance: ${nv(r.landing_to_ice_km, 2, ' km')}${r.landing_to_ice_min_km !== null ? ` (shortest ${nv(r.landing_to_ice_min_km, 2, ' km')})` : ''}.`;
+  if (r.zone === 'ice') d += ` The ice zone covers ${nv(r.area_km2, 1, ' km²')}.`;
+  return d;
+}
+
+function moonGenLight(r) {
+  const s = [];
+  if (r.sun !== null) s.push(`Sun visible ${nv(r.sun)}% of the time on average (best spot ${nv(r.sun_max)}%).`);
+  s.push(`The Sun never climbs more than ~${nv(r.noon_max, 1, '°')} above the horizon; ${nv(r.grazing)}% of daylight has the Sun below 12°.`);
+  s.push(`Surface temperature averages ${nv(r.t_mean, 0, ' K')}${r.t_mean !== null ? ` (${Math.round(r.t_mean - 273)} °C)` : ''}, ranging ${nv(r.t_min)}–${nv(r.t_max, 0, ' K')}.`);
+  return s.join(' ');
+}
+
+function moonGenSpecial(r, reg) {
+  const s = [];
+  if (reg.kind === 'a2024') s.push("One of the nine Artemis III candidate regions in NASA's October 2024 list.");
+  else if (reg.kind === 'other') s.push('Not an Artemis III candidate region: kept as a classic south-pole base target (rim of Shackleton crater).');
+  else s.push('Lunar pit / lava-tube shelter candidate — the only target scored for caves.');
+  if (r.zone === 'landing' && r.landing_vis50_km2 !== null) s.push(`${nv(r.landing_vis50_km2, 1, ' km²')} of the landing zone is sunlit more than half the time.`);
+  s.push(PLACEMENT[r.placement] || '');
+  const nSuff = Object.values(r.n_sufficient || {}).reduce((a, b) => a + (b > 0 ? 1 : 0), 0);
+  s.push(`${(r.relevant || []).length} of 14 experiments apply here; ${nSuff} have at least one Earth site rated sufficient.`);
+  return s.join(' ');
+}
+
+function moonTopAnalogs(r) {
+  return (r.top || []).slice(0, 5).map((x, k) => {
+    const t = allTiles[x.tile];
+    return `<li data-tile="${x.tile}"><span>${k + 1}. ${esc(t.name)}${t.country ? ' <em>· ' + esc(t.country) + '</em>' : ''}</span><b>${fmtScore(x.composite)}</b></li>`;
+  }).join('');
+}
+
+// ── Renderer / camera / controls (mirrors Earth) ──
+const moonRenderer = new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance'});
+moonRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+moonRenderer.setSize(W, H);
+moonRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+moonRenderer.toneMappingExposure = 1.2;
+moonRenderer.outputColorSpace = THREE.SRGBColorSpace;
+document.getElementById('moon-globe-container').appendChild(moonRenderer.domElement);
+
+const moonScene = new THREE.Scene();
+const moonCamera = new THREE.PerspectiveCamera(38, W / H, 0.001, 200);
+const MOON_HOME = ll2v(-66, 25, 2.9);   // tilted toward the south pole, where all 13 regions are
+moonCamera.position.copy(MOON_HOME);
+
+const moonControls = new OrbitControls(moonCamera, moonRenderer.domElement);
+moonControls.enableDamping = true; moonControls.dampingFactor = 0.06;
+moonControls.rotateSpeed = 0.35; moonControls.zoomSpeed = 0.6;
+moonControls.minDistance = 1.06; moonControls.maxDistance = 5;
+moonControls.enablePan = false;
+moonControls.autoRotate = true; moonControls.autoRotateSpeed = 0.3;
+
+moonScene.add(new THREE.AmbientLight(0xffffff, 2.3));
+const moonKey = new THREE.DirectionalLight(0xffffff, 0.7);   // follows the camera so bump relief always reads
+moonKey.position.set(-1, 0.8, 0.6);
+moonCamera.add(moonKey);
+moonScene.add(moonCamera);
+makeStars(moonScene);
+
+// ── Loading overlay ──
+let moonTexLoaded = 0;
+const moonTexTotal = 3;
+function moonTexDone() { if (++moonTexLoaded >= moonTexTotal) setTimeout(() => document.getElementById('moon-loading').classList.add('hidden'), 300); }
+
+// ── Globe ──
+const moonMaxAniso = moonRenderer.capabilities.getMaxAnisotropy();
+function moonTex(src, srgb) {
+  const t = tl.load(src, moonTexDone, undefined, moonTexDone);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = moonMaxAniso; t.minFilter = THREE.LinearMipMapLinearFilter; t.magFilter = THREE.LinearFilter;
+  return t;
+}
+(function createMoon() {
+  const g = new THREE.SphereGeometry(R, 192, 128);
+  const mat = new THREE.MeshPhongMaterial({
+    map: moonTex(MOON_TEX.color, true), bumpMap: moonTex(MOON_TEX.dem, false), bumpScale: 0.6,
+    shininess: 2, specular: new THREE.Color(0x000000),
+    emissive: new THREE.Color(0x0a0a10), emissiveIntensity: 0.3
+  });
+  moonScene.add(new THREE.Mesh(g, mat));
+})();
+
+// South-polar detail cap (to -75°): LROC colour modulated by LOLA hillshade relief. The relief is full strength
+// poleward of -82.5° and fades to zero at the edge, where the cap matches the global map exactly.
+(function createPolarCap() {
+  const EDGE = 15, RINGS = 160, SEG = 512;
+  const pos = [], nor = [], uv = [], col = [], idx = [];
+  for (let i = 0; i <= RINGS; i++) {
+    const colat = EDGE * i / RINGS, rn = colat / EDGE, lat = -90 + colat;
+    const f = Math.min(1, Math.max(0, (rn - 0.9) / 0.1));
+    const a = 1 - f * f * (3 - 2 * f);
+    for (let j = 0; j <= SEG; j++) {
+      const lon = -180 + 360 * j / SEG, L = lon * Math.PI / 180;
+      const v = ll2v(lat, lon, R * 1.0004), n = v.clone().normalize();
+      pos.push(v.x, v.y, v.z); nor.push(n.x, n.y, n.z);
+      uv.push(0.5 + 0.5 * rn * Math.sin(L), 0.5 + 0.5 * rn * Math.cos(L));
+      col.push(1, 1, 1, a);
+    }
+  }
+  for (let i = 0; i < RINGS; i++) for (let j = 0; j < SEG; j++) {
+    const a = i * (SEG + 1) + j, b = a + SEG + 1;
+    idx.push(a, a + 1, b, b, a + 1, b + 1);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(col, 4));
+  g.setIndex(idx);
+  const mat = new THREE.MeshPhongMaterial({
+    map: moonTex(MOON_TEX.pole, true), vertexColors: true, transparent: true, depthWrite: false,
+    shininess: 2, specular: new THREE.Color(0x000000),
+    emissive: new THREE.Color(0x0a0a10), emissiveIntensity: 0.3,
+    side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+  });
+  const m = new THREE.Mesh(g, mat);
+  m.renderOrder = 1;
+  moonScene.add(m);
+})();
+
+// Thin limb glow — no real atmosphere, just a hint of dust at the edge
+(function moonLimb() {
+  const LAYERS = 40, rMin = R * 1.001, rMax = R * 1.025, peak = 0.004;
+  const shellGeo = new THREE.SphereGeometry(1, 64, 40);
+  for (let i = 0; i < LAYERS; i++) {
+    const t = i / (LAYERS - 1), op = peak * Math.pow(1 - t, 2.2);
+    if (op < 0.0005) continue;
+    const mesh = new THREE.Mesh(shellGeo, new THREE.MeshBasicMaterial({
+      color: new THREE.Color(0.6 + t * 0.1, 0.62 + t * 0.1, 0.7 + t * 0.1), transparent: true, opacity: op,
+      depthWrite: false, side: THREE.BackSide, blending: THREE.AdditiveBlending, toneMapped: false
+    }));
+    mesh.scale.setScalar(rMin + (rMax - rMin) * t);
+    mesh.renderOrder = -1;
+    moonScene.add(mesh);
+  }
+})();
+
+// ── Markers: one InstancedMesh, scaled with camera distance so they stay ~constant on screen ──
+const moonPositions = MOON_REGIONS.map(r => ll2v(r.lat, r.lon, R * 1.0015));
+const moonMarkers = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 16, 12),
+  new THREE.MeshBasicMaterial({color: 0xffffff, toneMapped: false}), MOON_REGIONS.length);
+moonMarkers.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+moonScene.add(moonMarkers);
+let moonHov = -1, moonSel = -1;
+const _md = new THREE.Object3D(), _white = new THREE.Color(0xffffff);
+const moonDotRadius = () => Math.max(0.0078 * (moonCamera.position.length() - R), 0.005);
+function refreshMoonMarkers() {
+  const base = moonDotRadius();
+  MOON_REGIONS.forEach((r, i) => {
+    const k = i === moonSel ? 2.2 : i === moonHov ? 1.8 : 1;
+    _md.position.copy(moonPositions[i]); _md.scale.setScalar(base * k); _md.updateMatrix();
+    moonMarkers.setMatrixAt(i, _md.matrix);
+    moonMarkers.setColorAt(i, (i === moonSel || i === moonHov) ? _white : MCOL[mKey(r)]);
+  });
+  moonMarkers.instanceMatrix.needsUpdate = true;
+  moonMarkers.instanceColor.needsUpdate = true;
+}
+
+const _pv = new THREE.Vector3();
+function moonScreen(i) {
+  const p = moonPositions[i];
+  const facing = p.clone().normalize().dot(_pv.copy(moonCamera.position).sub(p)) > 0;
+  _pv.copy(p).project(moonCamera);
+  const w = moonRenderer.domElement.clientWidth, h = moonRenderer.domElement.clientHeight;
+  return {x: (_pv.x + 1) / 2 * w, y: (1 - _pv.y) / 2 * h, ok: facing && _pv.z < 1};
+}
+// ── Interaction ──
+const mtip = document.getElementById('moon-tooltip'), mpan = document.getElementById('moon-info-panel');
+let moonIdle = null, moonDown = null;
+const MOON_CLOSE = 1.8;   // camera distance below which we count as "zoomed in"
+const moonIsClose = () => moonCamera.position.length() < MOON_CLOSE;
+function scheduleMoonAutoRotate() {
+  if (moonIdle) clearTimeout(moonIdle);
+  moonIdle = setTimeout(() => { if (moonSel < 0) moonControls.autoRotate = true; }, 2000);
+}
+function moonPick(e) {
+  const rect = moonRenderer.domElement.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  const pxPerUnit = rect.height / (2 * Math.tan(moonCamera.fov * Math.PI / 360));
+  let best = -1, bd = Infinity;
+  MOON_REGIONS.forEach((r, i) => {
+    const s = moonScreen(i);
+    if (!s.ok) return;
+    const reach = Math.max(16, moonDotRadius() * pxPerUnit / moonCamera.position.distanceTo(moonPositions[i]) + 6);
+    const d = (s.x - mx) ** 2 + (s.y - my) ** 2;
+    if (d < reach * reach && d < bd) { bd = d; best = i; }
+  });
+  return best;
+}
+moonRenderer.domElement.addEventListener('mousemove', e => {
+  const i = moonPick(e);
+  moonHov = i;
+  moonRenderer.domElement.style.cursor = i >= 0 ? 'pointer' : 'grab';
+  if (i >= 0) {
+    const r = MOON_REGIONS[i];
+    mtip.querySelector('.tt-name').textContent = r.name;
+    mtip.querySelector('.tt-coords').textContent = fmtC(r.lat, r.lon);
+    const ty = mtip.querySelector('.tt-type');
+    ty.textContent = MLAB[mKey(r)]; ty.style.cssText = MCSS[mKey(r)];
+    mtip.style.left = Math.min(e.clientX + 14, window.innerWidth - 260) + 'px';
+    mtip.style.top = (e.clientY - 8) + 'px';
+    mtip.style.opacity = '1';
+  } else mtip.style.opacity = '0';
+});
+moonRenderer.domElement.addEventListener('mouseleave', () => { moonHov = -1; mtip.style.opacity = '0'; });
+moonRenderer.domElement.addEventListener('pointerdown', e => { moonDown = [e.clientX, e.clientY]; });
+moonRenderer.domElement.addEventListener('click', e => {
+  if (moonDown && Math.hypot(e.clientX - moonDown[0], e.clientY - moonDown[1]) > 5) return;  // was a drag
+  const i = moonPick(e);
+  if (i >= 0) selectMoon(i);
+});
+
+function flyMoonCamera(dir, dist, ms = 900) {
+  const start = moonCamera.position.clone(), d0 = start.length(), t0 = performance.now();
+  const from = start.clone().normalize(), to = dir.clone().normalize();
+  function step(now) {
+    const p = Math.min((now - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+    moonCamera.position.copy(from.clone().lerp(to, e).normalize().multiplyScalar(d0 + (dist - d0) * e));
+    moonControls.update();
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function renderMoonPanel(i) {
+  const reg = MOON_REGIONS[i], r = moonTargetOf(reg);
+  document.getElementById('moon-ip-name').textContent = reg.name;
+  document.getElementById('moon-ip-coords').textContent = fmtC(r.lat, r.lon);
+  document.getElementById('moon-ip-where').textContent = reg.kind === 'pit' ? 'Moon · Mare Tranquillitatis' : 'Moon · South Pole';
+  const bg = document.getElementById('moon-ip-badge');
+  bg.textContent = MLAB[mKey(reg)]; bg.style.cssText = MCSS[mKey(reg)];
+  // target switch: landing zone / ice zone / 10 km tile — each is scored separately
+  document.getElementById('moon-ip-targets').innerHTML = reg.targets.map(id => {
+    const t = MT[id];
+    return `<button class="mt-btn${id === r.id ? ' on' : ''}${selectedMoonTarget && selectedMoonTarget.id === id ? ' chosen' : ''}" data-t="${id}" title="${esc(t.name)}">${t.zone === 'tile' ? '10 km tile' : t.label}</button>`;
+  }).join('');
+  document.getElementById('moon-ip-targets').querySelectorAll('.mt-btn').forEach(b => b.addEventListener('click', () => {
+    moonView[i] = b.dataset.t; renderMoonPanel(i); updateFlowButtons();
+  }));
+  document.getElementById('moon-ip-tnote').textContent = r.kind === 'zone'
+    ? (r.zone === 'landing' ? 'Flat, sunlit ground where a lander would touch down.' : 'Permanently shadowed ground next to the landing zone, where the ice is.') + ` ${nv(r.area_km2, 1, ' km²')} · centred ${fmtC(r.lat, r.lon)}.`
+    : 'A 10 km window centred on the target coordinate.';
+  document.getElementById('moon-ip-terrain').textContent = moonGenTerrain(r);
+  document.getElementById('moon-ip-composition').textContent = moonGenComp(r);
+  document.getElementById('moon-ip-ice').textContent = moonGenIce(r);
+  document.getElementById('moon-ip-light').textContent = moonGenLight(r);
+  document.getElementById('moon-ip-special').textContent = moonGenSpecial(r, reg);
+  const top = document.getElementById('moon-ip-top');
+  top.innerHTML = moonTopAnalogs(r);
+  top.querySelectorAll('li').forEach(li => li.addEventListener('click', () => {
+    if (!selectedMoonTarget || selectedMoonTarget.id !== r.id) chooseMoonTarget(r);   // the Earth colours then match this list
+    goTo('earth'); focusEarthTile(+li.dataset.tile);
+  }));
+}
+
+function selectMoon(i) {
+  moonSel = i;
+  if (i < 0) {
+    mpan.classList.remove('open');
+    scheduleMoonAutoRotate();
+    updateFlowButtons();
+    return;
+  }
+  const reg = MOON_REGIONS[i];
+  renderMoonPanel(i);
+  mpan.querySelector('.ip-scroll').scrollTop = 0;
+  mpan.classList.add('open');
+  moonControls.autoRotate = false;
+  if (moonIdle) { clearTimeout(moonIdle); moonIdle = null; }
+  // Zoom in on the first pick from the overview; once close, leave the camera where the user put it
+  if (!moonIsClose() || reg.kind === 'pit') flyMoonCamera(ll2v(Math.max(reg.lat, -89), reg.lon, 1), 1.45);
+  updateFlowButtons();
+}
+
+// One place that changes the chosen Moon target: tab label, Earth colouring, assessment
+function chooseMoonTarget(t) {
+  selectedMoonTarget = t;
+  setMoonSel(t ? t.name : '');
+  if (moonSel >= 0) renderMoonPanel(moonSel);
+  onMoonTargetChange();
+  updateFlowButtons();
+}
+
+document.getElementById('moon-close-panel').addEventListener('click', () => selectMoon(-1));
+document.getElementById('moon-btn-choose').addEventListener('click', () => {
+  if (moonSel < 0) return;
+  chooseMoonTarget(moonTargetOf(MOON_REGIONS[moonSel]));
+});
+document.getElementById('moon-btn-go').addEventListener('click', () => {
+  if (selectedEarthTile) {
+    if (moonSel >= 0 && (!selectedMoonTarget || selectedMoonTarget.id !== moonTargetOf(MOON_REGIONS[moonSel]).id)) chooseMoonTarget(moonTargetOf(MOON_REGIONS[moonSel]));
+    goTo('compare');
+  } else goTo('earth');
+  updateFlowButtons();
+});
+
+function moonZoom(f) {
+  const d = moonCamera.position.length();
+  const nd = Math.min(moonControls.maxDistance, Math.max(moonControls.minDistance, d * f));
+  moonCamera.position.multiplyScalar(nd / d);
+  moonControls.update();
+}
+document.getElementById('moon-zoom-in').addEventListener('click', () => moonZoom(0.75));
+document.getElementById('moon-zoom-out').addEventListener('click', () => moonZoom(1.33));
+document.getElementById('moon-zoom-home').addEventListener('click', () => { flyMoonCamera(MOON_HOME, MOON_HOME.length()); scheduleMoonAutoRotate(); });
+
+moonControls.addEventListener('start', () => {
+  moonControls.autoRotate = false;
+  if (moonIdle) { clearTimeout(moonIdle); moonIdle = null; }
+});
+moonControls.addEventListener('end', scheduleMoonAutoRotate);
+
+function moonFrame() {
+  // Drag sensitivity follows altitude: the closer to the surface, the slower the Moon turns per pixel
+  const alt = (moonCamera.position.length() - R) / (MOON_HOME.length() - R);   // 1 at the home view
+  moonControls.rotateSpeed = 0.35 * Math.min(1.2, Math.max(0.025, alt));
+  moonControls.update();
+  refreshMoonMarkers();
+  moonRenderer.render(moonScene, moonCamera);
+}
+
+
+
+// ══════════════════════════════════════
+// ANIMATION
+// ══════════════════════════════════════
+const clock = new THREE.Clock();
+let idleTimer = null;
+
+function resumeAutoRotate() {
+  if (sId < 0) { controls.autoRotate = true; }
+}
+
+controls.addEventListener('start', () => {
+  controls.autoRotate = false;
+  if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; }
+});
+controls.addEventListener('end', () => {
+  if (idleTimer) clearTimeout(idleTimer);
+  idleTimer = setTimeout(resumeAutoRotate, 2000);
+});
+
+let frameCount = 0;
+
+/*@ASSESS@*/
+
+const pageEarth = document.getElementById('page-earth'), pageMoon = document.getElementById('page-moon');
+function animate() {
+  requestAnimationFrame(animate);
+  if (pageEarth.classList.contains('active')) {
+    const alt = (camera.position.length() - R) / (EARTH_HOME.length() - R);   // 1 at the home view
+    controls.rotateSpeed = 0.35 * Math.min(1.2, Math.max(0.06, alt));
+    controls.update();
+    if (cloudMesh) cloudMesh.rotation.y += 0.00005;
+    // Check cluster update every 10 frames (performance)
+    frameCount++;
+    if (frameCount % 10 === 0) checkClusterUpdate();
+    renderer.render(scene, camera);
+  }
+  if (pageMoon.classList.contains('active')) moonFrame();
+}
+animate();
+updateFlowButtons();
+
+
+// ══════════════════════════════════════
+// RESIZE
+// ══════════════════════════════════════
+window.addEventListener('resize', () => {
+  const w = window.innerWidth, h = window.innerHeight - 52;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+  moonCamera.aspect = w / h;
+  moonCamera.updateProjectionMatrix();
+  moonRenderer.setSize(w, h);
+});
+
+</script>
+</body>
+</html>
