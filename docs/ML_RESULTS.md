@@ -58,7 +58,7 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | Category | Min | Median | Max | Earth-tile pairs >= 0.5 |
 |---|---|---|---|---|
 | terrain | -1.00 | -0.49 | 0.90 | 1,650 |
-| geology | -0.84 | -0.52 | 0.80 | 137 |
+| geology | -0.84 | -0.52 | 0.80 | 85 |
 | thermal | -0.79 | -0.72 | 0.40 | 0 |
 | water_ice | -0.89 | -0.43 | 0.55 | 193 |
 | dust | -0.93 | -0.49 | 0.70 | 810 |
@@ -77,7 +77,7 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | illumination_power_planning | 0 | 704 | 128,596 |
 | habitat_human_ops_isolation | 8,221 | 13,493 | 107,586 |
 | dust_mitigation | 810 | 26,760 | 101,730 |
-| instrument_spectrometers_mineralogy | 137 | 3,810 | 123,433 |
+| instrument_spectrometers_mineralogy | 85 | 3,862 | 123,433 |
 | instrument_gpr_drill_subsurface | 100 | 1,570 | 125,710 |
 | planetary_protection_contamination_blanks | 2,970 | 56,880 | 69,450 |
 | cave_pit_robotics | 97 | 1,700 | 2,513 |
@@ -133,7 +133,7 @@ Composite = weighted mean of category scores; each category's weight is the numb
 - **Data:** the brief's counts were stale. Used 5,610 Moon tiles (3,609 polar + 2,001 mid-latitude), 151 anchors, 128 x 128 patches and 30 Moon targets.
 - **Sub-score floor:** the brief's hard floor (`max(-1, 1 - |d|/tol)`) made every Earth site tie at -1 for temperature. Same formula within one tolerance, soft approach to -1 beyond, so closest-approach order survives.
 - **Terrain:** added a CORAL alignment term, random-blur views and early stopping on held-out cross-body agreement (longer training made Moon-to-Earth matching worse).
-- **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only.
+- **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
 - **Thermal:** six terms instead of four (added max temperature and noon sun height from `categories.json`). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
 - **Dust reference:** 45% fines (lunar soil median grain size ~70 um) instead of the brief's '70-80% sand-sized'.

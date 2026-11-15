@@ -54,7 +54,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 172,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -142,7 +142,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 73,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -228,7 +228,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 608,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -316,7 +316,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 460,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -404,7 +404,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 211,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -492,7 +492,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 275,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -752,7 +752,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 505,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -840,7 +840,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 297,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -928,7 +928,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 510,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1016,7 +1016,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 429,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1102,7 +1102,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 4,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1190,7 +1190,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 16,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1276,7 +1276,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 167,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1364,7 +1364,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 155,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1450,7 +1450,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 5,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1538,7 +1538,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 2,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1626,7 +1626,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 81,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1714,7 +1714,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 239,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1802,7 +1802,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 74,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1890,7 +1890,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 330,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -1978,7 +1978,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -2150,7 +2150,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 435,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -2238,7 +2238,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 493,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -2326,7 +2326,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 281,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -2414,7 +2414,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 190,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 4,
+   "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
@@ -2502,7 +2502,7 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 335,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 5,
+   "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0

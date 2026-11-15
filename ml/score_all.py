@@ -34,6 +34,7 @@ TUBE_REGIONS = re.compile(
     r"hawai|kilauea|mauna loa|hualalai|iceland|lanzarote|canary|tenerife|jeju|halla\b|galapagos|gal.pagos|azores|"
     r"\betna\b|undara|mcbride|medicine lake|lava beds|newberry|st\. helens|craters of the moon|snake river|"
     r"zuni-bandera|el malpais|khaybar|chyulu|suswa|\bfuji\b|r.union|piton de la fournaise|rapa nui|easter island")
+GEO_MINOR_CAP = 0.3   # geology cap for tiles where anorthosite is only a minor component (partial match)
 CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, water_ice=0.7, dust=0.7, biology=0.6, caves=0.5, operations=0.8)
 
 
@@ -156,6 +157,9 @@ def geology_terms(ent, E, earth, suffix, info):
     ice = col(earth, "x_surface_ice_frac")
     et = [G.earth_text(r) for r in earth.to_dict("records")]
     ec = [G.earth_classes(t, s, i, G.earth_primary_text(r)) for t, s, i, r in zip(et, earth["source"], ice, earth.to_dict("records"))]
+    # anorthosite only as a minor component (gneiss/granite units): the text encoder was fine-tuned before these
+    # were demoted and still rates them close to highland text, so apply_caps limits them to a partial match
+    E["geo_anorth_minor"] = np.array([bool(e.get("anorth_minor")) for e in ec], float)
     terms = {"lith_match": np.array([[G.lith_match(m, e) for e in ec] for m in zc], float)}
     prior = {"lith_match": 1.0}
     fm, fe = C.EMB / f"moon_entity_geology_384{suffix}.npy", C.EMB / f"earth_geology_384{suffix}.npy"
@@ -306,6 +310,8 @@ def apply_caps(name, cal, ent, E):
     cal = np.minimum(cal, CAPS[name])
     if name == "terrain":
         cal = np.where((col(E, "obstacle_frac") >= 0.5)[None, :], np.minimum(cal, 0.0), cal)
+    if name == "geology":
+        cal = np.where((col(E, "geo_anorth_minor") > 0)[None, :], np.minimum(cal, GEO_MINOR_CAP), cal)
     if name == "thermal":
         psr = (col(ent, "dvn_frac_coldtrap_110k") >= 0.5) | (col(ent, "lola_frac_psr") >= 0.5)
         cal = np.where(psr[:, None], np.minimum(cal, 0.0), cal)
