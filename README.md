@@ -86,10 +86,10 @@ python -W ignore -m ml.step1_validate      # data checks
 python -W ignore -m ml.score_all           # scores + calibration (~1 min, CPU)
 python -W ignore -m ml.evaluate            # scorecard: site-grouped CV per category + polar-analog check
 python -W ignore -m ml.export_web          # web/data bundle for the site
-python tools/build_globe.py                # web/globe.html: 3-D globe with all final scores embedded
+python tools/build_globe.py                # web/index.html (home page): 3-D globe with all final scores embedded
 python tools/make_results_doc.py           # regenerate docs/ML_RESULTS.md
 python tools/reembed_geology.py            # re-embed changed geology texts (no training)
-python -m http.server 8765 --directory web # local preview at http://localhost:8765 (globe: /globe.html)
+python -m http.server 8765 --directory web # local preview at http://localhost:8765 (2-D map: /map.html)
 ```
 
 Training (Colab T4, optional; the trained models are in `models/`):
@@ -110,7 +110,7 @@ python -m ml.geology_ssl
 | `tools/` | Data building, array reassembly, results doc, geology re-embedding |
 | `models/`, `embeddings/` | Fine-tuned models and their embeddings |
 | `results/` | Scores, calibration, anchor residuals |
-| `web/` | Static map site (GitHub Pages); `web/globe.html` is the 3-D globe, built by `tools/build_globe.py` |
+| `web/` | Static map site (GitHub Pages); `web/index.html` is the 3-D globe (home page, built by `tools/build_globe.py`), `web/map.html` the 2-D map |
 | `frontend/` | Globe source: `globe.template.html` (page code), `assess.js` (Similarity Assessment page), `moon_textures.json` |
 | `docs/` | `ML_RESULTS.md` (generated results), `DATA_REPORT.md` (data dictionary), `ANCHORS.md`, `HANDOFF.md` |
 
