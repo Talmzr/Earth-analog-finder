@@ -7,7 +7,8 @@ web/data/
   earth_tiles.json        the Earth tiles as parallel arrays (id, name, type, lat, lon + a few measured values)
   scores/<moon_id>.json   for one Moon target: every category score for every Earth tile (integers = score x 100,
                           null = not available), composite, experiment readiness codes, top 25 tiles,
-                          percentile.thermal = closest-approach rank among Earth tiles (0-100, 100 = closest)
+                          percentile.thermal = closest-approach rank among Earth tiles (0-100, 100 = closest),
+                          twin_month = Earth month (1-12, 0 = none) whose sun is closest to this Moon target's
   top_analogs.json        top 20 Earth tiles per Moon target with names, scores and the experiments they suit
 Scores are in [-1, 1]: >= 0.5 sufficient, 0..0.5 partial, < 0 avoid. Readiness codes: 3 sufficient, 2 partial,
 1 avoid, 0 not available, -1 experiment not relevant for that Moon target.
@@ -24,11 +25,15 @@ from . import common as C
 
 LABELS = {"terrain": "Terrain & topography", "geology": "Geology & surface materials",
           "thermal": "Temperature & illumination", "water_ice": "Water, ice & permafrost",
+          "dust": "Dust & regolith", "biology": "Biological sterility", "caves": "Caves & lava tubes",
           "operations": "Landing & operations"}
 HOW = {"terrain": "Measured relief, slope, roughness and steep-ground share, same 80 m elevation processing on both bodies (the fine-tuned DINOv2 model is evaluated but does not improve the score, so it is not used)",
        "geology": "BGE-small text encoder fine-tuned contrastively on lunar map units vs Earth lithology, plus a lithology-match term",
-       "thermal": "Night minimum temperature, grazing-sun share, noon sun height. Closest approach only: no Earth site overlaps the Moon, so this ranks how polar and cold the site is; not part of the overall score",
+       "thermal": "Night minimum temperature (closest approach: no Earth site is lunar-cold) and sun height / grazing-sun share in the Earth light-twin month, the month whose sun is closest to the Moon target's. Not part of the overall score",
        "water_ice": "Frozen ground within ~1 m, distance from flat bare ground to ice, absence of liquid water",
+       "dust": "Bare ground share and volcanic tephra, compared with the known lunar regolith (Apollo samples: bare, dry, fine). Same for every Moon target, so not part of the overall score",
+       "biology": "How lifeless the Earth site is (vegetation greenness, rainfall), compared with the sterile Moon. Same for every Moon target, capped at 0.6, not part of the overall score",
+       "caves": "Rule: known lava-tube region / basaltic volcano / no tubes, against the Tranquillitatis pit (an LRO-imaged skylight). Only for that target",
        "operations": "Calibrated terrain and ice scores plus slope hazard, penalty for forest / towns / water"}
 
 
@@ -64,6 +69,7 @@ def main(sfx=""):
     Z = np.load(C.RES / f"score_matrices{sfx}.npz", allow_pickle=False)
     cats, ent_ids, tile_ids = Z["categories"].tolist(), Z["entity_id"].tolist(), Z["earth_tile_id"].tolist()
     cal, comp, ready, exps_ids, Wm = Z["calibrated"], Z["composite"], Z["readiness"], Z["experiments"].tolist(), Z["category_weights"]
+    twin = Z["light_twin_month"] if "light_twin_month" in Z.files else None
     moon, earth, zones = C.load_tables()
     ent = C.build_entities(moon, zones).set_index("entity_id").loc[ent_ids].reset_index()
     earth = earth.set_index("patch_id").loc[tile_ids].reset_index()
@@ -96,12 +102,14 @@ def main(sfx=""):
                             lat=E["lat"][j], lon=E["lon"][j], composite=r(comp[i, j]),
                             scores={c: r(cal[k, i, j]) for k, c in enumerate(cats)},
                             thermal_percentile=None if th_pct is None else r(th_pct[j] * 100, 0),
+                            twin_month=None if twin is None or not twin[i, j] else int(twin[i, j]),
                             sufficient_for=suff, partial_for=part))
         tops_all[m] = top[:20]
         relevant = [exps_ids[x] for x in range(len(exps_ids)) if (ready[x, i] >= 0).any()]
         (out / "scores" / f"{m}.json").write_text(json.dumps(dict(
             moon_id=m, categories=cats, scores={c: ints(cal[k, i]) for k, c in enumerate(cats)}, composite=ints(comp[i]),
             percentile={} if th_pct is None else {"thermal": ints(th_pct)},
+            twin_month=None if twin is None else twin[i].astype(int).tolist(),
             readiness={exps_ids[x]: ready[x, i].astype(int).tolist() for x in range(len(exps_ids)) if exps_ids[x] in relevant},
             top=top), separators=(",", ":")), encoding="utf-8")
         best = {c: (None if not np.isfinite(cal[k, i]).any() else r(float(np.nanmax(cal[k, i])))) for k, c in enumerate(cats)}
@@ -140,7 +148,7 @@ def main(sfx=""):
         limitations=[
             "No ground truth exists for analog quality: the -1..+1 scale is set by draft expert anchors (all still marked needs_review).",
             "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach (a latitude ranking), not similarity, and are left out of the overall score.",
-            "Dust/regolith, biological sterility and caves are not scored: there is no per-site Moon data to compare Earth sites with.",
+            "Dust/regolith and sterility compare Earth sites with known lunar constants (Apollo regolith, sterile Moon), so they rank Earth sites the same way for every Moon target and are left out of the overall score.",
             "Earth climate layers are coarser (5-50 km) than the 10 km tiles; Antarctica lacks land-cover, soil and rainfall layers.",
             "Lunar geology comes from a 1:5M map plus the known composition of mare vs highland crust, not per-tile mineralogy.",
             "Thermal scores for the Tranquillitatis pit are extrapolated (thermal anchors are all polar).",

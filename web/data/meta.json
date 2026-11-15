@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T11:09:35Z",
+ "generated_utc": "2026-11-15T11:31:50Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -59,18 +59,18 @@
    "id": "thermal",
    "config_id": "thermal_illumination",
    "label": "Temperature & illumination",
-   "how": "Night minimum temperature, grazing-sun share, noon sun height. Closest approach only: no Earth site overlaps the Moon, so this ranks how polar and cold the site is; not part of the overall score",
+   "how": "Night minimum temperature (closest approach: no Earth site is lunar-cold) and sun height / grazing-sun share in the Earth light-twin month, the month whose sun is closest to the Moon target's. Not part of the overall score",
    "cap": 0.4,
    "n_anchors": 19,
    "terms": {
-    "t_min": 0.2433,
-    "grazing_sun": 0.2772,
-    "noon_sun": 0.2409
+    "t_min": 0.1691,
+    "grazing_sun": 0.0693,
+    "noon_sun": 0.0813
    },
-   "intercept": -0.0478,
-   "anchor_mae": 0.12,
-   "anchor_mae_leave_one_out": 0.13,
-   "anchor_rank_agreement": 0.76,
+   "intercept": -0.5695,
+   "anchor_mae": 0.09,
+   "anchor_mae_leave_one_out": 0.1,
+   "anchor_rank_agreement": 0.77,
    "anchors_off_by_0_3": 0
   },
   {
@@ -90,6 +90,56 @@
    "anchor_mae_leave_one_out": 0.18,
    "anchor_rank_agreement": 0.95,
    "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "dust",
+   "config_id": "dust_regolith",
+   "label": "Dust & regolith",
+   "how": "Bare ground share and volcanic tephra, compared with the known lunar regolith (Apollo samples: bare, dry, fine). Same for every Moon target, so not part of the overall score",
+   "cap": 0.7,
+   "n_anchors": 18,
+   "terms": {
+    "bare": 0.5065,
+    "tephra": 0.3225
+   },
+   "intercept": -0.1815,
+   "anchor_mae": 0.15,
+   "anchor_mae_leave_one_out": 0.17,
+   "anchor_rank_agreement": 0.96,
+   "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "biology",
+   "config_id": "biology_sterility",
+   "label": "Biological sterility",
+   "how": "How lifeless the Earth site is (vegetation greenness, rainfall), compared with the sterile Moon. Same for every Moon target, capped at 0.6, not part of the overall score",
+   "cap": 0.6,
+   "n_anchors": 18,
+   "terms": {
+    "ndvi": 1.14,
+    "precip": 0.7417
+   },
+   "intercept": 0.4376,
+   "anchor_mae": 0.17,
+   "anchor_mae_leave_one_out": 0.18,
+   "anchor_rank_agreement": 0.88,
+   "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "caves",
+   "config_id": "caves_subsurface",
+   "label": "Caves & lava tubes",
+   "how": "Rule: known lava-tube region / basaltic volcano / no tubes, against the Tranquillitatis pit (an LRO-imaged skylight). Only for that target",
+   "cap": 0.5,
+   "n_anchors": 15,
+   "terms": {
+    "rule": 1.0
+   },
+   "intercept": 0.0,
+   "anchor_mae": 0.14,
+   "anchor_mae_leave_one_out": 0.14,
+   "anchor_rank_agreement": 0.91,
+   "anchors_off_by_0_3": 1
   },
   {
    "id": "operations",
@@ -132,14 +182,14 @@
    "id": "rover_mobility_navigation",
    "name": "Rover mobility & navigation",
    "required": {
-    "terrain": 0.5
+    "terrain": 0.5,
+    "dust": 0.3
    },
    "supporting": {
     "operations": 0.4,
     "thermal": 0.0
    },
    "also_account_for": [
-    "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
     "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
     "Moist, vegetated or rounded-grain Earth soils differ from dry, angular, compact lunar regolith.",
     "No GNSS on the Moon: switch GPS off and navigate visually or by terrain-relative methods.",
@@ -167,17 +217,34 @@
    "id": "isru_ice_extraction",
    "name": "ISRU: excavation and extraction of icy regolith",
    "required": {
-    "water_ice": 0.5
+    "water_ice": 0.5,
+    "dust": 0.3
    },
    "supporting": {
     "thermal": 0.0
    },
    "also_account_for": [
-    "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
     "In vacuum ice sublimates instead of melting: heating and vapour capture must be validated in a thermal-vacuum chamber.",
     "Ice-cemented regolith at cryogenic temperature is much harder than Earth permafrost near 0 C.",
     "Volatile contaminants (H2S, NH3, CO2 ...) need handling.",
     "PSR operations: no sunlight for power, extreme cold soak."
+   ]
+  },
+  {
+   "id": "regolith_excavation_construction",
+   "name": "Regolith excavation, berms, landing pads, sintering",
+   "required": {
+    "dust": 0.5,
+    "terrain": 0.3
+   },
+   "supporting": {
+    "geology": 0.2,
+    "operations": 0.3
+   },
+   "also_account_for": [
+    "1/6 g reduces excavator weight and reaction force; lunar regolith is very compact below ~30 cm with interlocking angular grains.",
+    "Sintering and microwave heating depend on glass and nanophase iron absent from Earth tephra.",
+    "No water for concrete; binders outgas in vacuum."
    ]
   },
   {
@@ -216,7 +283,8 @@
     "operations": 0.3
    },
    "supporting": {
-    "thermal": 0.0
+    "thermal": 0.0,
+    "biology": 0.0
    },
    "also_account_for": [
     "Isolation/remoteness is not scored by any category: prefer sites tagged 'isolation' (e.g. Concordia, HMP, MDRS).",
@@ -225,14 +293,31 @@
    ]
   },
   {
+   "id": "dust_mitigation",
+   "name": "Dust mitigation (seals, coatings, filters, suits)",
+   "required": {
+    "dust": 0.5
+   },
+   "supporting": {
+    "biology": 0.0
+   },
+   "also_account_for": [
+    "Lunar dust is charged and moved by plume ejecta and electrostatics, not wind; Earth dust is wind-driven and moist.",
+    "Sharp glassy agglutinates are more abrasive than weathered Earth dust.",
+    "Verify seals and mechanisms in dirty-vacuum chambers with simulant."
+   ]
+  },
+  {
    "id": "instrument_spectrometers_mineralogy",
    "name": "Instrument field tests: spectrometers / mineralogy (VNIR, Raman, LIBS, XRF)",
    "required": {
     "geology": 0.5
    },
-   "supporting": {},
+   "supporting": {
+    "dust": 0.0,
+    "biology": 0.0
+   },
    "also_account_for": [
-    "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
     "No space weathering on Earth (no nanophase-iron darkening and reddening).",
     "Terrestrial anorthosite is more sodic than lunar ferroan anorthosite.",
     "Atmospheric water bands (VNIR) and different LIBS plasma at 1 atm; lichen/biofilm coatings on Earth rocks."
@@ -245,12 +330,44 @@
     "geology": 0.3,
     "water_ice": 0.3
    },
-   "supporting": {},
+   "supporting": {
+    "dust": 0.3
+   },
    "also_account_for": [
-    "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
     "Drilling in vacuum: no air cooling or flushing of cuttings; ice cuttings sublimate.",
     "Cryogenic ice-regolith is much harder than Earth permafrost.",
     "Earth subsurface moisture and salts dominate GPR attenuation."
+   ]
+  },
+  {
+   "id": "planetary_protection_contamination_blanks",
+   "name": "Planetary protection, contamination blanks, life-detection false positives",
+   "required": {
+    "biology": 0.4
+   },
+   "supporting": {
+    "dust": 0.0
+   },
+   "also_account_for": [
+    "No Earth surface is sterile; every blank still carries microbes and organics.",
+    "Stations and camps raise local contamination.",
+    "COSPAR policy for lunar polar / PSR missions asks for an organic-materials inventory (check the current category definitions)."
+   ]
+  },
+  {
+   "id": "cave_pit_robotics",
+   "name": "Cave / pit robotics (skylight descent, mapping, comms)",
+   "required": {
+    "caves": 0.5
+   },
+   "supporting": {
+    "geology": 0.3
+   },
+   "also_account_for": [
+    "Lunar pits/tubes may be far larger than terrestrial tubes.",
+    "Diviner-based studies estimate the shaded Tranquillitatis pit floor stays near ~290 K (verify before quoting).",
+    "Underground: no comms or GNSS; skylight descent by tether.",
+    "Earth caves are humid, biologically active and shaped by water."
    ]
   },
   {
@@ -389,13 +506,25 @@
    "agreement": 0.462
   },
   "terrain_ssl_in_score": false,
-  "geology_embeddings": "fine-tuned BGE"
+  "geology_embeddings": "fine-tuned BGE",
+  "dust_reference": {
+   "fines_pct": 45.0,
+   "bulk_density": 1.5,
+   "coarse_pct": 5.0,
+   "note": "fines = % finer than 50 um; lunar soil median grain size ~70 um (the brief's '70-80% sand-sized' would be fines ~25%; kept the 45% of categories.json)"
+  },
+  "caves": {
+   "known_tube_tiles": 97,
+   "plausible_tiles": 878,
+   "no_tube_tiles": 2513
+  }
  },
  "composite_categories": [
   "terrain",
   "geology",
   "water_ice",
-  "operations"
+  "operations",
+  "caves"
  ],
  "kept_terms": {
   "terrain": [
@@ -415,6 +544,17 @@
    "traverse",
    "no_liquid_water"
   ],
+  "dust": [
+   "bare",
+   "tephra"
+  ],
+  "biology": [
+   "ndvi",
+   "precip"
+  ],
+  "caves": [
+   "rule"
+  ],
   "operations": [
    "terrain",
    "water_ice",
@@ -424,7 +564,7 @@
  "limitations": [
   "No ground truth exists for analog quality: the -1..+1 scale is set by draft expert anchors (all still marked needs_review).",
   "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach (a latitude ranking), not similarity, and are left out of the overall score.",
-  "Dust/regolith, biological sterility and caves are not scored: there is no per-site Moon data to compare Earth sites with.",
+  "Dust/regolith and sterility compare Earth sites with known lunar constants (Apollo regolith, sterile Moon), so they rank Earth sites the same way for every Moon target and are left out of the overall score.",
   "Earth climate layers are coarser (5-50 km) than the 10 km tiles; Antarctica lacks land-cover, soil and rainfall layers.",
   "Lunar geology comes from a 1:5M map plus the known composition of mare vs highland crust, not per-tile mineralogy.",
   "Thermal scores for the Tranquillitatis pit are extrapolated (thermal anchors are all polar).",

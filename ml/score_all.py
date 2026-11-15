@@ -12,13 +12,16 @@ Terms (see docs/ML_RESULTS.md):
   geology     text_cos (BGE embedding cosine), lith_match (discrete lithology match)
   thermal     temperature swing / min / max, grazing-sun share, noon sun height, polar night   [closest approach]
   water_ice   frozen ground, surface ice (both one-sided), landing -> ice traverse distance
-  (dust, biology and caves were removed on 2026-11-15: they use no Moon data, so every Moon target got the same score)
+  dust        Earth ground vs the known lunar regolith (bare, fine, volcanic tephra)   lunar constant: same for every target
+  biology     Earth vegetation / rainfall vs the sterile Moon                         lunar constant: same for every target
+  caves       rule: known lava-tube region / basaltic volcano                         Tranquillitatis pit (LRO skylight) only
   operations  calibrated terrain + thermal + water_ice, slope-hazard kernel, traverse, forest/urban penalty
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
 
 import numpy as np
 import pandas as pd
@@ -27,21 +30,32 @@ from . import common as C
 from . import geo_text as G
 
 SUB = C.subscore
+TUBE_REGIONS = re.compile(
+    r"hawai|kilauea|mauna loa|hualalai|iceland|lanzarote|canary|tenerife|jeju|halla\b|galapagos|gal.pagos|azores|"
+    r"\betna\b|undara|mcbride|medicine lake|lava beds|newberry|st\. helens|craters of the moon|snake river|"
+    r"zuni-bandera|el malpais|khaybar|chyulu|suswa|\bfuji\b|r.union|piton de la fournaise|rapa nui|easter island")
 # Terms that enter each category score. Chosen by a per-term audit against the anchors (2026-11-15): weight fitted,
 # whether the Moon and Earth values overlap, leave-one-out effect of dropping the term. Dropped terms and why:
 #   terrain    ssl_cos (DINOv2 cosine): alone rho 0.31 with the anchors, dropping it lowers LOO MAE 0.162 -> 0.141
 #   thermal    swing (no Moon/Earth overlap, weight 0), t_max (weight 0.02, dropping raises LOO rho), polar_night (weight 0)
+#              (sun terms use the Earth light-twin month since 2026-11-15: LOO error 0.128 -> 0.100)
 #   water_ice  surface_ice (weight 0.03, dropping improves the fit)
+#   dust       fines, bulk_density, coarse (SoilGrids: 5 km modelled agricultural soil, none in Antarctica; zero or
+#              negative effect), aerosol (weight 0), dryness (no effect, duplicates soil moisture)
+#   biology    soil_moisture (almost no spread, 23% missing), tree_cover (no effect, redundant with NDVI)
 #   operations thermal (no effect, a latitude proxy), traverse (already inside water_ice: double counted)
 KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
-                  water_ice=["frozen_ground", "traverse", "no_liquid_water"],
-                  operations=["terrain", "water_ice", "slope_hazard"])
-# Categories in the composite: those that compare an Earth tile with the specific Moon target. thermal has no
-# Moon/Earth overlap (it ranks Earth tiles by latitude, rho 0.93) and stays a category score + experiment requirement.
-# dust, biology and caves were removed entirely (2026-11-15): no Moon data, identical score for every Moon target.
-COMPOSITE_CATS = ("terrain", "geology", "water_ice", "operations")
+                  water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
+                  biology=["ndvi", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
+# Categories in the composite ("which Earth place is most like THIS Moon place"): those that use per-site Moon data,
+# plus caves, which only the Tranquillitatis pit has. dust and biology compare Earth with lunar constants (known
+# regolith, sterile Moon): valid analog tests and experiment requirements, but identical for every Moon target, so
+# they cannot help choose between targets. thermal has no Moon/Earth overlap in temperature (weakest calibration).
+# Compared on 2026-11-15: all-category composite vs this one gave the same expert agreement (0.85 vs 0.83), but the
+# all-category version drew 38% of every target's ranking from target-invariant scores.
+COMPOSITE_CATS = ("terrain", "geology", "water_ice", "operations", "caves")
 GEO_MINOR_CAP = 0.3   # geology cap for tiles where anorthosite is only a minor component (partial match)
-CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, water_ice=0.7, operations=0.8)
+CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, water_ice=0.7, dust=0.7, biology=0.6, caves=0.5, operations=0.8)
 
 
 def col(df, name):
@@ -184,12 +198,43 @@ def geology_terms(ent, E, earth, suffix, info):
     return terms, prior
 
 
+MID_MONTH_DOY = np.array([15, 46, 74, 105, 135, 166, 196, 227, 258, 288, 319, 349])
+
+
+def earth_monthly_sun(E):
+    """Per Earth tile and month: noon sun height (deg, NaN in polar night) and the share of daylight with the sun
+    below 12 deg (geometric sun path on the mid-month day)."""
+    lat = np.radians(col(E, "center_lat"))
+    dec = np.radians(23.44 * np.sin(2 * np.pi * (284 + MID_MONTH_DOY) / 365))
+    H = np.linspace(-np.pi, np.pi, 193)[None, None, :]
+    sinh = np.sin(lat)[:, None, None] * np.sin(dec)[None, :, None] + np.cos(lat)[:, None, None] * np.cos(dec)[None, :, None] * np.cos(H)
+    h = np.degrees(np.arcsin(np.clip(sinh, -1, 1)))
+    day = (h > 0).sum(2)
+    graz = np.where(day > 0, ((h > 0) & (h < 12)).sum(2) / np.maximum(day, 1), np.nan)
+    noon = np.where(day > 0, np.column_stack([col(E, f"noon_elev_m{m:02d}") for m in range(1, 13)]), np.nan)
+    return noon, graz
+
+
 def thermal_terms(ent, E):
-    spec = [("swing", "x_temp_swing_k", 50.0), ("t_min", "x_temp_min_k", 60.0), ("t_max", "x_temp_max_k", 40.0),
-            ("grazing_sun", "x_grazing_sun_frac", 0.3), ("noon_sun", "x_noon_sun_max_deg", 10.0),
-            ("polar_night", "x_polar_night_frac", 0.15)]
-    terms = {n: SUB(M_(ent, c), E_(E, c), tau) for n, c, tau in spec}
-    return terms, {n: 1 / len(spec) for n in terms}
+    """Night minimum temperature (no Moon/Earth overlap: closest approach) and sunlight geometry in the Earth
+    LIGHT-TWIN MONTH: for each (Moon target, Earth tile) the month whose noon sun is closest to the Moon target's.
+    Annual Earth values never reach lunar polar sun heights; a single month does for ~35% of Earth tiles.
+    Returns terms, prior and the twin month (1-12, 0 = none) per pair."""
+    terms = {"swing": SUB(M_(ent, "x_temp_swing_k"), E_(E, "x_temp_swing_k"), 50.0),
+             "t_min": SUB(M_(ent, "x_temp_min_k"), E_(E, "x_temp_min_k"), 60.0),
+             "t_max": SUB(M_(ent, "x_temp_max_k"), E_(E, "x_temp_max_k"), 40.0),
+             "polar_night": SUB(M_(ent, "x_polar_night_frac"), E_(E, "x_polar_night_frac"), 0.15)}
+    noon, graz = earth_monthly_sun(E)
+    mn, mg = col(ent, "x_noon_sun_max_deg"), col(ent, "x_grazing_sun_frac")
+    dist = np.where(np.isnan(noon)[None], np.inf, np.abs(noon[None] - mn[:, None, None]))      # (M, E, 12)
+    k = dist.argmin(2)
+    has = np.isfinite(dist.min(2))
+    twin_noon = np.where(has, np.take_along_axis(np.broadcast_to(noon, dist.shape), k[..., None], 2)[..., 0], np.nan)
+    twin_graz = np.where(has, np.take_along_axis(np.broadcast_to(graz, dist.shape), k[..., None], 2)[..., 0], np.nan)
+    terms["noon_sun"] = SUB(mn[:, None], twin_noon, 10.0)
+    terms["grazing_sun"] = SUB(mg[:, None], twin_graz, 0.3)
+    twin_month = np.where(has, k + 1, 0).astype(np.int8)
+    return terms, {n: 1 / len(terms) for n in terms}, twin_month
 
 
 def traverse_term(ent, E):
@@ -202,13 +247,67 @@ def traverse_term(ent, E):
 
 
 def water_terms(ent, E):
-    terms = {"frozen_ground": SUB(M_(ent, "x_frozen_ground_frac"), E_(E, "x_frozen_ground_frac"), 0.25, one_sided=True),
+    # one-sided (more Earth ice is not penalised) where the Moon target has ground ice; where it has none (the
+    # Tranquillitatis pit) the Moon's dryness counts and icy Earth ground is a mismatch
+    fz_m = M_(ent, "x_frozen_ground_frac")
+    dry = np.nan_to_num(fz_m, nan=0.0) < 0.05
+    fz = np.where(dry, SUB(fz_m, E_(E, "x_frozen_ground_frac"), 0.25),
+                  SUB(fz_m, E_(E, "x_frozen_ground_frac"), 0.25, one_sided=True))
+    terms = {"frozen_ground": fz,
              "surface_ice": SUB(M_(ent, "x_surface_ice_frac"), E_(E, "x_surface_ice_frac"), 0.4, one_sided=True),
              "traverse": traverse_term(ent, E)}
     with np.errstate(all="ignore"):                                      # liquid water: the Moon has none
         wet = np.nanmean(np.vstack([np.clip(col(E, "precip") / 1000.0, 0, 1), np.clip(col(E, "soil_moist_frac") / 0.4, 0, 1)]), axis=0)
     terms["no_liquid_water"] = SUB(0.0, wet[None, :], 0.15) * np.ones((len(ent), 1))
     return terms, {"frozen_ground": 0.35, "surface_ice": 0.2, "traverse": 0.25, "no_liquid_water": 0.2}
+
+
+def dust_terms(ent, E, info):
+    ref = dict(fines_pct=45.0, bulk_density=1.5, coarse_pct=5.0)        # fixed lunar-regolith reference
+    info["dust_reference"] = dict(ref, note="fines = % finer than 50 um; lunar soil median grain size ~70 um "
+                                  "(the brief's '70-80% sand-sized' would be fines ~25%; kept the 45% of categories.json)")
+    one = np.ones((len(ent), 1))
+    t = {"fines": SUB(ref["fines_pct"], E_(E, "fines_pct"), 15.0),
+         "bulk_density": SUB(ref["bulk_density"], E_(E, "sg_bdod_g_cm3"), 0.2),
+         "coarse": SUB(ref["coarse_pct"], E_(E, "sg_cfvo_pct"), 15.0),
+         "bare": SUB(1.0, E_(E, "bare_f"), 0.25),
+         "dryness": SUB(0.0, E_(E, "soil_moist_frac"), 0.08),
+         "aerosol": 2 * np.clip(E_(E, "aot_mean") / 0.8, 0, 1) - 1}
+    phys = np.isfinite(np.stack(list(t.values()))).sum(0)                # physical terms available per Earth tile
+    t["tephra"] = np.where(E["flag_tephra"].to_numpy(bool), 1.0, 0.0)[None, :]
+    terms = {k: np.where(phys >= 1, v, np.nan) * one for k, v in t.items()}
+    prior = dict(fines=0.25, bulk_density=0.15, coarse=0.1, bare=0.2, dryness=0.1, aerosol=0.05, tephra=0.15)
+    return terms, prior
+
+
+def biology_terms(ent, E):
+    one = np.ones((len(ent), 1))
+    t = {"ndvi": col(E, "ndvi_f"), "precip": np.clip(col(E, "precip") / 1000.0, 0, 2),
+         "soil_moisture": col(E, "soil_moist_frac"), "tree_cover": col(E, "tree_f")}
+    terms = {k: -v[None, :] * one for k, v in t.items()}                 # more life -> lower score
+    return terms, dict(ndvi=1.0, precip=0.5, soil_moisture=1.0, tree_cover=0.5)
+
+
+def caves_terms(ent, E, earth):
+    """Rule levels (brief + categories.json), used as the score itself:
+       +0.5 known lava tubes: named lava-tube site, or a volcanic tile whose catalog text mentions lava tubes / caves
+            or that lies in a known lava-tube region (Hawaii, Iceland, Canaries, Jeju, ...)
+       +0.3 basaltic volcano / shield / volcanic field: tubes plausible, not documented in the tile text
+       -0.5 sedimentary, evaporite or ice-covered ground with no volcanic evidence: no lava tubes
+        0.0 everything else.  Only the Tranquillitatis pit target is scored."""
+    ctx = C.text_blob(earth, ["name", "context"])                      # catalog / tag text only, not the bedrock map
+    has = lambda rx: ctx.str.contains(rx, regex=True).to_numpy()       # noqa: E731
+    volc_src = earth["source"].eq("volcano").to_numpy()
+    named_volc = earth["source"].eq("named_site").to_numpy() & has(r"basalt|volcanic|lava")
+    volcanic = volc_src | named_volc
+    known = has(r"lava_tube") | (volcanic & (has(r"lava[ _-]?tubes?|lava caves?|\bcaves?\b") | has(TUBE_REGIONS.pattern)))
+    plausible = (volc_src & has(r"shield|basalt")) | (named_volc & ~E["flag_aqueous_sed"].to_numpy())
+    no_tubes = (E["flag_aqueous_sed"].to_numpy() | E["flag_ice_surface"].to_numpy()) & ~volc_src & ~known & ~plausible
+    rule = np.where(known, 0.5, np.where(plausible, 0.3, np.where(no_tubes, -0.5, 0.0)))
+    t = np.full((len(ent), len(earth)), np.nan)
+    t[ent["is_pit"].to_numpy()] = rule
+    return {"rule": t}, {"rule": 1.0}, dict(known_tube_tiles=int(known.sum()), plausible_tiles=int((plausible & ~known).sum()),
+                                           no_tube_tiles=int(no_tubes.sum()))
 
 
 def hazard_term(ent, E):
@@ -387,8 +486,14 @@ def main():
     run("terrain", t, p)
     t, p = geology_terms(ent, E, earth, a.emb_suffix, info)
     run("geology", t, p)
-    run("thermal", *thermal_terms(ent, E))
+    t, p, twin_month = thermal_terms(ent, E)
+    run("thermal", t, p)
     run("water_ice", *water_terms(ent, E))
+    run("dust", *dust_terms(ent, E, info))
+    run("biology", *biology_terms(ent, E), prior_b=1.0)
+    t, p, cinfo = caves_terms(ent, E, earth)
+    info["caves"] = cinfo
+    run("caves", t, p, fit=False)
     ops = {"terrain": cal["terrain"], "thermal": cal["thermal"], "water_ice": cal["water_ice"],
            "slope_hazard": hazard_term(ent, E), "traverse": traverse_term(ent, E)}
     run("operations", ops, dict(terrain=0.35, thermal=0.10, water_ice=0.15, slope_hazard=0.25, traverse=0.15))
@@ -441,7 +546,7 @@ def main():
                         earth_tile_id=earth["patch_id"].to_numpy(str), calibrated=Sc.astype(np.float32),
                         raw=np.stack([raw[c] for c in cal]).astype(np.float32), composite=comp.astype(np.float32),
                         experiments=np.array([e["id"] for e in exps_cfg["experiments"]]), readiness=codes,
-                        category_weights=Wm.astype(np.float32))
+                        category_weights=Wm.astype(np.float32), light_twin_month=twin_month)
     TOP = pd.concat(tops, ignore_index=True)
     TOP.round(3).to_csv(C.RES / f"top_analogs{sfx}.csv", index=False)
 
@@ -458,7 +563,7 @@ def main():
     pd.set_option("display.max_colwidth", 90)
     print("\n== terrain SSL variants (held-out blocks; lower = neighbours agree better with measured terrain) ==")
     print(pd.DataFrame(info.get("terrain_ssl_variants", [])).to_string(index=False) if info.get("terrain_ssl_variants") else "no embeddings")
-    print("chosen:", info.get("terrain_ssl_chosen"), "| geology:", info.get("geology_embeddings"))
+    print("chosen:", info.get("terrain_ssl_chosen"), "| geology:", info.get("geology_embeddings"), "| caves:", info.get("caves"))
     print("\n== calibration on anchors ==")
     print(summ.drop(columns=["weights"]).to_string(index=False))
     for k, v in stats.items():

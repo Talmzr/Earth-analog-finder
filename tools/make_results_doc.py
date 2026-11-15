@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RES, MOD, OUT = ROOT / "results", ROOT / "models", ROOT / "docs" / "ML_RESULTS.md"
 FEATS = ("log_relief", "slope_mean", "log_tri")
 SHOW_CATS = [("terrain", "Terrain"), ("geology", "Geology"), ("thermal", "Thermal"), ("water_ice", "Water/ice"),
-             ("operations", "Ops")]
+             ("dust", "Dust"), ("operations", "Ops")]
 
 LIMITS = """## 6. Deviations from the brief and known limits
 
@@ -25,9 +25,10 @@ LIMITS = """## 6. Deviations from the brief and known limits
 - **Sub-score floor:** the brief's hard floor (`max(-1, 1 - |d|/tol)`) made every Earth site tie at -1 for temperature. Same formula within one tolerance, soft approach to -1 beyond, so closest-approach order survives.
 - **Terrain:** the fine-tuned DINOv2 embedding is trained and evaluated (section 1) but not used in the score: alone it agrees 0.31 with the terrain anchors and removing it lowered the leave-one-out error. The score uses measured relief / slope / roughness / steep share.
 - **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
-- **Thermal:** night minimum, grazing sun and noon sun height only (swing, max temperature and polar night were dropped). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
+- **Thermal:** night minimum temperature (closest approach) plus sun height and grazing-sun share in the Earth **light-twin month**, the month whose noon sun is closest to the Moon target's; annual Earth values never reach lunar polar sun heights, one month does for ~35% of tiles (LOO error 0.128 -> 0.100). Swing, max temperature and polar night were dropped.
+- **Dry Moon targets:** where the Moon target has no ground ice (the Tranquillitatis pit) the frozen-ground term is two-sided, so icy Earth ground counts as a mismatch instead of a free match. No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Removed categories:** dust/regolith, biological sterility and caves/lava tubes were dropped with the experiments that needed only them (dust mitigation, planetary protection blanks, cave/pit robotics). Regolith excavation was removed too: without dust it was only a terrain check. None of them used Moon data: every Moon target got the same score for a given Earth site. Experiments that listed dust as a requirement now carry a caveat to test regolith behaviour with a simulant.
+- **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (vegetation, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but stay out of the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.
 - **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.
@@ -123,10 +124,12 @@ def composite_section(params):
            "Terms kept per category after the 2026-11-15 audit (see `KEEP_TERMS` in `ml/score_all.py` for why each dropped "
            "term was removed):", "", "| Category | Terms used |", "|---|---|"]
     out += [f"| {c} | {', '.join(ks)} |" for c, ks in (params.get("kept_terms") or {}).items()]
-    out += ["", f"Composite = weighted mean of **{', '.join(cc)}** only (the categories that compare an Earth tile with the "
-            "specific Moon target). Each weight is the number of experiments "
-            "relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Thermal (no overlap: "
-            "a latitude ranking) remains a category score and experiment requirement. "
+    out += ["", f"Composite = weighted mean of **{', '.join(cc)}** only: the categories that use per-site Moon data, plus "
+            "caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon "
+            "target that require (1.0) or support (0.5) the category, normalised. Dust and sterility (lunar constants, the "
+            "same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. "
+            "An all-category composite was compared and rejected: same expert agreement (0.85 vs 0.83) but 38% of every "
+            "target's ranking came from scores that are identical for all Moon targets. "
             "Typical weights (median over targets):", "",
            "| " + " | ".join(w) + " |", "|" + "---|" * len(w),
            "| " + " | ".join(f"{np.median(v):.2f}" for v in w.values()) + " |", ""]
