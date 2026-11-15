@@ -134,6 +134,8 @@ canvas{display:block}
 .sp-bar{position:absolute;top:1px;bottom:1px;border-radius:5px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1),left .9s cubic-bezier(.2,.8,.2,1)}
 .sp-bar.pos{left:50%;background:rgb(var(--c));box-shadow:0 0 8px rgba(var(--c),.9),0 0 20px rgba(var(--c),.5)}
 .sp-bar.neg{background:#ff4d8d;box-shadow:0 0 8px rgba(255,77,141,.9),0 0 20px rgba(255,77,141,.5)}
+.sp-bar.avoid{background:#a3162f;box-shadow:0 0 8px rgba(163,22,47,.9),0 0 20px rgba(163,22,47,.5)}
+.sp-val.avoid{color:#ff7b8b;text-shadow:0 0 4px rgba(163,22,47,.95),0 0 16px rgba(163,22,47,.6)}
 .sp-val{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;color:#fff}
 .sp-val.pos{text-shadow:0 0 4px rgba(var(--c),.95),0 0 16px rgba(var(--c),.6)}
 .sp-val.neg{text-shadow:0 0 4px rgba(255,77,141,.95),0 0 16px rgba(255,77,141,.6)}
@@ -293,7 +295,7 @@ canvas{display:block}
 .ip-score .lbl{font-size:8.5px;text-transform:uppercase;letter-spacing:1.1px;font-family:'Space Grotesk',sans-serif;color:#34d399}
 .ip-score .big{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 .vd{font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap}
-.vd.sufficient{color:#34d399;background:rgba(52,211,153,.1)}.vd.partial{color:#fbbf24;background:rgba(251,191,36,.1)}.vd.avoid{color:#ff4d8d;background:rgba(255,77,141,.1)}.vd.na{color:#5a6a7a;background:rgba(255,255,255,.04)}
+.vd.sufficient{color:#34d399;background:rgba(52,211,153,.1)}.vd.partial{color:#fbbf24;background:rgba(251,191,36,.1)}.vd.avoid{color:#ff8a8a;background:rgba(150,20,40,.55);border:1px solid #8e1430;--old:rgba(255,77,141,.1)}.vd.na{color:#5a6a7a;background:rgba(255,255,255,.04)}
 .ip-score .sub{font-size:10.5px;color:#5a7a90;margin-top:4px;line-height:1.5}
 .ip-score .sub b{color:#9ab8d0;font-weight:500}
 .mini{display:grid;grid-template-columns:92px 1fr 34px;gap:6px;align-items:center;font-size:10px;color:#6a8090;margin-top:4px}
@@ -310,7 +312,7 @@ canvas{display:block}
 #earth-tools .et-top{max-height:min(30vh,280px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(100,180,255,.1) transparent}
 #score-legend{display:none;position:fixed;bottom:16px;left:16px;background:rgba(8,10,18,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,180,255,.07);border-radius:9px;padding:12px 15px;z-index:10;width:240px}
 #score-legend h3{font-family:'Space Grotesk',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#2e4a5e;margin-bottom:8px}
-#score-legend .grad{height:7px;border-radius:4px;background:linear-gradient(90deg,#ff4d8d 0%,#ff4d8d 20%,#4a5468 49.5%,#9fe0b8 50.5%,#34d399 75%,#34d399 100%)}
+#score-legend .grad{height:7px;border-radius:4px;background:linear-gradient(90deg,#6a0d1f 0%,#a3162f 37%,#ff4d8d 38%,#ff4d8d 49.5%,#9fe0b8 50.5%,#34d399 75%,#34d399 100%)}
 #score-legend .ticks{display:flex;justify-content:space-between;font-size:9.5px;color:#5a7080;margin-top:4px}
 #score-legend .foot{font-size:9.5px;color:#3e5a70;margin-top:6px}
 @media (max-width:860px){#earth-tools{width:calc(100vw - 32px);top:96px}#earth-tools .et-top{max-height:22vh}#tile-count{right:18px}}
@@ -563,7 +565,7 @@ const MONTHS = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'Jul
 const CAT = Object.fromEntries(META.categories.map(c => [c.id, c]));        // category id -> metadata
 const EXP = Object.fromEntries(META.experiments.map(e => [e.id, e]));       // experiment id -> metadata
 // Project verdict bands: >= 0.5 sufficient, 0..0.5 partial, < 0 avoid
-const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'sufficient' : v >= 0 ? 'partial' : 'avoid';
+const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'sufficient' : v >= -0.25 ? 'partial' : 'avoid';
 // Overall verdict of a place (Moon target x Earth tile), from its experiment verdicts rather than the overall score:
 // sufficient = at least one experiment is sufficient there; partial = none sufficient but at least one partial;
 // avoid = no experiment is even partly possible. (No Earth site matches the Moon overall, so a negative overall score
@@ -728,7 +730,7 @@ function genLife(t) {
 const tone = v => v === null ? 'na' : verdictOf(v);
 function scoreColorCSS(v) {
   if (v === null || v === undefined || isNaN(v)) return '#3a4250';
-  return v >= 0.5 ? '#34d399' : v >= 0 ? '#7fd8a6' : '#ff4d8d';                // positive = green, negative = pink-red
+  return v >= 0.5 ? '#34d399' : v >= 0 ? '#7fd8a6' : v >= -0.25 ? '#ff4d8d' : '#a3162f';   // green / pink (partial) / dark red (avoid)
 }
 function miniBar(label, v, title) {
   const w = v === null ? 0 : Math.abs(v) * 50, left = v === null || v >= 0 ? 50 : 50 - w;
@@ -1112,19 +1114,21 @@ function updateLabels() { return; }
 
 // ── Colour-by: tile source (default) or a score column for the chosen Moon target ──
 let colorBy = 'source', colorCol = null;
-const SCORE_COL = { pos: new THREE.Color(0x34d399), posLow: new THREE.Color(0x9fe0b8), mid: new THREE.Color(0xfbbf24), neg: new THREE.Color(0xff4d8d), na: new THREE.Color(0x3a4250), zero: new THREE.Color(0x4a5468) };
+const SCORE_COL = { avoid: new THREE.Color(0xa3162f), avoidDeep: new THREE.Color(0x6a0d1f), pos: new THREE.Color(0x34d399), posLow: new THREE.Color(0x9fe0b8), mid: new THREE.Color(0xfbbf24), neg: new THREE.Color(0xff4d8d), na: new THREE.Color(0x3a4250), zero: new THREE.Color(0x4a5468) };
 function scoreColor(v) {
   if (v === null || isNaN(v)) return SCORE_COL.na;
   if (v >= 0.5) return SCORE_COL.pos.clone().lerp(new THREE.Color(0xb6ffe0), Math.min(1, (v - 0.5) / 0.4) * 0.5);
   if (v >= 0) return SCORE_COL.posLow.clone().lerp(SCORE_COL.pos, Math.min(1, v / 0.5));   // any positive score reads green
-  return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.min(1, -v / 0.6));
+  if (v >= -0.25) return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.max(0.45, -v / 0.25));   // partial: pink
+  return SCORE_COL.avoid.clone().lerp(SCORE_COL.avoidDeep, Math.min(1, (-v - 0.25) / 0.5));       // avoid: dark red
 }
 // Overall match is coloured by the place verdict: sufficient = green (light at -0.15, deeper as the score rises),
 // partial / avoid = pink-red by score. colorCol encodes sufficient tiles as 2 + score so a cluster shows its best tile.
 function verdictColor(v) {
   if (v === null || isNaN(v)) return SCORE_COL.na;
   if (v >= 1.5) return SCORE_COL.posLow.clone().lerp(SCORE_COL.pos, Math.max(0, Math.min(1, (v - 2 + 0.15) / 0.65)));
-  return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.min(1, Math.max(0.35, -v / 0.6)));
+  if (v <= -2) return SCORE_COL.avoid.clone().lerp(SCORE_COL.avoidDeep, Math.min(1, Math.max(0, (-(v + 3) - 0.25) / 0.5)));
+  return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, 0.85);
 }
 function markerColor(c) {
   if (colorBy === 'source' || !colorCol) return SCOL[c.source] || new THREE.Color(0x888888);
@@ -1147,11 +1151,11 @@ function setColorBy(v) {
   colorBy = v;
   const m = selectedMoonTarget;
   colorCol = v !== 'source' && m ? SC.column(m.id, v) : null;
-  if (colorCol && v === 'composite') colorCol = colorCol.map((x, j) => isNaN(x) ? x : overallVerdict(m.id, j) === 'sufficient' ? 2 + x : x);
+  if (colorCol && v === 'composite') colorCol = colorCol.map((x, j) => { if (isNaN(x)) return x; const vd = overallVerdict(m.id, j); return vd === 'sufficient' ? 2 + x : vd === 'avoid' ? x - 3 : x; });
   const ticks = document.getElementById('score-legend-ticks'), grad = document.querySelector('#score-legend .grad');
-  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>partial / avoid</span><span></span><span>sufficient (≥ −0.15 and a sufficient test)</span>'
+  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>avoid</span><span>partial (≥ −0.25)</span><span>sufficient (≥ −0.15)</span>'
     : '<span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span>';
-  if (grad) grad.style.background = v === 'composite' ? 'linear-gradient(90deg,#ff4d8d,#8a4a68 49.5%,#9fe0b8 50.5%,#34d399)' : '';
+  if (grad) grad.style.background = v === 'composite' ? 'linear-gradient(90deg,#6a0d1f,#a3162f 33%,#ff4d8d 34%,#ff4d8d 66%,#9fe0b8 67%,#34d399)' : '';
   refreshMarkerColors();
 }
 // Called whenever the chosen Moon target changes (Moon page, assessment)

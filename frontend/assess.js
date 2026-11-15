@@ -842,13 +842,14 @@ function renderCompare() {
     return parts.join(' · ');
   };
   const paramList = k => `<ul class="sd-params">${(SIM_DATA[k] || []).map(([n, u, , , d]) => `<li><b>${esc(n)}</b> <span class="sd-unit">${esc(u)}</span><br>${esc(d)}</li>`).join('')}</ul>`;
-  const rowHTML = (c, v, sub, detail, extra = '') => {
-    const has = ready && !isNa(v), val = has ? Math.max(-1, Math.min(1, v)) : 0, sign = val >= 0 ? 'pos' : 'neg';
+  const rowHTML = (c, v, sub, detail, extra = '', label = null) => {
+    const has = ready && !isNa(v), val = has ? Math.max(-1, Math.min(1, v)) : 0;
+    const lab = label || verdictOf(val), sign = val >= 0 ? 'pos' : lab === 'avoid' ? 'avoid' : 'neg';
     return `<div class="sp-row ${extra}" style="--c:${c.rgb}">
       <button class="sp-main" aria-expanded="false">
         <span class="sp-name"><i class="sp-chev"></i><span>${esc(c.title)}${sub ? `<em class="sp-sub">${esc(sub)}</em>` : ''}</span></span>
         <span class="sp-track"><i class="sp-bar ${sign}" data-v="${val}"></i></span>
-        ${has ? `<span class="sp-val ${sign}">${fmtScore(val)}<small>${verdictOf(val)}</small></span>` : '<span class="sp-val na">—</span>'}
+        ${has ? `<span class="sp-val ${sign}">${fmtScore(val)}<small>${lab}</small></span>` : '<span class="sp-val na">—</span>'}
       </button>
       <div class="sp-body"><div class="sp-inner"><div class="sp-detail"><span></span><div>${detail}</div></div></div></div>
     </div>`;
@@ -858,7 +859,7 @@ function renderCompare() {
     ready ? `${overallVerdict(m.id, e.idx)} for ${m.name} (from its experiment verdicts)` : 'experiment-weighted mean of the comparable categories',
     `<p class="sd-brief">The overall score for this Moon target: an experiment-weighted mean of the categories that actually compare with this specific Moon place (terrain, geology, illumination and water/ice, plus caves for the Tranquillitatis pit). Each category is weighted by how many relevant experiments require it (1.0) or use it in support (0.5). A category with no score takes the target's median. Operations is left out because it is built from the terrain and ice scores, which would count them twice. Temperature, dust and sterility are scored and drive experiment verdicts, but are not averaged in because they are identical across targets or have no real overlap. Finally the overall score is capped at 0.8 − 2 × the share of the tile under plants (including moss and lichen), open water or towns, so a tile with 40% or more such cover is at most 0.</p>
      ${W.length ? `<ul class="sd-params">${W.map(([k, w]) => `<li><b>${esc(catTitle(k))}</b> <span class="sd-unit">${Math.round(w * 100)}% weight</span><br>${ready && !isNa(s[k]) ? 'score ' + fmtScore(s[k]) + ' · ' + verdictOf(s[k]) : 'no score for this pair'}</li>`).join('')}</ul>` : ''}`,
-    'sp-overall');
+    'sp-overall', ready ? overallVerdict(m.id, e.idx) : null);
   const catRow = c => rowHTML(c, ready ? s[c.key] : null, subOf(c),
     `<p class="sd-brief">${esc(c.brief)}</p><p class="sd-method"><b>Method:</b> ${esc(c.how)}${isNa(c.cap) ? '' : ` Capped at +${(+c.cap).toFixed(1)}.`}</p>${paramList(c.key)}`);
   const inC = SIM_CATS.filter(c => c.inComp), outC = SIM_CATS.filter(c => !c.inComp);
