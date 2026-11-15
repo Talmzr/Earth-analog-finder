@@ -1,4 +1,4 @@
-"""Build web/index.html (the site's home page): the 3-D globe front end with the final scoring data embedded (one self-contained file).
+"""Build web/globe.html: the 3-D globe front end with the final scoring data embedded (one self-contained file).
 
     python tools/build_globe.py            (run after ml.score_all and ml.export_web)
 
@@ -10,7 +10,7 @@ Inputs
   results/score_matrices.npz     calibrated category scores, composite, experiment readiness, light-twin month
   results/calibration_summary.csv, web/data/meta.json   calibration quality, caveats, limitations
 Output
-  web/index.html                 TILE_DATA, EARTH_X, EARTH_SUN, MOON_DB, META, SCORE_PACK embedded as JS constants
+  web/globe.html                 TILE_DATA, EARTH_X, EARTH_SUN, MOON_DB, META, SCORE_PACK embedded as JS constants
 """
 from __future__ import annotations
 
@@ -296,11 +296,11 @@ def main():
     for mark in ("/*@DATA@*/", "/*@MOON_TEX@*/null", "/*@ASSESS@*/"):
         assert tpl.count(mark) == 1, mark
     html = tpl.replace("/*@DATA@*/", data).replace("/*@MOON_TEX@*/null", tex).replace("/*@ASSESS@*/", assess)
-    out = ROOT / "web" / "index.html"                                   # home page; the 2-D map is web/map.html
+    out = ROOT / "web" / "globe.html"                                   # the globe; the 2-D map is web/map.html
     out.write_text(html, encoding="utf-8")
-    # old address: keep links to /globe.html working
-    (ROOT / "web" / "globe.html").write_text('<!doctype html><meta charset="utf-8"><title>Earth Analog Finder</title>'
-                                             '<meta http-equiv="refresh" content="0; url=./"><a href="./">Open the globe</a>' + chr(10),
+    # site root opens the globe
+    (ROOT / "web" / "index.html").write_text('<!doctype html><meta charset="utf-8"><title>Earth Analog Finder</title>'
+                                             '<meta http-equiv="refresh" content="0; url=globe.html"><a href="globe.html">Open the globe</a>' + chr(10),
                                              encoding="utf-8")
     print(f"wrote {out.relative_to(ROOT)}  ({out.stat().st_size / 1e6:.1f} MB): {len(tile_ids)} Earth tiles, "
           f"{len(mdb['regions'])} Moon regions, {len(ent_ids)} Moon targets, {len(cats)} categories, {len(exps)} experiments")
