@@ -117,8 +117,20 @@ GVP_SILICIC = ("dacite", "rhyolite", "trachyte", "phonolite")
 
 
 def earth_primary_text(r: dict) -> str:
-    """Name, primary rock type and catalog context: where a rock must appear to count as the tile's main lithology."""
-    return " ; ".join(str(r.get(k)) for k in ("name", "mstrat_lith", "context") if isinstance(r.get(k), str))
+    """Where a rock must appear to count as the tile's main lithology: the tile name, the FIRST lithology listed
+    in the Macrostrat unit (after a 'plutonic:'-style class prefix), and curated named-site tags.
+    'granite, granodiorite; ...; gabbro, anorthositic' or 'diorite; minor anorthosite' are therefore not primary
+    anorthosite, while 'plutonic: anorthosite' and Mistastin's 'anorthosite' tag are."""
+    parts = [str(r.get("name"))] if isinstance(r.get("name"), str) else []
+    lith = r.get("mstrat_lith")
+    if isinstance(lith, str) and lith.strip():
+        body = lith.split(":", 1)[1] if re.match(r"^\s*[a-z ]+:", lith) else lith
+        parts.append(re.split(r"[,;]|\bto\b|\band\b|\bwith\b", body.strip(), maxsplit=1)[0])
+    ctx = r.get("context")
+    if r.get("source") == "named_site" and isinstance(ctx, str):
+        m = re.search(r"tags=([^;]*(?:;[^;=]*)*?)(?:;\s*\w+=|$)", ctx)
+        parts.append(m.group(1) if m else ctx)
+    return " ; ".join(parts)
 
 
 def earth_classes(text: str, source: str = "", ice_frac: float = np.nan, primary: str | None = None) -> dict:
