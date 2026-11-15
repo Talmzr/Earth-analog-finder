@@ -23,11 +23,12 @@ LIMITS = """## 6. Deviations from the brief and known limits
 
 - **Data:** the brief's counts were stale. Used 5,610 Moon tiles (3,609 polar + 2,001 mid-latitude), 151 anchors, 128 x 128 patches and 30 Moon targets.
 - **Sub-score floor:** the brief's hard floor (`max(-1, 1 - |d|/tol)`) made every Earth site tie at -1 for temperature. Same formula within one tolerance, soft approach to -1 beyond, so closest-approach order survives.
-- **Terrain:** added a CORAL alignment term, random-blur views and early stopping on held-out cross-body agreement (longer training made Moon-to-Earth matching worse).
+- **Terrain:** the fine-tuned DINOv2 embedding is trained and evaluated (section 1) but not used in the score: alone it agrees 0.31 with the terrain anchors and removing it lowered the leave-one-out error. The score uses measured relief / slope / roughness / steep share.
 - **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
-- **Thermal:** six terms instead of four (added max temperature and noon sun height from `categories.json`). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
+- **Thermal:** night minimum, grazing sun and noon sun height only (swing, max temperature and polar night were dropped). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Dust reference:** 45% fines (lunar soil median grain size ~70 um) instead of the brief's '70-80% sand-sized'.
+- **Dust:** SoilGrids grain size / density / coarse fragments, aerosol and dryness were dropped (no or negative effect, 5 km modelled soil, no Antarctic data); dust is bare ground + volcanic tephra.
+- **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
 - **Caves:** the rule levels (+0.5 / +0.3 / 0 / -0.5) are the score; anchors check it rather than rescale it.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.
@@ -59,7 +60,10 @@ def models_section(tm, gm, info):
     ch = info.get("terrain_ssl_chosen")
     chosen = f"{ch.get('variant')} (agreement {ch.get('agreement')})" if isinstance(ch, dict) else str(ch)
     out.append("Terrain embeddings stay separable by body, so pooled training alone does not give body-agnostic features. "
-               f"The scorer compares post-hoc alignments on held-out blocks and uses the best: **{chosen}**.")
+               f"Post-hoc alignments are compared on held-out blocks; the best is **{chosen}**."
+               + ("" if info.get("terrain_ssl_in_score", True) else
+                  " The embedding is **not used in the terrain score**: against the anchors it adds nothing over the measured "
+                  "relief / slope / roughness (see `KEEP_TERMS` in `ml/score_all.py`)."))
     out += ["", "| Alignment | agreement (lower is better) |", "|---|---|"]
     out += [f"| {v['variant']} | {f3(v['agreement'])} |" for v in info.get("terrain_ssl_variants", [])]
     return out + [""]
@@ -115,9 +119,16 @@ def composite_section(params):
     ents = params.get("entities", [])
     if not w or not ents:
         return []
-    out = ["## 5. Composite weights", "",
-           "Composite = weighted mean of category scores; each category's weight is the number of experiments relevant to "
-           "that Moon target that require (1.0) or support (0.5) it, normalised. Typical weights (median over targets):", "",
+    cc = params.get("composite_categories") or list(w)
+    out = ["## 5. Scoring terms and composite weights", "",
+           "Terms kept per category after the 2026-11-15 audit (see `KEEP_TERMS` in `ml/score_all.py` for why each dropped "
+           "term was removed):", "", "| Category | Terms used |", "|---|---|"]
+    out += [f"| {c} | {', '.join(ks)} |" for c, ks in (params.get("kept_terms") or {}).items()]
+    out += ["", f"Composite = weighted mean of **{', '.join(cc)}** only (the categories that compare an Earth tile with the "
+            "specific Moon target; caves applies to the Tranquillitatis pit only). Each weight is the number of experiments "
+            "relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Thermal (no overlap: "
+            "a latitude ranking), dust and biology (Earth-only) remain category scores and experiment requirements. "
+            "Typical weights (median over targets):", "",
            "| " + " | ".join(w) + " |", "|" + "---|" * len(w),
            "| " + " | ".join(f"{np.median(v):.2f}" for v in w.values()) + " |", ""]
     return out

@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T10:22:53Z",
+ "generated_utc": "2026-11-15T10:51:38Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -26,17 +26,16 @@
    "id": "terrain",
    "config_id": "terrain",
    "label": "Terrain & topography",
-   "how": "DINOv2-small fine-tuned self-supervised on Moon + Earth elevation patches, blended with measured relief / slope / roughness",
+   "how": "Measured relief, slope, roughness and steep-ground share, same 80 m elevation processing on both bodies (the fine-tuned DINOv2 model is evaluated but does not improve the score, so it is not used)",
    "cap": 0.9,
    "n_anchors": 21,
    "terms": {
-    "kernel": 0.7295,
-    "ssl_cos": 0.4633
+    "kernel": 0.7459
    },
-   "intercept": -0.0305,
-   "anchor_mae": 0.15,
-   "anchor_mae_leave_one_out": 0.16,
-   "anchor_rank_agreement": 0.94,
+   "intercept": -0.0454,
+   "anchor_mae": 0.13,
+   "anchor_mae_leave_one_out": 0.14,
+   "anchor_rank_agreement": 0.95,
    "anchors_off_by_0_3": 2
   },
   {
@@ -60,37 +59,33 @@
    "id": "thermal",
    "config_id": "thermal_illumination",
    "label": "Temperature & illumination",
-   "how": "Physics terms (temperature swing / min / max, grazing sun, noon sun, polar night). Closest approach: no Earth site is thermally lunar",
+   "how": "Night minimum temperature, grazing-sun share, noon sun height. Closest approach only: no Earth site overlaps the Moon, so this ranks how polar and cold the site is; not part of the overall score",
    "cap": 0.4,
    "n_anchors": 19,
    "terms": {
-    "swing": 0.0,
-    "t_min": 0.2442,
-    "t_max": 0.0246,
-    "grazing_sun": 0.2755,
-    "noon_sun": 0.2376,
-    "polar_night": 0.0029
+    "t_min": 0.2433,
+    "grazing_sun": 0.2772,
+    "noon_sun": 0.2409
    },
-   "intercept": -0.0562,
+   "intercept": -0.0478,
    "anchor_mae": 0.12,
-   "anchor_mae_leave_one_out": 0.14,
-   "anchor_rank_agreement": 0.64,
+   "anchor_mae_leave_one_out": 0.13,
+   "anchor_rank_agreement": 0.76,
    "anchors_off_by_0_3": 0
   },
   {
    "id": "water_ice",
    "config_id": "water_ice",
    "label": "Water, ice & permafrost",
-   "how": "Frozen ground, surface ice, distance from flat bare ground to ice, absence of liquid water",
+   "how": "Frozen ground within ~1 m, distance from flat bare ground to ice, absence of liquid water",
    "cap": 0.7,
    "n_anchors": 20,
    "terms": {
-    "frozen_ground": 0.244,
-    "surface_ice": 0.0329,
-    "traverse": 0.3117,
-    "no_liquid_water": 0.1474
+    "frozen_ground": 0.2485,
+    "traverse": 0.3096,
+    "no_liquid_water": 0.1517
    },
-   "intercept": -0.1739,
+   "intercept": -0.1517,
    "anchor_mae": 0.14,
    "anchor_mae_leave_one_out": 0.18,
    "anchor_rank_agreement": 0.95,
@@ -100,42 +95,35 @@
    "id": "dust",
    "config_id": "dust_regolith",
    "label": "Dust & regolith",
-   "how": "Earth soil vs a fixed lunar-regolith reference (grain size, density, bare ground, dryness, volcanic tephra)",
+   "how": "Bare ground share and volcanic ash/tephra. Earth-only ranking against a fixed lunar-regolith idea; not part of the overall score",
    "cap": 0.7,
    "n_anchors": 18,
    "terms": {
-    "fines": 0.1053,
-    "bulk_density": 0.1285,
-    "coarse": 0.0,
-    "bare": 0.3845,
-    "dryness": 0.1793,
-    "aerosol": 0.0,
-    "tephra": 0.305
+    "bare": 0.5065,
+    "tephra": 0.3225
    },
-   "intercept": -0.2261,
+   "intercept": -0.1815,
    "anchor_mae": 0.15,
-   "anchor_mae_leave_one_out": 0.2,
-   "anchor_rank_agreement": 0.91,
-   "anchors_off_by_0_3": 0
+   "anchor_mae_leave_one_out": 0.17,
+   "anchor_rank_agreement": 0.96,
+   "anchors_off_by_0_3": 2
   },
   {
    "id": "biology",
    "config_id": "biology_sterility",
    "label": "Biological sterility",
-   "how": "How lifeless the Earth site is (vegetation, rainfall, soil moisture, trees). Earth-only ranking, capped at 0.6",
+   "how": "How lifeless the Earth site is (vegetation greenness, rainfall). Earth-only ranking, capped at 0.6; not part of the overall score",
    "cap": 0.6,
    "n_anchors": 18,
    "terms": {
-    "ndvi": 1.0451,
-    "precip": 0.653,
-    "soil_moisture": 0.9755,
-    "tree_cover": 0.434
+    "ndvi": 1.14,
+    "precip": 0.7417
    },
-   "intercept": 0.4985,
-   "anchor_mae": 0.18,
-   "anchor_mae_leave_one_out": 0.2,
+   "intercept": 0.4376,
+   "anchor_mae": 0.17,
+   "anchor_mae_leave_one_out": 0.18,
    "anchor_rank_agreement": 0.88,
-   "anchors_off_by_0_3": 1
+   "anchors_off_by_0_3": 2
   },
   {
    "id": "caves",
@@ -157,20 +145,18 @@
    "id": "operations",
    "config_id": "ops_landing_mobility",
    "label": "Landing & operations",
-   "how": "Calibrated terrain + temperature + ice scores, slope hazard, traverse, penalty for forest / towns",
+   "how": "Calibrated terrain and ice scores plus slope hazard, penalty for forest / towns / water",
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.5813,
-    "thermal": 0.0833,
-    "water_ice": 0.2834,
-    "slope_hazard": 0.263,
-    "traverse": 0.1095
+    "terrain": 0.5971,
+    "water_ice": 0.3923,
+    "slope_hazard": 0.2314
    },
-   "intercept": 0.0793,
-   "anchor_mae": 0.23,
-   "anchor_mae_leave_one_out": 0.28,
-   "anchor_rank_agreement": 0.74,
+   "intercept": 0.0115,
+   "anchor_mae": 0.21,
+   "anchor_mae_leave_one_out": 0.25,
+   "anchor_rank_agreement": 0.77,
    "anchors_off_by_0_3": 4
   }
  ],
@@ -519,6 +505,7 @@
    "variant": "inlp8",
    "agreement": 0.462
   },
+  "terrain_ssl_in_score": false,
   "geology_embeddings": "fine-tuned BGE",
   "dust_reference": {
    "fines_pct": 45.0,
@@ -532,9 +519,52 @@
    "no_tube_tiles": 2513
   }
  },
+ "composite_categories": [
+  "terrain",
+  "geology",
+  "water_ice",
+  "operations",
+  "caves"
+ ],
+ "kept_terms": {
+  "terrain": [
+   "kernel"
+  ],
+  "geology": [
+   "lith_match",
+   "text_cos"
+  ],
+  "thermal": [
+   "t_min",
+   "grazing_sun",
+   "noon_sun"
+  ],
+  "water_ice": [
+   "frozen_ground",
+   "traverse",
+   "no_liquid_water"
+  ],
+  "dust": [
+   "bare",
+   "tephra"
+  ],
+  "biology": [
+   "ndvi",
+   "precip"
+  ],
+  "caves": [
+   "rule"
+  ],
+  "operations": [
+   "terrain",
+   "water_ice",
+   "slope_hazard"
+  ]
+ },
  "limitations": [
   "No ground truth exists for analog quality: the -1..+1 scale is set by draft expert anchors (all still marked needs_review).",
-  "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach, not similarity.",
+  "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach (a latitude ranking), not similarity, and are left out of the overall score.",
+  "Dust and biology compare Earth sites with a fixed lunar idea, not with per-site Moon data, and are left out of the overall score.",
   "Earth climate layers are coarser (5-50 km) than the 10 km tiles; Antarctica lacks land-cover, soil and rainfall layers.",
   "Lunar geology comes from a 1:5M map plus the known composition of mare vs highland crust, not per-tile mineralogy.",
   "Thermal scores for the Tranquillitatis pit are extrapolated (thermal anchors are all polar).",

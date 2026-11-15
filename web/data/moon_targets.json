@@ -20,14 +20,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 0.82,
   "best_score": {
-   "terrain": 0.77,
+   "terrain": 0.64,
    "geology": 0.8,
-   "thermal": -0.6,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.59,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.7
+   "operations": 0.55
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -45,45 +45,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 17,
-   "rover_mobility_navigation": 2,
-   "ice_prospecting_instruments": 209,
+   "landing_hazard_detection": 4,
+   "rover_mobility_navigation": 1,
+   "ice_prospecting_instruments": 189,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 4,
+   "regolith_excavation_construction": 2,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 172,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 51,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.07
+    "name": "sparse_cold sample 49",
+    "id": "lc_sparse_cold_0049",
+    "composite": 0.3
    },
    {
-    "name": "antarctic_ice_free sample 342",
-    "id": "lc_antarctic_ice_free_0342",
-    "composite": 0.07
+    "name": "antarctic_ice_free sample 253",
+    "id": "lc_antarctic_ice_free_0253",
+    "composite": 0.28
    },
    {
-    "name": "bare_midlat sample 148",
-    "id": "lc_bare_midlat_0148",
-    "composite": 0.05
+    "name": "ice_edge sample 273",
+    "id": "lc_ice_edge_0273",
+    "composite": 0.28
    }
   ]
  },
@@ -108,14 +108,14 @@
   "cold_trap_frac": 0.7,
   "landing_to_ice_km": 0.82,
   "best_score": {
-   "terrain": 0.73,
+   "terrain": 0.61,
    "geology": 0.8,
-   "thermal": -0.58,
+   "thermal": -0.59,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.46
+   "operations": 0.31
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -133,45 +133,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 10,
-   "rover_mobility_navigation": 3,
+   "landing_hazard_detection": 0,
+   "rover_mobility_navigation": 0,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 4,
+   "regolith_excavation_construction": 3,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 73,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 7,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.11
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.32
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.06
+    "name": "lichen_moss sample 70",
+    "id": "lc_lichen_moss_0070",
+    "composite": 0.23
    },
    {
-    "name": "sparse_cold sample 140",
-    "id": "lc_sparse_cold_0140",
-    "composite": 0.03
+    "name": "antarctic_ice_free sample 349",
+    "id": "lc_antarctic_ice_free_0349",
+    "composite": 0.22
    }
   ]
  },
@@ -196,14 +196,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.37,
   "best_score": {
-   "terrain": 0.79,
+   "terrain": 0.67,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.53,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.79
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -220,44 +220,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 103,
-   "rover_mobility_navigation": 14,
-   "ice_prospecting_instruments": 221,
-   "regolith_excavation_construction": 8,
+   "landing_hazard_detection": 58,
+   "rover_mobility_navigation": 17,
+   "ice_prospecting_instruments": 201,
+   "regolith_excavation_construction": 6,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 608,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 418,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
-    "name": "Ashikule Volcanic Field",
-    "id": "gvp_304030",
-    "composite": 0.22
+    "name": "lichen_moss sample 243",
+    "id": "lc_lichen_moss_0243",
+    "composite": 0.45
    },
    {
-    "name": "antarctic_ice_free sample 327",
-    "id": "lc_antarctic_ice_free_0327",
-    "composite": 0.18
+    "name": "lichen_moss sample 251",
+    "id": "lc_lichen_moss_0251",
+    "composite": 0.43
    },
    {
-    "name": "bare_midlat sample 355",
-    "id": "lc_bare_midlat_0355",
-    "composite": 0.16
+    "name": "Hiawatha impact structure",
+    "id": "crater_hiawatha",
+    "composite": 0.43
    }
   ]
  },
@@ -282,14 +282,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.37,
   "best_score": {
-   "terrain": 0.87,
+   "terrain": 0.68,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.53,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.74
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -307,45 +307,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 89,
-   "rover_mobility_navigation": 10,
-   "ice_prospecting_instruments": 210,
+   "landing_hazard_detection": 36,
+   "rover_mobility_navigation": 17,
+   "ice_prospecting_instruments": 190,
    "isru_ice_extraction": 0,
    "regolith_excavation_construction": 7,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 460,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 312,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Ashikule Volcanic Field",
-    "id": "gvp_304030",
-    "composite": 0.18
+    "name": "Hiawatha impact structure",
+    "id": "crater_hiawatha",
+    "composite": 0.42
    },
    {
-    "name": "bare_midlat sample 355",
-    "id": "lc_bare_midlat_0355",
-    "composite": 0.15
+    "name": "lichen_moss sample 243",
+    "id": "lc_lichen_moss_0243",
+    "composite": 0.38
    },
    {
-    "name": "antarctic_ice_free sample 327",
-    "id": "lc_antarctic_ice_free_0327",
-    "composite": 0.15
+    "name": "lichen_moss sample 251",
+    "id": "lc_lichen_moss_0251",
+    "composite": 0.38
    }
   ]
  },
@@ -370,14 +370,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.72,
+   "terrain": 0.64,
    "geology": 0.8,
-   "thermal": -0.51,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.58,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.66
+   "operations": 0.52
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -395,45 +395,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 4,
-   "rover_mobility_navigation": 3,
-   "ice_prospecting_instruments": 221,
+   "landing_hazard_detection": 6,
+   "rover_mobility_navigation": 2,
+   "ice_prospecting_instruments": 201,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 5,
+   "regolith_excavation_construction": 7,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 211,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 129,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Purico Complex",
-    "id": "gvp_355094",
-    "composite": 0.09
+    "name": "lichen_moss sample 269",
+    "id": "lc_lichen_moss_0269",
+    "composite": 0.28
    },
    {
-    "name": "bare_midlat sample 226",
-    "id": "lc_bare_midlat_0226",
-    "composite": 0.04
+    "name": "antarctic_ice_free sample 388",
+    "id": "lc_antarctic_ice_free_0388",
+    "composite": 0.26
    },
    {
-    "name": "Negrillar, La",
-    "id": "gvp_355108",
-    "composite": 0.03
+    "name": "antarctic_ice_free sample 253",
+    "id": "lc_antarctic_ice_free_0253",
+    "composite": 0.26
    }
   ]
  },
@@ -458,14 +458,14 @@
   "cold_trap_frac": 0.61,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.74,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.51,
+   "thermal": -0.58,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.7
+   "operations": 0.66
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -483,45 +483,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 26,
-   "rover_mobility_navigation": 3,
+   "landing_hazard_detection": 29,
+   "rover_mobility_navigation": 9,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 4,
+   "regolith_excavation_construction": 6,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 275,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 194,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.08
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.42
    },
    {
     "name": "sparse_cold sample 49",
     "id": "lc_sparse_cold_0049",
-    "composite": 0.06
+    "composite": 0.38
    },
    {
-    "name": "ice_edge sample 397",
-    "id": "lc_ice_edge_0397",
-    "composite": 0.06
+    "name": "lichen_moss sample 70",
+    "id": "lc_lichen_moss_0070",
+    "composite": 0.33
    }
   ]
  },
@@ -546,14 +546,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.73,
+   "terrain": 0.66,
    "geology": 0.78,
-   "thermal": -0.49,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.44
+   "operations": 0.37
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -570,44 +570,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 1,
+   "landing_hazard_detection": 0,
    "rover_mobility_navigation": 3,
-   "ice_prospecting_instruments": 221,
+   "ice_prospecting_instruments": 201,
    "regolith_excavation_construction": 0,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 6,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 1,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
-   "instrument_gpr_drill_subsurface": 19,
-   "planetary_protection_contamination_blanks": 99,
+   "instrument_gpr_drill_subsurface": 15,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": 0.15
-   },
-   {
     "name": "ice_edge sample 184",
     "id": "lc_ice_edge_0184",
-    "composite": 0.04
+    "composite": 0.2
    },
    {
-    "name": "ice_edge sample 386",
-    "id": "lc_ice_edge_0386",
-    "composite": 0.04
+    "name": "antarctic_ice_free sample 275",
+    "id": "lc_antarctic_ice_free_0275",
+    "composite": 0.19
+   },
+   {
+    "name": "McMurdo Dry Valleys (Wright Valley)",
+    "id": "dry_valleys_wright",
+    "composite": 0.18
    }
   ]
  },
@@ -632,14 +632,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.5,
+   "terrain": 0.4,
    "geology": 0.78,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.56,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.23
+   "operations": 0.15
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -659,43 +659,43 @@
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
    "rover_mobility_navigation": 0,
-   "ice_prospecting_instruments": 198,
+   "ice_prospecting_instruments": 177,
    "isru_ice_extraction": 0,
    "regolith_excavation_construction": 0,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 27,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
-   "instrument_gpr_drill_subsurface": 18,
-   "planetary_protection_contamination_blanks": 99,
+   "instrument_gpr_drill_subsurface": 15,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
+    "name": "bare_polar sample 29",
+    "id": "lc_bare_polar_0029",
+    "composite": 0.11
+   },
+   {
     "name": "McMurdo Dry Valleys (Wright Valley)",
     "id": "dry_valleys_wright",
-    "composite": 0.05
+    "composite": 0.1
    },
    {
-    "name": "ice_edge sample 124",
-    "id": "lc_ice_edge_0124",
-    "composite": -0.01
-   },
-   {
-    "name": "ice_edge sample 91",
-    "id": "lc_ice_edge_0091",
-    "composite": -0.03
+    "name": "ice_edge sample 214",
+    "id": "lc_ice_edge_0214",
+    "composite": 0.09
    }
   ]
  },
@@ -720,14 +720,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.83,
   "best_score": {
-   "terrain": 0.87,
+   "terrain": 0.65,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.76
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -744,44 +744,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 57,
-   "rover_mobility_navigation": 4,
-   "ice_prospecting_instruments": 221,
+   "landing_hazard_detection": 32,
+   "rover_mobility_navigation": 7,
+   "ice_prospecting_instruments": 201,
    "regolith_excavation_construction": 6,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 505,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 341,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
-    "name": "Atakor Volcanic Field",
-    "id": "gvp_225005",
-    "composite": 0.17
+    "name": "lichen_moss sample 175",
+    "id": "lc_lichen_moss_0175",
+    "composite": 0.42
    },
    {
-    "name": "bare_midlat sample 266",
-    "id": "lc_bare_midlat_0266",
-    "composite": 0.16
+    "name": "lichen_moss sample 28",
+    "id": "lc_lichen_moss_0028",
+    "composite": 0.37
    },
    {
-    "name": "ice_edge sample 158",
-    "id": "lc_ice_edge_0158",
-    "composite": 0.13
+    "name": "ice_edge sample 391",
+    "id": "lc_ice_edge_0391",
+    "composite": 0.33
    }
   ]
  },
@@ -806,14 +806,14 @@
   "cold_trap_frac": 0.22,
   "landing_to_ice_km": 1.83,
   "best_score": {
-   "terrain": 0.75,
+   "terrain": 0.61,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.71
+   "operations": 0.6
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -831,45 +831,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 31,
-   "rover_mobility_navigation": 4,
-   "ice_prospecting_instruments": 192,
+   "landing_hazard_detection": 16,
+   "rover_mobility_navigation": 6,
+   "ice_prospecting_instruments": 185,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 4,
+   "regolith_excavation_construction": 7,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 297,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 220,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Purico Complex",
-    "id": "gvp_355094",
-    "composite": 0.13
+    "name": "lichen_moss sample 269",
+    "id": "lc_lichen_moss_0269",
+    "composite": 0.35
    },
    {
-    "name": "bare_midlat sample 148",
-    "id": "lc_bare_midlat_0148",
-    "composite": 0.09
+    "name": "sparse_cold sample 49",
+    "id": "lc_sparse_cold_0049",
+    "composite": 0.31
    },
    {
-    "name": "bare_polar sample 237",
-    "id": "lc_bare_polar_0237",
-    "composite": 0.09
+    "name": "sparse_cold sample 163",
+    "id": "lc_sparse_cold_0163",
+    "composite": 0.3
    }
   ]
  },
@@ -894,14 +894,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.24,
   "best_score": {
-   "terrain": 0.72,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.73
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -919,45 +919,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 42,
-   "rover_mobility_navigation": 5,
-   "ice_prospecting_instruments": 221,
+   "landing_hazard_detection": 32,
+   "rover_mobility_navigation": 12,
+   "ice_prospecting_instruments": 201,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 9,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 510,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 334,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Ashikule Volcanic Field",
-    "id": "gvp_304030",
-    "composite": 0.16
+    "name": "Hiawatha impact structure",
+    "id": "crater_hiawatha",
+    "composite": 0.4
    },
    {
-    "name": "sparse_hot sample 237",
-    "id": "lc_sparse_hot_0237",
-    "composite": 0.14
+    "name": "lichen_moss sample 243",
+    "id": "lc_lichen_moss_0243",
+    "composite": 0.34
    },
    {
-    "name": "bare_midlat sample 355",
-    "id": "lc_bare_midlat_0355",
-    "composite": 0.11
+    "name": "lichen_moss sample 251",
+    "id": "lc_lichen_moss_0251",
+    "composite": 0.33
    }
   ]
  },
@@ -982,14 +982,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.24,
   "best_score": {
-   "terrain": 0.79,
+   "terrain": 0.67,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.77
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1007,45 +1007,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 39,
-   "rover_mobility_navigation": 10,
-   "ice_prospecting_instruments": 206,
+   "landing_hazard_detection": 29,
+   "rover_mobility_navigation": 7,
+   "ice_prospecting_instruments": 185,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 9,
+   "regolith_excavation_construction": 6,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 429,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 299,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Ashikule Volcanic Field",
-    "id": "gvp_304030",
-    "composite": 0.12
+    "name": "lichen_moss sample 175",
+    "id": "lc_lichen_moss_0175",
+    "composite": 0.39
    },
    {
-    "name": "bare_midlat sample 266",
-    "id": "lc_bare_midlat_0266",
-    "composite": 0.12
+    "name": "ice_edge sample 391",
+    "id": "lc_ice_edge_0391",
+    "composite": 0.34
    },
    {
-    "name": "bare_midlat sample 247",
-    "id": "lc_bare_midlat_0247",
-    "composite": 0.1
+    "name": "bare_polar sample 216",
+    "id": "lc_bare_polar_0216",
+    "composite": 0.33
    }
   ]
  },
@@ -1070,14 +1070,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.63,
+   "terrain": 0.56,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.38
+   "operations": 0.27
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1095,43 +1095,43 @@
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 1,
-   "ice_prospecting_instruments": 221,
-   "regolith_excavation_construction": 0,
+   "rover_mobility_navigation": 0,
+   "ice_prospecting_instruments": 201,
+   "regolith_excavation_construction": 1,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 4,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 0,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": 0.16
+    "name": "ice_edge sample 274",
+    "id": "lc_ice_edge_0274",
+    "composite": 0.25
    },
    {
-    "name": "Lascar",
-    "id": "gvp_355100",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 232",
+    "id": "lc_antarctic_ice_free_0232",
+    "composite": 0.2
    },
    {
-    "name": "antarctic_ice_free sample 78",
-    "id": "lc_antarctic_ice_free_0078",
-    "composite": 0.04
+    "name": "Ojos del Salado, Nevados",
+    "id": "gvp_355130",
+    "composite": 0.15
    }
   ]
  },
@@ -1156,14 +1156,14 @@
   "cold_trap_frac": 0.09,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.53,
+   "terrain": 0.61,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.56,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.44
+   "operations": 0.45
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1181,45 +1181,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 0,
+   "landing_hazard_detection": 1,
    "rover_mobility_navigation": 0,
-   "ice_prospecting_instruments": 203,
+   "ice_prospecting_instruments": 187,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 1,
+   "regolith_excavation_construction": 2,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 16,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 2,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Solo, El",
-    "id": "gvp_355131",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 233",
+    "id": "lc_antarctic_ice_free_0233",
+    "composite": 0.24
    },
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.06
+    "name": "ice_edge sample 212",
+    "id": "lc_ice_edge_0212",
+    "composite": 0.23
    },
    {
-    "name": "ice_edge sample 124",
-    "id": "lc_ice_edge_0124",
-    "composite": 0.05
+    "name": "antarctic_ice_free sample 232",
+    "id": "lc_antarctic_ice_free_0232",
+    "composite": 0.22
    }
   ]
  },
@@ -1244,14 +1244,14 @@
   "cold_trap_frac": 0.01,
   "landing_to_ice_km": 2.25,
   "best_score": {
-   "terrain": 0.64,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.52
+   "operations": 0.47
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1268,44 +1268,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 22,
+   "landing_hazard_detection": 9,
    "rover_mobility_navigation": 1,
-   "ice_prospecting_instruments": 222,
-   "regolith_excavation_construction": 3,
+   "ice_prospecting_instruments": 201,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 167,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 72,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 8",
-    "id": "lc_antarctic_ice_free_0008",
-    "composite": 0.08
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.35
    },
    {
-    "name": "ice_edge sample 374",
-    "id": "lc_ice_edge_0374",
-    "composite": 0.08
+    "name": "lichen_moss sample 70",
+    "id": "lc_lichen_moss_0070",
+    "composite": 0.28
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 85",
+    "id": "lc_antarctic_ice_free_0085",
+    "composite": 0.28
    }
   ]
  },
@@ -1330,14 +1330,14 @@
   "cold_trap_frac": 0.41,
   "landing_to_ice_km": 2.25,
   "best_score": {
-   "terrain": 0.73,
+   "terrain": 0.67,
    "geology": 0.8,
-   "thermal": -0.49,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.54,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.67
+   "operations": 0.57
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1355,45 +1355,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 37,
-   "rover_mobility_navigation": 1,
-   "ice_prospecting_instruments": 177,
+   "landing_hazard_detection": 27,
+   "rover_mobility_navigation": 3,
+   "ice_prospecting_instruments": 182,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 2,
+   "regolith_excavation_construction": 4,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 155,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 102,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.13
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.34
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.12
+    "name": "antarctic_ice_free sample 349",
+    "id": "lc_antarctic_ice_free_0349",
+    "composite": 0.32
    },
    {
-    "name": "Solo, El",
-    "id": "gvp_355131",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 161",
+    "id": "lc_antarctic_ice_free_0161",
+    "composite": 0.31
    }
   ]
  },
@@ -1418,14 +1418,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 2.23,
   "best_score": {
-   "terrain": 0.86,
+   "terrain": 0.62,
    "geology": 0.8,
-   "thermal": -0.51,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.58,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.68
+   "operations": 0.48
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1442,44 +1442,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 3,
+   "landing_hazard_detection": 1,
    "rover_mobility_navigation": 0,
-   "ice_prospecting_instruments": 222,
+   "ice_prospecting_instruments": 201,
    "regolith_excavation_construction": 0,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 5,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 1,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.212,
-   "geology": 0.154,
-   "thermal": 0.135,
-   "water_ice": 0.077,
-   "dust": 0.173,
-   "biology": 0.096,
+   "terrain": 0.355,
+   "geology": 0.258,
+   "thermal": 0.0,
+   "water_ice": 0.129,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.154
+   "operations": 0.258
   },
   "top3": [
    {
     "name": "antarctic_ice_free sample 233",
     "id": "lc_antarctic_ice_free_0233",
-    "composite": 0.19
+    "composite": 0.27
    },
    {
-    "name": "Morning",
-    "id": "gvp_390017",
-    "composite": 0.07
+    "name": "ice_edge sample 212",
+    "id": "lc_ice_edge_0212",
+    "composite": 0.17
    },
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.06
+    "name": "lichen_moss sample 210",
+    "id": "lc_lichen_moss_0210",
+    "composite": 0.16
    }
   ]
  },
@@ -1506,12 +1506,12 @@
   "best_score": {
    "terrain": 0.58,
    "geology": 0.8,
-   "thermal": -0.51,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.58,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.31
+   "operations": 0.23
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1531,43 +1531,43 @@
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
    "rover_mobility_navigation": 0,
-   "ice_prospecting_instruments": 198,
+   "ice_prospecting_instruments": 177,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 0,
+   "regolith_excavation_construction": 1,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 2,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 0,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Lascar",
-    "id": "gvp_355100",
-    "composite": 0.06
+    "name": "Ojos del Salado, Nevados",
+    "id": "gvp_355130",
+    "composite": 0.14
    },
    {
-    "name": "ice_edge sample 124",
-    "id": "lc_ice_edge_0124",
-    "composite": 0.05
+    "name": "antarctic_ice_free sample 232",
+    "id": "lc_antarctic_ice_free_0232",
+    "composite": 0.14
    },
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": 0.04
+    "name": "antarctic_ice_free sample 7",
+    "id": "lc_antarctic_ice_free_0007",
+    "composite": 0.13
    }
   ]
  },
@@ -1592,14 +1592,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.0,
   "best_score": {
-   "terrain": 0.76,
+   "terrain": 0.61,
    "geology": 0.8,
-   "thermal": -0.58,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.59,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.48
+   "operations": 0.36
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1617,45 +1617,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 4,
+   "landing_hazard_detection": 0,
    "rover_mobility_navigation": 0,
-   "ice_prospecting_instruments": 214,
+   "ice_prospecting_instruments": 192,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 3,
+   "regolith_excavation_construction": 1,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 81,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 17,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.11
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.28
    },
    {
-    "name": "sparse_cold sample 140",
-    "id": "lc_sparse_cold_0140",
-    "composite": 0.07
+    "name": "sparse_cold sample 49",
+    "id": "lc_sparse_cold_0049",
+    "composite": 0.24
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.03
+    "name": "lichen_moss sample 252",
+    "id": "lc_lichen_moss_0252",
+    "composite": 0.21
    }
   ]
  },
@@ -1680,14 +1680,14 @@
   "cold_trap_frac": 0.06,
   "landing_to_ice_km": 1.0,
   "best_score": {
-   "terrain": 0.73,
+   "terrain": 0.63,
    "geology": 0.8,
-   "thermal": -0.57,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.6,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.65
+   "operations": 0.58
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1705,45 +1705,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 20,
-   "rover_mobility_navigation": 6,
-   "ice_prospecting_instruments": 205,
+   "landing_hazard_detection": 10,
+   "rover_mobility_navigation": 3,
+   "ice_prospecting_instruments": 187,
    "isru_ice_extraction": 0,
    "regolith_excavation_construction": 5,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 239,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 115,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Purico Complex",
-    "id": "gvp_355094",
-    "composite": 0.08
+    "name": "sparse_cold sample 49",
+    "id": "lc_sparse_cold_0049",
+    "composite": 0.32
    },
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.06
+    "name": "antarctic_ice_free sample 253",
+    "id": "lc_antarctic_ice_free_0253",
+    "composite": 0.3
    },
    {
-    "name": "Dubbi",
-    "id": "gvp_221100",
-    "composite": 0.05
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.3
    }
   ]
  },
@@ -1768,14 +1768,14 @@
   "cold_trap_frac": 1.0,
   "landing_to_ice_km": 0.82,
   "best_score": {
-   "terrain": 0.66,
+   "terrain": 0.61,
    "geology": 0.8,
-   "thermal": -0.63,
+   "thermal": -0.61,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.63
+   "operations": 0.52
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1793,45 +1793,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 10,
-   "rover_mobility_navigation": 0,
+   "landing_hazard_detection": 2,
+   "rover_mobility_navigation": 1,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
    "regolith_excavation_construction": 0,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 74,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 34,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": 0.11
-   },
-   {
     "name": "antarctic_ice_free sample 110",
     "id": "lc_antarctic_ice_free_0110",
-    "composite": 0.1
+    "composite": 0.25
+   },
+   {
+    "name": "ice_edge sample 319",
+    "id": "lc_ice_edge_0319",
+    "composite": 0.23
    },
    {
     "name": "antarctic_ice_free sample 48",
     "id": "lc_antarctic_ice_free_0048",
-    "composite": 0.04
+    "composite": 0.23
    }
   ]
  },
@@ -1856,14 +1856,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.37,
   "best_score": {
-   "terrain": 0.76,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.48,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.53,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.77
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1881,45 +1881,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 65,
-   "rover_mobility_navigation": 7,
-   "ice_prospecting_instruments": 199,
+   "landing_hazard_detection": 45,
+   "rover_mobility_navigation": 3,
+   "ice_prospecting_instruments": 179,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 9,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 330,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 248,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Purico Complex",
-    "id": "gvp_355094",
-    "composite": 0.16
+    "name": "lichen_moss sample 112",
+    "id": "lc_lichen_moss_0112",
+    "composite": 0.47
    },
    {
-    "name": "antarctic_ice_free sample 11",
-    "id": "lc_antarctic_ice_free_0011",
-    "composite": 0.15
+    "name": "antarctic_ice_free sample 354",
+    "id": "lc_antarctic_ice_free_0354",
+    "composite": 0.38
    },
    {
-    "name": "bare_midlat sample 59",
-    "id": "lc_bare_midlat_0059",
-    "composite": 0.09
+    "name": "lichen_moss sample 175",
+    "id": "lc_lichen_moss_0175",
+    "composite": 0.37
    }
   ]
  },
@@ -1944,14 +1944,14 @@
   "cold_trap_frac": 0.5,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.39,
+   "terrain": 0.29,
    "geology": 0.8,
-   "thermal": -0.51,
+   "thermal": -0.59,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.22
+   "operations": 0.07
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -1977,37 +1977,37 @@
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 27,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": -0.02
+    "name": "ice_edge sample 274",
+    "id": "lc_ice_edge_0274",
+    "composite": 0.05
    },
    {
-    "name": "ice_edge sample 124",
-    "id": "lc_ice_edge_0124",
-    "composite": -0.05
+    "name": "antarctic_ice_free sample 24",
+    "id": "lc_antarctic_ice_free_0024",
+    "composite": 0.04
    },
    {
-    "name": "antarctic_ice_free sample 233",
-    "id": "lc_antarctic_ice_free_0233",
-    "composite": -0.09
+    "name": "bare_polar sample 29",
+    "id": "lc_bare_polar_0029",
+    "composite": 0.01
    }
   ]
  },
@@ -2032,14 +2032,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.29,
   "best_score": {
-   "terrain": 0.69,
+   "terrain": 0.63,
    "geology": 0.78,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.57,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.73
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2055,43 +2055,43 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 17,
-   "rover_mobility_navigation": 2,
+   "landing_hazard_detection": 15,
+   "rover_mobility_navigation": 3,
    "regolith_excavation_construction": 0,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 177,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 127,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
-   "instrument_gpr_drill_subsurface": 19,
-   "planetary_protection_contamination_blanks": 99,
+   "instrument_gpr_drill_subsurface": 15,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.208,
-   "geology": 0.146,
-   "thermal": 0.146,
-   "water_ice": 0.042,
-   "dust": 0.188,
-   "biology": 0.104,
+   "terrain": 0.37,
+   "geology": 0.259,
+   "thermal": 0.0,
+   "water_ice": 0.074,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.167
+   "operations": 0.296
   },
   "top3": [
    {
-    "name": "McMurdo Dry Valleys (Wright Valley)",
-    "id": "dry_valleys_wright",
-    "composite": 0.12
+    "name": "Adams",
+    "id": "gvp_321040",
+    "composite": 0.3
    },
    {
-    "name": "Incahuasi, Nevado de",
-    "id": "gvp_355125",
-    "composite": 0.11
+    "name": "ice_edge sample 184",
+    "id": "lc_ice_edge_0184",
+    "composite": 0.29
    },
    {
-    "name": "Pular",
-    "id": "gvp_355107",
-    "composite": 0.1
+    "name": "Chiginagak",
+    "id": "gvp_312110",
+    "composite": 0.29
    }
   ]
  },
@@ -2116,14 +2116,14 @@
   "cold_trap_frac": 0.02,
   "landing_to_ice_km": 1.83,
   "best_score": {
-   "terrain": 0.85,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.77
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2141,45 +2141,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 46,
+   "landing_hazard_detection": 20,
    "rover_mobility_navigation": 6,
-   "ice_prospecting_instruments": 221,
+   "ice_prospecting_instruments": 201,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 7,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 435,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 307,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "bare_midlat sample 266",
-    "id": "lc_bare_midlat_0266",
-    "composite": 0.14
-   },
-   {
-    "name": "ice_edge sample 158",
-    "id": "lc_ice_edge_0158",
-    "composite": 0.12
-   },
-   {
     "name": "lichen_moss sample 175",
     "id": "lc_lichen_moss_0175",
-    "composite": 0.12
+    "composite": 0.48
+   },
+   {
+    "name": "lichen_moss sample 28",
+    "id": "lc_lichen_moss_0028",
+    "composite": 0.43
+   },
+   {
+    "name": "lichen_moss sample 269",
+    "id": "lc_lichen_moss_0269",
+    "composite": 0.4
    }
   ]
  },
@@ -2204,14 +2204,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": 1.24,
   "best_score": {
-   "terrain": 0.72,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.55,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.75
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2229,45 +2229,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 44,
-   "rover_mobility_navigation": 6,
-   "ice_prospecting_instruments": 221,
+   "landing_hazard_detection": 33,
+   "rover_mobility_navigation": 13,
+   "ice_prospecting_instruments": 201,
    "isru_ice_extraction": 0,
    "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 493,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 340,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Ashikule Volcanic Field",
-    "id": "gvp_304030",
-    "composite": 0.15
+    "name": "Hiawatha impact structure",
+    "id": "crater_hiawatha",
+    "composite": 0.4
    },
    {
-    "name": "sparse_hot sample 237",
-    "id": "lc_sparse_hot_0237",
-    "composite": 0.15
+    "name": "bare_polar sample 211",
+    "id": "lc_bare_polar_0211",
+    "composite": 0.34
    },
    {
-    "name": "bare_midlat sample 355",
-    "id": "lc_bare_midlat_0355",
-    "composite": 0.12
+    "name": "bare_polar sample 10",
+    "id": "lc_bare_polar_0010",
+    "composite": 0.33
    }
   ]
  },
@@ -2292,14 +2292,14 @@
   "cold_trap_frac": 0.09,
   "landing_to_ice_km": 1.77,
   "best_score": {
-   "terrain": 0.9,
+   "terrain": 0.65,
    "geology": 0.8,
-   "thermal": -0.5,
-   "water_ice": 0.53,
-   "dust": 0.7,
-   "biology": 0.48,
+   "thermal": -0.56,
+   "water_ice": 0.52,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.72
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2317,45 +2317,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 40,
-   "rover_mobility_navigation": 10,
-   "ice_prospecting_instruments": 217,
+   "landing_hazard_detection": 43,
+   "rover_mobility_navigation": 3,
+   "ice_prospecting_instruments": 201,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 6,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 281,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 213,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
-    "composite": 0.14
+    "name": "ice_edge sample 397",
+    "id": "lc_ice_edge_0397",
+    "composite": 0.41
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.13
+    "name": "lichen_moss sample 70",
+    "id": "lc_lichen_moss_0070",
+    "composite": 0.35
    },
    {
-    "name": "sparse_cold sample 140",
-    "id": "lc_sparse_cold_0140",
-    "composite": 0.11
+    "name": "antarctic_ice_free sample 85",
+    "id": "lc_antarctic_ice_free_0085",
+    "composite": 0.34
    }
   ]
  },
@@ -2380,14 +2380,14 @@
   "cold_trap_frac": 0.7,
   "landing_to_ice_km": 2.23,
   "best_score": {
-   "terrain": 0.54,
+   "terrain": 0.56,
    "geology": 0.8,
-   "thermal": -0.51,
+   "thermal": -0.6,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.75
+   "operations": 0.6
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2405,45 +2405,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 3,
-   "rover_mobility_navigation": 1,
+   "landing_hazard_detection": 0,
+   "rover_mobility_navigation": 0,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 3,
+   "regolith_excavation_construction": 2,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 190,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 118,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "Royal Society Range",
-    "id": "gvp_390021",
+    "name": "lichen_moss sample 210",
+    "id": "lc_lichen_moss_0210",
+    "composite": 0.26
+   },
+   {
+    "name": "antarctic_ice_free sample 183",
+    "id": "lc_antarctic_ice_free_0183",
     "composite": 0.22
    },
    {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.15
-   },
-   {
-    "name": "sparse_cold sample 140",
-    "id": "lc_sparse_cold_0140",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 236",
+    "id": "lc_antarctic_ice_free_0236",
+    "composite": 0.22
    }
   ]
  },
@@ -2468,14 +2468,14 @@
   "cold_trap_frac": 0.96,
   "landing_to_ice_km": 1.0,
   "best_score": {
-   "terrain": 0.79,
+   "terrain": 0.66,
    "geology": 0.8,
-   "thermal": -0.51,
+   "thermal": -0.6,
    "water_ice": 0.3,
-   "dust": 0.7,
-   "biology": 0.48,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": null,
-   "operations": 0.8
+   "operations": 0.72
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2493,45 +2493,45 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 66,
-   "rover_mobility_navigation": 6,
+   "landing_hazard_detection": 36,
+   "rover_mobility_navigation": 3,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 7,
+   "regolith_excavation_construction": 8,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 335,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 246,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 99,
+   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
-   "terrain": 0.193,
-   "geology": 0.14,
-   "thermal": 0.14,
-   "water_ice": 0.105,
-   "dust": 0.193,
-   "biology": 0.088,
+   "terrain": 0.333,
+   "geology": 0.242,
+   "thermal": 0.0,
+   "water_ice": 0.182,
+   "dust": 0.0,
+   "biology": 0.0,
    "caves": 0.0,
-   "operations": 0.14
+   "operations": 0.242
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 11",
-    "id": "lc_antarctic_ice_free_0011",
-    "composite": 0.17
+    "name": "lichen_moss sample 112",
+    "id": "lc_lichen_moss_0112",
+    "composite": 0.41
    },
    {
-    "name": "Purico Complex",
-    "id": "gvp_355094",
-    "composite": 0.09
+    "name": "lichen_moss sample 175",
+    "id": "lc_lichen_moss_0175",
+    "composite": 0.35
    },
    {
-    "name": "Toh, Tarso",
-    "id": "gvp_225009",
-    "composite": 0.08
+    "name": "antarctic_ice_free sample 184",
+    "id": "lc_antarctic_ice_free_0184",
+    "composite": 0.34
    }
   ]
  },
@@ -2556,14 +2556,14 @@
   "cold_trap_frac": 0.0,
   "landing_to_ice_km": null,
   "best_score": {
-   "terrain": 0.83,
+   "terrain": 0.68,
    "geology": 0.56,
    "thermal": 0.4,
-   "water_ice": 0.55,
-   "dust": 0.7,
-   "biology": 0.48,
+   "water_ice": 0.54,
+   "dust": 0.65,
+   "biology": 0.42,
    "caves": 0.5,
-   "operations": 0.8
+   "operations": 0.76
   },
   "relevant_experiments": [
    "landing_hazard_detection",
@@ -2580,44 +2580,44 @@
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
-   "landing_hazard_detection": 96,
-   "rover_mobility_navigation": 14,
+   "landing_hazard_detection": 63,
+   "rover_mobility_navigation": 27,
    "regolith_excavation_construction": 1,
-   "thermal_power_extreme_cold_long_night": 15,
+   "thermal_power_extreme_cold_long_night": 17,
    "illumination_power_planning": 0,
-   "habitat_human_ops_isolation": 1691,
-   "dust_mitigation": 27,
+   "habitat_human_ops_isolation": 1265,
+   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 8,
-   "instrument_gpr_drill_subsurface": 42,
-   "planetary_protection_contamination_blanks": 99,
+   "instrument_gpr_drill_subsurface": 31,
+   "planetary_protection_contamination_blanks": 45,
    "cave_pit_robotics": 97,
    "geology_eva_training": 5
   },
   "composite_weights": {
-   "terrain": 0.196,
-   "geology": 0.157,
-   "thermal": 0.137,
-   "water_ice": 0.039,
-   "dust": 0.176,
-   "biology": 0.098,
-   "caves": 0.039,
-   "operations": 0.157
+   "terrain": 0.333,
+   "geology": 0.267,
+   "thermal": 0.0,
+   "water_ice": 0.067,
+   "dust": 0.0,
+   "biology": 0.0,
+   "caves": 0.067,
+   "operations": 0.267
   },
   "top3": [
    {
+    "name": "antarctic_ice_free sample 278",
+    "id": "lc_antarctic_ice_free_0278",
+    "composite": 0.45
+   },
+   {
     "name": "Kishb, Harrat",
     "id": "gvp_231071",
-    "composite": 0.44
+    "composite": 0.43
    },
    {
-    "name": "Ithnayn, Harrat",
-    "id": "gvp_231050",
-    "composite": 0.42
-   },
-   {
-    "name": "sparse_hot sample 137",
-    "id": "lc_sparse_hot_0137",
-    "composite": 0.35
+    "name": "St. Michael",
+    "id": "gvp_314040",
+    "composite": 0.43
    }
   ]
  }

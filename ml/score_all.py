@@ -34,6 +34,22 @@ TUBE_REGIONS = re.compile(
     r"hawai|kilauea|mauna loa|hualalai|iceland|lanzarote|canary|tenerife|jeju|halla\b|galapagos|gal.pagos|azores|"
     r"\betna\b|undara|mcbride|medicine lake|lava beds|newberry|st\. helens|craters of the moon|snake river|"
     r"zuni-bandera|el malpais|khaybar|chyulu|suswa|\bfuji\b|r.union|piton de la fournaise|rapa nui|easter island")
+# Terms that enter each category score. Chosen by a per-term audit against the anchors (2026-11-15): weight fitted,
+# whether the Moon and Earth values overlap, leave-one-out effect of dropping the term. Dropped terms and why:
+#   terrain    ssl_cos (DINOv2 cosine): alone rho 0.31 with the anchors, dropping it lowers LOO MAE 0.162 -> 0.141
+#   thermal    swing (no Moon/Earth overlap, weight 0), t_max (weight 0.02, dropping raises LOO rho), polar_night (weight 0)
+#   water_ice  surface_ice (weight 0.03, dropping improves the fit)
+#   dust       fines, bulk_density, coarse (SoilGrids: 5 km modelled agricultural soil, none in Antarctica; zero or
+#              negative effect), aerosol (weight 0), dryness (no effect, duplicates soil moisture)
+#   biology    soil_moisture (almost no spread, 23% missing), tree_cover (no effect, redundant with NDVI)
+#   operations thermal (no effect, a latitude proxy), traverse (already inside water_ice: double counted)
+KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
+                  water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
+                  biology=["ndvi", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
+# Categories that compare an Earth tile with the specific Moon target. thermal (no Moon/Earth overlap: ranks Earth
+# tiles by latitude, rho 0.93), dust (fixed lunar reference) and biology (Earth-only) stay as scores and experiment
+# requirements but do not enter the composite.
+COMPOSITE_CATS = ("terrain", "geology", "water_ice", "operations", "caves")
 GEO_MINOR_CAP = 0.3   # geology cap for tiles where anorthosite is only a minor component (partial match)
 CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, water_ice=0.7, dust=0.7, biology=0.6, caves=0.5, operations=0.8)
 
@@ -416,6 +432,8 @@ def main():
     info, raw, cal, nt, stats, resid = {}, {}, {}, {}, {}, []
 
     def run(name, terms, prior, prior_b=0.0, fit=True):
+        keep = [k for k in KEEP_TERMS.get(name, list(terms)) if k in terms]
+        terms, prior = {k: terms[k] for k in keep}, {k: prior[k] for k in keep}
         r, c, n, st, res = calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=prior_b, fit=fit)
         c = apply_caps(name, c, ent, E)
         raw[name], cal[name], nt[name], stats[name] = r, c, n, st
@@ -423,6 +441,7 @@ def main():
         resid.append(res)
 
     t, p = terrain_terms(ent, E, moon, earth, zones, a.emb_suffix, info)
+    info["terrain_ssl_in_score"] = "ssl_cos" in KEEP_TERMS["terrain"]
     run("terrain", t, p)
     t, p = geology_terms(ent, E, earth, a.emb_suffix, info)
     run("geology", t, p)
@@ -459,10 +478,15 @@ def main():
     RD, APP, counts, wsum, codes = readiness(ent, earth, cal, exps_cfg["experiments"], exps_cfg.get("default_avoid_below", 0.0))
     C.save_table(RD, C.RES / f"experiment_readiness{sfx}.parquet")
     APP.to_csv(C.RES / f"experiment_applicability{sfx}.csv", index=False)
-    Wm = np.stack([wsum[c] for c in cal])                                       # (cat, M)
+    Wm = np.stack([wsum[c] * (c in COMPOSITE_CATS) for c in cal])               # (cat, M); non-comparable cats weigh 0
     Sc = np.stack([cal[c] for c in cal])                                        # (cat, M, E)
-    wgt = np.where(np.isfinite(Sc), Wm[:, :, None], 0.0)
-    comp = np.where(wgt.sum(0) > 0, (np.nan_to_num(Sc) * wgt).sum(0) / np.maximum(wgt.sum(0), 1e-9), np.nan)
+    # a category the Earth tile has no data for (e.g. no bedrock map in Antarctica) counts as that Moon target's median
+    # for the category; skipping it would hand data-poor tiles a free pass on their weakest category
+    with np.errstate(all="ignore"):
+        med = np.nanmedian(Sc, axis=2, keepdims=True)                          # (cat, M, 1); NaN if never scored
+    Sf = np.where(np.isfinite(Sc), Sc, med)                                     # Sc itself stays unimputed (saved below)
+    wgt = np.where(np.isfinite(Sf), Wm[:, :, None], 0.0)
+    comp = np.where(wgt.sum(0) > 0, (np.nan_to_num(Sf) * wgt).sum(0) / np.maximum(wgt.sum(0), 1e-9), np.nan)
     tops = []
     for i, m in enumerate(ent["entity_id"]):
         order = np.argsort(-np.nan_to_num(comp[i], nan=-9))[:20]
@@ -486,7 +510,8 @@ def main():
 
     params = dict(score_form="calibrated = clip(intercept + sum_k weight_k * term_k, -1, 1), then caps", caps=CAPS,
                   subscore="1 - |d|/tol for |d| <= tol; -(1 - exp(-(|d|/tol - 1))) beyond (soft floor at -1)",
-                  categories=stats, info=info, composite_weights={c: np.round(wsum[c] / max(Wm.sum(0).max(), 1e-9), 3).tolist() for c in cal},
+                  categories=stats, info=info, composite_weights={c: np.round(Wm[k] / np.maximum(Wm.sum(0), 1e-9), 3).tolist() for k, c in enumerate(cal)},
+                  composite_categories=list(COMPOSITE_CATS), kept_terms=KEEP_TERMS,
                   entities=ent["entity_id"].tolist(), always_attached=exps_cfg.get("always_include"),
                   non_reproducible=[g.get("id") for g in exps_cfg.get("global_non_reproducible", [])])
     (C.MODELS / f"calibration_params{sfx}.json").write_text(json.dumps(params, indent=1, default=str))
