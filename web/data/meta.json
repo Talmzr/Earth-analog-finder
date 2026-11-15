@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T11:50:10Z",
+ "generated_utc": "2026-11-15T12:03:05Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -30,13 +30,13 @@
    "cap": 0.9,
    "n_anchors": 21,
    "terms": {
-    "kernel": 0.7459
+    "kernel": 0.7543
    },
-   "intercept": -0.0454,
-   "anchor_mae": 0.13,
-   "anchor_mae_leave_one_out": 0.14,
+   "intercept": -0.0184,
+   "anchor_mae": 0.1,
+   "anchor_mae_leave_one_out": 0.11,
    "anchor_rank_agreement": 0.95,
-   "anchors_off_by_0_3": 2
+   "anchors_off_by_0_3": 0
   },
   {
    "id": "geology",
@@ -98,15 +98,15 @@
    "cap": 0.7,
    "n_anchors": 20,
    "terms": {
-    "frozen_ground": 0.3498,
-    "traverse": 0.2186,
-    "no_liquid_water": 0.2086
+    "frozen_ground": 0.3562,
+    "traverse": 0.2228,
+    "no_liquid_water": 0.1895
    },
-   "intercept": -0.0744,
-   "anchor_mae": 0.13,
-   "anchor_mae_leave_one_out": 0.15,
+   "intercept": -0.0838,
+   "anchor_mae": 0.11,
+   "anchor_mae_leave_one_out": 0.13,
    "anchor_rank_agreement": 0.91,
-   "anchors_off_by_0_3": 2
+   "anchors_off_by_0_3": 1
   },
   {
    "id": "dust",
@@ -153,8 +153,8 @@
     "rule": 1.0
    },
    "intercept": 0.0,
-   "anchor_mae": 0.13,
-   "anchor_mae_leave_one_out": 0.13,
+   "anchor_mae": 0.12,
+   "anchor_mae_leave_one_out": 0.12,
    "anchor_rank_agreement": 0.92,
    "anchors_off_by_0_3": 0
   },
@@ -166,11 +166,11 @@
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.5791,
-    "water_ice": 0.3104,
-    "slope_hazard": 0.1774
+    "terrain": 0.5789,
+    "water_ice": 0.2976,
+    "slope_hazard": 0.1709
    },
-   "intercept": -0.0176,
+   "intercept": -0.0303,
    "anchor_mae": 0.24,
    "anchor_mae_leave_one_out": 0.28,
    "anchor_rank_agreement": 0.76,

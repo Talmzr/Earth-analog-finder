@@ -23,14 +23,14 @@
     "kernel": 0.4
    },
    "weights": {
-    "kernel": 0.7459
+    "kernel": 0.7543
    },
-   "intercept": -0.0454,
-   "mae": 0.131,
-   "mae_loo": 0.141,
+   "intercept": -0.0184,
+   "mae": 0.097,
+   "mae_loo": 0.106,
    "spearman": 0.951,
    "spearman_raw": 0.951,
-   "spearman_loo": 0.943
+   "spearman_loo": 0.937
   },
   "geology": {
    "category": "geology",
@@ -115,16 +115,16 @@
     "no_liquid_water": 0.2
    },
    "weights": {
-    "frozen_ground": 0.3498,
-    "traverse": 0.2186,
-    "no_liquid_water": 0.2086
+    "frozen_ground": 0.3562,
+    "traverse": 0.2228,
+    "no_liquid_water": 0.1895
    },
-   "intercept": -0.0744,
-   "mae": 0.128,
-   "mae_loo": 0.15,
-   "spearman": 0.906,
-   "spearman_raw": 0.906,
-   "spearman_loo": 0.846
+   "intercept": -0.0838,
+   "mae": 0.113,
+   "mae_loo": 0.134,
+   "spearman": 0.908,
+   "spearman_raw": 0.908,
+   "spearman_loo": 0.851
   },
   "dust": {
    "category": "dust",
@@ -184,11 +184,11 @@
    },
    "intercept": 0.0,
    "note": "rule levels used as the score (not rescaled)",
-   "mae": 0.133,
-   "mae_loo": 0.133,
-   "spearman": 0.919,
-   "spearman_raw": 0.919,
-   "spearman_loo": 0.919
+   "mae": 0.123,
+   "mae_loo": 0.123,
+   "spearman": 0.923,
+   "spearman_raw": 0.923,
+   "spearman_loo": 0.923
   },
   "operations": {
    "category": "operations",
@@ -204,16 +204,16 @@
     "slope_hazard": 0.25
    },
    "weights": {
-    "terrain": 0.5791,
-    "water_ice": 0.3104,
-    "slope_hazard": 0.1774
+    "terrain": 0.5789,
+    "water_ice": 0.2976,
+    "slope_hazard": 0.1709
    },
-   "intercept": -0.0176,
-   "mae": 0.239,
-   "mae_loo": 0.283,
+   "intercept": -0.0303,
+   "mae": 0.241,
+   "mae_loo": 0.285,
    "spearman": 0.755,
    "spearman_raw": 0.748,
-   "spearman_loo": 0.686
+   "spearman_loo": 0.688
   }
  },
  "info": {

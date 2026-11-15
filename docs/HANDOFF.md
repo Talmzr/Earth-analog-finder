@@ -44,19 +44,21 @@ We score every (Moon target, Earth tile) pair per category on a -1..+1 scale, th
 
 | Category | Anchors | LOO error | LOO rank agreement |
 |---|---|---|---|
-| terrain | 21 | 0.141 | 0.943 |
+| terrain | 21 | 0.106 | 0.937 |
 | geology | 22 | 0.179 | 0.885 |
 | thermal | 19 | 0.100 | 0.518 |
 | illumination | 10 | 0.097 | 0.728 |
-| water_ice | 20 | 0.150 | 0.846 |
+| water_ice | 20 | 0.134 | 0.851 |
 | dust | 18 | 0.143 | 0.893 |
 | biology | 18 | 0.185 | 0.866 |
-| caves (rule levels) | 15 | 0.133 | 0.919 |
-| operations | 18 | 0.283 | 0.686 |
+| caves (rule levels) | 15 | 0.123 | 0.923 |
+| operations | 18 | 0.285 | 0.688 |
 
-**8 of 161 anchors** are off by > 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`):
-terrain: Haworth x Dry Valleys, Mons Mouton plateau x Haughton; geology: pit x Lonar, pit x Pinacate;
-water_ice: de Gerlache ice zone x Beacon Valley, Shackleton ice zone x Concordia; operations: Black Point, Craters of the Moon.
+**5 of 161 anchors** are off by > 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`):
+geology: pit x Lonar, pit x Pinacate; water_ice: de Gerlache ice zone x Beacon Valley; operations: Black Point, Craters of
+the Moon. All five were judged to be model limits, not anchor errors (an anchor review on 2026-11-15 corrected 7 anchors:
+two caves labels above the cap, two contradicting pairs at Concordia and the Dry Valleys, Haughton terrain, and two
+illumination rationales; changes are noted in each rationale). All anchors still need a site expert (needs_review=1).
 
 ## 3. Open items (priority order)
 
@@ -65,7 +67,7 @@ water_ice: de Gerlache ice zone x Beacon Valley, Shackleton ice zone x Concordia
    `python -W ignore -m ml.score_all && python -W ignore -m ml.export_web && python tools/make_results_doc.py`. Then consider removing `GEO_MINOR_CAP`.
 3. **Antarctic ice-mask hole:** the Dry Valleys tile reports 0% ice within +-10 km (`trav_ice_frac=0`, `trav_dist` 10 km). It does not change scores (frozen ground overrides the distance), but the raw value is wrong.
 4. **Experiment-first website view:** pick an experiment, see the best Earth sites.
-5. **Operations** is the weakest category (LOO error 0.283, rank 0.686).
+5. **Operations** is the weakest category (LOO error 0.285, rank 0.688).
 6. **Rotate the NASA Earthdata password** (typed into chat in an earlier session; never written to a file; the repo is public).
 
 Other notes: older planning artefacts are superseded (`docs/ML_PLAN.md`, `notebooks/*.ipynb`, `data/target_*.csv`, `data/earth_*.csv`); `config/categories.json` is still used for text flags and tolerances. Locally there is no `pyarrow`, so tables are written as `*.csv.gz` (`ml/common.py: save_table` falls back automatically).

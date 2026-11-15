@@ -35,15 +35,15 @@ LOO = leave-one-out check against the expert anchors (mean error / rank agreemen
 
 | Category | What is compared | LOO error / rank |
 |---|---|---|
-| Terrain | Measured relief, slope, roughness, share of steep ground (LOLA 80 m vs Copernicus DEM) | .141 / .943 |
+| Terrain | Measured relief, slope, roughness, share of steep ground (LOLA 80 m vs Copernicus DEM) | .106 / .937 |
 | Geology | Lunar map-unit text vs Earth bedrock text (fine-tuned BGE-small) + rock-type match | .179 / .885 |
 | Temperature (thermal) | Night minimum + light-twin sun terms; closest approach only, Earth never gets lunar-cold | .100 / .518 |
 | Illumination | Noon sun height + share of grazing sun in the Earth "light-twin month" (the month whose sun is closest to the Moon target's); real overlap for about 35-40% of Earth sites | .097 / .728 * |
-| Water / ice | Frozen ground (ice sheets do not count as ice-cemented soil), landing-to-ice distance, dryness | .150 / .846 |
+| Water / ice | Frozen ground (ice sheets do not count as ice-cemented soil), landing-to-ice distance, dryness | .134 / .851 |
 | Dust / regolith | Bare ground + volcanic tephra vs known Apollo regolith (same for every Moon target) | .143 / .893 |
 | Biological sterility | Vegetation and rainfall vs the sterile Moon (same for every Moon target) | .185 / .866 |
-| Caves | Lava-tube rule; Tranquillitatis pit only | .133 / .919 |
-| Operations | Terrain + ice scores + slope hazard, with penalties for forest, towns and open water | .283 / .686 |
+| Caves | Lava-tube rule; Tranquillitatis pit only | .123 / .923 |
+| Operations | Terrain + ice scores + slope hazard, with penalties for forest, towns and open water | .285 / .688 |
 
 \* The 10 illumination anchors are drafts derived from the same sun geometry, so this number is optimistic.
 
@@ -63,7 +63,7 @@ Fine-tuning ran on a Colab T4 GPU. Scoring runs on a laptop CPU in about 2 minut
 ## Status: MVP with draft expert calibration
 
 - All 161 expert anchors (`config/anchors.csv`) are drafts (`needs_review=1`). They set the scale of every category, so scores will move when experts review them.
-- 8 anchors disagree with the model by more than 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`).
+- 5 anchors disagree with the model by more than 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`).
 - The geology model was trained before a stricter anorthosite rule. Tiles with only minor anorthosite are capped at 0.3 until the model is retrained.
 - Earth climate layers are 5-50 km, coarser than the tiles.
 - 10 km tiles dilute small test sites (a quarry or a single lava tube is a small part of its tile).
