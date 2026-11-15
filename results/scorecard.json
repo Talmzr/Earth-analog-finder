@@ -1,0 +1,69 @@
+{
+ "categories": {
+  "biology": {
+   "n": 18,
+   "cv_mae": 0.137,
+   "cv_rank": 0.856,
+   "cv_off_by_0_3": 1
+  },
+  "caves": {
+   "n": 15,
+   "cv_mae": 0.123,
+   "cv_rank": 0.923,
+   "cv_off_by_0_3": 0
+  },
+  "dust": {
+   "n": 18,
+   "cv_mae": 0.153,
+   "cv_rank": 0.915,
+   "cv_off_by_0_3": 1
+  },
+  "geology": {
+   "n": 22,
+   "cv_mae": 0.181,
+   "cv_rank": 0.882,
+   "cv_off_by_0_3": 3
+  },
+  "illumination": {
+   "n": 10,
+   "cv_mae": 0.091,
+   "cv_rank": 0.747,
+   "cv_off_by_0_3": 0
+  },
+  "operations": {
+   "n": 18,
+   "cv_mae": 0.204,
+   "cv_rank": 0.851,
+   "cv_off_by_0_3": 5
+  },
+  "terrain": {
+   "n": 21,
+   "cv_mae": 0.104,
+   "cv_rank": 0.944,
+   "cv_off_by_0_3": 0
+  },
+  "thermal": {
+   "n": 19,
+   "cv_mae": 0.094,
+   "cv_rank": 0.7,
+   "cv_off_by_0_3": 0
+  },
+  "water_ice": {
+   "n": 20,
+   "cv_mae": 0.124,
+   "cv_rank": 0.881,
+   "cv_off_by_0_3": 2
+  }
+ },
+ "all_anchors": {
+  "n": 161,
+  "cv_mae": 0.137,
+  "cv_off_by_0_3": 12
+ },
+ "overall_sanity": {
+  "auc": 0.914,
+  "polar_sites_median_rank": 277,
+  "n_targets": 29,
+  "n_tiles": 4310
+ }
+}

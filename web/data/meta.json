@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T16:11:28Z",
+ "generated_utc": "2026-11-15T16:35:48Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -166,15 +166,16 @@
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.5789,
-    "water_ice": 0.2976,
-    "slope_hazard": 0.1709
+    "terrain": 0.4018,
+    "water_ice": 0.0339,
+    "slope_hazard": 0.2246,
+    "bare": 0.2958
    },
-   "intercept": -0.0303,
-   "anchor_mae": 0.24,
-   "anchor_mae_leave_one_out": 0.28,
-   "anchor_rank_agreement": 0.76,
-   "anchors_off_by_0_3": 2
+   "intercept": -0.0719,
+   "anchor_mae": 0.2,
+   "anchor_mae_leave_one_out": 0.25,
+   "anchor_rank_agreement": 0.82,
+   "anchors_off_by_0_3": 4
   }
  ],
  "experiments": [
@@ -587,7 +588,8 @@
   "operations": [
    "terrain",
    "water_ice",
-   "slope_hazard"
+   "slope_hazard",
+   "bare"
   ]
  },
  "limitations": [

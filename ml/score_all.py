@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import zlib
 
 import numpy as np
 import pandas as pd
@@ -45,10 +46,13 @@ TUBE_REGIONS = re.compile(
 #              negative effect), aerosol (weight 0), dryness (no effect, duplicates soil moisture)
 #   biology    soil_moisture (almost no spread, 23% missing), tree_cover (no effect, redundant with NDVI)
 #   operations thermal (no effect, a latitude proxy), traverse (already inside water_ice: double counted)
+#   added 2026-11-15: operations bare (open, drivable ground): site-grouped CV error 0.232 -> 0.204, rank 0.847 -> 0.851;
+#   operations scored flat bare test sites (Black Point, Makhtesh Ramon, Lanzarote) far below their labels
+#   tested and rejected: terrain ssl_cos (DINOv2) again: terrain CV error 0.104 -> 0.134
 KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
                   illumination=["noon_sun", "grazing_sun"],
                   water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
-                  biology=["plant_cover", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
+                  biology=["plant_cover", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard", "bare"])
 # Categories in the composite ("which Earth place is most like THIS Moon place"): those that use per-site Moon data,
 # plus caves, which only the Tranquillitatis pit has. thermal has no Moon/Earth overlap in temperature (weakest
 # calibration). operations is left out because it is fitted as ~0.58 terrain + 0.30 water_ice + 0.17 slope hazard:
@@ -347,6 +351,15 @@ def hazard_term(ent, E):
 
 
 # ============================================================================= calibration
+N_FOLDS = 5
+
+
+def site_fold(site):
+    """Fixed cross-validation fold of an Earth site (all its anchors, in every category, share one fold), so a site is
+    never seen while it is being tested. Fixed by a hash of the site id: the folds never change between runs."""
+    return zlib.crc32(str(site).encode()) % N_FOLDS
+
+
 def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=1.0, fit=True, skip_fit=()):
     """skip_fit: Earth sites whose anchors are reported (residuals) but not fitted, because a rule cap sets their
     score whatever the terms say (KNOWN_LIFE for biology); fitting them pulls every other site toward that rule."""
@@ -366,6 +379,7 @@ def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=
     ok = np.isfinite(T).all(1)
     a, T = a[ok], T[ok]
     y, w = a["label"].to_numpy(float), a["w"].to_numpy(float)
+    folds = []                                                           # (weights, intercept, test rows) per CV fold
     stats = dict(category=name, n_anchors=int(len(a)), terms=names, prior=dict(zip(names, p.round(3).tolist())))
     if len(a) >= 4 and not fit:                    # rule-defined score: anchors check it, they do not rescale it
         c, b = p, prior_b
@@ -382,6 +396,11 @@ def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=
             m = fm & (np.arange(len(a)) != i)
             ci, bi = C.fit_terms(T[m], y[m], w[m], prior=p, lam=lam)
             loo[i] = np.clip(bi + T[i] @ ci, -1, 1)
+        fold = a["earth_site"].map(site_fold).to_numpy()
+        for k in range(N_FOLDS):                                         # site-grouped CV: fit without fold k's sites
+            test, m = fold == k, fm & (fold != k)
+            if test.any():
+                folds.append((*C.fit_terms(T[m], y[m], w[m], prior=p, lam=lam), test))
         if not fm.all():
             stats["not_fitted"] = sorted(set(a.loc[~fm, "earth_site"]))
         # fit quality on the anchors the terms are responsible for (skipped ones are set by a rule cap)
@@ -396,7 +415,7 @@ def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=
     cal = np.clip(b + np.tensordot(np.asarray(c, float), S, axes=1), -1, 1)
     res = a[["moon_target", "moon_zone", "entity_id", "earth_site", "category", "label", "confidence"]].copy()
     res["raw_score"], res["calibrated_uncapped"], res["loo_pred"] = raw[mi[ok], ei[ok]], pred, loo
-    return raw, cal, n_terms, stats, res
+    return raw, cal, n_terms, stats, res, (S, folds)
 
 
 def apply_caps(name, cal, ent, E):
@@ -502,7 +521,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--emb-suffix", default="", help="e.g. _smoke to read smoke-test embeddings")
     ap.add_argument("--out-suffix", default="")
+    ap.add_argument("--terms", type=json.loads, default=None,
+                    help="experiment: override KEEP_TERMS per category, as JSON (terrain kernel + ssl_cos, for example)")
+    ap.add_argument("--geo-minor-cap", type=float, default=None, help="experiment: geology cap for minor-anorthosite tiles")
     a = ap.parse_args()
+    global GEO_MINOR_CAP
+    if a.terms:
+        KEEP_TERMS.update(a.terms)
+    if a.geo_minor_cap is not None:
+        GEO_MINOR_CAP = a.geo_minor_cap
     C.ensure_dirs()
     sfx = a.out_suffix
     moon, earth, zones = C.load_tables()
@@ -517,10 +544,20 @@ def main():
     def run(name, terms, prior, prior_b=0.0, fit=True, skip_fit=()):
         keep = [k for k in KEEP_TERMS.get(name, list(terms)) if k in terms]
         terms, prior = {k: terms[k] for k in keep}, {k: prior[k] for k in keep}
-        r, c, n, st, res = calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=prior_b, fit=fit, skip_fit=skip_fit)
+        r, c, n, st, res, (S, folds) = calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=prior_b, fit=fit,
+                                                 skip_fit=skip_fit)
         c = apply_caps(name, c, ent, E)
         raw[name], cal[name], nt[name], stats[name] = r, c, n, st
-        res["calibrated_score"] = c[res["entity_id"].map(ent_pos).to_numpy(int), res["earth_site"].map(earth_pos).to_numpy(int)]
+        ri, rj = res["entity_id"].map(ent_pos).to_numpy(int), res["earth_site"].map(earth_pos).to_numpy(int)
+        res["calibrated_score"] = c[ri, rj]
+        # site-grouped CV prediction, caps included: each anchor scored by a fit that never saw its Earth site.
+        # Rule-defined categories and rule-capped anchors (skip_fit) are not fitted, so their CV value = the score.
+        cv = res["calibrated_score"].to_numpy(float).copy()
+        for ck, bk, test in folds:
+            ck_full = apply_caps(name, np.clip(bk + np.tensordot(np.asarray(ck, float), S, axes=1), -1, 1), ent, E)
+            keep = test & ~res["earth_site"].isin(list(skip_fit)).to_numpy()
+            cv[keep] = ck_full[ri[keep], rj[keep]]
+        res["cv_pred"] = cv
         resid.append(res)
 
     t, p = terrain_terms(ent, E, moon, earth, zones, a.emb_suffix, info)
@@ -541,8 +578,9 @@ def main():
     info["caves"] = cinfo
     run("caves", t, p, fit=False)
     ops = {"terrain": cal["terrain"], "thermal": cal["thermal"], "water_ice": cal["water_ice"],
-           "slope_hazard": hazard_term(ent, E), "traverse": traverse_term(ent, E)}
-    run("operations", ops, dict(terrain=0.35, thermal=0.10, water_ice=0.15, slope_hazard=0.25, traverse=0.15))
+           "slope_hazard": hazard_term(ent, E), "traverse": traverse_term(ent, E),
+           "bare": SUB(1.0, E_(E, "bare_f_site"), 0.25) * np.ones((len(ent), 1))}     # open, drivable ground
+    run("operations", ops, dict(terrain=0.35, thermal=0.10, water_ice=0.15, slope_hazard=0.25, traverse=0.15, bare=0.2))
 
     # ---- calibration report
     R = pd.concat(resid, ignore_index=True)

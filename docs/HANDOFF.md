@@ -72,7 +72,7 @@ illumination rationales; changes are noted in each rationale). All anchors still
    `python -W ignore -m ml.score_all && python -W ignore -m ml.export_web && python tools/make_results_doc.py`. Then consider removing `GEO_MINOR_CAP`.
 3. **Antarctic ice-mask hole:** the Dry Valleys tile reports 0% ice within +-10 km (`trav_ice_frac=0`, `trav_dist` 10 km). It does not change scores (frozen ground overrides the distance), but the raw value is wrong.
 4. **Experiment-first website view:** pick an experiment, see the best Earth sites.
-5. **Operations** is the weakest category (LOO error 0.285, rank 0.688).
+5. **Operations** is still the weakest category (site-grouped CV error 0.204 after adding the bare-ground term).
 6. **Rotate the NASA Earthdata password** (typed into chat in an earlier session; never written to a file; the repo is public).
 
 Other notes: older planning artefacts are superseded (`docs/ML_PLAN.md`, `notebooks/*.ipynb`, `data/target_*.csv`, `data/earth_*.csv`); `config/categories.json` is still used for text flags and tolerances. Locally there is no `pyarrow`, so tables are written as `*.csv.gz` (`ml/common.py: save_table` falls back automatically).
@@ -84,7 +84,9 @@ Local machine: Windows 11 ARM64, venv `.venv` (torch CPU, transformers, scikit-l
 ```bash
 python tools/reassemble_arrays.py                  # joins data/arrays/*.part* -> data/patches/*_128.npz (checksum-verified)
 python -W ignore -m ml.step1_validate              # data checks, writes results/step1_validation.json
-python -W ignore -m ml.score_all                   # scores + calibration + outputs (about 2 min local; reads embeddings/)
+python -W ignore -m ml.score_all                   # scores + calibration + outputs (about 1 min local; reads embeddings/)
+python -W ignore -m ml.evaluate                    # scorecard (results/scorecard.json); --compare an older one
+# experiments without code edits: ml.score_all --out-suffix _x --terms '{"operations": [...]}' --geo-minor-cap 0.8
 python -W ignore -m ml.export_web                  # writes web/data/
 python tools/make_results_doc.py                   # regenerates docs/ML_RESULTS.md from results/ and models/
 python tools/reembed_geology.py                    # re-embeds changed geology texts with the existing model (no training)

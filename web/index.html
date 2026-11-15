@@ -47,7 +47,10 @@
   <h1>Earth Analog Finder</h1>
   <label>Moon target <select id="target"></select></label>
   <label>Colour Earth by <select id="cat"></select></label>
-  <div class="legend">avoid <b></b> sufficient</div>
+  <label>Colour scale <select id="scale">
+    <option value="rank">Relative: rank among Earth tiles for this Moon target</option>
+    <option value="abs">Absolute: score -1 to +1 (avoid / partial / sufficient)</option></select></label>
+  <div class="legend"><span id="lg-lo">bottom</span> <b></b> <span id="lg-hi">top 1%</span></div>
 </header>
 <main>
   <div id="map"></div>
@@ -85,7 +88,9 @@ async function load() {
   const r = L.canvas({ padding: .5 });
   markers = tiles.id.map((id, i) => L.circleMarker([tiles.lat[i], tiles.lon[i]], { renderer: r, radius: 4, weight: 0, fillOpacity: .85 })
     .on('click', () => showTile(i)).addTo(map));
+  try { $('scale').value = localStorage.getItem('scale') || 'rank'; } catch (e) { /* storage blocked: keep default */ }
   $('target').onchange = pick; $('cat').onchange = paint;
+  $('scale').onchange = () => { try { localStorage.setItem('scale', $('scale').value); } catch (e) { /* ignore */ } paint(); };
   await pick();
 }
 async function pick() {
@@ -105,7 +110,18 @@ async function pick() {
 function paint() {
   const c = $('cat').value;
   const arr = c === 'composite' ? cur.composite : c === 'thermal_pct' ? (cur.percentile?.thermal || []).map(v => v == null ? null : v * 2 - 100) : cur.scores[c];
-  markers.forEach((m, i) => m.setStyle({ fillColor: colour(arr[i]), radius: i === sel ? 7 : 4 }));
+  const rel = $('scale').value === 'rank';
+  $('lg-lo').textContent = rel ? 'bottom' : 'avoid'; $('lg-hi').textContent = rel ? 'top 1%' : 'sufficient';
+  // Relative: colour by rank among Earth tiles (p = share of tiles scoring lower), stretched so the top 10% read
+  // yellow-green and the top 1% green. It shows WHERE the best analogs are; the absolute score and verdict stay in
+  // the side panel, because a green tile can still be only "partial".
+  let shown = arr;
+  if (rel) {
+    const ok = arr.map((v, i) => [v, i]).filter(([v]) => v != null).sort((a, b) => a[0] - b[0]);
+    shown = new Array(arr.length).fill(null);
+    ok.forEach(([, i], k) => { const p = ok.length > 1 ? k / (ok.length - 1) : 1; shown[i] = 200 * p ** 4 - 100; });
+  }
+  markers.forEach((m, i) => m.setStyle({ fillColor: colour(shown[i]), radius: i === sel ? 7 : 4 }));
 }
 function showTile(i) {
   sel = i; paint();

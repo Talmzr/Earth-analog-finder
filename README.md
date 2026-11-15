@@ -43,7 +43,7 @@ LOO = leave-one-out check against the expert anchors (mean error / rank agreemen
 | Dust / regolith | Bare ground + volcanic tephra vs known Apollo regolith (same for every Moon target) | .143 / .893 |
 | Biological sterility | Plant cover (vegetation index above the bare-soil level) and rainfall vs the sterile Moon (same for every Moon target) | .134 / .784 \*\* |
 | Caves | Lava-tube rule; Tranquillitatis pit only | .123 / .923 |
-| Operations | Terrain + ice scores + slope hazard, with penalties for forest, towns and open water | .285 / .688 |
+| Operations | Terrain + ice scores + slope hazard + open bare ground, with penalties for forest, towns and open water | .285 / .688 |
 
 \* The 10 illumination anchors are drafts derived from the same sun geometry, so this number is optimistic.
 
@@ -81,7 +81,8 @@ From the repo root, in a Python virtual environment with `pip install -r require
 ```bash
 python tools/reassemble_arrays.py          # rebuild image arrays from their parts
 python -W ignore -m ml.step1_validate      # data checks
-python -W ignore -m ml.score_all           # scores + calibration (~2 min, CPU)
+python -W ignore -m ml.score_all           # scores + calibration (~1 min, CPU)
+python -W ignore -m ml.evaluate            # scorecard: site-grouped CV per category + polar-analog check
 python -W ignore -m ml.export_web          # web/data bundle for the site
 python tools/build_globe.py                # web/globe.html: 3-D globe with all final scores embedded
 python tools/make_results_doc.py           # regenerate docs/ML_RESULTS.md

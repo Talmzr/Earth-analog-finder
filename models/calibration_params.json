@@ -201,24 +201,27 @@
    "terms": [
     "terrain",
     "water_ice",
-    "slope_hazard"
+    "slope_hazard",
+    "bare"
    ],
    "prior": {
     "terrain": 0.35,
     "water_ice": 0.15,
-    "slope_hazard": 0.25
+    "slope_hazard": 0.25,
+    "bare": 0.2
    },
    "weights": {
-    "terrain": 0.5789,
-    "water_ice": 0.2976,
-    "slope_hazard": 0.1709
+    "terrain": 0.4018,
+    "water_ice": 0.0339,
+    "slope_hazard": 0.2246,
+    "bare": 0.2958
    },
-   "intercept": -0.0303,
-   "mae": 0.241,
-   "mae_loo": 0.285,
-   "spearman": 0.755,
-   "spearman_raw": 0.748,
-   "spearman_loo": 0.688
+   "intercept": -0.0719,
+   "mae": 0.203,
+   "mae_loo": 0.251,
+   "spearman": 0.818,
+   "spearman_raw": 0.788,
+   "spearman_loo": 0.763
   }
  },
  "info": {
@@ -624,7 +627,8 @@
   "operations": [
    "terrain",
    "water_ice",
-   "slope_hazard"
+   "slope_hazard",
+   "bare"
   ]
  },
  "entities": [
