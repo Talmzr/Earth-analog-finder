@@ -75,6 +75,9 @@ COMPOSITE_CATS = ("terrain", "geology", "illumination", "water_ice", "caves")
 # Pre-specified polar-analog check 0.926 -> 0.944 (the earlier sensitivity grid also favoured 0.6/2.0). Note: tiles
 # named "lichen_moss sample N" were sampled at a moss pixel, but the 10 km tile can be mostly bare (sample 51: 87% bare).
 COVER_GATE_BASE, COVER_GATE_SLOPE = 0.6, 2.0
+# The gate may lower the overall score by at most this much: as a hard cap it pinned 41% of all pairs to -1 (an
+# 80%-water tile with categories averaging -0.14 showed -1.00 overall), which the category scores cannot explain.
+COVER_GATE_MAX_DROP = 0.3
 GEO_MINOR_CAP = 0.3
 # named analog sites with documented life that satellite greenness cannot see
 KNOWN_LIFE = {"svalbard_bockfjorden": "Troll / Jotun warm springs with microbial mats (AMASE)",
@@ -625,9 +628,9 @@ def main():
     comp_mean = np.where(wgt.sum(0) > 0, (np.nan_to_num(Sf) * wgt).sum(0) / np.maximum(wgt.sum(0), 1e-9), np.nan)
     cover = col(E, "cover_nonlunar")[None, :]                                  # ground-cover gate (see COVER_GATE_BASE)
     gate = np.where(np.isfinite(cover), np.clip(COVER_GATE_BASE - COVER_GATE_SLOPE * cover, -1, 1), np.inf)
-    comp = np.minimum(comp_mean, gate)
+    comp = np.maximum(np.minimum(comp_mean, gate), comp_mean - COVER_GATE_MAX_DROP)
     gated = np.isfinite(comp_mean) & (comp < comp_mean)
-    info["cover_gate"] = dict(base=COVER_GATE_BASE, slope=COVER_GATE_SLOPE, rule="composite <= base - slope * cover_nonlunar",
+    info["cover_gate"] = dict(base=COVER_GATE_BASE, slope=COVER_GATE_SLOPE, rule="composite = max(min(mean, base - slope * cover_nonlunar), mean - max_drop)", max_drop=COVER_GATE_MAX_DROP,
                                 share_pairs_lowered=round(float(gated.mean()), 3))
     tops, dup, shown_names = [], C.duplicate_of_named(earth), C.display_names(earth)
     for i, m in enumerate(ent["entity_id"]):

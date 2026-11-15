@@ -69,7 +69,7 @@ const CAT_BRIEF = {
   dust: 'How bare and regolith-like the surface is, compared with the known Apollo regolith (bare, dry, fine). The same for every Moon target.',
   biology: 'How lifeless the site is (plant cover from vegetation greenness above the bare-soil level, rainfall), compared with the sterile Moon. The same for every Moon target.'
 };
-const CAT_ORDER = ['terrain', 'geology', 'illumination', 'water_ice', 'operations', 'caves', 'thermal', 'dust', 'biology'];
+const CAT_ORDER = ['terrain', 'geology', 'illumination', 'water_ice', 'operations', 'thermal', 'dust', 'biology'];   // caves chart removed (only the pit is scored)
 const SIM_CATS = CAT_ORDER.filter(k => CAT[k]).map(k => ({ key: k, title: CAT[k].label || k, rgb: CAT_RGB[k] || '100,180,255',
   brief: CAT_BRIEF[k] || CAT[k].how || '', how: CAT[k].how || '', cap: CAT[k].cap, inComp: !!CAT[k].in_composite, invariant: !!CAT[k].target_invariant }));
 const catTitle = k => (CAT[k] && CAT[k].label) || k;

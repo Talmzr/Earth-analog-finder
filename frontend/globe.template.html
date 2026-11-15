@@ -759,7 +759,7 @@ function renderEarthScore(t) {
   const order = [...META.composite_categories, ...META.categories.map(c => c.id).filter(c => !META.composite_categories.includes(c))];
   box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${overallVerdict(m.id, t.idx).replace("/", "")}">${overallVerdict(m.id, t.idx)}</span></div>
     <div class="row"><span class="sub">${rank >= 0 ? `<b>#${rank + 1}</b> of 4,310 Earth tiles` : 'Experiment-weighted mean of the comparable categories'}</span><span class="big">${sc.composite === null ? '—' : fmtScore(sc.composite)}</span></div>
-    ${order.filter(c => !(c === 'caves' && sc.caves === null)).map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
+    ${order.filter(c => c !== 'caves').map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
     <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}.${sufSpec.length ? ` Sufficient for this target: ${esc(sufSpec.join(', '))}.` : ''}${sufGen.length ? ` General only (does not count toward the label): ${esc(sufGen.join(', '))}.` : ''} * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
 }
 

@@ -287,7 +287,8 @@
   "cover_gate": {
    "base": 0.6,
    "slope": 2.0,
-   "rule": "composite <= base - slope * cover_nonlunar",
+   "rule": "composite = max(min(mean, base - slope * cover_nonlunar), mean - max_drop)",
+   "max_drop": 0.3,
    "share_pairs_lowered": 0.54
   }
  },
@@ -591,7 +592,8 @@
  "cover_gate": {
   "base": 0.6,
   "slope": 2.0,
-  "rule": "composite <= base - slope * cover_nonlunar",
+  "rule": "composite = max(min(mean, base - slope * cover_nonlunar), mean - max_drop)",
+  "max_drop": 0.3,
   "share_pairs_lowered": 0.54
  },
  "kept_terms": {

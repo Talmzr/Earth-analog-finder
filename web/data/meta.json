@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T18:18:21Z",
+ "generated_utc": "2026-11-15T19:29:50Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -542,7 +542,8 @@
   "cover_gate": {
    "base": 0.6,
    "slope": 2.0,
-   "rule": "composite <= base - slope * cover_nonlunar",
+   "rule": "composite = max(min(mean, base - slope * cover_nonlunar), mean - max_drop)",
+   "max_drop": 0.3,
    "share_pairs_lowered": 0.54
   }
  },

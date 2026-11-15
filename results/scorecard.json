@@ -71,8 +71,8 @@
   "cv_off_by_0_3": 11
  },
  "overall_sanity": {
-  "auc": 0.944,
-  "polar_sites_median_rank": 218,
+  "auc": 0.939,
+  "polar_sites_median_rank": 225,
   "n_targets": 29,
   "n_tiles": 4310
  },

@@ -61,7 +61,7 @@ CV = site-grouped 5-fold cross-validation against the 161 draft anchors (mean ab
 
 The overall score for a Moon target is the experiment-weighted mean of the categories that compare with that specific Moon site: terrain, geology, illumination and water/ice (plus caves for the pit). Operations stays out because it is built from the terrain and ice scores (it would count them twice). Temperature, dust and sterility are scored and drive experiment verdicts, but are not averaged in because they are identical across targets or have no real overlap. Missing category data counts as the target's median.
 
-The mean is then capped by a **ground-cover gate**: overall <= 0.6 - 2 x the share of the tile under plants (including moss and lichen), open water or towns, so a tile with 30% or more such cover is at most 0.
+The mean is then lowered by a **ground-cover gate** for tiles covered by plants (including moss and lichen), open water or towns: overall <= 0.6 - 2 x that share, but the gate never lowers the score by more than 0.3, so the overall score stays close to its category scores.
 
 ### Models
 
