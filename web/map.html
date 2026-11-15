@@ -118,8 +118,8 @@ async function pick() {
 const SUFFICIENT_MIN = -15, PARTIAL_MIN = -25;   // partial also needs overall >= -0.25, else avoid
 let FREE_EXP = null;                                   // experiments that only use lunar constants (computed once)
 function placeVerdict(i) {
-  const inv = new Set(['dust', 'biology']);
-  const free = FREE_EXP || (FREE_EXP = new Set(meta.experiments.filter(e => Object.keys(e.required || {}).every(c => inv.has(c))).map(e => e.id)));
+  const site = new Set(['terrain', 'geology', 'illumination', 'water_ice', 'caves']);   // tests that compare with the Moon site
+  const free = FREE_EXP || (FREE_EXP = new Set(meta.experiments.filter(e => !Object.keys(e.required || {}).some(c => site.has(c))).map(e => e.id)));
   const ent = Object.entries(cur.readiness || {}), comp = cur.composite[i];
   if (comp != null && comp >= SUFFICIENT_MIN && ent.some(([e, a]) => a[i] === 3 && !free.has(e))) return 'sufficient';
   return comp != null && comp >= PARTIAL_MIN && ent.some(([, a]) => a[i] >= 2) ? 'partial' : ent.some(([, a]) => a[i] >= 1) ? 'avoid' : 'n/a';

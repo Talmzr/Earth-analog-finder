@@ -573,8 +573,13 @@ const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'suffi
 // 'Sufficient' needs an experiment that depends on THIS Moon target: tests whose required categories are only lunar
 // constants (dust mitigation, planetary protection: same for every Moon target, any dry desert passes) can make a
 // place 'partial' but not 'sufficient'.
-const INVARIANT_REQ = new Set(['dust', 'biology', 'dust_regolith', 'biology_sterility']);   // web data uses the short names
-const TARGET_FREE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).every(c => INVARIANT_REQ.has(c))).map(e => e.id));
+// Only tests that REQUIRE a category comparing with this specific Moon site (terrain, geology, light, ice, caves) can
+// make a place sufficient. Tests that only need workable ground, dust or sterility (rover mobility, habitat
+// operations, dust mitigation, planetary protection) pass on almost any flat bare desert, so they can only make it
+// partial. (Web data uses the short category names.)
+const SITE_REQ = new Set(['terrain', 'geology', 'illumination', 'water_ice', 'caves', 'caves_subsurface']);
+const SITE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).some(c => SITE_REQ.has(c))).map(e => e.id));
+const TARGET_FREE_EXP = new Set(META.experiments.map(e => e.id).filter(id => !SITE_EXP.has(id)));
 // 'Sufficient' also needs an overall score of at least SUFFICIENT_MIN: a place that passes one test but is far from
 // the Moon target overall is labelled 'partial'.
 const SUFFICIENT_MIN = -0.15, PARTIAL_MIN = -0.25;   // partial also needs overall >= -0.25, else avoid
@@ -762,7 +767,7 @@ function renderEarthScore(t) {
   box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${overallVerdict(m.id, t.idx).replace("/", "")}">${overallVerdict(m.id, t.idx)}</span></div>
     <div class="row"><span class="sub">${rank >= 0 ? `<b>#${rank + 1}</b> of 4,310 Earth tiles` : 'Experiment-weighted mean of the comparable categories'}</span><span class="big">${sc.composite === null ? '—' : fmtScore(sc.composite)}</span></div>
     ${order.filter(c => c !== 'caves').map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
-    <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}.${sufSpec.length ? ` Sufficient for this target: ${esc(sufSpec.join(', '))}.` : ''}${sufGen.length ? ` General only (does not count toward the label): ${esc(sufGen.join(', '))}.` : ''} * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
+    <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}.${sufSpec.length ? ` Sufficient for this target: ${esc(sufSpec.join(', '))}.` : ''}${sufGen.length ? ` Other tests (only check workable ground, dust or sterility; do not count toward the label): ${esc(sufGen.join(', '))}.` : ''} * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
 }
 
 // ══════════════════════════════════════
