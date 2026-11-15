@@ -55,14 +55,14 @@ def polar_auc(npz, earth: pd.DataFrame) -> dict:
                 n_targets=len(polar_t), n_tiles=len(pid))
 
 
-def real_world_check(npz, earth: pd.DataFrame) -> dict:
+def real_world_check(npz, earth: pd.DataFrame, fname: str = "real_world_uses.csv") -> dict:
     """3. Real-world site choices: config/real_world_uses.csv lists sites that space agencies actually used for a
     lunar test (Desert RATS, RESOLVE, PANGAEA, BRAILLE, FINESSE, ARCHES, K10, Concordia), with sources. If the model
     is right, it should not call those sites 'avoid' for the test that was run there. For each use: share of the
     Moon targets in scope (polar / pit / all, where the experiment applies) with a sufficient or partial verdict,
     compared with the same share over all 4,310 Earth tiles (how often the model says 'not avoid' by default).
     Some of these sites also carry category anchors, so this is not fully independent of the calibration."""
-    path = C.CFG / "real_world_uses.csv"
+    path = C.CFG / fname
     if not path.exists():
         return {}
     U = pd.read_csv(path)
@@ -108,7 +108,8 @@ def main():
     err = (R["cv_pred"] - R["label"]).abs()
     card = dict(categories=cats, all_anchors=dict(n=int(len(R)), cv_mae=round(float(err.mean()), 3),
                                                    cv_off_by_0_3=int((err > 0.3).sum())),
-                overall_sanity=polar_auc(npz, earth), real_world=real_world_check(npz, earth))
+                overall_sanity=polar_auc(npz, earth), real_world=real_world_check(npz, earth),
+                real_world_holdout=real_world_check(npz, earth, "real_world_uses_holdout.csv"))
     (C.RES / f"scorecard{a.out_suffix}.json").write_text(json.dumps(card, indent=1))
     old = json.loads(open(a.compare).read()) if a.compare else None
     print(f"{'category':13s} {'n':>3s}  {'CV error':>8s} {'CV rank':>8s} {'off>0.3':>7s}" + ("   | before: error rank off" if old else ""))
@@ -124,12 +125,14 @@ def main():
     print(f"overall score: polar-analog AUC {ov['auc']:.3f}, polar sites median rank {ov['polar_sites_median_rank']} "
           f"of {ov['n_tiles']}" + (f"   | before: AUC {old['overall_sanity']['auc']:.3f}, rank "
                                    f"{old['overall_sanity']['polar_sites_median_rank']}" if old else ""))
-    rw = card["real_world"]
-    if rw:
-        print(f"real-world site choices: {rw['n_uses']} documented uses; not 'avoid' for {100 * rw['mean_not_avoid']:.0f}% of "
+    for key, label in (("real_world", "real-world site choices (dev set)"), ("real_world_holdout", "real-world HOLD-OUT (never tuned on)")):
+        rw = card[key]
+        if not rw:
+            continue
+        print(f"{label}: {rw['n_uses']} documented uses; not 'avoid' for {100 * rw['mean_not_avoid']:.0f}% of "
               f"their Moon targets (all tiles: {100 * rw['mean_base_not_avoid']:.0f}%); never avoid {rw['uses_never_avoid']}, "
               f"mostly avoid {rw['uses_mostly_avoid']}")
-        print(pd.DataFrame(rw["table"]).to_string(index=False))
+        print(pd.DataFrame(rw["table"]).drop(columns=["program"], errors="ignore").to_string(index=False))
 
 
 if __name__ == "__main__":

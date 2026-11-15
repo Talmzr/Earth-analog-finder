@@ -191,5 +191,59 @@
     "base_not_avoid": 0.42
    }
   ]
+ },
+ "real_world_holdout": {
+  "n_uses": 5,
+  "mean_not_avoid": 0.06,
+  "mean_base_not_avoid": 0.004,
+  "uses_never_avoid": 0,
+  "uses_mostly_avoid": 5,
+  "table": [
+   {
+    "site": "meteor_crater",
+    "experiment": "geology_eva_training",
+    "program": "Apollo astronaut geology training (USGS)",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "pinacate",
+    "experiment": "geology_eva_training",
+    "program": "Apollo astronaut geology training",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "gvp_373060",
+    "experiment": "geology_eva_training",
+    "program": "Apollo astronaut geology training (Askja / Iceland)",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "crater_sudbury",
+    "experiment": "geology_eva_training",
+    "program": "Apollo 16 and 17 crew geology training",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "lanzarote",
+    "experiment": "rover_mobility_navigation",
+    "program": "CanMoon lunar sample-return analogue (Western University / CSA)",
+    "n_targets": 30,
+    "sufficient": 0.13,
+    "not_avoid": 0.3,
+    "base_not_avoid": 0.02
+   }
+  ]
  }
 }
