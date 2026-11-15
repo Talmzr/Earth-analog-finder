@@ -1,4 +1,4 @@
-# Anchors v2 (draft, 151 rows, all `needs_review=1`)
+# Anchors v2 (draft, 161 rows (151 + 10 illumination drafts added 2026-11-15), all `needs_review=1`)
 
 `config/anchors.csv` replaces the 47-row v1, which is kept as `config/anchors_v1.csv`. Nothing is reviewed yet.
 
