@@ -6,7 +6,8 @@ web/data/
   moon_targets.json       the 30 Moon targets (20 Artemis landing / ice zones + 10 target tiles) with key numbers
   earth_tiles.json        the Earth tiles as parallel arrays (id, name, type, lat, lon + a few measured values)
   scores/<moon_id>.json   for one Moon target: every category score for every Earth tile (integers = score x 100,
-                          null = not available), composite, experiment readiness codes, top 25 tiles
+                          null = not available), composite, experiment readiness codes, top 25 tiles,
+                          percentile.thermal = closest-approach rank among Earth tiles (0-100, 100 = closest)
   top_analogs.json        top 20 Earth tiles per Moon target with names, scores and the experiments they suit
 Scores are in [-1, 1]: >= 0.5 sufficient, 0..0.5 partial, < 0 avoid. Readiness codes: 3 sufficient, 2 partial,
 1 avoid, 0 not available, -1 experiment not relevant for that Moon target.
@@ -41,6 +42,16 @@ def ints(a):
     out = np.round(a * 100).astype(object)
     out[~np.isfinite(a)] = None
     return [None if v is None else int(v) for v in out]
+
+
+def percentile(a):
+    """Rank of each Earth tile among all Earth tiles for one Moon target, 0..100 (100 = best); None for NaN."""
+    a = np.asarray(a, float)
+    ok = np.isfinite(a)
+    out = np.full(a.shape, np.nan)
+    if ok.sum() > 1:
+        out[ok] = pd.Series(a[ok]).rank(pct=True, method="average").to_numpy()
+    return out
 
 
 def r(v, n=2):
@@ -80,17 +91,21 @@ def main(sfx=""):
     for i, m in enumerate(ent_ids):
         e = ent.iloc[i]
         order = np.argsort(-np.nan_to_num(comp[i], nan=-9))
+        th_pct = percentile(cal[cats.index("thermal"), i]) if "thermal" in cats else None
         top = []
         for rank, j in enumerate(order[:25], 1):
             suff = [exps_ids[x] for x in range(len(exps_ids)) if ready[x, i, j] == 3]
             part = [exps_ids[x] for x in range(len(exps_ids)) if ready[x, i, j] == 2]
             top.append(dict(rank=rank, tile=int(j), id=tile_ids[j], name=E["name"][j], stratum=E["stratum"][j],
                             lat=E["lat"][j], lon=E["lon"][j], composite=r(comp[i, j]),
-                            scores={c: r(cal[k, i, j]) for k, c in enumerate(cats)}, sufficient_for=suff, partial_for=part))
+                            scores={c: r(cal[k, i, j]) for k, c in enumerate(cats)},
+                            thermal_percentile=None if th_pct is None else r(th_pct[j] * 100, 0),
+                            sufficient_for=suff, partial_for=part))
         tops_all[m] = top[:20]
         relevant = [exps_ids[x] for x in range(len(exps_ids)) if (ready[x, i] >= 0).any()]
         (out / "scores" / f"{m}.json").write_text(json.dumps(dict(
             moon_id=m, categories=cats, scores={c: ints(cal[k, i]) for k, c in enumerate(cats)}, composite=ints(comp[i]),
+            percentile={} if th_pct is None else {"thermal": ints(th_pct)},
             readiness={exps_ids[x]: ready[x, i].astype(int).tolist() for x in range(len(exps_ids)) if exps_ids[x] in relevant},
             top=top), separators=(",", ":")), encoding="utf-8")
         best = {c: (None if not np.isfinite(cal[k, i]).any() else r(float(np.nanmax(cal[k, i])))) for k, c in enumerate(cats)}

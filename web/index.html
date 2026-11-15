@@ -34,6 +34,10 @@
   .good { color:var(--good); } .mid { color:var(--mid); } .bad { color:var(--bad); }
   small, .muted { color:var(--muted); }
   .legend { display:flex; gap:10px; align-items:center; font-size:12px; color:var(--muted); }
+  details { margin:4px 0; } summary { cursor:pointer; }
+  details ul { margin:4px 0 8px 16px; padding:0; color:var(--muted); font-size:12.5px; }
+  table.q { width:100%; border-collapse:collapse; font-size:12px; } table.q td, table.q th { padding:3px 4px; border-bottom:1px solid var(--line); text-align:left; }
+  table.q th { color:var(--muted); font-weight:500; }
   .legend b { width:120px; height:8px; border-radius:4px; background:linear-gradient(90deg,#d9534f,#e0b341,#3fb97a); display:inline-block; }
   @media (max-width: 860px) { main { grid-template-columns:1fr; height:auto; } #map { height:55vh; } aside { border-left:0; border-top:1px solid var(--line); } }
 </style>
@@ -52,6 +56,7 @@
     <h2>Selected Earth location</h2><div id="tile" class="muted">Click a dot on the map or a row below.</div>
     <h2>Top Earth analogs</h2><ol id="top"></ol>
     <h2>Earth can never reproduce</h2><div id="caveats" class="muted"></div>
+    <h2>How reliable are the scores</h2><div id="quality"></div>
     <p><small id="note"></small></p>
   </aside>
 </main>
@@ -70,8 +75,12 @@ async function load() {
   [meta, targets, tiles] = await Promise.all(['meta', 'moon_targets', 'earth_tiles'].map(f => fetch(`data/${f}.json`).then(r => r.json())));
   $('target').innerHTML = targets.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
   $('cat').innerHTML = `<option value="composite">Overall (weighted by relevant experiments)</option>` +
-    meta.categories.map(c => `<option value="${c.id}">${c.label}</option>`).join('');
-  $('caveats').innerHTML = meta.earth_cannot_reproduce.map(c => `<span class="tag">${c.condition}</span>`).join('');
+    meta.categories.map(c => `<option value="${c.id}">${c.label}</option>`).join('') +
+    `<option value="thermal_pct">Temperature: closest approach (rank among Earth sites)</option>`;
+  $('caveats').innerHTML = meta.earth_cannot_reproduce.map(c => `<span class="tag" title="Moon: ${c.moon}. Best on Earth: ${c.earth_best}. Cover with: ${c.cover_with}">${c.condition}</span>`).join('');
+  $('quality').innerHTML = `<table class="q"><tr><th>Category</th><th>Anchors</th><th>Rank agreement</th><th>Mean error</th></tr>` +
+    meta.categories.map(c => `<tr title="${c.how}"><td>${c.label}</td><td>${c.n_anchors}</td><td>${c.anchor_rank_agreement ?? 'n/a'}</td><td>${c.anchor_mae_leave_one_out ?? 'n/a'}</td></tr>`).join('') +
+    `</table><small>Checked against draft expert judgements (leave-one-out error). Hover a row for the method.</small>`;
   $('note').textContent = meta.limitations[0];
   const r = L.canvas({ padding: .5 });
   markers = tiles.id.map((id, i) => L.circleMarker([tiles.lat[i], tiles.lon[i]], { renderer: r, radius: 4, weight: 0, fillOpacity: .85 })
@@ -94,21 +103,27 @@ async function pick() {
   paint(); if (sel != null) showTile(sel);
 }
 function paint() {
-  const c = $('cat').value, arr = c === 'composite' ? cur.composite : cur.scores[c];
+  const c = $('cat').value;
+  const arr = c === 'composite' ? cur.composite : c === 'thermal_pct' ? (cur.percentile?.thermal || []).map(v => v == null ? null : v * 2 - 100) : cur.scores[c];
   markers.forEach((m, i) => m.setStyle({ fillColor: colour(arr[i]), radius: i === sel ? 7 : 4 }));
 }
 function showTile(i) {
   sel = i; paint();
   const bars = meta.categories.map(c => { const v = cur.scores[c.id][i]; const w = v == null ? 0 : Math.abs(v) / 2;
-    return `<div class="bar"><span>${c.label}</span><span class="track"><i style="left:${v == null || v >= 0 ? 50 : 50 - w}%;width:${w}%;background:${colour(v)}"></i></span>
+    const pct = c.id === 'thermal' && cur.percentile?.thermal ? cur.percentile.thermal[i] : null;
+    const lab = pct == null ? c.label : `${c.label}<br><small>closer than ${pct}% of Earth sites</small>`;
+    return `<div class="bar"><span>${lab}</span><span class="track"><i style="left:${v == null || v >= 0 ? 50 : 50 - w}%;width:${w}%;background:${colour(v)}"></i></span>
       <span class="score ${cls(v)}">${fmt(v)}</span></div>`; }).join('');
   const names = Object.fromEntries(meta.experiments.map(e => [e.id, e.name]));
   const by = code => Object.entries(cur.readiness).filter(([, a]) => a[i] === code).map(([k]) => names[k]);
   const tags = (l, k) => l.length ? l.map(n => `<span class="tag ${k}">${n}</span>`).join('') : '<span class="muted">none</span>';
+  const exps = Object.fromEntries(meta.experiments.map(e => [e.name, e]));
+  const advice = l => l.map(n => `<details><summary>${n}</summary><ul>${(exps[n].also_account_for || []).map(a => `<li>${a}</li>`).join('')}</ul></details>`).join('');
   $('tile').innerHTML = `<b>${tiles.name[i] || tiles.id[i]}</b><br><small>${tiles.stratum[i].replaceAll('_', ' ')} · ${tiles.lat[i]}, ${tiles.lon[i]}
     · relief ${tiles.relief_m[i]} m · ${tiles.temp_min_k[i] ?? '?'}–${tiles.temp_max_k[i] ?? '?'} K${tiles.rock[i] ? ' · ' + tiles.rock[i] : ''}</small>
     <div style="margin:8px 0">${bars}</div><div><small>Sufficient for</small><br>${tags(by(3), 'good')}</div>
-    <div><small>Partial (check weak categories)</small><br>${tags(by(2), 'mid')}</div><div><small>Avoid for</small><br>${tags(by(1), 'bad')}</div>`;
+    <div><small>Partial (check weak categories)</small><br>${tags(by(2), 'mid')}</div><div><small>Avoid for</small><br>${tags(by(1), 'bad')}</div>
+    ${by(3).length + by(2).length ? `<div style="margin-top:8px"><small>Also account for (open an experiment)</small>${advice([...by(3), ...by(2)])}</div>` : ''}`;
 }
 load().catch(e => { document.querySelector('aside').innerHTML = `<p>Could not load data: ${e}. Serve this folder over HTTP (for example <code>python -m http.server</code> in <code>web/</code>).</p>`; });
 </script>
