@@ -49,10 +49,13 @@ TUBE_REGIONS = re.compile(
 #   added 2026-11-15: operations bare (open, drivable ground): site-grouped CV error 0.232 -> 0.204, rank 0.847 -> 0.851;
 #   operations scored flat bare test sites (Black Point, Makhtesh Ramon, Lanzarote) far below their labels
 #   tested and rejected: terrain ssl_cos (DINOv2) again: terrain CV error 0.104 -> 0.134
+#   added 2026-11-15 (after the council relabel): operations clear (share of ground free of forest, towns, water,
+#   wetland, crops): CV error 0.252 -> 0.187, rank 0.774 -> 0.889, off by > 0.3: 6 -> 4. Best of 6 combinations tried;
+#   dropping the terrain match (with flat = share < 10 deg) always lowered rank agreement (0.66-0.78)
 KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
                   illumination=["noon_sun", "grazing_sun"],
                   water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
-                  biology=["plant_cover", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard", "bare"])
+                  biology=["plant_cover", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard", "bare", "clear"])
 # Categories in the composite ("which Earth place is most like THIS Moon place"): those that use per-site Moon data,
 # plus caves, which only the Tranquillitatis pit has. thermal has no Moon/Earth overlap in temperature (weakest
 # calibration). operations is left out because it is fitted as ~0.58 terrain + 0.30 water_ice + 0.17 slope hazard:
@@ -579,8 +582,12 @@ def main():
     run("caves", t, p, fit=False)
     ops = {"terrain": cal["terrain"], "thermal": cal["thermal"], "water_ice": cal["water_ice"],
            "slope_hazard": hazard_term(ent, E), "traverse": traverse_term(ent, E),
-           "bare": SUB(1.0, E_(E, "bare_f_site"), 0.25) * np.ones((len(ent), 1))}     # open, drivable ground
-    run("operations", ops, dict(terrain=0.35, thermal=0.10, water_ice=0.15, slope_hazard=0.25, traverse=0.15, bare=0.2))
+           "bare": SUB(1.0, E_(E, "bare_f_site"), 0.25) * np.ones((len(ent), 1)),    # open, drivable ground
+           # target-independent workability: share of gentle ground (< 10 deg) and of ground free of obstacles
+           "flat": (2 * (1 - np.clip(E_(E, "frac_slope500_gt10"), 0, 1)) - 1) * np.ones((len(ent), 1)),
+           "clear": (2 * (1 - np.clip(np.nan_to_num(E_(E, "obstacle_frac_ops")), 0, 1)) - 1) * np.ones((len(ent), 1))}
+    run("operations", ops, dict(terrain=0.35, thermal=0.10, water_ice=0.15, slope_hazard=0.25, traverse=0.15, bare=0.2,
+                                flat=0.2, clear=0.2))
 
     # ---- calibration report
     R = pd.concat(resid, ignore_index=True)

@@ -43,11 +43,13 @@ LOO = leave-one-out check against the expert anchors (mean error / rank agreemen
 | Dust / regolith | Bare ground + volcanic tephra vs known Apollo regolith (same for every Moon target) | .143 / .893 |
 | Biological sterility | Plant cover (vegetation index above the bare-soil level) and rainfall vs the sterile Moon (same for every Moon target) | .134 / .784 \*\* |
 | Caves | Lava-tube rule; Tranquillitatis pit only | .123 / .923 |
-| Operations | Terrain + ice scores + slope hazard + open bare ground, with penalties for forest, towns and open water | .285 / .688 |
+| Operations | Terrain match + slope hazard + open bare ground + ground free of forest, towns, water and crops (+ ice access) | .187 / .889 \*\*\* |
 
 \* The 10 illumination anchors are drafts derived from the same sun geometry, so this number is optimistic.
 
 \*\* On the 15 anchors the formula is fitted on; the 3 sites with documented microbial life (Svalbard springs, Rio Tinto, Lake Salda) are set to -0.6 by rule and reported but not fitted. The old raw-vegetation-index formula scored .158 / .77 on the same 15.
+
+\*\*\* Site-grouped 5-fold cross-validation on the anchors after the 2026-11-15 council relabel (`python -m ml.evaluate`).
 
 ### Overall (composite) score
 

@@ -202,26 +202,29 @@
     "terrain",
     "water_ice",
     "slope_hazard",
-    "bare"
+    "bare",
+    "clear"
    ],
    "prior": {
     "terrain": 0.35,
     "water_ice": 0.15,
     "slope_hazard": 0.25,
-    "bare": 0.2
+    "bare": 0.2,
+    "clear": 0.2
    },
    "weights": {
-    "terrain": 0.3285,
-    "water_ice": 0.0528,
-    "slope_hazard": 0.0184,
-    "bare": 0.3539
+    "terrain": 0.2742,
+    "water_ice": 0.0123,
+    "slope_hazard": 0.0954,
+    "bare": 0.1371,
+    "clear": 0.3732
    },
-   "intercept": 0.0823,
-   "mae": 0.245,
-   "mae_loo": 0.31,
-   "spearman": 0.761,
-   "spearman_raw": 0.793,
-   "spearman_loo": 0.719
+   "intercept": -0.1464,
+   "mae": 0.139,
+   "mae_loo": 0.192,
+   "spearman": 0.933,
+   "spearman_raw": 0.889,
+   "spearman_loo": 0.863
   }
  },
  "info": {
@@ -628,7 +631,8 @@
    "terrain",
    "water_ice",
    "slope_hazard",
-   "bare"
+   "bare",
+   "clear"
   ]
  },
  "entities": [

@@ -32,9 +32,9 @@
   },
   "operations": {
    "n": 18,
-   "cv_mae": 0.252,
-   "cv_rank": 0.774,
-   "cv_off_by_0_3": 6
+   "cv_mae": 0.187,
+   "cv_rank": 0.889,
+   "cv_off_by_0_3": 4
   },
   "terrain": {
    "n": 21,
@@ -57,8 +57,8 @@
  },
  "all_anchors": {
   "n": 161,
-  "cv_mae": 0.144,
-  "cv_off_by_0_3": 13
+  "cv_mae": 0.137,
+  "cv_off_by_0_3": 11
  },
  "overall_sanity": {
   "auc": 0.906,
