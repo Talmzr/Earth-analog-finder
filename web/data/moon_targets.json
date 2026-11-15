@@ -24,9 +24,6 @@
    "geology": 0.8,
    "thermal": -0.59,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.55
   },
   "relevant_experiments": [
@@ -38,25 +35,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 4,
-   "rover_mobility_navigation": 1,
+   "rover_mobility_navigation": 11,
    "ice_prospecting_instruments": 189,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 2,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 107,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 51,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -64,9 +57,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -112,9 +102,6 @@
    "geology": 0.8,
    "thermal": -0.59,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.31
   },
   "relevant_experiments": [
@@ -126,25 +113,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 27,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 3,
+   "regolith_excavation_construction": 189,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 7,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -152,9 +135,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -200,9 +180,6 @@
    "geology": 0.8,
    "thermal": -0.53,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.79
   },
   "relevant_experiments": [
@@ -213,24 +190,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 58,
-   "rover_mobility_navigation": 17,
+   "rover_mobility_navigation": 83,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 6,
+   "regolith_excavation_construction": 339,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 418,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -238,9 +211,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -286,9 +256,6 @@
    "geology": 0.8,
    "thermal": -0.53,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.74
   },
   "relevant_experiments": [
@@ -300,25 +267,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 36,
-   "rover_mobility_navigation": 17,
+   "rover_mobility_navigation": 83,
    "ice_prospecting_instruments": 190,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 7,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 326,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 312,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -326,9 +289,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -374,9 +334,6 @@
    "geology": 0.8,
    "thermal": -0.58,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.52
   },
   "relevant_experiments": [
@@ -388,25 +345,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 6,
-   "rover_mobility_navigation": 2,
+   "rover_mobility_navigation": 18,
    "ice_prospecting_instruments": 201,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 7,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 155,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 129,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -414,9 +367,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -462,9 +412,6 @@
    "geology": 0.8,
    "thermal": -0.58,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.66
   },
   "relevant_experiments": [
@@ -476,25 +423,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 29,
-   "rover_mobility_navigation": 9,
+   "rover_mobility_navigation": 74,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 6,
+   "regolith_excavation_construction": 236,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 194,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -502,9 +445,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -550,9 +490,6 @@
    "geology": 0.78,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.37
   },
   "relevant_experiments": [
@@ -563,24 +500,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 29,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 0,
+   "regolith_excavation_construction": 177,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 1,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 15,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -588,9 +521,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -636,9 +566,6 @@
    "geology": 0.78,
    "thermal": -0.56,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.15
   },
   "relevant_experiments": [
@@ -650,25 +577,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
    "rover_mobility_navigation": 0,
    "ice_prospecting_instruments": 177,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 0,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 26,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 15,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -676,9 +599,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -724,9 +644,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.76
   },
   "relevant_experiments": [
@@ -737,24 +654,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 32,
-   "rover_mobility_navigation": 7,
+   "rover_mobility_navigation": 53,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 6,
+   "regolith_excavation_construction": 276,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 341,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -762,9 +675,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -810,9 +720,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.6
   },
   "relevant_experiments": [
@@ -824,25 +731,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 16,
-   "rover_mobility_navigation": 6,
+   "rover_mobility_navigation": 35,
    "ice_prospecting_instruments": 185,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 7,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 224,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 220,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -850,9 +753,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -898,9 +798,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.73
   },
   "relevant_experiments": [
@@ -912,25 +809,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 32,
-   "rover_mobility_navigation": 12,
+   "rover_mobility_navigation": 58,
    "ice_prospecting_instruments": 201,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 247,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 334,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -938,9 +831,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -986,9 +876,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.77
   },
   "relevant_experiments": [
@@ -1000,25 +887,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 29,
-   "rover_mobility_navigation": 7,
+   "rover_mobility_navigation": 55,
    "ice_prospecting_instruments": 185,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 6,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 287,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 299,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1026,9 +909,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1074,9 +954,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.27
   },
   "relevant_experiments": [
@@ -1087,24 +964,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 5,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 1,
+   "regolith_excavation_construction": 101,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1112,9 +985,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -1160,9 +1030,6 @@
    "geology": 0.8,
    "thermal": -0.56,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.45
   },
   "relevant_experiments": [
@@ -1174,25 +1041,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 1,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 6,
    "ice_prospecting_instruments": 187,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 2,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 67,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 2,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1200,9 +1063,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1248,9 +1108,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.47
   },
   "relevant_experiments": [
@@ -1261,24 +1118,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 9,
-   "rover_mobility_navigation": 1,
+   "rover_mobility_navigation": 67,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 8,
+   "regolith_excavation_construction": 237,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 72,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1286,9 +1139,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -1334,9 +1184,6 @@
    "geology": 0.8,
    "thermal": -0.54,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.57
   },
   "relevant_experiments": [
@@ -1348,25 +1195,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 27,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 62,
    "ice_prospecting_instruments": 182,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 4,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 221,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 102,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1374,9 +1217,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1422,9 +1262,6 @@
    "geology": 0.8,
    "thermal": -0.58,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.48
   },
   "relevant_experiments": [
@@ -1435,24 +1272,20 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 1,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 3,
    "ice_prospecting_instruments": 201,
-   "regolith_excavation_construction": 0,
+   "regolith_excavation_construction": 24,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 1,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1460,9 +1293,6 @@
    "geology": 0.258,
    "thermal": 0.0,
    "water_ice": 0.129,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.258
   },
   "top3": [
@@ -1508,9 +1338,6 @@
    "geology": 0.8,
    "thermal": -0.58,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.23
   },
   "relevant_experiments": [
@@ -1522,25 +1349,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 5,
    "ice_prospecting_instruments": 177,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 1,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 119,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1548,9 +1371,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1596,9 +1416,6 @@
    "geology": 0.8,
    "thermal": -0.59,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.36
   },
   "relevant_experiments": [
@@ -1610,25 +1427,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 9,
    "ice_prospecting_instruments": 192,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 1,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 119,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 17,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1636,9 +1449,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1684,9 +1494,6 @@
    "geology": 0.8,
    "thermal": -0.6,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.58
   },
   "relevant_experiments": [
@@ -1698,25 +1505,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 10,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 30,
    "ice_prospecting_instruments": 187,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 5,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 173,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 115,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1724,9 +1527,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1772,9 +1572,6 @@
    "geology": 0.8,
    "thermal": -0.61,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.52
   },
   "relevant_experiments": [
@@ -1786,25 +1583,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 2,
-   "rover_mobility_navigation": 1,
+   "rover_mobility_navigation": 11,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 0,
+   "regolith_excavation_construction": 90,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 34,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1812,9 +1605,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1860,9 +1650,6 @@
    "geology": 0.8,
    "thermal": -0.53,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.77
   },
   "relevant_experiments": [
@@ -1874,25 +1661,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 45,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 56,
    "ice_prospecting_instruments": 179,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 250,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 248,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1900,9 +1683,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -1948,9 +1728,6 @@
    "geology": 0.8,
    "thermal": -0.59,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.07
   },
   "relevant_experiments": [
@@ -1962,10 +1739,8 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
@@ -1977,10 +1752,8 @@
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -1988,9 +1761,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2036,9 +1806,6 @@
    "geology": 0.78,
    "thermal": -0.57,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.73
   },
   "relevant_experiments": [
@@ -2048,23 +1815,19 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 15,
-   "rover_mobility_navigation": 3,
-   "regolith_excavation_construction": 0,
+   "rover_mobility_navigation": 31,
+   "regolith_excavation_construction": 175,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 127,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 15,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2072,9 +1835,6 @@
    "geology": 0.259,
    "thermal": 0.0,
    "water_ice": 0.074,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.296
   },
   "top3": [
@@ -2120,9 +1880,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.77
   },
   "relevant_experiments": [
@@ -2134,25 +1891,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 20,
-   "rover_mobility_navigation": 6,
+   "rover_mobility_navigation": 50,
    "ice_prospecting_instruments": 201,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 265,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 307,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2160,9 +1913,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2208,9 +1958,6 @@
    "geology": 0.8,
    "thermal": -0.55,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.75
   },
   "relevant_experiments": [
@@ -2222,25 +1969,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 33,
-   "rover_mobility_navigation": 13,
+   "rover_mobility_navigation": 61,
    "ice_prospecting_instruments": 201,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 255,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 340,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2248,9 +1991,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2296,9 +2036,6 @@
    "geology": 0.8,
    "thermal": -0.56,
    "water_ice": 0.52,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.72
   },
   "relevant_experiments": [
@@ -2310,25 +2047,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 43,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 71,
    "ice_prospecting_instruments": 201,
-   "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "isru_ice_extraction": 5,
+   "regolith_excavation_construction": 252,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 213,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2336,9 +2069,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2384,9 +2114,6 @@
    "geology": 0.8,
    "thermal": -0.6,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.6
   },
   "relevant_experiments": [
@@ -2398,25 +2125,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 0,
-   "rover_mobility_navigation": 0,
+   "rover_mobility_navigation": 1,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 2,
+   "regolith_excavation_construction": 74,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 118,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 2,
    "instrument_gpr_drill_subsurface": 1,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2424,9 +2147,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2472,9 +2192,6 @@
    "geology": 0.8,
    "thermal": -0.6,
    "water_ice": 0.3,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": null,
    "operations": 0.72
   },
   "relevant_experiments": [
@@ -2486,25 +2203,21 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 36,
-   "rover_mobility_navigation": 3,
+   "rover_mobility_navigation": 42,
    "ice_prospecting_instruments": 0,
    "isru_ice_extraction": 0,
-   "regolith_excavation_construction": 8,
+   "regolith_excavation_construction": 225,
    "thermal_power_extreme_cold_long_night": 0,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 246,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 3,
    "instrument_gpr_drill_subsurface": 0,
-   "planetary_protection_contamination_blanks": 45,
    "geology_eva_training": 0
   },
   "composite_weights": {
@@ -2512,9 +2225,6 @@
    "geology": 0.242,
    "thermal": 0.0,
    "water_ice": 0.182,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.0,
    "operations": 0.242
   },
   "top3": [
@@ -2560,9 +2270,6 @@
    "geology": 0.56,
    "thermal": 0.4,
    "water_ice": 0.54,
-   "dust": 0.65,
-   "biology": 0.42,
-   "caves": 0.5,
    "operations": 0.76
   },
   "relevant_experiments": [
@@ -2572,52 +2279,43 @@
    "thermal_power_extreme_cold_long_night",
    "illumination_power_planning",
    "habitat_human_ops_isolation",
-   "dust_mitigation",
    "instrument_spectrometers_mineralogy",
    "instrument_gpr_drill_subsurface",
-   "planetary_protection_contamination_blanks",
-   "cave_pit_robotics",
    "geology_eva_training"
   ],
   "earth_tiles_sufficient": {
    "landing_hazard_detection": 63,
-   "rover_mobility_navigation": 27,
-   "regolith_excavation_construction": 1,
+   "rover_mobility_navigation": 65,
+   "regolith_excavation_construction": 487,
    "thermal_power_extreme_cold_long_night": 17,
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 1265,
-   "dust_mitigation": 40,
    "instrument_spectrometers_mineralogy": 8,
    "instrument_gpr_drill_subsurface": 31,
-   "planetary_protection_contamination_blanks": 45,
-   "cave_pit_robotics": 97,
    "geology_eva_training": 5
   },
   "composite_weights": {
-   "terrain": 0.333,
-   "geology": 0.267,
+   "terrain": 0.37,
+   "geology": 0.259,
    "thermal": 0.0,
-   "water_ice": 0.067,
-   "dust": 0.0,
-   "biology": 0.0,
-   "caves": 0.067,
-   "operations": 0.267
+   "water_ice": 0.074,
+   "operations": 0.296
   },
   "top3": [
    {
     "name": "antarctic_ice_free sample 278",
     "id": "lc_antarctic_ice_free_0278",
-    "composite": 0.45
+    "composite": 0.49
    },
    {
     "name": "Kishb, Harrat",
     "id": "gvp_231071",
-    "composite": 0.43
+    "composite": 0.44
    },
    {
     "name": "St. Michael",
     "id": "gvp_314040",
-    "composite": 0.43
+    "composite": 0.44
    }
   ]
  }

@@ -17,8 +17,8 @@ MODELS, EMB, RES = ROOT / "models", ROOT / "embeddings", ROOT / "results"
 R_MOON = 1737400.0
 
 # output category name -> name used in config/categories.json, experiments.json and anchors.csv
+# (dust_regolith, biology_sterility, caves_subsurface were removed 2026-11-15: no Moon data; their anchors are ignored)
 CATS = {"terrain": "terrain", "geology": "geology", "thermal": "thermal_illumination", "water_ice": "water_ice",
-        "dust": "dust_regolith", "biology": "biology_sterility", "caves": "caves_subsurface",
         "operations": "ops_landing_mobility"}
 CFG2OUT = {v: k for k, v in CATS.items()}
 

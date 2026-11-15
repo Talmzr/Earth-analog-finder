@@ -5,9 +5,6 @@
   "geology": 0.8,
   "thermal": 0.4,
   "water_ice": 0.7,
-  "dust": 0.7,
-  "biology": 0.6,
-  "caves": 0.5,
   "operations": 0.8
  },
  "subscore": "1 - |d|/tol for |d| <= tol; -(1 - exp(-(|d|/tol - 1))) beyond (soft floor at -1)",
@@ -103,70 +100,6 @@
    "spearman_raw": 0.953,
    "spearman_loo": 0.89
   },
-  "dust": {
-   "category": "dust",
-   "n_anchors": 18,
-   "terms": [
-    "bare",
-    "tephra"
-   ],
-   "prior": {
-    "bare": 0.2,
-    "tephra": 0.15
-   },
-   "weights": {
-    "bare": 0.5065,
-    "tephra": 0.3225
-   },
-   "intercept": -0.1815,
-   "mae": 0.153,
-   "mae_loo": 0.175,
-   "spearman": 0.96,
-   "spearman_raw": 0.96,
-   "spearman_loo": 0.868
-  },
-  "biology": {
-   "category": "biology",
-   "n_anchors": 18,
-   "terms": [
-    "ndvi",
-    "precip"
-   ],
-   "prior": {
-    "ndvi": 1.0,
-    "precip": 0.5
-   },
-   "weights": {
-    "ndvi": 1.14,
-    "precip": 0.7417
-   },
-   "intercept": 0.4376,
-   "mae": 0.169,
-   "mae_loo": 0.185,
-   "spearman": 0.88,
-   "spearman_raw": 0.897,
-   "spearman_loo": 0.866
-  },
-  "caves": {
-   "category": "caves",
-   "n_anchors": 15,
-   "terms": [
-    "rule"
-   ],
-   "prior": {
-    "rule": 1.0
-   },
-   "weights": {
-    "rule": 1.0
-   },
-   "intercept": 0.0,
-   "note": "rule levels used as the score (not rescaled)",
-   "mae": 0.14,
-   "mae_loo": 0.14,
-   "spearman": 0.911,
-   "spearman_raw": 0.911,
-   "spearman_loo": 0.911
-  },
   "operations": {
    "category": "operations",
    "n_anchors": 18,
@@ -238,18 +171,7 @@
    "agreement": 0.462
   },
   "terrain_ssl_in_score": false,
-  "geology_embeddings": "fine-tuned BGE",
-  "dust_reference": {
-   "fines_pct": 45.0,
-   "bulk_density": 1.5,
-   "coarse_pct": 5.0,
-   "note": "fines = % finer than 50 um; lunar soil median grain size ~70 um (the brief's '70-80% sand-sized' would be fines ~25%; kept the 45% of categories.json)"
-  },
-  "caves": {
-   "known_tube_tiles": 97,
-   "plausible_tiles": 878,
-   "no_tube_tiles": 2513
-  }
+  "geology_embeddings": "fine-tuned BGE"
  },
  "composite_weights": {
   "terrain": [
@@ -282,7 +204,7 @@
    0.333,
    0.333,
    0.333,
-   0.333
+   0.37
   ],
   "geology": [
    0.242,
@@ -314,7 +236,7 @@
    0.242,
    0.242,
    0.242,
-   0.267
+   0.259
   ],
   "thermal": [
    0.0,
@@ -378,103 +300,7 @@
    0.182,
    0.182,
    0.182,
-   0.067
-  ],
-  "dust": [
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0
-  ],
-  "biology": [
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0
-  ],
-  "caves": [
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   0.067
+   0.074
   ],
   "operations": [
    0.242,
@@ -506,15 +332,14 @@
    0.242,
    0.242,
    0.242,
-   0.267
+   0.296
   ]
  },
  "composite_categories": [
   "terrain",
   "geology",
   "water_ice",
-  "operations",
-  "caves"
+  "operations"
  ],
  "kept_terms": {
   "terrain": [
@@ -533,17 +358,6 @@
    "frozen_ground",
    "traverse",
    "no_liquid_water"
-  ],
-  "dust": [
-   "bare",
-   "tephra"
-  ],
-  "biology": [
-   "ndvi",
-   "precip"
-  ],
-  "caves": [
-   "rule"
   ],
   "operations": [
    "terrain",

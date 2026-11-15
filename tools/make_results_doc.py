@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RES, MOD, OUT = ROOT / "results", ROOT / "models", ROOT / "docs" / "ML_RESULTS.md"
 FEATS = ("log_relief", "slope_mean", "log_tri")
 SHOW_CATS = [("terrain", "Terrain"), ("geology", "Geology"), ("thermal", "Thermal"), ("water_ice", "Water/ice"),
-             ("dust", "Dust"), ("operations", "Ops")]
+             ("operations", "Ops")]
 
 LIMITS = """## 6. Deviations from the brief and known limits
 
@@ -27,9 +27,8 @@ LIMITS = """## 6. Deviations from the brief and known limits
 - **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
 - **Thermal:** night minimum, grazing sun and noon sun height only (swing, max temperature and polar night were dropped). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Dust:** SoilGrids grain size / density / coarse fragments, aerosol and dryness were dropped (no or negative effect, 5 km modelled soil, no Antarctic data); dust is bare ground + volcanic tephra.
+- **Removed categories:** dust/regolith, biological sterility and caves/lava tubes were dropped with the experiments that needed only them (dust mitigation, planetary protection blanks, cave/pit robotics). None of them used Moon data: every Moon target got the same score for a given Earth site. Experiments that listed dust as a requirement now carry a caveat to test regolith behaviour with a simulant.
 - **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
-- **Caves:** the rule levels (+0.5 / +0.3 / 0 / -0.5) are the score; anchors check it rather than rescale it.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.
 """
@@ -125,9 +124,9 @@ def composite_section(params):
            "term was removed):", "", "| Category | Terms used |", "|---|---|"]
     out += [f"| {c} | {', '.join(ks)} |" for c, ks in (params.get("kept_terms") or {}).items()]
     out += ["", f"Composite = weighted mean of **{', '.join(cc)}** only (the categories that compare an Earth tile with the "
-            "specific Moon target; caves applies to the Tranquillitatis pit only). Each weight is the number of experiments "
+            "specific Moon target). Each weight is the number of experiments "
             "relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Thermal (no overlap: "
-            "a latitude ranking), dust and biology (Earth-only) remain category scores and experiment requirements. "
+            "a latitude ranking) remains a category score and experiment requirement. "
             "Typical weights (median over targets):", "",
            "| " + " | ".join(w) + " |", "|" + "---|" * len(w),
            "| " + " | ".join(f"{np.median(v):.2f}" for v in w.values()) + " |", ""]

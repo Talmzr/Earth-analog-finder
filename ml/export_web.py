@@ -24,15 +24,11 @@ from . import common as C
 
 LABELS = {"terrain": "Terrain & topography", "geology": "Geology & surface materials",
           "thermal": "Temperature & illumination", "water_ice": "Water, ice & permafrost",
-          "dust": "Dust & regolith", "biology": "Biological sterility", "caves": "Caves & lava tubes",
           "operations": "Landing & operations"}
 HOW = {"terrain": "Measured relief, slope, roughness and steep-ground share, same 80 m elevation processing on both bodies (the fine-tuned DINOv2 model is evaluated but does not improve the score, so it is not used)",
        "geology": "BGE-small text encoder fine-tuned contrastively on lunar map units vs Earth lithology, plus a lithology-match term",
        "thermal": "Night minimum temperature, grazing-sun share, noon sun height. Closest approach only: no Earth site overlaps the Moon, so this ranks how polar and cold the site is; not part of the overall score",
        "water_ice": "Frozen ground within ~1 m, distance from flat bare ground to ice, absence of liquid water",
-       "dust": "Bare ground share and volcanic ash/tephra. Earth-only ranking against a fixed lunar-regolith idea; not part of the overall score",
-       "biology": "How lifeless the Earth site is (vegetation greenness, rainfall). Earth-only ranking, capped at 0.6; not part of the overall score",
-       "caves": "Rule: known lava-tube region / basaltic volcano / no tubes. Only for the Tranquillitatis pit target",
        "operations": "Calibrated terrain and ice scores plus slope hazard, penalty for forest / towns / water"}
 
 
@@ -144,7 +140,7 @@ def main(sfx=""):
         limitations=[
             "No ground truth exists for analog quality: the -1..+1 scale is set by draft expert anchors (all still marked needs_review).",
             "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach (a latitude ranking), not similarity, and are left out of the overall score.",
-            "Dust and biology compare Earth sites with a fixed lunar idea, not with per-site Moon data, and are left out of the overall score.",
+            "Dust/regolith, biological sterility and caves are not scored: there is no per-site Moon data to compare Earth sites with.",
             "Earth climate layers are coarser (5-50 km) than the 10 km tiles; Antarctica lacks land-cover, soil and rainfall layers.",
             "Lunar geology comes from a 1:5M map plus the known composition of mare vs highland crust, not per-tile mineralogy.",
             "Thermal scores for the Tranquillitatis pit are extrapolated (thermal anchors are all polar).",
