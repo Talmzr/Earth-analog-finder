@@ -18,3 +18,4 @@ data/cache/
 models/
 embeddings/
 !data/patches/moon_zone_arrays_128.npz
+# website bundle and result tables are committed only from the real (non-smoke) run

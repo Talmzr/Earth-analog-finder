@@ -347,7 +347,8 @@ def precondition(expr, ent):
 
 def readiness(ent, earth, cal, exps, avoid_below):
     Ecount = len(earth)
-    rows, app_rows = [], []
+    rows, app_rows, codes = [], [], []
+    code_of = {"not_applicable": 0, "avoid": 1, "partial": 2, "sufficient": 3}
     counts = {s: np.zeros((len(ent), Ecount), np.int16) for s in ("sufficient", "partial", "avoid")}
     wsum = {c: np.zeros(len(ent)) for c in cal}
     for ex in exps:
@@ -374,6 +375,8 @@ def readiness(ent, earth, cal, exps, avoid_below):
         for c, v in sup.items():
             weak_sup = np.where(cal[c] < v, np.where(weak_sup == "", c, weak_sup + "+" + c), weak_sup)
         status = np.where(nan, "not_applicable", np.where(avoid, "avoid", np.where(suff, "sufficient", "partial")))
+        code = np.vectorize(code_of.get)(status).astype(np.int8)
+        codes.append(np.where(app[:, None], code, -1).astype(np.int8))      # -1 = experiment not relevant to this Moon target
         for i, m in enumerate(ent["entity_id"]):
             app_rows.append(dict(experiment=ex["id"], moon_zone_id=m, applicable=bool(app[i])))
             if not app[i]:
@@ -387,7 +390,7 @@ def readiness(ent, earth, cal, exps, avoid_below):
     out = pd.concat(rows, ignore_index=True)
     for c in ("experiment", "moon_zone_id", "earth_tile_id", "status", "limiting_category", "weak_required", "weak_supporting"):
         out[c] = out[c].astype("category")
-    return out, pd.DataFrame(app_rows), counts, wsum
+    return out, pd.DataFrame(app_rows), counts, wsum, np.stack(codes)
 
 
 def main():
@@ -447,7 +450,7 @@ def main():
         C.save_table(d, C.RES / f"{c}_scores{sfx}.parquet")
 
     # ---- experiments + composite
-    RD, APP, counts, wsum = readiness(ent, earth, cal, exps_cfg["experiments"], exps_cfg.get("default_avoid_below", 0.0))
+    RD, APP, counts, wsum, codes = readiness(ent, earth, cal, exps_cfg["experiments"], exps_cfg.get("default_avoid_below", 0.0))
     C.save_table(RD, C.RES / f"experiment_readiness{sfx}.parquet")
     APP.to_csv(C.RES / f"experiment_applicability{sfx}.csv", index=False)
     Wm = np.stack([wsum[c] for c in cal])                                       # (cat, M)
@@ -467,6 +470,11 @@ def main():
         for s in counts:
             d[f"n_{s}"] = counts[s][i, order]
         tops.append(d)
+    np.savez_compressed(C.RES / f"score_matrices{sfx}.npz", categories=np.array(list(cal)), entity_id=ent["entity_id"].to_numpy(str),
+                        earth_tile_id=earth["patch_id"].to_numpy(str), calibrated=Sc.astype(np.float32),
+                        raw=np.stack([raw[c] for c in cal]).astype(np.float32), composite=comp.astype(np.float32),
+                        experiments=np.array([e["id"] for e in exps_cfg["experiments"]]), readiness=codes,
+                        category_weights=Wm.astype(np.float32))
     TOP = pd.concat(tops, ignore_index=True)
     TOP.round(3).to_csv(C.RES / f"top_analogs{sfx}.csv", index=False)
 
