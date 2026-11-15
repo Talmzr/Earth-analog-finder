@@ -1,0 +1,14 @@
+earth_site,experiment,moon_scope,program,year,what_was_tested,source
+black_point,rover_mobility_navigation,all,NASA Desert RATS (D-RATS),2009-2022,pressurized lunar rover traverses and crewed driving,https://ntrs.nasa.gov/citations/20230007175
+black_point,geology_eva_training,all,NASA Desert RATS (D-RATS),2009-2022,crewed geology EVAs from a lunar rover,https://ntrs.nasa.gov/citations/20230007175
+mauna_kea_saddle,ice_prospecting_instruments,polar,NASA/CSA RESOLVE (PISCES),2010-2012,lunar polar volatile prospecting payload on a rover,https://ntrs.nasa.gov/citations/20100033667
+mauna_kea_saddle,isru_ice_extraction,polar,NASA/CSA/DLR ISRU field tests (PISCES),2008-2012,regolith ISRU and volatile extraction demonstrations,https://ntrs.nasa.gov/citations/20100033667
+ries,geology_eva_training,all,ESA PANGAEA; Apollo 14 and 17 crew training,1970-present,astronaut impact-crater geology training,https://www.eoportal.org/other-space-activities/pangaea
+lanzarote,geology_eva_training,all,ESA PANGAEA,2016-present,astronaut field geology traverses on volcanic terrain,https://www.eoportal.org/other-space-activities/pangaea
+lava_beds,cave_pit_robotics,pit,NASA BRAILLE (PSTAR),2018-2021,rover and legged-robot exploration of lava tubes,https://www.nasa.gov/feature/ames/braille
+craters_of_the_moon,geology_eva_training,pit,NASA FINESSE (SSERVI),2014-2019,volcanic field science and EVA concept studies,https://www.nasa.gov/general/overview-finesse/
+crater_clearwater_west,geology_eva_training,all,NASA FINESSE (SSERVI) with CSA,2014-2016,impact-structure field science and EVA concept studies,https://www.nasa.gov/general/overview-finesse/
+gvp_211060,rover_mobility_navigation,all,DLR/ESA ARCHES space-analogue demonstration (Mount Etna),2022,multi-rover lunar exploration teleoperated with a Gateway-like delay,https://esa.int/Newsroom/Press_Releases/Call_for_Media_ARCHES_robotic_demonstration_of_Mount_Etna_in_Sicily
+haughton,rover_mobility_navigation,polar,NASA Ames K10 robotic survey (Haughton-Mars Project),2007,robotic site survey chosen for its similarity to Shackleton crater,https://phys.org/news104156323.html
+haughton,instrument_gpr_drill_subsurface,polar,NASA Ames K10 robotic survey (Haughton-Mars Project),2007,ground-penetrating radar subsurface mapping from rovers,https://phys.org/news104156323.html
+concordia,habitat_human_ops_isolation,all,ESA Concordia isolation research,2005-present,long-duration isolation and confinement of crews,https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Exploration/Isolation_studies_in_Antarctica

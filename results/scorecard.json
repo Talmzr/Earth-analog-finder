@@ -65,5 +65,131 @@
   "polar_sites_median_rank": 288,
   "n_targets": 29,
   "n_tiles": 4310
+ },
+ "real_world": {
+  "n_uses": 13,
+  "mean_not_avoid": 0.182,
+  "mean_base_not_avoid": 0.092,
+  "uses_never_avoid": 2,
+  "uses_mostly_avoid": 11,
+  "table": [
+   {
+    "site": "black_point",
+    "experiment": "rover_mobility_navigation",
+    "program": "NASA Desert RATS (D-RATS)",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.02
+   },
+   {
+    "site": "black_point",
+    "experiment": "geology_eva_training",
+    "program": "NASA Desert RATS (D-RATS)",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "mauna_kea_saddle",
+    "experiment": "ice_prospecting_instruments",
+    "program": "NASA/CSA RESOLVE (PISCES)",
+    "n_targets": 28,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.25
+   },
+   {
+    "site": "mauna_kea_saddle",
+    "experiment": "isru_ice_extraction",
+    "program": "NASA/CSA/DLR ISRU field tests (PISCES)",
+    "n_targets": 22,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.02
+   },
+   {
+    "site": "ries",
+    "experiment": "geology_eva_training",
+    "program": "ESA PANGAEA; Apollo 14 and 17 crew training",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "lanzarote",
+    "experiment": "geology_eva_training",
+    "program": "ESA PANGAEA",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "lava_beds",
+    "experiment": "cave_pit_robotics",
+    "program": "NASA BRAILLE (PSTAR)",
+    "n_targets": 1,
+    "sufficient": 1.0,
+    "not_avoid": 1.0,
+    "base_not_avoid": 0.42
+   },
+   {
+    "site": "craters_of_the_moon",
+    "experiment": "geology_eva_training",
+    "program": "NASA FINESSE (SSERVI)",
+    "n_targets": 1,
+    "sufficient": 0.0,
+    "not_avoid": 1.0,
+    "base_not_avoid": 0.02
+   },
+   {
+    "site": "crater_clearwater_west",
+    "experiment": "geology_eva_training",
+    "program": "NASA FINESSE (SSERVI) with CSA",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.0
+   },
+   {
+    "site": "gvp_211060",
+    "experiment": "rover_mobility_navigation",
+    "program": "DLR/ESA ARCHES space-analogue demonstration (Mount Etna)",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.02
+   },
+   {
+    "site": "haughton",
+    "experiment": "rover_mobility_navigation",
+    "program": "NASA Ames K10 robotic survey (Haughton-Mars Project)",
+    "n_targets": 29,
+    "sufficient": 0.0,
+    "not_avoid": 0.0,
+    "base_not_avoid": 0.02
+   },
+   {
+    "site": "haughton",
+    "experiment": "instrument_gpr_drill_subsurface",
+    "program": "NASA Ames K10 robotic survey (Haughton-Mars Project)",
+    "n_targets": 29,
+    "sufficient": 0.0,
+    "not_avoid": 0.07,
+    "base_not_avoid": 0.01
+   },
+   {
+    "site": "concordia",
+    "experiment": "habitat_human_ops_isolation",
+    "program": "ESA Concordia isolation research",
+    "n_targets": 30,
+    "sufficient": 0.0,
+    "not_avoid": 0.3,
+    "base_not_avoid": 0.42
+   }
+  ]
  }
 }

@@ -4,7 +4,7 @@
   python -W ignore -m ml.evaluate --out-suffix _v2   # score a variant run (ml.score_all --out-suffix _v2)
   python -W ignore -m ml.evaluate --compare results/scorecard.json
 
-Two independent checks:
+Three checks:
 1. Category accuracy: site-grouped 5-fold cross-validation on the expert anchors (cv_pred in anchor_residuals.csv,
    from ml.score_all). Every anchor is predicted by a calibration that never saw its Earth site in any category, so
    a site cannot leak in through another Moon target. Folds are fixed by a hash of the site id (score_all.site_fold).
@@ -55,6 +55,45 @@ def polar_auc(npz, earth: pd.DataFrame) -> dict:
                 n_targets=len(polar_t), n_tiles=len(pid))
 
 
+def real_world_check(npz, earth: pd.DataFrame) -> dict:
+    """3. Real-world site choices: config/real_world_uses.csv lists sites that space agencies actually used for a
+    lunar test (Desert RATS, RESOLVE, PANGAEA, BRAILLE, FINESSE, ARCHES, K10, Concordia), with sources. If the model
+    is right, it should not call those sites 'avoid' for the test that was run there. For each use: share of the
+    Moon targets in scope (polar / pit / all, where the experiment applies) with a sufficient or partial verdict,
+    compared with the same share over all 4,310 Earth tiles (how often the model says 'not avoid' by default).
+    Some of these sites also carry category anchors, so this is not fully independent of the calibration."""
+    path = C.CFG / "real_world_uses.csv"
+    if not path.exists():
+        return {}
+    U = pd.read_csv(path)
+    ents, pid, exps = list(npz["entity_id"]), list(npz["earth_tile_id"]), list(npz["experiments"])
+    R = npz["readiness"]                                                    # (exp, M, E): 3 suff, 2 partial, 1 avoid
+    scope = {"polar": [i for i, m in enumerate(ents) if "tranquillitatis" not in m],
+             "pit": [i for i, m in enumerate(ents) if "tranquillitatis" in m], "all": list(range(len(ents)))}
+    rows = []
+    for u in U.itertuples():
+        if u.earth_site not in pid or u.experiment not in exps:
+            rows.append(dict(site=u.earth_site, experiment=u.experiment, note="site or experiment not in data"))
+            continue
+        k, j = exps.index(u.experiment), pid.index(u.earth_site)
+        tg = [i for i in scope[u.moon_scope] if R[k, i, j] > 0]
+        if not tg:
+            rows.append(dict(site=u.earth_site, experiment=u.experiment, note="experiment applies to no target in scope"))
+            continue
+        v = R[k, tg, j]
+        base = R[k][tg]
+        base = base[base > 0]
+        rows.append(dict(site=u.earth_site, experiment=u.experiment, program=u.program, n_targets=len(tg),
+                         sufficient=round(float((v == 3).mean()), 2), not_avoid=round(float((v >= 2).mean()), 2),
+                         base_not_avoid=round(float((base >= 2).mean()), 2)))
+    T = pd.DataFrame(rows)
+    ok = T.dropna(subset=["not_avoid"]) if "not_avoid" in T else T.iloc[0:0]
+    return dict(n_uses=int(len(ok)), mean_not_avoid=round(float(ok["not_avoid"].mean()), 3),
+                mean_base_not_avoid=round(float(ok["base_not_avoid"].mean()), 3),
+                uses_never_avoid=int((ok["not_avoid"] == 1).sum()), uses_mostly_avoid=int((ok["not_avoid"] < 0.5).sum()),
+                table=T.to_dict("records"))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-suffix", default="")
@@ -69,7 +108,7 @@ def main():
     err = (R["cv_pred"] - R["label"]).abs()
     card = dict(categories=cats, all_anchors=dict(n=int(len(R)), cv_mae=round(float(err.mean()), 3),
                                                    cv_off_by_0_3=int((err > 0.3).sum())),
-                overall_sanity=polar_auc(npz, earth))
+                overall_sanity=polar_auc(npz, earth), real_world=real_world_check(npz, earth))
     (C.RES / f"scorecard{a.out_suffix}.json").write_text(json.dumps(card, indent=1))
     old = json.loads(open(a.compare).read()) if a.compare else None
     print(f"{'category':13s} {'n':>3s}  {'CV error':>8s} {'CV rank':>8s} {'off>0.3':>7s}" + ("   | before: error rank off" if old else ""))
@@ -85,6 +124,12 @@ def main():
     print(f"overall score: polar-analog AUC {ov['auc']:.3f}, polar sites median rank {ov['polar_sites_median_rank']} "
           f"of {ov['n_tiles']}" + (f"   | before: AUC {old['overall_sanity']['auc']:.3f}, rank "
                                    f"{old['overall_sanity']['polar_sites_median_rank']}" if old else ""))
+    rw = card["real_world"]
+    if rw:
+        print(f"real-world site choices: {rw['n_uses']} documented uses; not 'avoid' for {100 * rw['mean_not_avoid']:.0f}% of "
+              f"their Moon targets (all tiles: {100 * rw['mean_base_not_avoid']:.0f}%); never avoid {rw['uses_never_avoid']}, "
+              f"mostly avoid {rw['uses_mostly_avoid']}")
+        print(pd.DataFrame(rw["table"]).to_string(index=False))
 
 
 if __name__ == "__main__":
