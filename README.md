@@ -4,6 +4,8 @@ NASA Space Apps 2026 challenge: *Identify Earth locations that analog the perman
 
 **Live site:** https://talmzr.github.io/Earth-analog-finder/ (3-D globe; 2-D map at `/map.html`)
 
+**Demo video (30 s):** https://talmzr.github.io/Earth-analog-finder/demo/TerraMatch-demo-30s.mp4
+
 Pick a Moon target, see which Earth places come closest to it, and read the verdict of each field-test experiment with its caveats. The site is built from `web/` and deployed by `.github/workflows/pages.yml` on every push to `main`.
 
 ## Top picks
