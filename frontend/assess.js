@@ -741,7 +741,7 @@ function cannotHTML() {
       ${c.cover_with ? `<p class="nr-how">→ ${esc(c.cover_with)}</p>` : ''}</div>`).join('')}</div></div>`;
 }
 function experimentsHTML(t, r) {
-  if (!t || !r) return `<p class="dt-note" style="margin-top:0">Lock in an Earth place and a Moon target to see the verdict of each of the ${META.experiments.length} field-test experiments (sufficient ≥ 0.5 on every required category, avoid if any required category is below 0, partial otherwise).</p>` + cannotHTML();
+  if (!t || !r) return `<p class="dt-note" style="margin-top:0">Lock in an Earth place and a Moon target to see the verdict of each of the ${META.experiments.length} field-test experiments (sufficient when every required category meets its minimum, avoid only if a required category is below -0.5, partial otherwise).</p>` + cannotHTML();
   const relIds = new Set(r.relevant || []);
   const rel = META.experiments.filter(x => relIds.has(x.id)).map(x => ({ x, code: SC.ready(r.id, x.id, t.idx) })).sort((a, b) => b.code - a.code);
   const notRel = META.experiments.filter(x => !relIds.has(x.id));

@@ -568,10 +568,17 @@ const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'suffi
 // sufficient = at least one experiment is sufficient there; partial = none sufficient but at least one partial;
 // avoid = no experiment is even partly possible. (No Earth site matches the Moon overall, so a negative overall score
 // alone would call almost every place 'avoid', including established analog test sites.)
+// 'Sufficient' needs an experiment that depends on THIS Moon target: tests whose required categories are only lunar
+// constants (dust mitigation, planetary protection: same for every Moon target, any dry desert passes) can make a
+// place 'partial' but not 'sufficient'.
+const INVARIANT_REQ = new Set(['dust_regolith', 'biology_sterility']);
+const TARGET_FREE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).every(c => INVARIANT_REQ.has(c))).map(e => e.id));
 const overallVerdict = (tid, j) => {
   if (tid == null || j == null) return 'n/a';
-  const r = Object.values(SC.readyAll(tid, j));
-  return r.includes(3) ? 'sufficient' : r.includes(2) ? 'partial' : r.includes(1) ? 'avoid' : 'n/a';
+  const r = Object.entries(SC.readyAll(tid, j));
+  const codes = r.map(([, c]) => c);
+  return r.some(([e, c]) => c === 3 && !TARGET_FREE_EXP.has(e)) ? 'sufficient'
+    : codes.some(c => c >= 2) ? 'partial' : codes.includes(1) ? 'avoid' : 'n/a';
 };
 const READY = { '-1': 'not relevant', 0: 'not available', 1: 'avoid', 2: 'partial', 3: 'sufficient' };
 
