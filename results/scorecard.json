@@ -62,7 +62,7 @@
  },
  "overall_sanity": {
   "auc": 0.914,
-  "polar_sites_median_rank": 277,
+  "polar_sites_median_rank": 275,
   "n_targets": 29,
   "n_tiles": 4310
  }

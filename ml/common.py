@@ -198,8 +198,11 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
     # water, built-up); bare ground and ice are both lunar-relevant. Antarctica has no WorldCover: plants 0 (veg_frac
     # fallback) and open sea from the DEM (share of sea-level pixels), so coastal tiles are not taken as all land.
     # Named regolith test sites keep their test spot (same rule as bare_f_site above).
-    water = e["wc_frac_water"].where(e["wc_frac_water"].notna(), np.where(lat < -60, e["frac_elev_zero"], np.nan))
-    cover = (water.fillna(0) + e["wc_frac_built"].fillna(0) + e["veg_frac"]).clip(0, 1)
+    # Same fallback wherever WorldCover is missing (also > ~82.6 N and some ocean islands, 18 tiles outside Antarctica):
+    # sea from the DEM, plants from NDVI plant cover. Without it a North Greenland tile that is 50% sea ranked #5.
+    water = e["wc_frac_water"].where(e["wc_frac_water"].notna(), e["frac_elev_zero"])
+    veg_any = e["veg_frac"].where(e["veg_frac"].notna(), e["plant_cover"])
+    cover = (water.fillna(0) + e["wc_frac_built"].fillna(0) + veg_any).clip(0, 1)
     e["cover_nonlunar"] = np.where(spot, np.fmin(cover, 1 - e["bare_f_site"]), cover)
     e["obstacle_frac"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water"])
     e["obstacle_frac_ops"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water", "wc_frac_wetland", "wc_frac_crop"])

@@ -285,7 +285,7 @@
    "base": 0.8,
    "slope": 2.0,
    "rule": "composite <= base - slope * cover_nonlunar",
-   "share_pairs_lowered": 0.503
+   "share_pairs_lowered": 0.505
   }
  },
  "composite_weights": {
@@ -589,7 +589,7 @@
   "base": 0.8,
   "slope": 2.0,
   "rule": "composite <= base - slope * cover_nonlunar",
-  "share_pairs_lowered": 0.503
+  "share_pairs_lowered": 0.505
  },
  "kept_terms": {
   "terrain": [

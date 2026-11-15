@@ -543,22 +543,22 @@ moon_de_gerlache_rim2__tile,tile,1,gvp_390021,Royal Society Range,volcano,volcan
 moon_de_gerlache_rim2__tile,tile,2,lc_ice_edge_0047,ice_edge sample 47,landcover_sample,ice_edge,79.598,-79.618,0.178,0.364,-0.188,-0.591,0.525,0.095,-0.512,0.409,,-0.065,1,2,10
 moon_de_gerlache_rim2__tile,tile,3,lc_antarctic_ice_free_0405,antarctic_ice_free sample 405,landcover_sample,antarctic_ice_free,-85.08,169.367,0.165,0.484,-0.358,-0.57,0.611,-0.022,-0.581,0.467,,-0.116,2,0,11
 moon_de_gerlache_rim2__tile,tile,4,lc_bare_polar_0236,bare_polar sample 236,landcover_sample,bare_polar,81.285,-71.459,0.151,0.372,-0.424,-0.603,0.469,0.3,0.152,0.454,,0.387,2,7,4
-moon_de_gerlache_rim2__tile,tile,5,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.128,0.327,-0.47,-0.589,0.539,0.289,0.639,0.417,,0.31,4,5,4
-moon_de_gerlache_rim2__tile,tile,6,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.108,0.389,-0.387,-0.58,0.573,-0.056,-0.125,0.438,,-0.103,1,1,11
-moon_de_gerlache_rim2__tile,tile,7,lc_antarctic_ice_free_0232,antarctic_ice_free sample 232,landcover_sample,antarctic_ice_free,-84.32,167.366,0.106,0.172,-0.075,-0.575,0.583,-0.093,-0.598,0.455,,-0.338,1,1,11
-moon_de_gerlache_rim2__tile,tile,8,lc_antarctic_ice_free_0290,antarctic_ice_free sample 290,landcover_sample,antarctic_ice_free,-85.961,-145.524,0.105,0.442,-0.366,-0.571,0.603,-0.215,-0.612,0.43,,-0.165,2,0,11
-moon_de_gerlache_rim2__tile,tile,9,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.105,0.239,-0.442,-0.579,0.58,0.27,-0.121,0.463,,0.164,1,4,8
-moon_de_gerlache_rim2__tile,tile,10,lc_antarctic_ice_free_0183,antarctic_ice_free sample 183,landcover_sample,antarctic_ice_free,-71.939,25.196,0.099,0.373,-0.265,-0.588,0.537,-0.209,-0.563,0.42,,0.016,1,3,9
-moon_de_gerlache_rim2__tile,tile,11,lc_antarctic_ice_free_0381,antarctic_ice_free sample 381,landcover_sample,antarctic_ice_free,-83.591,170.812,0.095,0.408,-0.355,-0.584,0.555,-0.186,-0.628,0.44,,-0.088,2,0,11
-moon_de_gerlache_rim2__tile,tile,12,lc_antarctic_ice_free_0279,antarctic_ice_free sample 279,landcover_sample,antarctic_ice_free,-80.027,155.764,0.092,0.291,-0.398,-0.592,0.508,0.105,-0.227,0.444,,0.109,1,4,8
-moon_de_gerlache_rim2__tile,tile,13,lc_antarctic_ice_free_0378,antarctic_ice_free sample 378,landcover_sample,antarctic_ice_free,-66.717,-64.114,0.092,0.414,-0.349,-0.576,0.605,-0.252,-0.48,0.054,,-0.063,1,1,11
-moon_de_gerlache_rim2__tile,tile,14,lc_antarctic_ice_free_0139,antarctic_ice_free sample 139,landcover_sample,antarctic_ice_free,-72.089,23.94,0.088,0.236,-0.213,-0.586,0.543,-0.086,-0.494,0.442,,-0.055,1,1,11
-moon_de_gerlache_rim2__tile,tile,15,lc_bare_polar_0031,bare_polar sample 31,landcover_sample,bare_polar,76.518,-86.534,0.087,0.113,-0.368,-0.574,0.606,0.3,-0.393,0.278,,-0.037,0,3,10
-moon_de_gerlache_rim2__tile,tile,16,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.074,-0.005,0.084,-0.588,0.54,0.111,-0.562,0.304,,-0.346,0,4,9
-moon_de_gerlache_rim2__tile,tile,17,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.074,0.239,-0.453,-0.576,0.592,0.129,-0.314,0.461,,0.02,1,4,8
-moon_de_gerlache_rim2__tile,tile,18,lc_ice_edge_0029,ice_edge sample 29,landcover_sample,ice_edge,80.216,-20.685,0.073,0.251,-0.447,-0.598,0.502,0.153,-0.53,0.407,,-0.03,1,2,10
-moon_de_gerlache_rim2__tile,tile,19,gvp_300650,Nylgimelkin,volcano,volcano_shield,57.97,160.65,0.073,0.463,-0.332,-0.621,0.402,-0.322,-0.315,-0.448,,-0.034,1,0,12
-moon_de_gerlache_rim2__tile,tile,20,lc_antarctic_ice_free_0415,antarctic_ice_free sample 415,landcover_sample,antarctic_ice_free,-72.124,26.116,0.072,0.376,-0.354,-0.586,0.544,-0.232,-0.541,0.401,,-0.063,1,1,11
+moon_de_gerlache_rim2__tile,tile,5,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.108,0.389,-0.387,-0.58,0.573,-0.056,-0.125,0.438,,-0.103,1,1,11
+moon_de_gerlache_rim2__tile,tile,6,lc_antarctic_ice_free_0232,antarctic_ice_free sample 232,landcover_sample,antarctic_ice_free,-84.32,167.366,0.106,0.172,-0.075,-0.575,0.583,-0.093,-0.598,0.455,,-0.338,1,1,11
+moon_de_gerlache_rim2__tile,tile,7,lc_antarctic_ice_free_0290,antarctic_ice_free sample 290,landcover_sample,antarctic_ice_free,-85.961,-145.524,0.105,0.442,-0.366,-0.571,0.603,-0.215,-0.612,0.43,,-0.165,2,0,11
+moon_de_gerlache_rim2__tile,tile,8,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.105,0.239,-0.442,-0.579,0.58,0.27,-0.121,0.463,,0.164,1,4,8
+moon_de_gerlache_rim2__tile,tile,9,lc_antarctic_ice_free_0183,antarctic_ice_free sample 183,landcover_sample,antarctic_ice_free,-71.939,25.196,0.099,0.373,-0.265,-0.588,0.537,-0.209,-0.563,0.42,,0.016,1,3,9
+moon_de_gerlache_rim2__tile,tile,10,lc_antarctic_ice_free_0381,antarctic_ice_free sample 381,landcover_sample,antarctic_ice_free,-83.591,170.812,0.095,0.408,-0.355,-0.584,0.555,-0.186,-0.628,0.44,,-0.088,2,0,11
+moon_de_gerlache_rim2__tile,tile,11,lc_antarctic_ice_free_0279,antarctic_ice_free sample 279,landcover_sample,antarctic_ice_free,-80.027,155.764,0.092,0.291,-0.398,-0.592,0.508,0.105,-0.227,0.444,,0.109,1,4,8
+moon_de_gerlache_rim2__tile,tile,12,lc_antarctic_ice_free_0378,antarctic_ice_free sample 378,landcover_sample,antarctic_ice_free,-66.717,-64.114,0.092,0.414,-0.349,-0.576,0.605,-0.252,-0.48,0.054,,-0.063,1,1,11
+moon_de_gerlache_rim2__tile,tile,13,lc_antarctic_ice_free_0139,antarctic_ice_free sample 139,landcover_sample,antarctic_ice_free,-72.089,23.94,0.088,0.236,-0.213,-0.586,0.543,-0.086,-0.494,0.442,,-0.055,1,1,11
+moon_de_gerlache_rim2__tile,tile,14,lc_bare_polar_0031,bare_polar sample 31,landcover_sample,bare_polar,76.518,-86.534,0.087,0.113,-0.368,-0.574,0.606,0.3,-0.393,0.278,,-0.037,0,3,10
+moon_de_gerlache_rim2__tile,tile,15,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.074,-0.005,0.084,-0.588,0.54,0.111,-0.562,0.304,,-0.346,0,4,9
+moon_de_gerlache_rim2__tile,tile,16,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.074,0.239,-0.453,-0.576,0.592,0.129,-0.314,0.461,,0.02,1,4,8
+moon_de_gerlache_rim2__tile,tile,17,lc_ice_edge_0029,ice_edge sample 29,landcover_sample,ice_edge,80.216,-20.685,0.073,0.251,-0.447,-0.598,0.502,0.153,-0.53,0.407,,-0.03,1,2,10
+moon_de_gerlache_rim2__tile,tile,18,gvp_300650,Nylgimelkin,volcano,volcano_shield,57.97,160.65,0.073,0.463,-0.332,-0.621,0.402,-0.322,-0.315,-0.448,,-0.034,1,0,12
+moon_de_gerlache_rim2__tile,tile,19,lc_antarctic_ice_free_0415,antarctic_ice_free sample 415,landcover_sample,antarctic_ice_free,-72.124,26.116,0.072,0.376,-0.354,-0.586,0.544,-0.232,-0.541,0.401,,-0.063,1,1,11
+moon_de_gerlache_rim2__tile,tile,20,lc_ice_edge_0171,ice_edge sample 171,landcover_sample,ice_edge,79.224,-89.444,0.069,0.364,-0.475,-0.589,0.539,-0.057,-0.492,0.381,,0.056,0,4,9
 moon_slater_plain__tile,tile,1,lc_antarctic_ice_free_0184,antarctic_ice_free sample 184,landcover_sample,antarctic_ice_free,-72.255,1.259,0.204,0.68,-0.356,-0.583,0.565,-0.161,-0.547,0.432,,0.113,2,2,9
 moon_slater_plain__tile,tile,2,lc_antarctic_ice_free_0306,antarctic_ice_free sample 306,landcover_sample,antarctic_ice_free,-78.086,165.297,0.189,0.631,-0.417,-0.584,0.566,-0.063,-0.595,0.461,,0.158,2,2,9
 moon_slater_plain__tile,tile,3,lc_antarctic_ice_free_0301,antarctic_ice_free sample 301,landcover_sample,antarctic_ice_free,-83.542,-54.9,0.182,0.695,-0.54,-0.582,0.569,-0.054,-0.595,0.463,,0.164,2,2,9
@@ -588,14 +588,14 @@ moon_tranquillitatis_pit__tile,tile,6,gvp_221115,Manda Hararo,volcano,volcano_sh
 moon_tranquillitatis_pit__tile,tile,7,gvp_231072,"Birk, Harrat al",volcano,volcano_field_cone,18.37,41.63,0.32,0.18,0.346,-0.583,0.574,0.432,0.618,0.271,0.3,0.493,3,8,1
 moon_tranquillitatis_pit__tile,tile,8,lc_bare_hot_0261,bare_hot sample 261,landcover_sample,bare_hot,11.208,42.54,0.316,0.412,0.155,-0.582,0.574,0.279,0.32,0.286,0.0,0.612,2,9,1
 moon_tranquillitatis_pit__tile,tile,9,gvp_221120,Kurub,volcano,volcano_shield,11.88,41.208,0.304,0.227,0.286,-0.578,0.599,0.177,0.327,0.242,0.3,0.494,1,10,1
-moon_tranquillitatis_pit__tile,tile,10,gvp_234002,St. Paul,volcano,volcano_strato_dome,-38.72,77.53,0.297,0.307,0.367,-0.642,0.283,0.0,-0.183,-0.088,0.3,0.283,0,7,5
-moon_tranquillitatis_pit__tile,tile,11,gvp_225006,Manzaz Volcanic Field,volcano,volcano_field_cone,23.92,5.83,0.264,-0.024,0.418,-0.586,0.539,0.505,0.639,0.425,0.3,0.405,4,2,6
-moon_tranquillitatis_pit__tile,tile,12,gvp_221124,Gufa,volcano,volcano_field_cone,12.55,42.53,0.253,-0.036,0.398,-0.575,0.608,0.356,0.619,0.284,0.3,0.388,3,3,6
-moon_tranquillitatis_pit__tile,tile,13,gvp_231060,"Khaybar, Harrat",volcano,volcano_field_cone,25.5,40.0,0.245,-0.064,0.364,-0.573,0.598,0.546,0.338,0.414,0.3,0.385,3,3,6
-moon_tranquillitatis_pit__tile,tile,14,craters_of_the_moon,Craters of the Moon,named_site,named_site,43.42,-113.52,0.243,0.144,0.405,-0.669,0.117,0.249,0.06,0.084,0.5,0.146,1,10,1
-moon_tranquillitatis_pit__tile,tile,15,lc_bare_polar_0157,bare_polar sample 157,landcover_sample,bare_polar,64.776,-18.212,0.238,0.401,0.383,-0.746,-0.222,0.0,0.218,0.24,0.0,0.53,1,9,2
-moon_tranquillitatis_pit__tile,tile,16,gvp_221122,Manda-Inakir,volcano,volcano_field_cone,12.38,42.2,0.234,-0.08,0.396,-0.574,0.614,0.332,0.621,0.249,0.3,0.367,3,3,6
-moon_tranquillitatis_pit__tile,tile,17,gvp_353080,Marchena,volcano,volcano_shield,0.33,-90.47,0.228,-0.142,0.52,-0.595,0.513,0.519,0.047,0.029,0.3,-0.018,2,3,7
-moon_tranquillitatis_pit__tile,tile,18,lanzarote,Lanzarote (Timanfaya / La Corona tube),named_site,named_site,29.0,-13.75,0.227,-0.17,0.394,-0.577,0.589,0.545,0.446,0.378,0.5,0.192,2,4,6
-moon_tranquillitatis_pit__tile,tile,19,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.224,-0.126,0.387,-0.575,0.611,0.473,0.624,0.396,0.3,0.323,3,3,6
-moon_tranquillitatis_pit__tile,tile,20,holuhraun,Holuhraun (Iceland highlands),named_site,named_site,64.87,-16.83,0.223,0.309,0.375,-0.746,-0.222,0.0,0.329,0.261,0.3,0.556,1,9,2
+moon_tranquillitatis_pit__tile,tile,10,gvp_225006,Manzaz Volcanic Field,volcano,volcano_field_cone,23.92,5.83,0.264,-0.024,0.418,-0.586,0.539,0.505,0.639,0.425,0.3,0.405,4,2,6
+moon_tranquillitatis_pit__tile,tile,11,gvp_221124,Gufa,volcano,volcano_field_cone,12.55,42.53,0.253,-0.036,0.398,-0.575,0.608,0.356,0.619,0.284,0.3,0.388,3,3,6
+moon_tranquillitatis_pit__tile,tile,12,gvp_231060,"Khaybar, Harrat",volcano,volcano_field_cone,25.5,40.0,0.245,-0.064,0.364,-0.573,0.598,0.546,0.338,0.414,0.3,0.385,3,3,6
+moon_tranquillitatis_pit__tile,tile,13,craters_of_the_moon,Craters of the Moon,named_site,named_site,43.42,-113.52,0.243,0.144,0.405,-0.669,0.117,0.249,0.06,0.084,0.5,0.146,1,10,1
+moon_tranquillitatis_pit__tile,tile,14,lc_bare_polar_0157,bare_polar sample 157,landcover_sample,bare_polar,64.776,-18.212,0.238,0.401,0.383,-0.746,-0.222,0.0,0.218,0.24,0.0,0.53,1,9,2
+moon_tranquillitatis_pit__tile,tile,15,gvp_221122,Manda-Inakir,volcano,volcano_field_cone,12.38,42.2,0.234,-0.08,0.396,-0.574,0.614,0.332,0.621,0.249,0.3,0.367,3,3,6
+moon_tranquillitatis_pit__tile,tile,16,gvp_353080,Marchena,volcano,volcano_shield,0.33,-90.47,0.228,-0.142,0.52,-0.595,0.513,0.519,0.047,0.029,0.3,-0.018,2,3,7
+moon_tranquillitatis_pit__tile,tile,17,lanzarote,Lanzarote (Timanfaya / La Corona tube),named_site,named_site,29.0,-13.75,0.227,-0.17,0.394,-0.577,0.589,0.545,0.446,0.378,0.5,0.192,2,4,6
+moon_tranquillitatis_pit__tile,tile,18,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.224,-0.126,0.387,-0.575,0.611,0.473,0.624,0.396,0.3,0.323,3,3,6
+moon_tranquillitatis_pit__tile,tile,19,holuhraun,Holuhraun (Iceland highlands),named_site,named_site,64.87,-16.83,0.223,0.309,0.375,-0.746,-0.222,0.0,0.329,0.261,0.3,0.556,1,9,2
+moon_tranquillitatis_pit__tile,tile,20,gvp_221050,Gada Ale,volcano,volcano_strato_dome,13.975,40.408,0.211,-0.06,0.341,-0.575,0.614,0.147,0.079,0.374,0.3,0.012,0,6,6
