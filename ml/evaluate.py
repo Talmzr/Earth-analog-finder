@@ -25,7 +25,15 @@ import pandas as pd
 
 from . import common as C
 
+NAMED = None
 POLAR_ANALOGS = ("dry_valleys_wright", "beacon_valley", "haughton", "svalbard_bockfjorden")   # fixed 2026-11-15
+
+
+def naive_cv(d: pd.DataFrame) -> pd.Series:
+    """Baseline: predict each anchor with the mean label of the other folds' anchors in its category."""
+    from .score_all import site_fold
+    f = d["earth_site"].map(site_fold)
+    return pd.Series([d.loc[f != k, "label"].mean() for k in f], index=d.index)
 
 
 def category_cv(R: pd.DataFrame) -> dict:
@@ -33,6 +41,7 @@ def category_cv(R: pd.DataFrame) -> dict:
     for cat, d in R.groupby("category", sort=True):
         err = (d["cv_pred"] - d["label"]).abs()
         out[C.CFG2OUT.get(cat, cat)] = dict(n=int(len(d)), cv_mae=round(float(err.mean()), 3),
+                                             naive_mae=round(float((naive_cv(d) - d["label"]).abs().mean()), 3),
                                              cv_rank=round(C.spearman(d["cv_pred"], d["label"]), 3),
                                              cv_off_by_0_3=int((err > 0.3).sum()))
     return out
@@ -68,6 +77,8 @@ def real_world_check(npz, earth: pd.DataFrame, fname: str = "real_world_uses.csv
     U = pd.read_csv(path)
     ents, pid, exps = list(npz["entity_id"]), list(npz["earth_tile_id"]), list(npz["experiments"])
     R = npz["readiness"]                                                    # (exp, M, E): 3 suff, 2 partial, 1 avoid
+    global NAMED
+    NAMED = np.array([earth.loc[p, "source"] == "named_site" for p in pid])     # baseline among deliberately chosen sites
     scope = {"polar": [i for i, m in enumerate(ents) if "tranquillitatis" not in m],
              "pit": [i for i, m in enumerate(ents) if "tranquillitatis" in m], "all": list(range(len(ents)))}
     rows = []
@@ -82,14 +93,18 @@ def real_world_check(npz, earth: pd.DataFrame, fname: str = "real_world_uses.csv
             continue
         v = R[k, tg, j]
         base = R[k][tg]
+        named_base = base[:, NAMED][base[:, NAMED] > 0] if NAMED is not None else base[base > 0]
         base = base[base > 0]
         rows.append(dict(site=u.earth_site, experiment=u.experiment, program=u.program, n_targets=len(tg),
                          sufficient=round(float((v == 3).mean()), 2), not_avoid=round(float((v >= 2).mean()), 2),
-                         base_not_avoid=round(float((base >= 2).mean()), 2)))
+                         base_not_avoid=round(float((base >= 2).mean()), 2),
+                         named_base_not_avoid=round(float((named_base >= 2).mean()), 2)))
     T = pd.DataFrame(rows)
     ok = T.dropna(subset=["not_avoid"]) if "not_avoid" in T else T.iloc[0:0]
     return dict(n_uses=int(len(ok)), mean_not_avoid=round(float(ok["not_avoid"].mean()), 3),
+                mean_sufficient=round(float(ok["sufficient"].mean()), 3),
                 mean_base_not_avoid=round(float(ok["base_not_avoid"].mean()), 3),
+                mean_named_base_not_avoid=round(float(ok["named_base_not_avoid"].mean()), 3),
                 uses_never_avoid=int((ok["not_avoid"] == 1).sum()), uses_mostly_avoid=int((ok["not_avoid"] < 0.5).sum()),
                 table=T.to_dict("records"))
 
@@ -106,7 +121,9 @@ def main():
     earth = C.load_tables()[1].set_index("patch_id")
     cats = category_cv(R)
     err = (R["cv_pred"] - R["label"]).abs()
+    naive = pd.concat([naive_cv(d) for _, d in R.groupby("category")]).reindex(R.index)
     card = dict(categories=cats, all_anchors=dict(n=int(len(R)), cv_mae=round(float(err.mean()), 3),
+                                                   naive_mae=round(float((naive - R["label"]).abs().mean()), 3),
                                                    cv_off_by_0_3=int((err > 0.3).sum())),
                 overall_sanity=polar_auc(npz, earth), real_world=real_world_check(npz, earth),
                 real_world_holdout=real_world_check(npz, earth, "real_world_uses_holdout.csv"))
@@ -120,6 +137,7 @@ def main():
             line += f"   | {o['cv_mae']:.3f} {o['cv_rank']:.3f} {o['cv_off_by_0_3']}"
         print(line)
     al, ov = card["all_anchors"], card["overall_sanity"]
+    print(f"naive baseline (predict the mean label): error {al['naive_mae']:.3f}")
     print(f"{'ALL':13s} {al['n']:3d}  {al['cv_mae']:8.3f} {'':8s} {al['cv_off_by_0_3']:7d}"
           + (f"   | {old['all_anchors']['cv_mae']:.3f} {'':5s} {old['all_anchors']['cv_off_by_0_3']}" if old else ""))
     print(f"overall score: polar-analog AUC {ov['auc']:.3f}, polar sites median rank {ov['polar_sites_median_rank']} "
@@ -130,8 +148,9 @@ def main():
         if not rw:
             continue
         print(f"{label}: {rw['n_uses']} documented uses; not 'avoid' for {100 * rw['mean_not_avoid']:.0f}% of "
-              f"their Moon targets (all tiles: {100 * rw['mean_base_not_avoid']:.0f}%); never avoid {rw['uses_never_avoid']}, "
-              f"mostly avoid {rw['uses_mostly_avoid']}")
+              f"their Moon targets (all tiles: {100 * rw['mean_base_not_avoid']:.0f}%, named sites: "
+              f"{100 * rw['mean_named_base_not_avoid']:.0f}%); sufficient {100 * rw['mean_sufficient']:.0f}%; "
+              f"never avoid {rw['uses_never_avoid']}, mostly avoid {rw['uses_mostly_avoid']}")
         print(pd.DataFrame(rw["table"]).drop(columns=["program"], errors="ignore").to_string(index=False))
 
 

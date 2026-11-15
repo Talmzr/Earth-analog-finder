@@ -71,7 +71,10 @@ COMPOSITE_CATS = ("terrain", "geology", "illumination", "water_ice", "caves")
 # Compared and rejected (2026-11-15): biology + 0.2 (NDVI barely sees moss/lichen: 41% moss in the top 20) and
 # min(dust, biology) + 0.2 (dust needs ~85% bare ground to be >= 0, so it treated half-ice polar tiles like tundra,
 # decided 23% of the top-20 positions and doubled the overlap between targets' lists to 0.27).
-COVER_GATE_BASE, COVER_GATE_SLOPE = 0.8, 2.0
+# Tightened 2026-11-15 (submission review): 0.8 -> 0.6, so >= 30% plant / water / town cover caps the overall match at 0.
+# Pre-specified polar-analog check 0.926 -> 0.944 (the earlier sensitivity grid also favoured 0.6/2.0). Note: tiles
+# named "lichen_moss sample N" were sampled at a moss pixel, but the 10 km tile can be mostly bare (sample 51: 87% bare).
+COVER_GATE_BASE, COVER_GATE_SLOPE = 0.6, 2.0
 GEO_MINOR_CAP = 0.3
 # named analog sites with documented life that satellite greenness cannot see
 KNOWN_LIFE = {"svalbard_bockfjorden": "Troll / Jotun warm springs with microbial mats (AMASE)",
@@ -626,10 +629,11 @@ def main():
     gated = np.isfinite(comp_mean) & (comp < comp_mean)
     info["cover_gate"] = dict(base=COVER_GATE_BASE, slope=COVER_GATE_SLOPE, rule="composite <= base - slope * cover_nonlunar",
                                 share_pairs_lowered=round(float(gated.mean()), 3))
-    tops, dup = [], C.duplicate_of_named(earth)
+    tops, dup, shown_names = [], C.duplicate_of_named(earth), C.display_names(earth)
     for i, m in enumerate(ent["entity_id"]):
         order = C.top_order(comp[i], dup)[:20]
         d = earth.iloc[order][["patch_id", "name", "source", "stratum", "center_lat", "center_lon"]].rename(columns={"patch_id": "earth_tile_id"}).copy()
+        d["name"] = shown_names.iloc[order].to_numpy()
         d.insert(0, "rank", np.arange(1, len(d) + 1))
         d.insert(0, "moon_kind", ent["kind"].iloc[i])
         d.insert(0, "moon_zone_id", m)

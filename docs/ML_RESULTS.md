@@ -88,35 +88,35 @@ Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for ther
 
 | Moon target | Best Earth tile | Type | Lat, lon | Composite | Terrain | Geology | Thermal | Sun | Water/ice | Dust | Ops |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| shackleton_rim__landing | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.19 | 0.45 | -0.29 | -0.57 | 0.39 | 0.32 | -0.39 | 0.24 |
-| shackleton_rim__ice | ice_edge sample 47 | ice_edge | 79.60, -79.62 | 0.17 | 0.35 | -0.07 | -0.58 | 0.35 | 0.13 | -0.51 | 0.18 |
-| peak_near_cabeus_b__landing | lichen_moss sample 51 | lichen_moss | 70.37, -75.52 | 0.27 | 0.19 | 0.27 | -0.58 | 0.37 | 0.36 | 0.07 | 0.42 |
-| peak_near_cabeus_b__ice | ice_edge sample 312 | ice_edge | 81.33, -53.28 | 0.28 | 0.68 | -0.40 | -0.57 | 0.37 | 0.50 | -0.42 | 0.41 |
-| haworth__landing | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.24 | 0.45 | -0.24 | -0.58 | 0.36 | 0.52 | -0.39 | 0.24 |
-| haworth__ice | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.18 | 0.59 | -0.29 | -0.58 | 0.36 | 0.06 | -0.39 | 0.30 |
-| malapert_massif__landing | antarctic_ice_free sample 275 | antarctic_ice_free | -80.12, 158.36 | 0.22 | 0.52 | -0.30 | -0.58 | 0.32 | 0.49 | -0.37 | 0.23 |
+| shackleton_rim__landing | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.19 | 0.45 | -0.29 | -0.57 | 0.39 | 0.32 | -0.39 | 0.24 |
+| shackleton_rim__ice | Ice-free Antarctic ground · 50 km from Royal Society Range | antarctic_ice_free | -77.80, 163.64 | 0.16 | 0.49 | -0.34 | -0.57 | 0.40 | 0.18 | -0.31 | 0.26 |
+| peak_near_cabeus_b__landing | Bare polar / cold desert · Canada | lichen_moss | 70.37, -75.52 | 0.27 | 0.19 | 0.27 | -0.58 | 0.37 | 0.36 | 0.07 | 0.42 |
+| peak_near_cabeus_b__ice | Bare polar / cold desert · Canada | lichen_moss | 70.37, -75.52 | 0.26 | 0.14 | 0.27 | -0.57 | 0.37 | 0.36 | 0.07 | 0.36 |
+| haworth__landing | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.24 | 0.45 | -0.24 | -0.58 | 0.36 | 0.52 | -0.39 | 0.24 |
+| haworth__ice | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.18 | 0.59 | -0.29 | -0.58 | 0.36 | 0.06 | -0.39 | 0.30 |
+| malapert_massif__landing | Ice-free Antarctic ground · Victoria Land, Antarctica | antarctic_ice_free | -80.12, 158.36 | 0.22 | 0.52 | -0.30 | -0.58 | 0.32 | 0.49 | -0.37 | 0.23 |
 | malapert_massif__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.17 | 0.29 | -0.35 | -0.59 | 0.32 | 0.60 | 0.34 | 0.36 |
-| mons_mouton__landing | ice_edge sample 277 | ice_edge | 78.26, -90.91 | 0.23 | 0.68 | -0.37 | -0.59 | 0.31 | 0.35 | -0.12 | 0.49 |
-| mons_mouton__ice | bare_polar sample 237 | bare_polar | 81.24, -72.07 | 0.22 | 0.57 | -0.44 | -0.57 | 0.40 | 0.47 | 0.15 | 0.50 |
-| mons_mouton_plateau__landing | bare_polar sample 211 | bare_polar | 79.79, 15.89 | 0.26 | 0.64 | -0.27 | -0.59 | 0.35 | 0.32 | -0.11 | 0.47 |
-| mons_mouton_plateau__ice | ice_edge sample 277 | ice_edge | 78.26, -90.91 | 0.23 | 0.65 | -0.37 | -0.59 | 0.30 | 0.34 | -0.12 | 0.49 |
-| nobile_rim_1__landing | antarctic_ice_free sample 232 | antarctic_ice_free | -84.32, 167.37 | 0.26 | 0.41 | -0.12 | -0.56 | 0.38 | 0.55 | -0.60 | 0.15 |
-| nobile_rim_1__ice | antarctic_ice_free sample 232 | antarctic_ice_free | -84.32, 167.37 | 0.16 | 0.42 | -0.12 | -0.57 | 0.37 | -0.01 | -0.60 | 0.15 |
-| nobile_rim_2__landing | antarctic_ice_free sample 139 | antarctic_ice_free | -72.09, 23.94 | 0.28 | 0.57 | -0.21 | -0.57 | 0.40 | 0.48 | -0.49 | 0.27 |
-| nobile_rim_2__ice | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.18 | 0.60 | -0.24 | -0.60 | 0.29 | 0.07 | -0.39 | 0.34 |
-| de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.23 | 0.66 | -0.41 | -0.57 | 0.36 | 0.46 | -0.11 | 0.33 |
+| mons_mouton__landing | Bare polar / cold desert · Canada | ice_edge | 78.26, -90.91 | 0.23 | 0.68 | -0.37 | -0.59 | 0.31 | 0.35 | -0.12 | 0.49 |
+| mons_mouton__ice | Bare polar / cold desert · Canada | bare_polar | 81.24, -72.07 | 0.22 | 0.57 | -0.44 | -0.57 | 0.40 | 0.47 | 0.15 | 0.50 |
+| mons_mouton_plateau__landing | Bare polar / cold desert · Norway | bare_polar | 79.79, 15.89 | 0.26 | 0.64 | -0.27 | -0.59 | 0.35 | 0.32 | -0.11 | 0.47 |
+| mons_mouton_plateau__ice | Bare polar / cold desert · Canada | ice_edge | 78.26, -90.91 | 0.23 | 0.65 | -0.37 | -0.59 | 0.30 | 0.34 | -0.12 | 0.49 |
+| nobile_rim_1__landing | Ice-free Antarctic ground · Transantarctic Mountains / polar plateau, Antarctica | antarctic_ice_free | -84.32, 167.37 | 0.26 | 0.41 | -0.12 | -0.56 | 0.38 | 0.55 | -0.60 | 0.15 |
+| nobile_rim_1__ice | Ice-free Antarctic ground · Transantarctic Mountains / polar plateau, Antarctica | antarctic_ice_free | -84.32, 167.37 | 0.16 | 0.42 | -0.12 | -0.57 | 0.37 | -0.01 | -0.60 | 0.15 |
+| nobile_rim_2__landing | Ice-free Antarctic ground · Dronning Maud Land, Antarctica | antarctic_ice_free | -72.09, 23.94 | 0.28 | 0.57 | -0.21 | -0.57 | 0.40 | 0.48 | -0.49 | 0.27 |
+| nobile_rim_2__ice | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.18 | 0.60 | -0.24 | -0.60 | 0.29 | 0.07 | -0.39 | 0.34 |
+| de_gerlache_rim_2__landing | Ice-free Antarctic ground · 36 km from Royal Society Range | antarctic_ice_free | -78.31, 164.87 | 0.23 | 0.66 | -0.41 | -0.57 | 0.36 | 0.46 | -0.11 | 0.33 |
 | de_gerlache_rim_2__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.17 | 0.30 | -0.40 | -0.57 | 0.39 | 0.60 | 0.34 | 0.36 |
-| slater_plain__landing | antarctic_ice_free sample 85 | antarctic_ice_free | -77.80, 163.64 | 0.23 | 0.43 | -0.34 | -0.57 | 0.39 | 0.58 | -0.31 | 0.28 |
-| slater_plain__ice | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.21 | 0.55 | -0.29 | -0.57 | 0.40 | 0.23 | -0.39 | 0.27 |
-| moon_shackleton__tile | antarctic_ice_free sample 110 | antarctic_ice_free | -78.12, 162.88 | 0.20 | 0.59 | -0.40 | -0.57 | 0.41 | 0.30 | -0.06 | 0.45 |
-| moon_peak_cabeus_b__tile | antarctic_ice_free sample 354 | antarctic_ice_free | -84.21, 160.32 | 0.19 | 0.60 | -0.23 | -0.58 | 0.35 | 0.03 | -0.61 | 0.33 |
+| slater_plain__landing | Ice-free Antarctic ground · 50 km from Royal Society Range | antarctic_ice_free | -77.80, 163.64 | 0.23 | 0.43 | -0.34 | -0.57 | 0.39 | 0.58 | -0.31 | 0.28 |
+| slater_plain__ice | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.21 | 0.55 | -0.29 | -0.57 | 0.40 | 0.23 | -0.39 | 0.27 |
+| moon_shackleton__tile | Ice-free Antarctic ground · 18 km from Royal Society Range | antarctic_ice_free | -78.12, 162.88 | 0.20 | 0.59 | -0.40 | -0.57 | 0.41 | 0.30 | -0.06 | 0.45 |
+| moon_peak_cabeus_b__tile | Ice-free Antarctic ground · Transantarctic Mountains / polar plateau, Antarctica | antarctic_ice_free | -84.21, 160.32 | 0.19 | 0.60 | -0.23 | -0.58 | 0.35 | 0.03 | -0.61 | 0.33 |
 | moon_haworth__tile | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.04 | 0.13 | -0.40 | -0.59 | 0.34 | 0.30 | 0.34 | 0.31 |
-| moon_malapert_massif__tile | antarctic_ice_free sample 275 | antarctic_ice_free | -80.12, 158.36 | 0.21 | 0.53 | -0.30 | -0.59 | 0.32 | 0.49 | -0.37 | 0.33 |
-| moon_mons_mouton__tile | antarctic_ice_free sample 407 | antarctic_ice_free | -83.32, 162.44 | 0.27 | 0.63 | -0.42 | -0.57 | 0.37 | 0.57 | -0.56 | 0.38 |
-| moon_mons_mouton_plateau__tile | bare_polar sample 211 | bare_polar | 79.79, 15.89 | 0.26 | 0.66 | -0.27 | -0.59 | 0.35 | 0.32 | -0.11 | 0.48 |
-| moon_nobile_rim__tile | ice_edge sample 47 | ice_edge | 79.60, -79.62 | 0.27 | 0.54 | -0.12 | -0.59 | 0.33 | 0.42 | -0.51 | 0.32 |
+| moon_malapert_massif__tile | Ice-free Antarctic ground · Victoria Land, Antarctica | antarctic_ice_free | -80.12, 158.36 | 0.21 | 0.53 | -0.30 | -0.59 | 0.32 | 0.49 | -0.37 | 0.33 |
+| moon_mons_mouton__tile | Ice-free Antarctic ground · Victoria Land, Antarctica | antarctic_ice_free | -83.32, 162.44 | 0.27 | 0.63 | -0.42 | -0.57 | 0.37 | 0.57 | -0.56 | 0.38 |
+| moon_mons_mouton_plateau__tile | Bare polar / cold desert · Norway | bare_polar | 79.79, 15.89 | 0.26 | 0.66 | -0.27 | -0.59 | 0.35 | 0.32 | -0.11 | 0.48 |
+| moon_nobile_rim__tile | Ice-free Antarctic ground · 74 km from McMurdo Dry Valleys (Wright Valley) | antarctic_ice_free | -76.86, 161.71 | 0.27 | 0.53 | -0.24 | -0.59 | 0.31 | 0.52 | -0.39 | 0.38 |
 | moon_de_gerlache_rim2__tile | Royal Society Range | volcano_field_cone | -78.25, 163.33 | 0.16 | 0.39 | -0.30 | -0.58 | 0.37 | 0.30 | 0.36 | 0.47 |
-| moon_slater_plain__tile | antarctic_ice_free sample 184 | antarctic_ice_free | -72.25, 1.26 | 0.16 | 0.68 | -0.29 | -0.58 | 0.36 | -0.15 | -0.55 | 0.37 |
+| moon_slater_plain__tile | Ice-free Antarctic ground · Dronning Maud Land, Antarctica | antarctic_ice_free | -72.25, 1.26 | 0.16 | 0.68 | -0.29 | -0.58 | 0.36 | -0.15 | -0.55 | 0.37 |
 | moon_tranquillitatis_pit__tile | Kishb, Harrat | volcano_field_cone | 22.80, 41.38 | 0.39 | 0.42 | 0.41 | -0.60 | 0.30 | 0.48 | 0.65 | 0.57 |
 
 ## 5. Scoring terms and composite weights
@@ -135,7 +135,7 @@ Terms kept per category after the 2026-11-15 audit (see `KEEP_TERMS` in `ml/scor
 | caves | rule |
 | operations | terrain, water_ice, slope_hazard, bare, clear |
 
-Composite = weighted mean of **terrain, geology, illumination, water_ice, caves** only: the categories that use per-site Moon data, plus caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Operations is left out because it is built from terrain and water/ice (it counted them twice). Dust and sterility (lunar constants, the same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. The composite is then capped by the ground-cover gate: composite <= base - slope * cover_nonlunar with base 0.8 and slope 2.0 (lowers 51% of all pairs, mostly vegetated, wet or open-water tiles that are poor analogs anyway). Typical weights (median over targets):
+Composite = weighted mean of **terrain, geology, illumination, water_ice, caves** only: the categories that use per-site Moon data, plus caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Operations is left out because it is built from terrain and water/ice (it counted them twice). Dust and sterility (lunar constants, the same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. The composite is then capped by the ground-cover gate: composite <= base - slope * cover_nonlunar with base 0.6 and slope 2.0 (lowers 54% of all pairs, mostly vegetated, wet or open-water tiles that are poor analogs anyway). Typical weights (median over targets):
 
 | terrain | geology | thermal | illumination | water_ice | dust | biology | caves | operations |
 |---|---|---|---|---|---|---|---|---|

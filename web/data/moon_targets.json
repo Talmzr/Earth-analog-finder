@@ -73,18 +73,18 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.19
    },
    {
-    "name": "ice_edge sample 273",
+    "name": "Glacier-edge ground \u00b7 Greenland",
     "id": "lc_ice_edge_0273",
     "composite": 0.19
    },
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
+    "id": "lc_antarctic_ice_free_0085",
     "composite": 0.15
    }
   ]
@@ -163,18 +163,18 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
-    "composite": 0.17
-   },
-   {
-    "name": "antarctic_ice_free sample 85",
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0085",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
+    "composite": 0.13
+   },
+   {
+    "name": "Ice-free Antarctic ground \u00b7 151 km from McMurdo Dry Valleys (Wright Valley)",
+    "id": "lc_antarctic_ice_free_0221",
     "composite": 0.13
    }
   ]
@@ -251,19 +251,19 @@
   },
   "top3": [
    {
-    "name": "lichen_moss sample 51",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_lichen_moss_0051",
     "composite": 0.27
    },
    {
-    "name": "lichen_moss sample 285",
-    "id": "lc_lichen_moss_0285",
-    "composite": 0.26
+    "name": "Ice-free Antarctic ground \u00b7 Enderby & Kemp Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0245",
+    "composite": 0.24
    },
    {
-    "name": "bare_polar sample 153",
-    "id": "lc_bare_polar_0153",
-    "composite": 0.26
+    "name": "Ice-free Antarctic ground \u00b7 Amery / Princess Elizabeth Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0023",
+    "composite": 0.23
    }
   ]
  },
@@ -341,19 +341,19 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 312",
-    "id": "lc_ice_edge_0312",
-    "composite": 0.28
-   },
-   {
-    "name": "lichen_moss sample 51",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_lichen_moss_0051",
     "composite": 0.26
    },
    {
-    "name": "lichen_moss sample 285",
-    "id": "lc_lichen_moss_0285",
-    "composite": 0.26
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_bare_polar_0004",
+    "composite": 0.23
+   },
+   {
+    "name": "Bare polar / cold desert \u00b7 Norway",
+    "id": "lc_bare_polar_0211",
+    "composite": 0.22
    }
   ]
  },
@@ -431,17 +431,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.24
    },
    {
-    "name": "antarctic_ice_free sample 388",
+    "name": "Ice-free Antarctic ground \u00b7 110 km from Melbourne",
     "id": "lc_antarctic_ice_free_0388",
     "composite": 0.24
    },
    {
-    "name": "antarctic_ice_free sample 297",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0297",
     "composite": 0.24
    }
@@ -521,17 +521,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.18
    },
    {
-    "name": "antarctic_ice_free sample 50",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0050",
     "composite": 0.17
    },
    {
-    "name": "antarctic_ice_free sample 85",
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0085",
     "composite": 0.17
    }
@@ -609,7 +609,7 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 275",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0275",
     "composite": 0.22
    },
@@ -619,7 +619,7 @@
     "composite": 0.21
    },
    {
-    "name": "antarctic_ice_free sample 363",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0363",
     "composite": 0.21
    }
@@ -704,12 +704,12 @@
     "composite": 0.17
    },
    {
-    "name": "antarctic_ice_free sample 110",
+    "name": "Ice-free Antarctic ground \u00b7 18 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0110",
     "composite": 0.05
    },
    {
-    "name": "antarctic_ice_free sample 363",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0363",
     "composite": 0.05
    }
@@ -787,17 +787,17 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 277",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_ice_edge_0277",
     "composite": 0.23
    },
    {
-    "name": "antarctic_ice_free sample 41",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0041",
     "composite": 0.22
    },
    {
-    "name": "antarctic_ice_free sample 194",
+    "name": "Ice-free Antarctic ground \u00b7 Enderby & Kemp Land, Antarctica",
     "id": "lc_antarctic_ice_free_0194",
     "composite": 0.22
    }
@@ -877,19 +877,19 @@
   },
   "top3": [
    {
-    "name": "bare_polar sample 237",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_bare_polar_0237",
     "composite": 0.22
    },
    {
-    "name": "bare_polar sample 103",
-    "id": "lc_bare_polar_0103",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0106",
     "composite": 0.15
    },
    {
-    "name": "antarctic_ice_free sample 106",
-    "id": "lc_antarctic_ice_free_0106",
-    "composite": 0.15
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0035",
+    "composite": 0.13
    }
   ]
  },
@@ -967,18 +967,18 @@
   },
   "top3": [
    {
-    "name": "bare_polar sample 211",
+    "name": "Bare polar / cold desert \u00b7 Norway",
     "id": "lc_bare_polar_0211",
     "composite": 0.25
    },
    {
-    "name": "lichen_moss sample 285",
-    "id": "lc_lichen_moss_0285",
-    "composite": 0.25
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_ice_edge_0170",
+    "composite": 0.24
    },
    {
-    "name": "ice_edge sample 170",
-    "id": "lc_ice_edge_0170",
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_lichen_moss_0051",
     "composite": 0.24
    }
   ]
@@ -1057,19 +1057,19 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 277",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_ice_edge_0277",
     "composite": 0.23
    },
    {
-    "name": "lichen_moss sample 285",
-    "id": "lc_lichen_moss_0285",
+    "name": "Bare polar / cold desert \u00b7 Norway",
+    "id": "lc_bare_polar_0211",
     "composite": 0.21
    },
    {
-    "name": "bare_polar sample 211",
-    "id": "lc_bare_polar_0211",
-    "composite": 0.21
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_lichen_moss_0051",
+    "composite": 0.2
    }
   ]
  },
@@ -1145,12 +1145,12 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 232",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0232",
     "composite": 0.26
    },
    {
-    "name": "antarctic_ice_free sample 24",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0024",
     "composite": 0.18
    },
@@ -1235,12 +1235,12 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 232",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0232",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 168",
+    "name": "Ice-free Antarctic ground \u00b7 42 km from Beacon Valley (buried ice)",
     "id": "lc_antarctic_ice_free_0168",
     "composite": 0.16
    },
@@ -1323,17 +1323,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 139",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0139",
     "composite": 0.28
    },
    {
-    "name": "antarctic_ice_free sample 96",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0096",
     "composite": 0.26
    },
    {
-    "name": "antarctic_ice_free sample 349",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0349",
     "composite": 0.26
    }
@@ -1413,18 +1413,18 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.18
    },
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
-    "composite": 0.18
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
+    "id": "lc_antarctic_ice_free_0085",
+    "composite": 0.17
    },
    {
-    "name": "antarctic_ice_free sample 85",
-    "id": "lc_antarctic_ice_free_0085",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0349",
     "composite": 0.17
    }
   ]
@@ -1501,17 +1501,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 233",
+    "name": "Ice-free Antarctic ground \u00b7 36 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0233",
     "composite": 0.24
    },
    {
-    "name": "antarctic_ice_free sample 232",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0232",
     "composite": 0.19
    },
    {
-    "name": "antarctic_ice_free sample 405",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0405",
     "composite": 0.15
    }
@@ -1596,12 +1596,12 @@
     "composite": 0.17
    },
    {
-    "name": "antarctic_ice_free sample 168",
+    "name": "Ice-free Antarctic ground \u00b7 42 km from Beacon Valley (buried ice)",
     "id": "lc_antarctic_ice_free_0168",
     "composite": 0.14
    },
    {
-    "name": "antarctic_ice_free sample 78",
+    "name": "Ice-free Antarctic ground \u00b7 23 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0078",
     "composite": 0.1
    }
@@ -1681,19 +1681,19 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 85",
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0085",
     "composite": 0.23
    },
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
-    "composite": 0.2
-   },
-   {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.18
+   },
+   {
+    "name": "Ice-free Antarctic ground \u00b7 Enderby & Kemp Land, Antarctica",
+    "id": "lc_antarctic_ice_free_0008",
+    "composite": 0.17
    }
   ]
  },
@@ -1771,18 +1771,18 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.21
    },
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
+    "id": "lc_antarctic_ice_free_0085",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 85",
-    "id": "lc_antarctic_ice_free_0085",
+    "name": "Glacier-edge ground \u00b7 Greenland",
+    "id": "lc_ice_edge_0273",
     "composite": 0.16
    }
   ]
@@ -1861,17 +1861,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 110",
+    "name": "Ice-free Antarctic ground \u00b7 18 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0110",
     "composite": 0.2
    },
    {
-    "name": "antarctic_ice_free sample 48",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0048",
     "composite": 0.12
    },
    {
-    "name": "antarctic_ice_free sample 363",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0363",
     "composite": 0.11
    }
@@ -1951,17 +1951,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 354",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0354",
     "composite": 0.19
    },
    {
-    "name": "bare_polar sample 237",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_bare_polar_0237",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 35",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0035",
     "composite": 0.16
    }
@@ -2046,12 +2046,12 @@
     "composite": 0.04
    },
    {
-    "name": "antarctic_ice_free sample 232",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0232",
     "composite": 0.02
    },
    {
-    "name": "antarctic_ice_free sample 24",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0024",
     "composite": -0.0
    }
@@ -2127,17 +2127,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 275",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0275",
     "composite": 0.21
    },
    {
-    "name": "antarctic_ice_free sample 363",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0363",
     "composite": 0.2
    },
    {
-    "name": "ice_edge sample 214",
+    "name": "Glacier-edge ground \u00b7 Canada",
     "id": "lc_ice_edge_0214",
     "composite": 0.17
    }
@@ -2217,17 +2217,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 407",
+    "name": "Ice-free Antarctic ground \u00b7 Victoria Land, Antarctica",
     "id": "lc_antarctic_ice_free_0407",
     "composite": 0.27
    },
    {
-    "name": "antarctic_ice_free sample 41",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0041",
     "composite": 0.26
    },
    {
-    "name": "ice_edge sample 277",
+    "name": "Bare polar / cold desert \u00b7 Canada",
     "id": "lc_ice_edge_0277",
     "composite": 0.22
    }
@@ -2307,19 +2307,19 @@
   },
   "top3": [
    {
-    "name": "bare_polar sample 211",
+    "name": "Bare polar / cold desert \u00b7 Norway",
     "id": "lc_bare_polar_0211",
     "composite": 0.26
    },
    {
-    "name": "lichen_moss sample 285",
-    "id": "lc_lichen_moss_0285",
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_ice_edge_0170",
     "composite": 0.24
    },
    {
-    "name": "ice_edge sample 170",
-    "id": "lc_ice_edge_0170",
-    "composite": 0.24
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_lichen_moss_0051",
+    "composite": 0.23
    }
   ]
  },
@@ -2397,18 +2397,18 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
-    "composite": 0.27
-   },
-   {
-    "name": "antarctic_ice_free sample 161",
+    "name": "Ice-free Antarctic ground \u00b7 74 km from McMurdo Dry Valleys (Wright Valley)",
     "id": "lc_antarctic_ice_free_0161",
     "composite": 0.26
    },
    {
-    "name": "antarctic_ice_free sample 139",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0139",
+    "composite": 0.26
+   },
+   {
+    "name": "Ice-free Antarctic ground \u00b7 50 km from Royal Society Range",
+    "id": "lc_antarctic_ice_free_0085",
     "composite": 0.26
    }
   ]
@@ -2492,14 +2492,14 @@
     "composite": 0.16
    },
    {
-    "name": "ice_edge sample 47",
-    "id": "lc_ice_edge_0047",
-    "composite": 0.15
-   },
-   {
-    "name": "antarctic_ice_free sample 405",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0405",
     "composite": 0.14
+   },
+   {
+    "name": "Bare polar / cold desert \u00b7 Canada",
+    "id": "lc_bare_polar_0236",
+    "composite": 0.13
    }
   ]
  },
@@ -2577,17 +2577,17 @@
   },
   "top3": [
    {
-    "name": "antarctic_ice_free sample 184",
+    "name": "Ice-free Antarctic ground \u00b7 Dronning Maud Land, Antarctica",
     "id": "lc_antarctic_ice_free_0184",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 354",
+    "name": "Ice-free Antarctic ground \u00b7 Transantarctic Mountains / polar plateau, Antarctica",
     "id": "lc_antarctic_ice_free_0354",
     "composite": 0.16
    },
    {
-    "name": "antarctic_ice_free sample 306",
+    "name": "Ice-free Antarctic ground \u00b7 48 km from Royal Society Range",
     "id": "lc_antarctic_ice_free_0306",
     "composite": 0.16
    }

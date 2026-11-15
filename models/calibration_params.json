@@ -285,10 +285,10 @@
    "no_tube_tiles": 2513
   },
   "cover_gate": {
-   "base": 0.8,
+   "base": 0.6,
    "slope": 2.0,
    "rule": "composite <= base - slope * cover_nonlunar",
-   "share_pairs_lowered": 0.506
+   "share_pairs_lowered": 0.54
   }
  },
  "composite_weights": {
@@ -589,10 +589,10 @@
   "caves"
  ],
  "cover_gate": {
-  "base": 0.8,
+  "base": 0.6,
   "slope": 2.0,
   "rule": "composite <= base - slope * cover_nonlunar",
-  "share_pairs_lowered": 0.506
+  "share_pairs_lowered": 0.54
  },
  "kept_terms": {
   "terrain": [

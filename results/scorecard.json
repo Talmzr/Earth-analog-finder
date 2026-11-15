@@ -3,54 +3,63 @@
   "biology": {
    "n": 18,
    "cv_mae": 0.117,
+   "naive_mae": 0.56,
    "cv_rank": 0.802,
    "cv_off_by_0_3": 0
   },
   "caves": {
    "n": 15,
    "cv_mae": 0.123,
+   "naive_mae": 0.499,
    "cv_rank": 0.923,
    "cv_off_by_0_3": 0
   },
   "dust": {
    "n": 18,
    "cv_mae": 0.16,
+   "naive_mae": 0.464,
    "cv_rank": 0.911,
    "cv_off_by_0_3": 2
   },
   "geology": {
    "n": 22,
    "cv_mae": 0.184,
+   "naive_mae": 0.572,
    "cv_rank": 0.926,
    "cv_off_by_0_3": 3
   },
   "illumination": {
    "n": 10,
    "cv_mae": 0.089,
+   "naive_mae": 0.426,
    "cv_rank": 0.728,
    "cv_off_by_0_3": 0
   },
   "operations": {
    "n": 18,
    "cv_mae": 0.187,
+   "naive_mae": 0.481,
    "cv_rank": 0.877,
    "cv_off_by_0_3": 4
   },
   "terrain": {
    "n": 21,
    "cv_mae": 0.104,
+   "naive_mae": 0.551,
    "cv_rank": 0.944,
    "cv_off_by_0_3": 0
   },
   "thermal": {
    "n": 19,
    "cv_mae": 0.094,
+   "naive_mae": 0.163,
    "cv_rank": 0.7,
    "cv_off_by_0_3": 0
   },
   "water_ice": {
    "n": 20,
    "cv_mae": 0.146,
+   "naive_mae": 0.513,
    "cv_rank": 0.873,
    "cv_off_by_0_3": 2
   }
@@ -58,18 +67,21 @@
  "all_anchors": {
   "n": 161,
   "cv_mae": 0.137,
+  "naive_mae": 0.474,
   "cv_off_by_0_3": 11
  },
  "overall_sanity": {
-  "auc": 0.926,
-  "polar_sites_median_rank": 242,
+  "auc": 0.944,
+  "polar_sites_median_rank": 218,
   "n_targets": 29,
   "n_tiles": 4310
  },
  "real_world": {
   "n_uses": 13,
   "mean_not_avoid": 0.85,
+  "mean_sufficient": 0.156,
   "mean_base_not_avoid": 0.568,
+  "mean_named_base_not_avoid": 0.736,
   "uses_never_avoid": 8,
   "uses_mostly_avoid": 2,
   "table": [
@@ -80,7 +92,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.36
+    "base_not_avoid": 0.36,
+    "named_base_not_avoid": 0.6
    },
    {
     "site": "black_point",
@@ -89,7 +102,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "mauna_kea_saddle",
@@ -98,7 +112,8 @@
     "n_targets": 28,
     "sufficient": 0.0,
     "not_avoid": 0.21,
-    "base_not_avoid": 0.57
+    "base_not_avoid": 0.57,
+    "named_base_not_avoid": 0.57
    },
    {
     "site": "mauna_kea_saddle",
@@ -107,7 +122,8 @@
     "n_targets": 22,
     "sufficient": 0.0,
     "not_avoid": 0.0,
-    "base_not_avoid": 0.17
+    "base_not_avoid": 0.17,
+    "named_base_not_avoid": 0.34
    },
    {
     "site": "ries",
@@ -116,7 +132,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 0.97,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "lanzarote",
@@ -125,7 +142,8 @@
     "n_targets": 30,
     "sufficient": 0.03,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "lava_beds",
@@ -134,7 +152,8 @@
     "n_targets": 1,
     "sufficient": 1.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 1.0
+    "base_not_avoid": 1.0,
+    "named_base_not_avoid": 1.0
    },
    {
     "site": "craters_of_the_moon",
@@ -143,7 +162,8 @@
     "n_targets": 1,
     "sufficient": 1.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.49
+    "base_not_avoid": 0.49,
+    "named_base_not_avoid": 0.67
    },
    {
     "site": "crater_clearwater_west",
@@ -152,7 +172,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 0.97,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "gvp_211060",
@@ -161,7 +182,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.36
+    "base_not_avoid": 0.36,
+    "named_base_not_avoid": 0.6
    },
    {
     "site": "haughton",
@@ -170,7 +192,8 @@
     "n_targets": 29,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.36
+    "base_not_avoid": 0.36,
+    "named_base_not_avoid": 0.6
    },
    {
     "site": "haughton",
@@ -179,7 +202,8 @@
     "n_targets": 29,
     "sufficient": 0.0,
     "not_avoid": 0.9,
-    "base_not_avoid": 0.41
+    "base_not_avoid": 0.41,
+    "named_base_not_avoid": 0.56
    },
    {
     "site": "concordia",
@@ -188,14 +212,17 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.79
+    "base_not_avoid": 0.79,
+    "named_base_not_avoid": 0.79
    }
   ]
  },
  "real_world_holdout": {
   "n_uses": 5,
   "mean_not_avoid": 0.968,
+  "mean_sufficient": 0.052,
   "mean_base_not_avoid": 0.648,
+  "mean_named_base_not_avoid": 0.888,
   "uses_never_avoid": 3,
   "uses_mostly_avoid": 0,
   "table": [
@@ -206,7 +233,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 0.87,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "pinacate",
@@ -215,7 +243,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "gvp_373060",
@@ -224,7 +253,8 @@
     "n_targets": 30,
     "sufficient": 0.03,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "crater_sudbury",
@@ -233,7 +263,8 @@
     "n_targets": 30,
     "sufficient": 0.0,
     "not_avoid": 0.97,
-    "base_not_avoid": 0.72
+    "base_not_avoid": 0.72,
+    "named_base_not_avoid": 0.96
    },
    {
     "site": "lanzarote",
@@ -242,7 +273,8 @@
     "n_targets": 30,
     "sufficient": 0.23,
     "not_avoid": 1.0,
-    "base_not_avoid": 0.36
+    "base_not_avoid": 0.36,
+    "named_base_not_avoid": 0.6
    }
   ]
  }

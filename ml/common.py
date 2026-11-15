@@ -235,6 +235,68 @@ def duplicate_of_named(earth: pd.DataFrame, km: float = 2.0) -> np.ndarray:
     return (~named) & (d.min(1) < km)
 
 
+def antarctic_region(lat: float, lon: float) -> str:
+    """Approximate named Antarctic sector from longitude (and latitude for the Peninsula and the polar plateau)."""
+    if lat < -84:
+        return "Transantarctic Mountains / polar plateau, Antarctica"
+    if -80 <= lon < -55 and lat > -75:
+        return "Antarctic Peninsula"
+    for lo, hi, name in ((-20, 45, "Dronning Maud Land"), (45, 75, "Enderby & Kemp Land"), (75, 100, "Amery / Princess Elizabeth Land"),
+                         (100, 136, "Wilkes Land"), (136, 155, "Adelie & George V Land"), (155, 180, "Victoria Land"),
+                         (-180, -150, "Ross Ice Shelf margin"), (-150, -100, "Marie Byrd Land"), (-100, -55, "Ellsworth Land"),
+                         (-55, -20, "Coats Land")):
+        if lo <= lon < hi:
+            return f"{name}, Antarctica"
+    return "Antarctica"
+
+
+def display_names(earth: pd.DataFrame) -> pd.Series:
+    """Readable names for the ~3,000 random land-cover samples ("antarctic_ice_free sample 161"): what the 10 km tile
+    actually is (from its land cover, not the stratum it was sampled from) plus where it is. Place = region/country
+    from config/tile_place_names.csv (OpenStreetMap reverse geocoding of tiles that reach a top list), else the
+    nearest catalogued site (named analog site, volcano or impact structure). Other tiles keep their catalog name."""
+    names = earth["name"].fillna("").astype(str).copy()
+    samp = earth["source"].eq("landcover_sample").to_numpy()
+    if not samp.any():
+        return names
+    lat, lon = earth["center_lat"].to_numpy(float), earth["center_lon"].to_numpy(float)
+    known = (~samp) & names.ne("").to_numpy()
+    d = haversine_km(lat[samp, None], lon[samp, None], lat[None, known], lon[None, known])
+    near_i, near_d = d.argmin(1), d.min(1)
+    known_names = names.to_numpy()[known]
+    places = {}
+    pf = CFG / "tile_place_names.csv"
+    if pf.exists():
+        t = pd.read_csv(pf).dropna(subset=["place"])
+        places = dict(zip(t["patch_id"], t["place"]))
+    def get(c):
+        return earth[c].to_numpy(float) if c in earth else np.full(len(earth), np.nan)
+    veg, bare, wc_ice, tmean = get("wc_frac_moss_lichen") + get("wc_frac_grass") + get("wc_frac_shrub"), get("wc_frac_bare_sparse"),         get("wc_frac_snow_ice"), get("power_t2m_c")
+    pids = earth["patch_id"].to_numpy()
+    for k, j in enumerate(np.flatnonzero(samp)):
+        if lat[j] < -60:
+            kind = "Ice-free Antarctic ground"
+        elif np.nan_to_num(veg[j]) >= 0.3:
+            kind = "Tundra" if (abs(lat[j]) > 55 or np.nan_to_num(tmean[j], nan=10) < 0) else "Vegetated ground"
+        elif np.nan_to_num(wc_ice[j]) >= 0.3:
+            kind = "Glacier-edge ground"
+        elif abs(lat[j]) > 55 or np.nan_to_num(tmean[j], nan=10) < 0:
+            kind = "Bare polar / cold desert"
+        else:
+            kind = "Bare desert"
+        place = places.get(pids[j])
+        if isinstance(place, str) and place.strip():
+            where = place
+        elif near_d[k] <= 200:
+            where = f"{near_d[k]:.0f} km from {known_names[near_i[k]]}"
+        elif lat[j] < -60:
+            where = antarctic_region(lat[j], lon[j])
+        else:
+            where = f"{near_d[k]:.0f} km from {known_names[near_i[k]]}"
+        names.iloc[j] = f"{kind} · {where}"
+    return names
+
+
 def top_order(comp_row: np.ndarray, dup: np.ndarray) -> np.ndarray:
     """Earth tiles sorted best-first for a top list: missing scores last, duplicates of named sites excluded."""
     order = np.argsort(-np.nan_to_num(comp_row, nan=-9))

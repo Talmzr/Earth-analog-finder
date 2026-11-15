@@ -1100,7 +1100,7 @@ function markerColor(c) {
   if (colorBy === 'source' || !colorCol) return SCOL[c.source] || new THREE.Color(0x888888);
   let best = NaN;
   for (const i of c.tiles) { const v = colorCol[i]; if (!isNaN(v) && !(v <= best)) best = v; }
-  return scoreColor(best);
+  return colorBy === 'composite' ? rankColor(best) : scoreColor(best);
 }
 function refreshMarkerColors() {
   if (!markerMesh) return;
@@ -1113,25 +1113,32 @@ function refreshMarkerColors() {
   if (scoreMode) document.getElementById('score-legend-t').textContent =
     (colorBy === 'composite' ? 'Overall match (rank among Earth tiles)' : CAT[colorBy].label) + ' · ' + selectedMoonTarget.name;
 }
-// Overall match is coloured by RANK among Earth tiles for the chosen Moon target: no Earth site fully matches the
-// lunar south pole (best overall scores are ~0.2-0.3, "partial"), so an absolute scale paints almost every tile pink.
-// Top 1% -> bright green, top 10% -> green, top half -> amber, bottom half -> pink. Scores and verdicts in the panels
-// stay absolute.
+// Overall match is coloured by RANK among Earth tiles for the chosen Moon target, on a red -> yellow -> green scale:
+// no Earth site fully matches the lunar south pole (best overall scores are ~0.2-0.3, "partial"), so an absolute
+// scale would paint almost every tile the same colour. rankColumn gives each tile p = share of tiles it beats (1 = best);
+// rankColor stretches the top (t = p^2) so roughly the best 10% read green and the bottom half red-orange. Scores
+// and verdicts in the panels stay absolute.
+const RG = [new THREE.Color(0xd9534f), new THREE.Color(0xe0b341), new THREE.Color(0x3fb97a)];
 function rankColumn(col) {
   const idx = [], n = col.length; for (let i = 0; i < n; i++) if (!isNaN(col[i])) idx.push(i);
-  idx.sort((a, b) => col[b] - col[a]);
+  idx.sort((a, b) => col[a] - col[b]);
   const out = new Float32Array(n).fill(NaN), m = idx.length;
-  idx.forEach((i, k) => { const r = m > 1 ? k / (m - 1) : 0;
-    out[i] = r <= 0.01 ? 0.85 : r <= 0.1 ? 0.5 + 0.35 * (0.1 - r) / 0.09 : r <= 0.5 ? 0.5 * (0.5 - r) / 0.4 : -0.6 * (r - 0.5) / 0.5; });
+  idx.forEach((i, k) => { out[i] = m > 1 ? k / (m - 1) : 1; });
   return out;
+}
+function rankColor(p) {
+  if (p === null || isNaN(p)) return SCORE_COL.na;
+  const t = Math.max(0, Math.min(1, p * p));
+  return t < 0.5 ? RG[0].clone().lerp(RG[1], t * 2) : RG[1].clone().lerp(RG[2], (t - 0.5) * 2);
 }
 function setColorBy(v) {
   colorBy = v;
   const raw = v !== 'source' && selectedMoonTarget ? SC.column(selectedMoonTarget.id, v) : null;
   colorCol = raw && v === 'composite' ? rankColumn(Array.from(raw, x => x === null ? NaN : x)) : raw;
-  const ticks = document.getElementById('score-legend-ticks');
-  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>bottom</span><span>top half</span><span>top 10% · top 1%</span>'
+  const ticks = document.getElementById('score-legend-ticks'), grad = document.querySelector('#score-legend .grad');
+  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>worst</span><span>middle</span><span>best analogs</span>'
     : '<span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span>';
+  if (grad) grad.style.background = v === 'composite' ? 'linear-gradient(90deg,#d9534f,#e0b341 70%,#3fb97a)' : '';
   refreshMarkerColors();
 }
 // Called whenever the chosen Moon target changes (Moon page, assessment)

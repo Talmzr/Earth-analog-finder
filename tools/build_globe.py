@@ -247,7 +247,8 @@ def main():
     moon, earth, zones = C.load_tables()
     earth = earth.set_index("patch_id").loc[tile_ids].reset_index()
     global DUP
-    dup = DUP = C.duplicate_of_named(earth)                                   # same place as a named site
+    dup = DUP = C.duplicate_of_named(earth)
+    earth["name"] = C.display_names(earth)                              # readable names for random samples                                   # same place as a named site
     ent = C.build_entities(moon, zones).set_index("entity_id").loc[ent_ids].reset_index()
     meta_web = json.loads((ROOT / "web" / "data" / "meta.json").read_text(encoding="utf-8"))
     mt_by_id = {t["id"]: t for t in json.loads((ROOT / "web" / "data" / "moon_targets.json").read_text(encoding="utf-8"))}

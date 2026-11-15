@@ -80,7 +80,7 @@ def main(sfx=""):
     summ = pd.read_csv(C.RES / f"calibration_summary{sfx}.csv").set_index("category")
 
     # ---- earth tiles (parallel arrays)
-    E = dict(id=tile_ids, name=earth["name"].fillna("").tolist(), source=earth["source"].tolist(), stratum=earth["stratum"].tolist(),
+    E = dict(id=tile_ids, name=C.display_names(earth).tolist(), source=earth["source"].tolist(), stratum=earth["stratum"].tolist(),
              lat=[r(v, 4) for v in earth["center_lat"]], lon=[r(v, 4) for v in earth["center_lon"]],
              relief_m=[r(v, 0) for v in earth["relief_m"]], slope_deg=[r(v, 1) for v in earth["slope500_mean_deg"]],
              temp_min_k=[r(v, 0) for v in earth["x_temp_min_k"]], temp_max_k=[r(v, 0) for v in earth["x_temp_max_k"]],
