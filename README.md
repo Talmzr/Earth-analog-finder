@@ -12,7 +12,7 @@ No place on Earth reproduces the lunar south pole: vacuum, 1/6 g, 25-110 K perma
 
 - **Artemis III south-pole regions:** ice-free ground in Antarctica (around the McMurdo Dry Valleys, the Royal Society Range and Dronning Maud Land nunataks) and High Arctic polar deserts (Canadian Arctic Archipelago, northern Greenland, Svalbard) lead almost every list. They match low sun in their best month, frozen ground and dry, bare surfaces. Their rocks do **not** match lunar highland anorthosite: geology is negative for nearly all of them, and anorthosite sites such as Mistastin are the geology analogs instead.
 - **Tranquillitatis pit (mare lava-tube skylight):** young basaltic volcanic fields with documented lava tubes in hot deserts (Arabian harrats such as Harrat Kishb, and Afar). They match lava-tube basalt, not the pit's vacuum or depth.
-- **Best overall scores are about 0.2-0.3 ("partial")** on a -1..+1 scale. The globe colours every score on the same absolute scale (green >= 0.5 sufficient, amber partial, grey near 0, pink negative), so the best analogs show amber: a good but partial match. The 2-D map can switch to a relative view (rank among Earth tiles).
+- **Best overall scores are about 0.2-0.3 ("partial")** on a -1..+1 scale. The globe and map colour every score on the same absolute scale: any positive score is green (light green just above 0, full green from 0.5) and negative scores are pink-red, so the best analogs show green while places with no positive match stay red. The 2-D map can switch to a relative view (rank among Earth tiles).
 
 ## What it does
 

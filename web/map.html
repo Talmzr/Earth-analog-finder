@@ -38,7 +38,7 @@
   details ul { margin:4px 0 8px 16px; padding:0; color:var(--muted); font-size:12.5px; }
   table.q { width:100%; border-collapse:collapse; font-size:12px; } table.q td, table.q th { padding:3px 4px; border-bottom:1px solid var(--line); text-align:left; }
   table.q th { color:var(--muted); font-weight:500; }
-  .legend b { width:120px; height:8px; border-radius:4px; background:linear-gradient(90deg,#d9534f,#e0b341,#3fb97a); display:inline-block; }
+  .legend b { width:120px; height:8px; border-radius:4px; background:linear-gradient(90deg,#c8373c,#d67860 49.5%,#9fe0b8 50.5%,#2faa69); display:inline-block; }
   @media (max-width: 860px) { main { grid-template-columns:1fr; height:auto; } #map { height:55vh; } aside { border-left:0; border-top:1px solid var(--line); } }
 </style>
 </head>
@@ -65,8 +65,11 @@
 </main>
 <script>
 const $ = id => document.getElementById(id);
-const colour = v => { if (v == null) return '#555c66'; const t = Math.max(0, Math.min(1, (v + 100) / 200));
-  const a = t < .5 ? [217,83,79] : [224,179,65], b = t < .5 ? [224,179,65] : [63,185,122], u = t < .5 ? t * 2 : (t - .5) * 2;
+// Score colour (v = score x 100): negative = red (deeper when more negative), zero and above = green (light at 0,
+// full green from 0.5), so any positive match reads green and no-match stays red.
+const colour = v => { if (v == null) return '#555c66';
+  const pos = v >= 0, u = pos ? Math.min(1, v / 50) : Math.min(1, -v / 60);
+  const a = pos ? [159,224,184] : [214,120,96], b = pos ? [47,170,105] : [200,55,60];
   return `rgb(${a.map((x, i) => Math.round(x + (b[i] - x) * u)).join(',')})`; };
 const cls = v => v == null ? 'muted' : v >= 50 ? 'good' : v >= 0 ? 'mid' : 'bad';
 const fmt = v => v == null ? 'n/a' : (v / 100).toFixed(2);
