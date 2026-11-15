@@ -73,14 +73,42 @@ def _clean(s, n):
     return s[:n]
 
 
+# old map terminology the text encoder does not read as a rock type
+JARGON = [(re.compile(r"\bbasic (igneous )?(extrusive|volcanic)( rocks?)?", re.I), "basalt (basic volcanic rock)"),
+          (re.compile(r"\bacid(ic)? (igneous )?(extrusive|volcanic)( rocks?)?", re.I), "rhyolite / dacite (felsic volcanic rock)"),
+          (re.compile(r"\bbasic (igneous )?intrusive( rocks?)?", re.I), "gabbro (basic intrusive rock)")]
+SITE_ROCK_TAGS = {"basalt": "basalt", "volcanic": "volcanic rock", "lava_tube": "lava tubes", "anorthosite": "anorthosite",
+                  "impact_melt": "impact melt", "impact_crater": "impact crater rocks", "regolith": "loose regolith",
+                  "evaporites": "evaporite salts", "carbonates": "carbonate rocks", "sedimentary": "sedimentary rocks",
+                  "clays": "clays", "iron_sulfates": "iron sulfates"}
+
+
+def _dejargon(s: str) -> str:
+    for rx, sub in JARGON:
+        s = rx.sub(sub, s)
+    return s
+
+
 def earth_text(r: dict) -> str:
-    """One geology description per Earth tile; '' when nothing geological is known."""
+    """One geology description per Earth tile; '' when nothing geological is known.
+    Named analog sites lead with their curated rock tags; a coarse-map bedrock entry that contradicts them (e.g.
+    'gneiss, granite' at Craters of the Moon, a basalt field) is left out."""
     parts = []
     src = r.get("source", "")
     ctx = _clean(r.get("context"), 700)
-    lith, desc, allt = _clean(r.get("mstrat_lith"), 200), _clean(r.get("mstrat_descrip"), 300), _clean(r.get("mstrat_text_all"), 500)
+    lith, desc, allt = (_dejargon(_clean(r.get(k), n)) for k, n in (("mstrat_lith", 200), ("mstrat_descrip", 300), ("mstrat_text_all", 500)))
     if src in ("named_site", "impact_structure", "volcano"):
         parts.append(f"{_clean(r.get('name'), 80)}.")
+    if src == "named_site":
+        m = re.search(r"tags=([^;=]*(?:;[^;=]*)*?)(?:;\s*\w+=|$)", ctx)
+        tags = [t.strip() for t in (m.group(1).split(";") if m else []) if t.strip()]
+        rocks = [SITE_ROCK_TAGS[t] for t in tags if t in SITE_ROCK_TAGS]
+        if rocks:
+            parts.append(f"Site rock types: {', '.join(rocks)}.")
+            volcanic_site = any(t in tags for t in ("basalt", "volcanic", "lava_tube"))
+            if volcanic_site and not RX["basalt"].search(lith.lower()) and \
+                    (RX["granmet"].search(lith.lower()) or RX["sed"].search(lith.lower())):
+                lith = desc = allt = ""                                      # contradicting coarse-map entry
     if lith or allt:
         parts.append(f"Bedrock: {lith or allt}.")
         if desc and desc.lower() != "nan":
@@ -96,7 +124,7 @@ def earth_text(r: dict) -> str:
 
 RX = {
     "anorth": re.compile(r"anorthosit|troctolit|\bnorit|leucogabbro|layered (mafic |ultramafic )?intrusion"),
-    "basalt": re.compile(r"basalt|picrit|hawaiite|tholeiit|basanit|tephrit|mafic volcanic|scoria|cinder cone|dolerite|diabase"),
+    "basalt": re.compile(r"basalt|basic volcanic|picrit|hawaiite|tholeiit|basanit|tephrit|mafic volcanic|scoria|cinder cone|dolerite|diabase"),
     "impact": re.compile(r"impact (structure|crater|melt|breccia|site)|impact_crater(?!_like)|impact_melt|suevite|impactite|"
                          r"shatter cone|shock(ed)? metamorph|astrobleme|meteorite crater"),
     "mafic_plut": re.compile(r"gabbro|ultramafic|peridotit|dunite|pyroxenit"),

@@ -1,5 +1,5 @@
 {
-  "version": "0.3-draft (2026-11-15)",
+  "version": "0.4-draft (2026-11-15)",
   "_changes": "2026-11-15: dust_regolith, biology_sterility and caves_subsurface were briefly removed and then restored: they compare Earth sites with known lunar constants (Apollo regolith, sterile Moon) or a known Moon feature (the Tranquillitatis pit), which are valid analog tests even though they are the same for every Moon target.",
   "_readme": "Inference rule table. For a (Moon location, Earth location) pair and each experiment: check moon_precondition, compare category scores (config/categories.json, range -1..1) with the minimums, emit sufficient / partial / avoid / not_applicable, and attach 'also account for' caveats. Expressions use the same helpers as categories.json and are evaluated on the Moon row (moon_precondition) or Earth row (earth_hint).",
 
@@ -46,7 +46,7 @@
 
   "experiments": [
     {"id": "landing_hazard_detection", "name": "Landing hazard detection & terrain-relative navigation",
-     "required": {"terrain": 0.5, "ops_landing_mobility": 0.4}, "supporting": {"thermal_illumination": 0.0},
+     "required": {"terrain": 0.5, "ops_landing_mobility": 0.4}, "supporting": {"illumination": 0.0},
      "moon_precondition": null,
      "also_account_for": [
        "Lander-scale hazards (boulders, small craters) are below the 500 m slope baseline; verify with metre-scale DEMs.",
@@ -55,7 +55,7 @@
        "Vegetation, buildings and DSM artefacts can create false hazards on Earth."]},
 
     {"id": "rover_mobility_navigation", "name": "Rover mobility & navigation",
-     "required": {"terrain": 0.5, "dust_regolith": 0.3}, "supporting": {"ops_landing_mobility": 0.4, "thermal_illumination": 0.0},
+     "required": {"terrain": 0.5, "dust_regolith": 0.3}, "supporting": {"ops_landing_mobility": 0.4, "illumination": 0.0},
      "moon_precondition": null,
      "also_account_for": [
        "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
@@ -98,7 +98,7 @@
        "Earth polar night is seasonal and comes with an atmosphere; lunar shadow periods are set by topography."]},
 
     {"id": "illumination_power_planning", "name": "Illumination & solar-power planning, low-sun-angle vision",
-     "required": {"thermal_illumination": 0.3, "terrain": 0.4}, "supporting": {},
+     "required": {"illumination": 0.4, "terrain": 0.4}, "supporting": {"thermal_illumination": 0.0},
      "moon_precondition": null,
      "also_account_for": [
        "Lunar south-pole sun stays within ~1.5 deg of the horizon; use LOLA illumination maps for numbers and Earth sites for procedures only.",

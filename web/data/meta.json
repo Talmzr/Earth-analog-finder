@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T11:31:50Z",
+ "generated_utc": "2026-11-15T11:50:10Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -46,20 +46,20 @@
    "cap": 0.8,
    "n_anchors": 22,
    "terms": {
-    "lith_match": 0.8923,
-    "text_cos": 0.9695
+    "lith_match": 0.8927,
+    "text_cos": 0.9708
    },
-   "intercept": -0.3637,
+   "intercept": -0.3623,
    "anchor_mae": 0.17,
    "anchor_mae_leave_one_out": 0.18,
-   "anchor_rank_agreement": 0.93,
+   "anchor_rank_agreement": 0.9,
    "anchors_off_by_0_3": 2
   },
   {
    "id": "thermal",
    "config_id": "thermal_illumination",
-   "label": "Temperature & illumination",
-   "how": "Night minimum temperature (closest approach: no Earth site is lunar-cold) and sun height / grazing-sun share in the Earth light-twin month, the month whose sun is closest to the Moon target's. Not part of the overall score",
+   "label": "Temperature",
+   "how": "Night minimum temperature plus the light-twin sun terms. Closest approach only: no Earth site is lunar-cold, so this ranks how cold and polar the site is. Not part of the overall score",
    "cap": 0.4,
    "n_anchors": 19,
    "terms": {
@@ -74,6 +74,23 @@
    "anchors_off_by_0_3": 0
   },
   {
+   "id": "illumination",
+   "config_id": "illumination",
+   "label": "Sunlight & illumination",
+   "how": "Noon sun height and grazing-sun share in the Earth light-twin month (the month whose sun is closest to the Moon target's). A real overlap for ~35-40% of Earth sites; Earth still has a 24 h day and a scattering sky. Calibrated on draft anchors",
+   "cap": 0.7,
+   "n_anchors": 10,
+   "terms": {
+    "noon_sun": 0.3756,
+    "grazing_sun": 0.2899
+   },
+   "intercept": -0.0422,
+   "anchor_mae": 0.07,
+   "anchor_mae_leave_one_out": 0.1,
+   "anchor_rank_agreement": 0.75,
+   "anchors_off_by_0_3": 0
+  },
+  {
    "id": "water_ice",
    "config_id": "water_ice",
    "label": "Water, ice & permafrost",
@@ -81,14 +98,14 @@
    "cap": 0.7,
    "n_anchors": 20,
    "terms": {
-    "frozen_ground": 0.2485,
-    "traverse": 0.3096,
-    "no_liquid_water": 0.1517
+    "frozen_ground": 0.3498,
+    "traverse": 0.2186,
+    "no_liquid_water": 0.2086
    },
-   "intercept": -0.1517,
-   "anchor_mae": 0.14,
-   "anchor_mae_leave_one_out": 0.18,
-   "anchor_rank_agreement": 0.95,
+   "intercept": -0.0744,
+   "anchor_mae": 0.13,
+   "anchor_mae_leave_one_out": 0.15,
+   "anchor_rank_agreement": 0.91,
    "anchors_off_by_0_3": 2
   },
   {
@@ -99,14 +116,14 @@
    "cap": 0.7,
    "n_anchors": 18,
    "terms": {
-    "bare": 0.5065,
-    "tephra": 0.3225
+    "bare": 0.5218,
+    "tephra": 0.3002
    },
-   "intercept": -0.1815,
-   "anchor_mae": 0.15,
-   "anchor_mae_leave_one_out": 0.17,
-   "anchor_rank_agreement": 0.96,
-   "anchors_off_by_0_3": 2
+   "intercept": -0.1833,
+   "anchor_mae": 0.12,
+   "anchor_mae_leave_one_out": 0.14,
+   "anchor_rank_agreement": 0.97,
+   "anchors_off_by_0_3": 0
   },
   {
    "id": "biology",
@@ -123,7 +140,7 @@
    "anchor_mae": 0.17,
    "anchor_mae_leave_one_out": 0.18,
    "anchor_rank_agreement": 0.88,
-   "anchors_off_by_0_3": 2
+   "anchors_off_by_0_3": 0
   },
   {
    "id": "caves",
@@ -136,10 +153,10 @@
     "rule": 1.0
    },
    "intercept": 0.0,
-   "anchor_mae": 0.14,
-   "anchor_mae_leave_one_out": 0.14,
-   "anchor_rank_agreement": 0.91,
-   "anchors_off_by_0_3": 1
+   "anchor_mae": 0.13,
+   "anchor_mae_leave_one_out": 0.13,
+   "anchor_rank_agreement": 0.92,
+   "anchors_off_by_0_3": 0
   },
   {
    "id": "operations",
@@ -149,15 +166,15 @@
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.5971,
-    "water_ice": 0.3923,
-    "slope_hazard": 0.2314
+    "terrain": 0.5791,
+    "water_ice": 0.3104,
+    "slope_hazard": 0.1774
    },
-   "intercept": 0.0115,
-   "anchor_mae": 0.21,
-   "anchor_mae_leave_one_out": 0.25,
-   "anchor_rank_agreement": 0.77,
-   "anchors_off_by_0_3": 4
+   "intercept": -0.0176,
+   "anchor_mae": 0.24,
+   "anchor_mae_leave_one_out": 0.28,
+   "anchor_rank_agreement": 0.76,
+   "anchors_off_by_0_3": 2
   }
  ],
  "experiments": [
@@ -169,7 +186,7 @@
     "operations": 0.4
    },
    "supporting": {
-    "thermal": 0.0
+    "illumination": 0.0
    },
    "also_account_for": [
     "Lander-scale hazards (boulders, small craters) are below the 500 m slope baseline; verify with metre-scale DEMs.",
@@ -187,7 +204,7 @@
    },
    "supporting": {
     "operations": 0.4,
-    "thermal": 0.0
+    "illumination": 0.0
    },
    "also_account_for": [
     "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
@@ -266,10 +283,12 @@
    "id": "illumination_power_planning",
    "name": "Illumination & solar-power planning, low-sun-angle vision",
    "required": {
-    "thermal": 0.3,
+    "illumination": 0.4,
     "terrain": 0.4
    },
-   "supporting": {},
+   "supporting": {
+    "thermal": 0.0
+   },
    "also_account_for": [
     "Lunar south-pole sun stays within ~1.5 deg of the horizon; use LOLA illumination maps for numbers and Earth sites for procedures only.",
     "No atmospheric scattering on the Moon: shadows are black.",
@@ -514,14 +533,15 @@
    "note": "fines = % finer than 50 um; lunar soil median grain size ~70 um (the brief's '70-80% sand-sized' would be fines ~25%; kept the 45% of categories.json)"
   },
   "caves": {
-   "known_tube_tiles": 97,
-   "plausible_tiles": 878,
+   "known_tube_tiles": 9,
+   "plausible_tiles": 966,
    "no_tube_tiles": 2513
   }
  },
  "composite_categories": [
   "terrain",
   "geology",
+  "illumination",
   "water_ice",
   "operations",
   "caves"
@@ -538,6 +558,10 @@
    "t_min",
    "grazing_sun",
    "noon_sun"
+  ],
+  "illumination": [
+   "noon_sun",
+   "grazing_sun"
   ],
   "water_ice": [
    "frozen_ground",

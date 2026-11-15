@@ -16,7 +16,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 RES, MOD, OUT = ROOT / "results", ROOT / "models", ROOT / "docs" / "ML_RESULTS.md"
 FEATS = ("log_relief", "slope_mean", "log_tri")
-SHOW_CATS = [("terrain", "Terrain"), ("geology", "Geology"), ("thermal", "Thermal"), ("water_ice", "Water/ice"),
+SHOW_CATS = [("terrain", "Terrain"), ("geology", "Geology"), ("thermal", "Thermal"), ("illumination", "Sun"), ("water_ice", "Water/ice"),
              ("dust", "Dust"), ("operations", "Ops")]
 
 LIMITS = """## 6. Deviations from the brief and known limits
@@ -25,7 +25,7 @@ LIMITS = """## 6. Deviations from the brief and known limits
 - **Sub-score floor:** the brief's hard floor (`max(-1, 1 - |d|/tol)`) made every Earth site tie at -1 for temperature. Same formula within one tolerance, soft approach to -1 beyond, so closest-approach order survives.
 - **Terrain:** the fine-tuned DINOv2 embedding is trained and evaluated (section 1) but not used in the score: alone it agrees 0.31 with the terrain anchors and removing it lowered the leave-one-out error. The score uses measured relief / slope / roughness / steep share.
 - **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
-- **Thermal:** night minimum temperature (closest approach) plus sun height and grazing-sun share in the Earth **light-twin month**, the month whose noon sun is closest to the Moon target's; annual Earth values never reach lunar polar sun heights, one month does for ~35% of tiles (LOO error 0.128 -> 0.100). Swing, max temperature and polar night were dropped.
+- **Thermal / illumination split:** temperature (night minimum, closest approach) is scored apart from **illumination**: sun height and grazing-sun share in the Earth **light-twin month**, the month whose noon sun is closest to the Moon target's; annual Earth values never reach lunar polar sun heights, one month does for ~35% of tiles (LOO error 0.128 -> 0.100). Swing, max temperature and polar night were dropped.
 - **Dry Moon targets:** where the Moon target has no ground ice (the Tranquillitatis pit) the frozen-ground term is two-sided, so icy Earth ground counts as a mismatch instead of a free match. No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
 - **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (vegetation, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but stay out of the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.

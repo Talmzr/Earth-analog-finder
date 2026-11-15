@@ -24,12 +24,13 @@ import pandas as pd
 from . import common as C
 
 LABELS = {"terrain": "Terrain & topography", "geology": "Geology & surface materials",
-          "thermal": "Temperature & illumination", "water_ice": "Water, ice & permafrost",
+          "thermal": "Temperature", "illumination": "Sunlight & illumination", "water_ice": "Water, ice & permafrost",
           "dust": "Dust & regolith", "biology": "Biological sterility", "caves": "Caves & lava tubes",
           "operations": "Landing & operations"}
 HOW = {"terrain": "Measured relief, slope, roughness and steep-ground share, same 80 m elevation processing on both bodies (the fine-tuned DINOv2 model is evaluated but does not improve the score, so it is not used)",
        "geology": "BGE-small text encoder fine-tuned contrastively on lunar map units vs Earth lithology, plus a lithology-match term",
-       "thermal": "Night minimum temperature (closest approach: no Earth site is lunar-cold) and sun height / grazing-sun share in the Earth light-twin month, the month whose sun is closest to the Moon target's. Not part of the overall score",
+       "thermal": "Night minimum temperature plus the light-twin sun terms. Closest approach only: no Earth site is lunar-cold, so this ranks how cold and polar the site is. Not part of the overall score",
+       "illumination": "Noon sun height and grazing-sun share in the Earth light-twin month (the month whose sun is closest to the Moon target's). A real overlap for ~35-40% of Earth sites; Earth still has a 24 h day and a scattering sky. Calibrated on draft anchors",
        "water_ice": "Frozen ground within ~1 m, distance from flat bare ground to ice, absence of liquid water",
        "dust": "Bare ground share and volcanic tephra, compared with the known lunar regolith (Apollo samples: bare, dry, fine). Same for every Moon target, so not part of the overall score",
        "biology": "How lifeless the Earth site is (vegetation greenness, rainfall), compared with the sterile Moon. Same for every Moon target, capped at 0.6, not part of the overall score",

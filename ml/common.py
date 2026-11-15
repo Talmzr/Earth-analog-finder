@@ -17,7 +17,8 @@ MODELS, EMB, RES = ROOT / "models", ROOT / "embeddings", ROOT / "results"
 R_MOON = 1737400.0
 
 # output category name -> name used in config/categories.json, experiments.json and anchors.csv
-CATS = {"terrain": "terrain", "geology": "geology", "thermal": "thermal_illumination", "water_ice": "water_ice",
+CATS = {"terrain": "terrain", "geology": "geology", "thermal": "thermal_illumination", "illumination": "illumination",
+        "water_ice": "water_ice",
         "dust": "dust_regolith", "biology": "biology_sterility", "caves": "caves_subsurface",
         "operations": "ops_landing_mobility"}
 CFG2OUT = {v: k for k, v in CATS.items()}
@@ -177,6 +178,11 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
     ice = e["x_surface_ice_frac"] if "x_surface_ice_frac" in e else e["wc_frac_snow_ice"]
     e["bare_f"] = e["wc_frac_bare_sparse"].where(e["wc_frac_bare_sparse"].notna(),
                                                   np.where(lat < -60, (1 - ice).clip(0, 1), np.nan))
+    # named regolith test sites (tephra / arid / cold desert) were chosen for a bare spot that a 10 km tile dilutes
+    # (Black Point 13% bare, Mauna Kea saddle 38%): count the test spot as at least 60% bare
+    ctx = e["context"].fillna("").astype(str)
+    spot = e["source"].eq("named_site") & ctx.str.contains("regolith") & ctx.str.contains("tephra|cinder|arid|cold_desert", regex=True)
+    e["bare_f_site"] = np.where(spot, np.fmax(e["bare_f"].fillna(0), 0.6), e["bare_f"])
     e["obstacle_frac"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water"])
     e["obstacle_frac_ops"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water", "wc_frac_wetland", "wc_frac_crop"])
     fields = {"context": ["context"], "lith_text": ["mstrat_lith"], "lith_desc": ["mstrat_text_all", "mstrat_descrip"],

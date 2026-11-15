@@ -45,6 +45,7 @@ TUBE_REGIONS = re.compile(
 #   biology    soil_moisture (almost no spread, 23% missing), tree_cover (no effect, redundant with NDVI)
 #   operations thermal (no effect, a latitude proxy), traverse (already inside water_ice: double counted)
 KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
+                  illumination=["noon_sun", "grazing_sun"],
                   water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
                   biology=["ndvi", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
 # Categories in the composite ("which Earth place is most like THIS Moon place"): those that use per-site Moon data,
@@ -53,9 +54,13 @@ KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], therma
 # they cannot help choose between targets. thermal has no Moon/Earth overlap in temperature (weakest calibration).
 # Compared on 2026-11-15: all-category composite vs this one gave the same expert agreement (0.85 vs 0.83), but the
 # all-category version drew 38% of every target's ranking from target-invariant scores.
-COMPOSITE_CATS = ("terrain", "geology", "water_ice", "operations", "caves")
-GEO_MINOR_CAP = 0.3   # geology cap for tiles where anorthosite is only a minor component (partial match)
-CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, water_ice=0.7, dust=0.7, biology=0.6, caves=0.5, operations=0.8)
+COMPOSITE_CATS = ("terrain", "geology", "illumination", "water_ice", "operations", "caves")
+GEO_MINOR_CAP = 0.3
+# named analog sites with documented life that satellite greenness cannot see
+KNOWN_LIFE = {"svalbard_bockfjorden": "Troll / Jotun warm springs with microbial mats (AMASE)",
+              "rio_tinto": "acidophile microbial and eukaryotic ecosystem",
+              "lake_salda": "living microbialites (stromatolites)"}   # geology cap for tiles where anorthosite is only a minor component (partial match)
+CAPS = dict(terrain=0.9, geology=0.8, thermal=0.4, illumination=0.7, water_ice=0.7, dust=0.7, biology=0.6, caves=0.5, operations=0.8)
 
 
 def col(df, name):
@@ -102,11 +107,15 @@ def inlp(Xtr, ytr, k=8):
 
 
 def terrain_terms(ent, E, moon, earth, zones, suffix, info):
-    feats = [("relief_m", True, 0.15), ("slope500_mean_deg", False, 3.0), ("tri500_mean_m", True, 0.15),
-             ("frac_slope500_gt10", False, 0.15)]
+    # (Moon column, Earth column, log scale, tolerance). The slope tail (90th percentile, share > 20 deg) separates a
+    # uniformly steep crater wall from a valley with cliffs that has the same mean slope (Haworth vs Dry Valleys).
+    feats = [("relief_m", "relief_m", True, 0.15), ("slope500_mean_deg", "slope500_mean_deg", False, 3.0),
+             ("tri500_mean_m", "tri500_mean_m", True, 0.15), ("frac_slope500_gt10", "frac_slope500_gt10", False, 0.15)]
+    # (tested 2026-11-15: adding the slope tail, 90th percentile and share > 20 deg, fixed Haworth x Dry Valleys but
+    #  raised the terrain LOO error 0.141 -> 0.179, so it is not used)
     subs = []
-    for name, logt, tau in feats:
-        m, e = M_(ent, name), E_(E, name)
+    for mname, name, logt, tau in feats:
+        m, e = M_(ent, mname), E_(E, name)
         if logt:
             m, e = np.log10(1 + np.clip(m, 0, None)), np.log10(1 + np.clip(e, 0, None))
         subs.append(SUB(m, e, tau))
@@ -249,10 +258,14 @@ def traverse_term(ent, E):
 def water_terms(ent, E):
     # one-sided (more Earth ice is not penalised) where the Moon target has ground ice; where it has none (the
     # Tranquillitatis pit) the Moon's dryness counts and icy Earth ground is a mismatch
+    # Lunar ground ice is ice-cemented regolith. On Earth only frozen GROUND counts: the part of a tile under a glacier
+    # or ice sheet is bulk ice, not frozen regolith (Concordia, 3 km of ice, is not ice-cemented soil).
     fz_m = M_(ent, "x_frozen_ground_frac")
+    ice_e = np.nan_to_num(col(E, "x_surface_ice_frac"), nan=0.0)
+    ground_ice_e = (col(E, "x_frozen_ground_frac") * (1 - ice_e))[None, :]
+    any_ice_e = np.fmax(col(E, "x_frozen_ground_frac"), ice_e)[None, :]
     dry = np.nan_to_num(fz_m, nan=0.0) < 0.05
-    fz = np.where(dry, SUB(fz_m, E_(E, "x_frozen_ground_frac"), 0.25),
-                  SUB(fz_m, E_(E, "x_frozen_ground_frac"), 0.25, one_sided=True))
+    fz = np.where(dry, SUB(fz_m, any_ice_e, 0.25), SUB(fz_m, ground_ice_e, 0.25, one_sided=True))
     terms = {"frozen_ground": fz,
              "surface_ice": SUB(M_(ent, "x_surface_ice_frac"), E_(E, "x_surface_ice_frac"), 0.4, one_sided=True),
              "traverse": traverse_term(ent, E)}
@@ -270,7 +283,7 @@ def dust_terms(ent, E, info):
     t = {"fines": SUB(ref["fines_pct"], E_(E, "fines_pct"), 15.0),
          "bulk_density": SUB(ref["bulk_density"], E_(E, "sg_bdod_g_cm3"), 0.2),
          "coarse": SUB(ref["coarse_pct"], E_(E, "sg_cfvo_pct"), 15.0),
-         "bare": SUB(1.0, E_(E, "bare_f"), 0.25),
+         "bare": SUB(1.0, E_(E, "bare_f_site"), 0.25),
          "dryness": SUB(0.0, E_(E, "soil_moist_frac"), 0.08),
          "aerosol": 2 * np.clip(E_(E, "aot_mean") / 0.8, 0, 1) - 1}
     phys = np.isfinite(np.stack(list(t.values()))).sum(0)                # physical terms available per Earth tile
@@ -300,8 +313,11 @@ def caves_terms(ent, E, earth):
     volc_src = earth["source"].eq("volcano").to_numpy()
     named_volc = earth["source"].eq("named_site").to_numpy() & has(r"basalt|volcanic|lava")
     volcanic = volc_src | named_volc
-    known = has(r"lava_tube") | (volcanic & (has(r"lava[ _-]?tubes?|lava caves?|\bcaves?\b") | has(TUBE_REGIONS.pattern)))
-    plausible = (volc_src & has(r"shield|basalt")) | (named_volc & ~E["flag_aqueous_sed"].to_numpy())
+    # known: the tile's own catalog text documents tubes / caves. Being in a lava-tube region (all of Iceland, Hawaii,
+    # ...) is only "plausible": a fresh flow such as Holuhraun has no documented tubes.
+    known = has(r"lava_tube") | (volcanic & has(r"lava[ _-]?tubes?|lava caves?|\bcaves?\b"))
+    plausible = (volc_src & has(r"shield|basalt")) | (named_volc & ~E["flag_aqueous_sed"].to_numpy()) | \
+        (volcanic & has(TUBE_REGIONS.pattern))
     no_tubes = (E["flag_aqueous_sed"].to_numpy() | E["flag_ice_surface"].to_numpy()) & ~volc_src & ~known & ~plausible
     rule = np.where(known, 0.5, np.where(plausible, 0.3, np.where(no_tubes, -0.5, 0.0)))
     t = np.full((len(ent), len(earth)), np.nan)
@@ -375,10 +391,16 @@ def apply_caps(name, cal, ent, E):
     if name == "water_ice":
         cold = col(ent, "dvn_frac_coldtrap_110k") >= 0.5
         cal = np.where(cold[:, None], np.minimum(cal, 0.3), cal)
+        # >= 500 mm/yr: liquid-water-dominated ground (active layer, springs) is no analog for dry lunar ice
+        cal = np.where((col(E, "precip") >= 500)[None, :], np.minimum(cal, 0.0), cal)
+    if name == "biology":
+        # documented life that NDVI cannot see (microbial mats, acidophiles, microbialites) at named analog sites
+        cal = np.where(E["patch_id"].isin(KNOWN_LIFE).to_numpy()[None, :], np.minimum(cal, -0.6), cal)
     if name == "operations":
         pen = ((col(E, "tree_f") > 0.3) | (col(E, "wc_frac_built") > 0.1))[None, :]
         cal = np.where(pen, cal - 0.5, cal)
         cal = np.where((col(E, "obstacle_frac_ops") >= 0.5)[None, :], np.minimum(cal, -0.3), cal)
+        cal = np.where((col(E, "wc_frac_water") >= 0.5)[None, :], np.minimum(cal, -0.8), cal)   # mostly lake / sea
         cal = np.clip(cal, -1, CAPS[name])
     return cal
 
@@ -488,6 +510,10 @@ def main():
     run("geology", t, p)
     t, p, twin_month = thermal_terms(ent, E)
     run("thermal", t, p)
+    # Illumination split from temperature (2026-11-15): sun height and grazing-sun share in the Earth light-twin month
+    # genuinely overlap with the Moon for ~35-40% of Earth tiles, but the 19 thermal anchors are all about cold, so a
+    # shared category could never credit it. Fitted on its own (draft, geometry-based) anchors, which set the scale.
+    run("illumination", t, {"noon_sun": 0.5, "grazing_sun": 0.5})
     run("water_ice", *water_terms(ent, E))
     run("dust", *dust_terms(ent, E, info))
     run("biology", *biology_terms(ent, E), prior_b=1.0)

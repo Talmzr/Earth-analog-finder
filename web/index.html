@@ -74,7 +74,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 11,
 async function load() {
   [meta, targets, tiles] = await Promise.all(['meta', 'moon_targets', 'earth_tiles'].map(f => fetch(`data/${f}.json`).then(r => r.json())));
   $('target').innerHTML = targets.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-  $('cat').innerHTML = `<option value="composite">Overall match to this Moon site: terrain, geology, ice, operations (+ caves for the pit)</option>` +
+  $('cat').innerHTML = `<option value="composite">Overall match to this Moon site: terrain, geology, sunlight, ice, operations (+ caves for the pit)</option>` +
     meta.categories.map(c => `<option value="${c.id}">${c.label}</option>`).join('') +
     `<option value="thermal_pct">Temperature: closest approach (rank among Earth sites)</option>`;
   $('caveats').innerHTML = meta.earth_cannot_reproduce.map(c => `<span class="tag" title="Moon: ${c.moon}. Best on Earth: ${c.earth_best}. Cover with: ${c.cover_with}">${c.condition}</span>`).join('');
@@ -111,9 +111,9 @@ function showTile(i) {
   sel = i; paint();
   const bars = meta.categories.map(c => { const v = cur.scores[c.id][i]; const w = v == null ? 0 : Math.abs(v) / 2;
     const pct = c.id === 'thermal' && cur.percentile?.thermal ? cur.percentile.thermal[i] : null;
-    const tm = c.id === 'thermal' && cur.twin_month ? cur.twin_month[i] : 0;
+    const tm = c.id === 'illumination' && cur.twin_month ? cur.twin_month[i] : 0;
     const MON = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const lab = pct == null ? c.label : `${c.label}<br><small>closer than ${pct}% of Earth sites${tm ? ' · best light in ' + MON[tm] : ''}</small>`;
+    const lab = pct != null ? `${c.label}<br><small>colder than ${pct}% of Earth sites</small>` : tm ? `${c.label}<br><small>best light in ${MON[tm]}</small>` : c.label;
     return `<div class="bar"><span>${lab}</span><span class="track"><i style="left:${v == null || v >= 0 ? 50 : 50 - w}%;width:${w}%;background:${colour(v)}"></i></span>
       <span class="score ${cls(v)}">${fmt(v)}</span></div>`; }).join('');
   const names = Object.fromEntries(meta.experiments.map(e => [e.id, e.name]));
