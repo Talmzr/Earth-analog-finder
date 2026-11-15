@@ -218,6 +218,24 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
     return e
 
 
+def duplicate_of_named(earth: pd.DataFrame, km: float = 2.0) -> np.ndarray:
+    """Catalog tiles (impact structures, volcanoes, samples) within `km` of a named analog site are the same place
+    listed twice (Haughton, Ries, Lonar, Meteor Crater, Mistastin): kept in the scores and on the map, left out of the
+    top-analog lists so a site cannot fill two places."""
+    named = earth["source"].eq("named_site").to_numpy()
+    lat, lon = earth["center_lat"].to_numpy(float), earth["center_lon"].to_numpy(float)
+    if not named.any():
+        return np.zeros(len(earth), bool)
+    d = haversine_km(lat[:, None], lon[:, None], lat[None, named], lon[None, named])
+    return (~named) & (d.min(1) < km)
+
+
+def top_order(comp_row: np.ndarray, dup: np.ndarray) -> np.ndarray:
+    """Earth tiles sorted best-first for a top list: missing scores last, duplicates of named sites excluded."""
+    order = np.argsort(-np.nan_to_num(comp_row, nan=-9))
+    return order[~dup[order]]
+
+
 # ----------------------------------------------------------------------------- spatial blocks (no leakage)
 def spatial_blocks(lat, lon, body, polar=None):
     """Moon south pole: 100 km blocks in polar-stereographic x/y. Elsewhere: 5-degree lat/lon cells."""

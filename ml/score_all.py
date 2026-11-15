@@ -619,9 +619,9 @@ def main():
     gated = np.isfinite(comp_mean) & (comp < comp_mean)
     info["cover_gate"] = dict(base=COVER_GATE_BASE, slope=COVER_GATE_SLOPE, rule="composite <= base - slope * cover_nonlunar",
                                 share_pairs_lowered=round(float(gated.mean()), 3))
-    tops = []
+    tops, dup = [], C.duplicate_of_named(earth)
     for i, m in enumerate(ent["entity_id"]):
-        order = np.argsort(-np.nan_to_num(comp[i], nan=-9))[:20]
+        order = C.top_order(comp[i], dup)[:20]
         d = earth.iloc[order][["patch_id", "name", "source", "stratum", "center_lat", "center_lon"]].rename(columns={"patch_id": "earth_tile_id"}).copy()
         d.insert(0, "rank", np.arange(1, len(d) + 1))
         d.insert(0, "moon_kind", ent["kind"].iloc[i])

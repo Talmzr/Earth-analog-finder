@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T17:07:11Z",
+ "generated_utc": "2026-11-15T17:15:32Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -46,14 +46,14 @@
    "cap": 0.8,
    "n_anchors": 22,
    "terms": {
-    "lith_match": 0.8927,
-    "text_cos": 0.9708
+    "lith_match": 0.8561,
+    "text_cos": 0.8942
    },
-   "intercept": -0.3623,
-   "anchor_mae": 0.17,
-   "anchor_mae_leave_one_out": 0.18,
-   "anchor_rank_agreement": 0.9,
-   "anchors_off_by_0_3": 2
+   "intercept": -0.2909,
+   "anchor_mae": 0.18,
+   "anchor_mae_leave_one_out": 0.2,
+   "anchor_rank_agreement": 0.92,
+   "anchors_off_by_0_3": 3
   },
   {
    "id": "thermal",
@@ -81,13 +81,13 @@
    "cap": 0.7,
    "n_anchors": 10,
    "terms": {
-    "noon_sun": 0.3756,
-    "grazing_sun": 0.2899
+    "noon_sun": 0.3078,
+    "grazing_sun": 0.2461
    },
-   "intercept": -0.0422,
+   "intercept": -0.1456,
    "anchor_mae": 0.07,
    "anchor_mae_leave_one_out": 0.1,
-   "anchor_rank_agreement": 0.75,
+   "anchor_rank_agreement": 0.84,
    "anchors_off_by_0_3": 0
   },
   {
@@ -98,15 +98,15 @@
    "cap": 0.7,
    "n_anchors": 20,
    "terms": {
-    "frozen_ground": 0.3562,
-    "traverse": 0.2228,
-    "no_liquid_water": 0.1895
+    "frozen_ground": 0.3477,
+    "traverse": 0.2173,
+    "no_liquid_water": 0.215
    },
-   "intercept": -0.0838,
-   "anchor_mae": 0.11,
-   "anchor_mae_leave_one_out": 0.13,
-   "anchor_rank_agreement": 0.91,
-   "anchors_off_by_0_3": 1
+   "intercept": -0.0713,
+   "anchor_mae": 0.13,
+   "anchor_mae_leave_one_out": 0.16,
+   "anchor_rank_agreement": 0.9,
+   "anchors_off_by_0_3": 2
   },
   {
    "id": "dust",
@@ -116,14 +116,14 @@
    "cap": 0.7,
    "n_anchors": 18,
    "terms": {
-    "bare": 0.5218,
-    "tephra": 0.3002
+    "bare": 0.5231,
+    "tephra": 0.3114
    },
-   "intercept": -0.1833,
-   "anchor_mae": 0.12,
-   "anchor_mae_leave_one_out": 0.14,
-   "anchor_rank_agreement": 0.97,
-   "anchors_off_by_0_3": 0
+   "intercept": -0.1817,
+   "anchor_mae": 0.13,
+   "anchor_mae_leave_one_out": 0.15,
+   "anchor_rank_agreement": 0.96,
+   "anchors_off_by_0_3": 1
   },
   {
    "id": "biology",
@@ -133,14 +133,14 @@
    "cap": 0.6,
    "n_anchors": 18,
    "terms": {
-    "plant_cover": 1.6768,
-    "precip": 0.2577
+    "plant_cover": 1.704,
+    "precip": 0.2506
    },
-   "intercept": 0.4833,
-   "anchor_mae": 0.12,
-   "anchor_mae_leave_one_out": 0.13,
-   "anchor_rank_agreement": 0.81,
-   "anchors_off_by_0_3": 1
+   "intercept": 0.5165,
+   "anchor_mae": 0.09,
+   "anchor_mae_leave_one_out": 0.1,
+   "anchor_rank_agreement": 0.8,
+   "anchors_off_by_0_3": 0
   },
   {
    "id": "caves",
@@ -166,16 +166,16 @@
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.4018,
-    "water_ice": 0.0339,
-    "slope_hazard": 0.2246,
-    "bare": 0.2958
+    "terrain": 0.3285,
+    "water_ice": 0.0528,
+    "slope_hazard": 0.0184,
+    "bare": 0.3539
    },
-   "intercept": -0.0719,
-   "anchor_mae": 0.2,
-   "anchor_mae_leave_one_out": 0.25,
-   "anchor_rank_agreement": 0.82,
-   "anchors_off_by_0_3": 4
+   "intercept": 0.0823,
+   "anchor_mae": 0.24,
+   "anchor_mae_leave_one_out": 0.31,
+   "anchor_rank_agreement": 0.76,
+   "anchors_off_by_0_3": 6
   }
  ],
  "experiments": [
@@ -542,7 +542,7 @@
    "base": 0.8,
    "slope": 2.0,
    "rule": "composite <= base - slope * cover_nonlunar",
-   "share_pairs_lowered": 0.505
+   "share_pairs_lowered": 0.506
   }
  },
  "composite_categories": [

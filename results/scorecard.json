@@ -2,9 +2,9 @@
  "categories": {
   "biology": {
    "n": 18,
-   "cv_mae": 0.137,
-   "cv_rank": 0.856,
-   "cv_off_by_0_3": 1
+   "cv_mae": 0.113,
+   "cv_rank": 0.87,
+   "cv_off_by_0_3": 0
   },
   "caves": {
    "n": 15,
@@ -14,27 +14,27 @@
   },
   "dust": {
    "n": 18,
-   "cv_mae": 0.153,
-   "cv_rank": 0.915,
-   "cv_off_by_0_3": 1
+   "cv_mae": 0.16,
+   "cv_rank": 0.911,
+   "cv_off_by_0_3": 2
   },
   "geology": {
    "n": 22,
-   "cv_mae": 0.181,
-   "cv_rank": 0.882,
+   "cv_mae": 0.184,
+   "cv_rank": 0.926,
    "cv_off_by_0_3": 3
   },
   "illumination": {
    "n": 10,
-   "cv_mae": 0.091,
-   "cv_rank": 0.747,
+   "cv_mae": 0.089,
+   "cv_rank": 0.728,
    "cv_off_by_0_3": 0
   },
   "operations": {
    "n": 18,
-   "cv_mae": 0.204,
-   "cv_rank": 0.851,
-   "cv_off_by_0_3": 5
+   "cv_mae": 0.252,
+   "cv_rank": 0.774,
+   "cv_off_by_0_3": 6
   },
   "terrain": {
    "n": 21,
@@ -50,19 +50,19 @@
   },
   "water_ice": {
    "n": 20,
-   "cv_mae": 0.124,
-   "cv_rank": 0.881,
+   "cv_mae": 0.148,
+   "cv_rank": 0.873,
    "cv_off_by_0_3": 2
   }
  },
  "all_anchors": {
   "n": 161,
-  "cv_mae": 0.137,
-  "cv_off_by_0_3": 12
+  "cv_mae": 0.144,
+  "cv_off_by_0_3": 13
  },
  "overall_sanity": {
-  "auc": 0.914,
-  "polar_sites_median_rank": 275,
+  "auc": 0.906,
+  "polar_sites_median_rank": 288,
   "n_targets": 29,
   "n_tiles": 4310
  }

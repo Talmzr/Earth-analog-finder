@@ -194,7 +194,7 @@ def moon_db(moon, zones, ent, cats, comp, mt_by_id):
         g = lambda c: (geo[c] if geo is not None and c in geo.index else np.nan)  # noqa: E731
         s = lambda c: (src[c] if c in src.index else np.nan)  # noqa: E731
         m = mt_by_id.get(tid, {})
-        order = np.argsort(-np.nan_to_num(comp[i], nan=-9))[:25]
+        order = C.top_order(comp[i], DUP)[:25]                          # duplicates of named sites left out
         targets[tid] = dict(
             id=tid, idx=i, region=region, regionName=region_name, kind=e["kind"], zone=e["zone"], label=label,
             name=f"{region_name} · {label.lower()}", lat=num(e["lat"], 4), lon=num(e["lon"], 4), placement=e["placement_method"],
@@ -246,6 +246,8 @@ def main():
     twin = Z["light_twin_month"]
     moon, earth, zones = C.load_tables()
     earth = earth.set_index("patch_id").loc[tile_ids].reset_index()
+    global DUP
+    dup = DUP = C.duplicate_of_named(earth)                                   # same place as a named site
     ent = C.build_entities(moon, zones).set_index("entity_id").loc[ent_ids].reset_index()
     meta_web = json.loads((ROOT / "web" / "data" / "meta.json").read_text(encoding="utf-8"))
     mt_by_id = {t["id"]: t for t in json.loads((ROOT / "web" / "data" / "moon_targets.json").read_text(encoding="utf-8"))}

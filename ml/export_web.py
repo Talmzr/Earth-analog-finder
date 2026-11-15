@@ -74,6 +74,7 @@ def main(sfx=""):
     moon, earth, zones = C.load_tables()
     ent = C.build_entities(moon, zones).set_index("entity_id").loc[ent_ids].reset_index()
     earth = earth.set_index("patch_id").loc[tile_ids].reset_index()
+    dup = C.duplicate_of_named(earth)                                   # same place as a named site
     exps_cfg = json.loads((C.CFG / "experiments.json").read_text(encoding="utf-8"))
     params = json.loads((C.MODELS / f"calibration_params{sfx}.json").read_text())
     summ = pd.read_csv(C.RES / f"calibration_summary{sfx}.csv").set_index("category")
@@ -93,7 +94,7 @@ def main(sfx=""):
     targets, tops_all = [], {}
     for i, m in enumerate(ent_ids):
         e = ent.iloc[i]
-        order = np.argsort(-np.nan_to_num(comp[i], nan=-9))
+        order = C.top_order(comp[i], dup)                               # duplicates of named sites left out
         th_pct = percentile(cal[cats.index("thermal"), i]) if "thermal" in cats else None
         top = []
         for rank, j in enumerate(order[:25], 1):
