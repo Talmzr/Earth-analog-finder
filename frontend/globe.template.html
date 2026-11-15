@@ -356,7 +356,7 @@ canvas{display:block}
   </div>
   <div id="score-legend">
     <h3 id="score-legend-t">Score</h3>
-    <div class="grad"></div><div class="ticks"><span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span></div>
+    <div class="grad"></div><div class="ticks" id="score-legend-ticks"><span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span></div>
     <div class="foot">Clusters show their best tile · grey = not scored</div>
   </div>
   <div id="zoom-controls"><button id="zoom-in-btn" title="Zoom in">+</button><button id="zoom-out-btn" title="Zoom out">−</button><button id="zoom-home-btn" title="Back to the starting view">⌂</button></div>
@@ -573,11 +573,14 @@ const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'suffi
 // place 'partial' but not 'sufficient'.
 const INVARIANT_REQ = new Set(['dust_regolith', 'biology_sterility']);
 const TARGET_FREE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).every(c => INVARIANT_REQ.has(c))).map(e => e.id));
+// 'Sufficient' also needs an overall score of at least SUFFICIENT_MIN: a place that passes one test but is far from
+// the Moon target overall is labelled 'partial'.
+const SUFFICIENT_MIN = -0.15;
 const overallVerdict = (tid, j) => {
   if (tid == null || j == null) return 'n/a';
   const r = Object.entries(SC.readyAll(tid, j));
-  const codes = r.map(([, c]) => c);
-  return r.some(([e, c]) => c === 3 && !TARGET_FREE_EXP.has(e)) ? 'sufficient'
+  const codes = r.map(([, c]) => c), comp = SC.score(tid, 'composite', j);
+  return comp !== null && comp >= SUFFICIENT_MIN && r.some(([e, c]) => c === 3 && !TARGET_FREE_EXP.has(e)) ? 'sufficient'
     : codes.some(c => c >= 2) ? 'partial' : codes.includes(1) ? 'avoid' : 'n/a';
 };
 const READY = { '-1': 'not relevant', 0: 'not available', 1: 'avoid', 2: 'partial', 3: 'sufficient' };
@@ -1112,11 +1115,18 @@ function scoreColor(v) {
   if (v >= 0) return SCORE_COL.posLow.clone().lerp(SCORE_COL.pos, Math.min(1, v / 0.5));   // any positive score reads green
   return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.min(1, -v / 0.6));
 }
+// Overall match is coloured by the place verdict: sufficient = green (light at -0.15, deeper as the score rises),
+// partial / avoid = pink-red by score. colorCol encodes sufficient tiles as 2 + score so a cluster shows its best tile.
+function verdictColor(v) {
+  if (v === null || isNaN(v)) return SCORE_COL.na;
+  if (v >= 1.5) return SCORE_COL.posLow.clone().lerp(SCORE_COL.pos, Math.max(0, Math.min(1, (v - 2 + 0.15) / 0.65)));
+  return SCORE_COL.zero.clone().lerp(SCORE_COL.neg, Math.min(1, Math.max(0.35, -v / 0.6)));
+}
 function markerColor(c) {
   if (colorBy === 'source' || !colorCol) return SCOL[c.source] || new THREE.Color(0x888888);
   let best = NaN;
   for (const i of c.tiles) { const v = colorCol[i]; if (!isNaN(v) && !(v <= best)) best = v; }
-  return scoreColor(best);
+  return colorBy === 'composite' ? verdictColor(best) : scoreColor(best);
 }
 function refreshMarkerColors() {
   if (!markerMesh) return;
@@ -1131,7 +1141,13 @@ function refreshMarkerColors() {
 }
 function setColorBy(v) {
   colorBy = v;
-  colorCol = v !== 'source' && selectedMoonTarget ? SC.column(selectedMoonTarget.id, v) : null;
+  const m = selectedMoonTarget;
+  colorCol = v !== 'source' && m ? SC.column(m.id, v) : null;
+  if (colorCol && v === 'composite') colorCol = colorCol.map((x, j) => isNaN(x) ? x : overallVerdict(m.id, j) === 'sufficient' ? 2 + x : x);
+  const ticks = document.getElementById('score-legend-ticks'), grad = document.querySelector('#score-legend .grad');
+  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>partial / avoid</span><span></span><span>sufficient (≥ −0.15 and a sufficient test)</span>'
+    : '<span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span>';
+  if (grad) grad.style.background = v === 'composite' ? 'linear-gradient(90deg,#ff4d8d,#8a4a68 49.5%,#9fe0b8 50.5%,#34d399)' : '';
   refreshMarkerColors();
 }
 // Called whenever the chosen Moon target changes (Moon page, assessment)

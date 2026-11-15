@@ -110,6 +110,24 @@ async function pick() {
   $('top').querySelectorAll('li').forEach(li => li.onclick = () => { const i = +li.dataset.i; map.setView([tiles.lat[i], tiles.lon[i]], 6); showTile(i); });
   paint(); if (sel != null) showTile(sel);
 }
+// Place verdict (same rule as the globe): sufficient = a Moon-target-specific experiment is sufficient AND the overall
+// score is >= -0.15; partial = at least one experiment partly possible; avoid = none. Dust mitigation and planetary
+// protection (same for every Moon target) can make a place partial but not sufficient.
+const SUFFICIENT_MIN = -15;
+let FREE_EXP = null;                                   // experiments that only use lunar constants (computed once)
+function placeVerdict(i) {
+  const inv = new Set(['dust', 'biology']);
+  const free = FREE_EXP || (FREE_EXP = new Set(meta.experiments.filter(e => Object.keys(e.required || {}).every(c => inv.has(c))).map(e => e.id)));
+  const ent = Object.entries(cur.readiness || {}), comp = cur.composite[i];
+  if (comp != null && comp >= SUFFICIENT_MIN && ent.some(([e, a]) => a[i] === 3 && !free.has(e))) return 'sufficient';
+  return ent.some(([, a]) => a[i] >= 2) ? 'partial' : ent.some(([, a]) => a[i] === 1) ? 'avoid' : 'n/a';
+}
+// overall match in absolute mode: sufficient places green (light at -0.15, deeper with the score), others pink-red
+const verdictColour = (i, v) => { if (v == null) return '#555c66';
+  if (placeVerdict(i) === 'sufficient') { const u = Math.max(0, Math.min(1, (v + 15) / 65)), a = [159,224,184], b = [47,170,105];
+    return `rgb(${a.map((x, k) => Math.round(x + (b[k] - x) * u)).join(',')})`; }
+  const u = Math.max(0.35, Math.min(1, -v / 60)), a = [214,120,96], b = [200,55,60];
+  return `rgb(${a.map((x, k) => Math.round(x + (b[k] - x) * u)).join(',')})`; };
 function paint() {
   const c = $('cat').value;
   const arr = c === 'composite' ? cur.composite : c === 'thermal_pct' ? (cur.percentile?.thermal || []).map(v => v == null ? null : v * 2 - 100) : cur.scores[c];
@@ -124,7 +142,9 @@ function paint() {
     shown = new Array(arr.length).fill(null);
     ok.forEach(([, i], k) => { const p = ok.length > 1 ? k / (ok.length - 1) : 1; shown[i] = 200 * p ** 4 - 100; });
   }
-  markers.forEach((m, i) => m.setStyle({ fillColor: colour(shown[i]), radius: i === sel ? 7 : 4 }));
+  const byVerdict = c === 'composite' && !rel;
+  if (byVerdict) { $('lg-lo').textContent = 'partial / avoid'; $('lg-hi').textContent = 'sufficient'; }
+  markers.forEach((m, i) => m.setStyle({ fillColor: byVerdict ? verdictColour(i, arr[i]) : colour(shown[i]), radius: i === sel ? 7 : 4 }));
 }
 function showTile(i) {
   sel = i; paint();
