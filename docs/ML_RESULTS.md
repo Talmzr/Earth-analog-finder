@@ -33,17 +33,18 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | illumination | 10 | 0.072 | 0.097 | 0.747 | 0.728 | 0 | `{"noon_sun": 0.3756, "grazing_sun": 0.2899}` |
 | water_ice | 20 | 0.113 | 0.134 | 0.908 | 0.851 | 1 | `{"frozen_ground": 0.3562, "traverse": 0.2228, "no_liquid_water": 0.1895}` |
 | dust | 18 | 0.124 | 0.143 | 0.966 | 0.893 | 0 | `{"bare": 0.5218, "tephra": 0.3002}` |
-| biology | 18 | 0.169 | 0.185 | 0.88 | 0.866 | 0 | `{"ndvi": 1.14, "precip": 0.7417}` |
+| biology | 18 | 0.122 | 0.134 | 0.813 | 0.784 | 1 | `{"plant_cover": 1.6768, "precip": 0.2577}` |
 | caves | 15 | 0.123 | 0.123 | 0.923 | 0.923 | 0 | `{"rule": 1.0}` |
 | operations | 18 | 0.241 | 0.285 | 0.755 | 0.688 | 2 | `{"terrain": 0.5789, "water_ice": 0.2976, "slope_hazard": 0.1709}` |
 
-### Anchors that disagree with the model by more than 0.3 (5 of 161): review these first
+### Anchors that disagree with the model by more than 0.3 (6 of 161): review these first
 
 | Moon | Earth | Category | Label | Model | Difference |
 |---|---|---|---|---|---|
 | moon_tranquillitatis_pit__tile | lonar | geology | 0.6 | -0.03 | -0.63 |
 | moon_tranquillitatis_pit__tile | pinacate | geology | 0.4 | -0.04 | -0.44 |
 | de_gerlache_rim_2__ice | beacon_valley | water_ice | 0.6 | 0.28 | -0.32 |
+| moon_peak_cabeus_b__tile | haughton | biology_sterility | -0.2 | 0.22 | +0.42 |
 | mons_mouton_plateau__landing | black_point | ops_landing_mobility | 0.55 | 0.16 | -0.39 |
 | nobile_rim_2__landing | craters_of_the_moon | ops_landing_mobility | 0.15 | -0.39 | -0.54 |
 
@@ -57,7 +58,7 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | illumination | -0.66 | -0.42 | 0.62 | 44,941 |
 | water_ice | -0.83 | -0.40 | 0.67 | 2,560 |
 | dust | -0.68 | -0.57 | 0.64 | 1,200 |
-| biology | -1.00 | -0.08 | 0.42 | 0 |
+| biology | -1.00 | 0.12 | 0.48 | 0 |
 | caves | -0.50 | -0.50 | 0.50 | 9 |
 | operations | -1.00 | -0.47 | 0.69 | 389 |
 
@@ -74,7 +75,7 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | dust_mitigation | 1,200 | 27,090 | 101,010 |
 | instrument_spectrometers_mineralogy | 85 | 3,902 | 123,393 |
 | instrument_gpr_drill_subsurface | 95 | 1,397 | 125,888 |
-| planetary_protection_contamination_blanks | 1,350 | 55,020 | 72,930 |
+| planetary_protection_contamination_blanks | 30,060 | 43,230 | 56,010 |
 | cave_pit_robotics | 9 | 1,788 | 2,513 |
 | geology_eva_training | 6 | 396 | 126,978 |
 
@@ -84,36 +85,36 @@ Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for ther
 
 | Moon target | Best Earth tile | Type | Lat, lon | Composite | Terrain | Geology | Thermal | Sun | Water/ice | Dust | Ops |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| shackleton_rim__landing | sparse_cold sample 49 | sparse_cold | 70.08, -71.11 | 0.34 | 0.32 | 0.28 | -0.58 | 0.56 | 0.41 | -0.56 | 0.28 |
-| shackleton_rim__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.35 | 0.49 | 0.25 | -0.60 | 0.48 | 0.30 | -0.63 | 0.21 |
-| peak_near_cabeus_b__landing | lichen_moss sample 243 | lichen_moss | 70.86, -76.29 | 0.46 | 0.53 | 0.25 | -0.57 | 0.59 | 0.38 | -0.60 | 0.55 |
-| peak_near_cabeus_b__ice | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.44 | 0.56 | 0.07 | -0.57 | 0.58 | 0.50 | -0.61 | 0.54 |
-| haworth__landing | lichen_moss sample 269 | lichen_moss | 71.35, -76.58 | 0.32 | 0.30 | 0.17 | -0.58 | 0.58 | 0.39 | -0.56 | 0.32 |
-| haworth__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.43 | 0.59 | 0.25 | -0.58 | 0.57 | 0.30 | -0.63 | 0.42 |
+| shackleton_rim__landing | ice_edge sample 273 | ice_edge | 77.27, -67.96 | 0.23 | 0.68 | -0.57 | -0.57 | 0.61 | 0.21 | -0.54 | 0.43 |
+| shackleton_rim__ice | ice_edge sample 47 | ice_edge | 79.60, -79.62 | 0.20 | 0.35 | -0.12 | -0.58 | 0.55 | 0.13 | -0.51 | 0.13 |
+| peak_near_cabeus_b__landing | lichen_moss sample 51 | lichen_moss | 70.37, -75.52 | 0.29 | 0.19 | 0.25 | -0.58 | 0.57 | 0.38 | 0.06 | 0.34 |
+| peak_near_cabeus_b__ice | lichen_moss sample 51 | lichen_moss | 70.37, -75.52 | 0.28 | 0.14 | 0.25 | -0.57 | 0.58 | 0.38 | 0.06 | 0.22 |
+| haworth__landing | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.27 | 0.45 | -0.31 | -0.58 | 0.56 | 0.52 | -0.39 | 0.28 |
+| haworth__ice | antarctic_ice_free sample 50 | antarctic_ice_free | -71.80, 10.46 | 0.21 | 0.67 | -0.36 | -0.57 | 0.60 | -0.12 | -0.59 | 0.31 |
 | malapert_massif__landing | antarctic_ice_free sample 275 | antarctic_ice_free | -80.12, 158.36 | 0.25 | 0.52 | -0.37 | -0.58 | 0.52 | 0.49 | -0.37 | 0.25 |
-| malapert_massif__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.17 | 0.29 | -0.43 | -0.59 | 0.51 | 0.58 | 0.34 | 0.15 |
-| mons_mouton__landing | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.43 | 0.49 | 0.26 | -0.57 | 0.59 | 0.39 | -0.62 | 0.48 |
-| mons_mouton__ice | lichen_moss sample 269 | lichen_moss | 71.35, -76.58 | 0.38 | 0.42 | 0.25 | -0.58 | 0.58 | 0.39 | -0.56 | 0.36 |
-| mons_mouton_plateau__landing | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.42 | 0.49 | 0.07 | -0.59 | 0.52 | 0.50 | -0.61 | 0.55 |
-| mons_mouton_plateau__ice | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.42 | 0.45 | 0.26 | -0.57 | 0.59 | 0.39 | -0.62 | 0.47 |
-| nobile_rim_1__landing | ice_edge sample 274 | ice_edge | 71.86, -28.18 | 0.31 | 0.59 | -0.27 | -0.57 | 0.59 | 0.46 | -0.66 | 0.28 |
-| nobile_rim_1__ice | ice_edge sample 212 | ice_edge | 71.99, -77.92 | 0.29 | 0.29 | 0.13 | -0.57 | 0.59 | 0.41 | -0.64 | 0.19 |
-| nobile_rim_2__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.39 | 0.50 | 0.18 | -0.58 | 0.57 | 0.40 | -0.63 | 0.33 |
-| nobile_rim_2__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.37 | 0.52 | 0.18 | -0.58 | 0.57 | 0.34 | -0.63 | 0.28 |
-| de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.31 | 0.66 | -0.49 | -0.57 | 0.56 | 0.47 | -0.12 | 0.45 |
-| de_gerlache_rim_2__ice | bare_polar sample 228 | bare_polar | 65.99, 142.53 | 0.20 | 0.34 | -0.29 | -0.56 | 0.62 | 0.38 | -0.45 | 0.17 |
-| slater_plain__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.32 | 0.34 | 0.25 | -0.59 | 0.49 | 0.40 | -0.63 | 0.24 |
-| slater_plain__ice | sparse_cold sample 49 | sparse_cold | 70.08, -71.11 | 0.34 | 0.35 | 0.28 | -0.58 | 0.55 | 0.35 | -0.56 | 0.29 |
-| moon_shackleton__tile | antarctic_ice_free sample 110 | antarctic_ice_free | -78.12, 162.88 | 0.28 | 0.59 | -0.48 | -0.57 | 0.62 | 0.29 | -0.06 | 0.43 |
-| moon_peak_cabeus_b__tile | lichen_moss sample 112 | lichen_moss | 72.93, -80.85 | 0.48 | 0.68 | 0.09 | -0.59 | 0.55 | 0.42 | -0.67 | 0.63 |
-| moon_haworth__tile | ice_edge sample 274 | ice_edge | 71.86, -28.18 | 0.12 | 0.20 | -0.27 | -0.58 | 0.59 | 0.30 | -0.66 | 0.01 |
-| moon_malapert_massif__tile | antarctic_ice_free sample 275 | antarctic_ice_free | -80.12, 158.36 | 0.30 | 0.53 | -0.37 | -0.59 | 0.52 | 0.49 | -0.37 | 0.43 |
-| moon_mons_mouton__tile | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.49 | 0.61 | 0.26 | -0.57 | 0.59 | 0.39 | -0.62 | 0.59 |
-| moon_mons_mouton_plateau__tile | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.42 | 0.48 | 0.07 | -0.59 | 0.52 | 0.50 | -0.61 | 0.56 |
-| moon_nobile_rim__tile | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.44 | 0.52 | 0.18 | -0.57 | 0.62 | 0.40 | -0.63 | 0.50 |
-| moon_de_gerlache_rim2__tile | lichen_moss sample 210 | lichen_moss | 70.28, -71.95 | 0.28 | 0.25 | 0.08 | -0.59 | 0.53 | 0.30 | -0.67 | 0.35 |
-| moon_slater_plain__tile | lichen_moss sample 112 | lichen_moss | 72.93, -80.85 | 0.42 | 0.56 | 0.16 | -0.58 | 0.59 | 0.30 | -0.67 | 0.50 |
-| moon_tranquillitatis_pit__tile | Kishb, Harrat | volcano_field_cone | 22.80, 41.38 | 0.43 | 0.42 | 0.39 | -0.60 | 0.50 | 0.47 | 0.64 | 0.50 |
+| malapert_massif__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.18 | 0.29 | -0.43 | -0.59 | 0.51 | 0.58 | 0.34 | 0.15 |
+| mons_mouton__landing | ice_edge sample 277 | ice_edge | 78.26, -90.91 | 0.27 | 0.68 | -0.45 | -0.59 | 0.50 | 0.37 | -0.12 | 0.59 |
+| mons_mouton__ice | bare_polar sample 237 | bare_polar | 81.24, -72.07 | 0.26 | 0.57 | -0.53 | -0.57 | 0.62 | 0.48 | 0.15 | 0.49 |
+| mons_mouton_plateau__landing | bare_polar sample 211 | bare_polar | 79.79, 15.89 | 0.29 | 0.64 | -0.34 | -0.59 | 0.55 | 0.35 | -0.11 | 0.55 |
+| mons_mouton_plateau__ice | ice_edge sample 277 | ice_edge | 78.26, -90.91 | 0.27 | 0.65 | -0.45 | -0.59 | 0.49 | 0.36 | -0.12 | 0.58 |
+| nobile_rim_1__landing | antarctic_ice_free sample 232 | antarctic_ice_free | -84.32, 167.37 | 0.28 | 0.41 | -0.17 | -0.56 | 0.59 | 0.55 | -0.60 | 0.21 |
+| nobile_rim_1__ice | antarctic_ice_free sample 232 | antarctic_ice_free | -84.32, 167.37 | 0.18 | 0.42 | -0.17 | -0.57 | 0.58 | -0.04 | -0.60 | 0.05 |
+| nobile_rim_2__landing | antarctic_ice_free sample 139 | antarctic_ice_free | -72.09, 23.94 | 0.31 | 0.57 | -0.28 | -0.57 | 0.61 | 0.48 | -0.49 | 0.38 |
+| nobile_rim_2__ice | antarctic_ice_free sample 349 | antarctic_ice_free | -72.03, 25.70 | 0.22 | 0.70 | -0.36 | -0.57 | 0.61 | -0.16 | -0.47 | 0.34 |
+| de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.27 | 0.66 | -0.49 | -0.57 | 0.56 | 0.47 | -0.12 | 0.45 |
+| de_gerlache_rim_2__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.18 | 0.30 | -0.48 | -0.57 | 0.60 | 0.58 | 0.34 | 0.15 |
+| slater_plain__landing | antarctic_ice_free sample 85 | antarctic_ice_free | -77.80, 163.64 | 0.25 | 0.43 | -0.42 | -0.57 | 0.60 | 0.57 | -0.31 | 0.33 |
+| slater_plain__ice | antarctic_ice_free sample 161 | antarctic_ice_free | -76.86, 161.71 | 0.24 | 0.55 | -0.36 | -0.57 | 0.61 | 0.22 | -0.39 | 0.25 |
+| moon_shackleton__tile | antarctic_ice_free sample 110 | antarctic_ice_free | -78.12, 162.88 | 0.23 | 0.59 | -0.48 | -0.57 | 0.62 | 0.29 | -0.06 | 0.43 |
+| moon_peak_cabeus_b__tile | antarctic_ice_free sample 354 | antarctic_ice_free | -84.21, 160.32 | 0.22 | 0.60 | -0.29 | -0.58 | 0.56 | -0.01 | -0.62 | 0.41 |
+| moon_haworth__tile | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.05 | 0.13 | -0.48 | -0.59 | 0.54 | 0.30 | 0.34 | -0.03 |
+| moon_malapert_massif__tile | antarctic_ice_free sample 275 | antarctic_ice_free | -80.12, 158.36 | 0.25 | 0.53 | -0.37 | -0.59 | 0.52 | 0.49 | -0.37 | 0.43 |
+| moon_mons_mouton__tile | antarctic_ice_free sample 407 | antarctic_ice_free | -83.32, 162.44 | 0.30 | 0.63 | -0.50 | -0.57 | 0.57 | 0.56 | -0.56 | 0.63 |
+| moon_mons_mouton_plateau__tile | bare_polar sample 211 | bare_polar | 79.79, 15.89 | 0.30 | 0.66 | -0.34 | -0.59 | 0.55 | 0.35 | -0.11 | 0.59 |
+| moon_nobile_rim__tile | antarctic_ice_free sample 139 | antarctic_ice_free | -72.09, 23.94 | 0.29 | 0.50 | -0.28 | -0.57 | 0.58 | 0.48 | -0.49 | 0.53 |
+| moon_de_gerlache_rim2__tile | Royal Society Range | volcano_field_cone | -78.25, 163.33 | 0.18 | 0.39 | -0.38 | -0.58 | 0.57 | 0.30 | 0.35 | 0.42 |
+| moon_slater_plain__tile | antarctic_ice_free sample 184 | antarctic_ice_free | -72.25, 1.26 | 0.20 | 0.68 | -0.36 | -0.58 | 0.56 | -0.16 | -0.55 | 0.41 |
+| moon_tranquillitatis_pit__tile | Kishb, Harrat | volcano_field_cone | 22.80, 41.38 | 0.41 | 0.42 | 0.39 | -0.60 | 0.50 | 0.47 | 0.64 | 0.50 |
 
 ## 5. Scoring terms and composite weights
 
@@ -127,15 +128,15 @@ Terms kept per category after the 2026-11-15 audit (see `KEEP_TERMS` in `ml/scor
 | illumination | noon_sun, grazing_sun |
 | water_ice | frozen_ground, traverse, no_liquid_water |
 | dust | bare, tephra |
-| biology | ndvi, precip |
+| biology | plant_cover, precip |
 | caves | rule |
 | operations | terrain, water_ice, slope_hazard |
 
-Composite = weighted mean of **terrain, geology, illumination, water_ice, operations, caves** only: the categories that use per-site Moon data, plus caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Dust and sterility (lunar constants, the same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. An all-category composite was compared and rejected: same expert agreement (0.85 vs 0.83) but 38% of every target's ranking came from scores that are identical for all Moon targets. Typical weights (median over targets):
+Composite = weighted mean of **terrain, geology, illumination, water_ice, caves** only: the categories that use per-site Moon data, plus caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon target that require (1.0) or support (0.5) the category, normalised. Operations is left out because it is built from terrain and water/ice (it counted them twice). Dust and sterility (lunar constants, the same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. The composite is then capped by the ground-cover gate: composite <= base - slope * cover_nonlunar with base 0.8 and slope 2.0 (lowers 50% of all pairs, mostly vegetated, wet or open-water tiles that are poor analogs anyway). Typical weights (median over targets):
 
 | terrain | geology | thermal | illumination | water_ice | dust | biology | caves | operations |
 |---|---|---|---|---|---|---|---|---|
-| 0.30 | 0.22 | 0.00 | 0.11 | 0.16 | 0.00 | 0.00 | 0.00 | 0.22 |
+| 0.38 | 0.28 | 0.00 | 0.14 | 0.21 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## 6. Deviations from the brief and known limits
 
@@ -146,7 +147,10 @@ Composite = weighted mean of **terrain, geology, illumination, water_ice, operat
 - **Thermal / illumination split:** temperature (night minimum, closest approach) is scored apart from **illumination**: sun height and grazing-sun share in the Earth **light-twin month**, the month whose noon sun is closest to the Moon target's; annual Earth values never reach lunar polar sun heights, one month does for ~35% of tiles (LOO error 0.128 -> 0.100). Swing, max temperature and polar night were dropped.
 - **Dry Moon targets:** where the Moon target has no ground ice (the Tranquillitatis pit) the frozen-ground term is two-sided, so icy Earth ground counts as a mismatch instead of a free match. No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (vegetation, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but stay out of the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.
+- **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (plant cover, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but are not averaged into the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.
+- **Sterility uses plant cover, not raw NDVI:** bare soil and rock read NDVI ~0.1-0.15 (median 0.116 on tiles that are >= 90% bare), so raw NDVI scored hyper-arid deserts as lightly vegetated and capped the whole category at 0.44. Plant cover = (NDVI - 0.10) / (0.80 - 0.10), clipped to 0-1, with the 0.10 bare-soil baseline from the category spec; plant-cover prior 2.0 to match the label range; the three KNOWN_LIFE sites (capped at -0.6 by rule) are reported but not fitted. Atacama 0.28 -> 0.40, Beacon Valley 0.26 -> 0.45.
+- **Composite without operations:** operations is fitted as ~0.58 terrain + 0.30 water/ice + 0.17 slope hazard, so in the composite it counted terrain and ice a second time (terrain ~43% of the composite). It stays a category and experiment requirement.
+- **Ground-cover gate:** composite <= 0.8 - 2 x (share of the tile under plants incl. moss/lichen, open water or towns; Antarctic sea from the DEM). Without it moss/lichen tundra filled 46% of the polar targets' top-20 lists (now 1%); the gate binds on 5% of top-20 positions and the targets' lists stay distinct (overlap 0.12 vs 0.13). Gating on sterility (NDVI barely sees moss) or on dust (needs ~85% bare ground, so half-ice polar tiles were treated like tundra) was tried and rejected.
 - **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.

@@ -141,6 +141,7 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--max-len", type=int, default=0, help="token limit while TRAINING (0 = 256); embeddings always use 256")
     ap.add_argument("--eval-every", type=int, default=5, help="held-out evaluation every N epochs (and after the last)")
+    ap.add_argument("--out-tag", default="", help="suffix for every output file (e.g. _v2), so a retrain does not overwrite the model in use")
     ap.add_argument("--before", type=json.loads, default=None,
                     help="reuse a known pretrained-baseline metrics dict (JSON) instead of re-evaluating; saves a full pass on CPU")
     a = ap.parse_args()
@@ -259,7 +260,7 @@ def main():
     metrics["train_minutes"] = round((time.time() - t0) / 60, 1)
 
     # ---- embeddings aligned to the tables (unique texts embedded once)
-    tag = "_smoke" if a.smoke else ""
+    tag = "_smoke" if a.smoke else a.out_tag
     Eu = enc.embed(u_text, device, amp)
     np.save(C.EMB / f"moon_geology_384{tag}.npy", Eu[[seen[t] for t in mt]].astype(np.float32))
     np.save(C.EMB / f"moon_entity_geology_384{tag}.npy", Eu[[seen[t] for t in zt]].astype(np.float32))

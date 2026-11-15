@@ -27,6 +27,12 @@ TERRAIN_COLS = ["relief_m", "elev_std_m", "slope500_mean_deg", "slope500_p90_deg
                 "frac_slope500_gt20", "tri500_mean_m"]
 X_COLS = ["x_temp_max_k", "x_temp_mean_k", "x_temp_min_k", "x_temp_swing_k", "x_grazing_sun_frac",
           "x_noon_sun_max_deg", "x_polar_night_frac", "x_frozen_ground_frac", "x_surface_ice_frac"]
+# NDVI of bare ground and of full plant cover, for the plant-cover fraction (prepare_earth). 0.10 is the bare-soil
+# baseline in the category spec (config/categories.json: bio_ndvi / dust_ndvi = max(ndvi - 0.1, 0)), which the
+# scoring had not applied; tiles that WorldCover maps as >= 90% bare have a median NDVI of 0.116. Compared against
+# 0.15 on the 18 biology anchors (2026-11-15): 0.10 fits better (LOO error 0.134 vs 0.153). 0.80 is a dense-canopy
+# value (tiles >= 50% tree: median NDVI 0.74).
+NDVI_SOIL, NDVI_VEG = 0.10, 0.80
 MOON_EXTRA = ["dvn_frac_coldtrap_110k", "lola_frac_psr", "dvn_frac_ice_within_1m", "dvn_frac_ice_stable"]
 ARRAY_FILES = [("moon_patch_arrays_128.npz", "moon"), ("moon_midlat_arrays_128.npz", "moon"),
                ("moon_zone_arrays_128.npz", "zone"), ("earth_patch_arrays_128.npz", "earth")]
@@ -174,6 +180,11 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
                     "wc_frac_wetland", "wc_frac_mangrove"])
     e["veg_frac"] = veg.where(veg.notna(), np.where(lat < -60, 0.0, np.nan))  # no WorldCover south of 60S
     e["ndvi_f"] = e["ndvi_mean"].where(e["ndvi_mean"].notna(), np.where(lat < -60, 0.0, np.nan))
+    # Plant cover from NDVI (fractional vegetation cover, Gutman & Ignatov 1998). Bare soil and rock are not NDVI 0:
+    # the 850 tiles that are >= 90% bare have a median NDVI of 0.116, so raw NDVI scored hyper-arid deserts (Atacama
+    # 0.13) as lightly vegetated while Antarctica (no NDVI, fallback 0) looked lifeless. Below the bare-soil baseline
+    # = no plants; water and snow (NDVI < 0) also count as no plants, not as "extra sterile".
+    e["plant_cover"] = ((e["ndvi_f"] - NDVI_SOIL) / (NDVI_VEG - NDVI_SOIL)).clip(0, 1)
     e["tree_f"] = e["wc_frac_tree"].where(e["wc_frac_tree"].notna(), np.where(lat < -60, 0.0, np.nan))
     ice = e["x_surface_ice_frac"] if "x_surface_ice_frac" in e else e["wc_frac_snow_ice"]
     e["bare_f"] = e["wc_frac_bare_sparse"].where(e["wc_frac_bare_sparse"].notna(),
@@ -183,6 +194,13 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
     ctx = e["context"].fillna("").astype(str)
     spot = e["source"].eq("named_site") & ctx.str.contains("regolith") & ctx.str.contains("tephra|cinder|arid|cold_desert", regex=True)
     e["bare_f_site"] = np.where(spot, np.fmax(e["bare_f"].fillna(0), 0.6), e["bare_f"])
+    # Share of the tile under ground cover the Moon has no counterpart for (plants of any kind incl. moss/lichen, open
+    # water, built-up); bare ground and ice are both lunar-relevant. Antarctica has no WorldCover: plants 0 (veg_frac
+    # fallback) and open sea from the DEM (share of sea-level pixels), so coastal tiles are not taken as all land.
+    # Named regolith test sites keep their test spot (same rule as bare_f_site above).
+    water = e["wc_frac_water"].where(e["wc_frac_water"].notna(), np.where(lat < -60, e["frac_elev_zero"], np.nan))
+    cover = (water.fillna(0) + e["wc_frac_built"].fillna(0) + e["veg_frac"]).clip(0, 1)
+    e["cover_nonlunar"] = np.where(spot, np.fmin(cover, 1 - e["bare_f_site"]), cover)
     e["obstacle_frac"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water"])
     e["obstacle_frac_ops"] = _nsum(e, ["wc_frac_tree", "wc_frac_built", "wc_frac_water", "wc_frac_wetland", "wc_frac_crop"])
     fields = {"context": ["context"], "lith_text": ["mstrat_lith"], "lith_desc": ["mstrat_text_all", "mstrat_descrip"],

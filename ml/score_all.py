@@ -16,6 +16,7 @@ Terms (see docs/ML_RESULTS.md):
   biology     Earth vegetation / rainfall vs the sterile Moon                         lunar constant: same for every target
   caves       rule: known lava-tube region / basaltic volcano                         Tranquillitatis pit (LRO skylight) only
   operations  calibrated terrain + thermal + water_ice, slope-hazard kernel, traverse, forest/urban penalty
+Composite = experiment-weighted mean of COMPOSITE_CATS, capped by the ground-cover gate (COVER_GATE_BASE - COVER_GATE_SLOPE * cover).
 """
 from __future__ import annotations
 
@@ -47,14 +48,23 @@ TUBE_REGIONS = re.compile(
 KEEP_TERMS = dict(terrain=["kernel"], geology=["lith_match", "text_cos"], thermal=["t_min", "grazing_sun", "noon_sun"],
                   illumination=["noon_sun", "grazing_sun"],
                   water_ice=["frozen_ground", "traverse", "no_liquid_water"], dust=["bare", "tephra"],
-                  biology=["ndvi", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
+                  biology=["plant_cover", "precip"], caves=["rule"], operations=["terrain", "water_ice", "slope_hazard"])
 # Categories in the composite ("which Earth place is most like THIS Moon place"): those that use per-site Moon data,
-# plus caves, which only the Tranquillitatis pit has. dust and biology compare Earth with lunar constants (known
-# regolith, sterile Moon): valid analog tests and experiment requirements, but identical for every Moon target, so
-# they cannot help choose between targets. thermal has no Moon/Earth overlap in temperature (weakest calibration).
-# Compared on 2026-11-15: all-category composite vs this one gave the same expert agreement (0.85 vs 0.83), but the
-# all-category version drew 38% of every target's ranking from target-invariant scores.
-COMPOSITE_CATS = ("terrain", "geology", "illumination", "water_ice", "operations", "caves")
+# plus caves, which only the Tranquillitatis pit has. thermal has no Moon/Earth overlap in temperature (weakest
+# calibration). operations is left out because it is fitted as ~0.58 terrain + 0.30 water_ice + 0.17 slope hazard:
+# in the composite it counted terrain and ice a second time (terrain drove ~43% of the composite) and gave an Earth
+# site whose relief is wrong for the target the same penalty twice.
+COMPOSITE_CATS = ("terrain", "geology", "illumination", "water_ice", "caves")
+# Ground-cover gate on the composite: composite <= COVER_GATE_BASE - COVER_GATE_SLOPE * cover_nonlunar (share of the
+# tile under plants incl. moss/lichen, open water or towns; common.prepare_earth). Each 10% of such cover lowers the
+# ceiling by 0.2, and a tile with >= 40% of it is at most 0 ("avoid"). Without it nothing in the composite saw the ground
+# cover, and moss/lichen tundra (NW Greenland samples, ~55% moss) ranked #1 for most targets (46% of the polar
+# targets' top-20 tiles had >= 30% moss/lichen; with the gate 1%). The gate binds on 5% of the top-20 positions, and the
+# targets' top-20 lists stay as distinct as before (mean overlap 0.11 vs 0.13).
+# Compared and rejected (2026-11-15): biology + 0.2 (NDVI barely sees moss/lichen: 41% moss in the top 20) and
+# min(dust, biology) + 0.2 (dust needs ~85% bare ground to be >= 0, so it treated half-ice polar tiles like tundra,
+# decided 23% of the top-20 positions and doubled the overlap between targets' lists to 0.27).
+COVER_GATE_BASE, COVER_GATE_SLOPE = 0.8, 2.0
 GEO_MINOR_CAP = 0.3
 # named analog sites with documented life that satellite greenness cannot see
 KNOWN_LIFE = {"svalbard_bockfjorden": "Troll / Jotun warm springs with microbial mats (AMASE)",
@@ -295,10 +305,14 @@ def dust_terms(ent, E, info):
 
 def biology_terms(ent, E):
     one = np.ones((len(ent), 1))
-    t = {"ndvi": col(E, "ndvi_f"), "precip": np.clip(col(E, "precip") / 1000.0, 0, 2),
+    # plant_cover = NDVI above the bare-soil baseline (common.prepare_earth); raw NDVI scored bare deserts as vegetated.
+    # Prior 2.0: the anchors run from +0.55 (no plants) to -0.9 (plant cover ~0.8-0.9), a slope near 1.8; with the old
+    # prior 1.0 the ridge kept the slope shallow and fitted the forested anchors by lowering the intercept, which is
+    # the ceiling of the score (0.44, so no Earth site could reach "sufficient").
+    t = {"plant_cover": col(E, "plant_cover"), "precip": np.clip(col(E, "precip") / 1000.0, 0, 2),
          "soil_moisture": col(E, "soil_moist_frac"), "tree_cover": col(E, "tree_f")}
     terms = {k: -v[None, :] * one for k, v in t.items()}                 # more life -> lower score
-    return terms, dict(ndvi=1.0, precip=0.5, soil_moisture=1.0, tree_cover=0.5)
+    return terms, dict(plant_cover=2.0, precip=0.5, soil_moisture=1.0, tree_cover=0.5)
 
 
 def caves_terms(ent, E, earth):
@@ -333,7 +347,9 @@ def hazard_term(ent, E):
 
 
 # ============================================================================= calibration
-def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=1.0, fit=True):
+def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=1.0, fit=True, skip_fit=()):
+    """skip_fit: Earth sites whose anchors are reported (residuals) but not fitted, because a rule cap sets their
+    score whatever the terms say (KNOWN_LIFE for biology); fitting them pulls every other site toward that rule."""
     names = list(terms)
     S = np.stack([terms[k] for k in names])                              # (k, M, E)
     n_terms = np.isfinite(S).sum(0).astype(np.int8)
@@ -358,17 +374,21 @@ def calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=0.0, lam=
                      mae=round(float(np.abs(pred - y).mean()), 3), mae_loo=round(float(np.abs(pred - y).mean()), 3),
                      spearman=round(C.spearman(pred, y), 3), spearman_raw=round(C.spearman(pred, y), 3), spearman_loo=round(C.spearman(pred, y), 3))
     elif len(a) >= 4:
-        c, b = C.fit_terms(T, y, w, prior=p, lam=lam)
+        fm = ~a["earth_site"].isin(list(skip_fit)).to_numpy()            # anchors used for fitting
+        c, b = C.fit_terms(T[fm], y[fm], w[fm], prior=p, lam=lam)
         pred = np.clip(b + T @ c, -1, 1)
-        loo = np.full(len(a), np.nan)
-        for i in range(len(a)):
-            m = np.arange(len(a)) != i
+        loo = pred.copy()                                                # skipped anchors: not fitted, so pred is held-out
+        for i in np.flatnonzero(fm):
+            m = fm & (np.arange(len(a)) != i)
             ci, bi = C.fit_terms(T[m], y[m], w[m], prior=p, lam=lam)
             loo[i] = np.clip(bi + T[i] @ ci, -1, 1)
+        if not fm.all():
+            stats["not_fitted"] = sorted(set(a.loc[~fm, "earth_site"]))
+        # fit quality on the anchors the terms are responsible for (skipped ones are set by a rule cap)
         stats.update(weights=dict(zip(names, np.round(c, 4).tolist())), intercept=round(b, 4),
-                     mae=round(float(np.abs(pred - y).mean()), 3), mae_loo=round(float(np.abs(loo - y).mean()), 3),
-                     spearman=round(C.spearman(pred, y), 3), spearman_raw=round(C.spearman(raw[mi[ok], ei[ok]], y), 3),
-                     spearman_loo=round(C.spearman(loo, y), 3))
+                     mae=round(float(np.abs(pred - y)[fm].mean()), 3), mae_loo=round(float(np.abs(loo - y)[fm].mean()), 3),
+                     spearman=round(C.spearman(pred[fm], y[fm]), 3), spearman_raw=round(C.spearman(raw[mi[ok], ei[ok]][fm], y[fm]), 3),
+                     spearman_loo=round(C.spearman(loo[fm], y[fm]), 3))
     else:
         c, b = p, prior_b
         pred, loo = np.clip(b + T @ c, -1, 1) if len(a) else np.array([]), np.full(len(a), np.nan)
@@ -494,10 +514,10 @@ def main():
     earth_pos = {e: i for i, e in enumerate(earth["patch_id"])}
     info, raw, cal, nt, stats, resid = {}, {}, {}, {}, {}, []
 
-    def run(name, terms, prior, prior_b=0.0, fit=True):
+    def run(name, terms, prior, prior_b=0.0, fit=True, skip_fit=()):
         keep = [k for k in KEEP_TERMS.get(name, list(terms)) if k in terms]
         terms, prior = {k: terms[k] for k in keep}, {k: prior[k] for k in keep}
-        r, c, n, st, res = calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=prior_b, fit=fit)
+        r, c, n, st, res = calibrate(name, terms, prior, anchors, ent_pos, earth_pos, prior_b=prior_b, fit=fit, skip_fit=skip_fit)
         c = apply_caps(name, c, ent, E)
         raw[name], cal[name], nt[name], stats[name] = r, c, n, st
         res["calibrated_score"] = c[res["entity_id"].map(ent_pos).to_numpy(int), res["earth_site"].map(earth_pos).to_numpy(int)]
@@ -516,7 +536,7 @@ def main():
     run("illumination", t, {"noon_sun": 0.5, "grazing_sun": 0.5})
     run("water_ice", *water_terms(ent, E))
     run("dust", *dust_terms(ent, E, info))
-    run("biology", *biology_terms(ent, E), prior_b=1.0)
+    run("biology", *biology_terms(ent, E), prior_b=1.0, skip_fit=KNOWN_LIFE)     # KNOWN_LIFE sites are capped by rule
     t, p, cinfo = caves_terms(ent, E, earth)
     info["caves"] = cinfo
     run("caves", t, p, fit=False)
@@ -554,7 +574,13 @@ def main():
         med = np.nanmedian(Sc, axis=2, keepdims=True)                          # (cat, M, 1); NaN if never scored
     Sf = np.where(np.isfinite(Sc), Sc, med)                                     # Sc itself stays unimputed (saved below)
     wgt = np.where(np.isfinite(Sf), Wm[:, :, None], 0.0)
-    comp = np.where(wgt.sum(0) > 0, (np.nan_to_num(Sf) * wgt).sum(0) / np.maximum(wgt.sum(0), 1e-9), np.nan)
+    comp_mean = np.where(wgt.sum(0) > 0, (np.nan_to_num(Sf) * wgt).sum(0) / np.maximum(wgt.sum(0), 1e-9), np.nan)
+    cover = col(E, "cover_nonlunar")[None, :]                                  # ground-cover gate (see COVER_GATE_BASE)
+    gate = np.where(np.isfinite(cover), np.clip(COVER_GATE_BASE - COVER_GATE_SLOPE * cover, -1, 1), np.inf)
+    comp = np.minimum(comp_mean, gate)
+    gated = np.isfinite(comp_mean) & (comp < comp_mean)
+    info["cover_gate"] = dict(base=COVER_GATE_BASE, slope=COVER_GATE_SLOPE, rule="composite <= base - slope * cover_nonlunar",
+                                share_pairs_lowered=round(float(gated.mean()), 3))
     tops = []
     for i, m in enumerate(ent["entity_id"]):
         order = np.argsort(-np.nan_to_num(comp[i], nan=-9))[:20]
@@ -571,6 +597,7 @@ def main():
     np.savez_compressed(C.RES / f"score_matrices{sfx}.npz", categories=np.array(list(cal)), entity_id=ent["entity_id"].to_numpy(str),
                         earth_tile_id=earth["patch_id"].to_numpy(str), calibrated=Sc.astype(np.float32),
                         raw=np.stack([raw[c] for c in cal]).astype(np.float32), composite=comp.astype(np.float32),
+                        composite_ungated=comp_mean.astype(np.float32),
                         experiments=np.array([e["id"] for e in exps_cfg["experiments"]]), readiness=codes,
                         category_weights=Wm.astype(np.float32), light_twin_month=twin_month)
     TOP = pd.concat(tops, ignore_index=True)
@@ -579,7 +606,7 @@ def main():
     params = dict(score_form="calibrated = clip(intercept + sum_k weight_k * term_k, -1, 1), then caps", caps=CAPS,
                   subscore="1 - |d|/tol for |d| <= tol; -(1 - exp(-(|d|/tol - 1))) beyond (soft floor at -1)",
                   categories=stats, info=info, composite_weights={c: np.round(Wm[k] / np.maximum(Wm.sum(0), 1e-9), 3).tolist() for k, c in enumerate(cal)},
-                  composite_categories=list(COMPOSITE_CATS), kept_terms=KEEP_TERMS,
+                  composite_categories=list(COMPOSITE_CATS), cover_gate=info["cover_gate"], kept_terms=KEEP_TERMS,
                   entities=ent["entity_id"].tolist(), always_attached=exps_cfg.get("always_include"),
                   non_reproducible=[g.get("id") for g in exps_cfg.get("global_non_reproducible", [])])
     (C.MODELS / f"calibration_params{sfx}.json").write_text(json.dumps(params, indent=1, default=str))

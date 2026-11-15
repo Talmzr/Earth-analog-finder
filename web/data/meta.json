@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T12:03:05Z",
+ "generated_utc": "2026-11-15T16:11:28Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -133,14 +133,14 @@
    "cap": 0.6,
    "n_anchors": 18,
    "terms": {
-    "ndvi": 1.14,
-    "precip": 0.7417
+    "plant_cover": 1.6768,
+    "precip": 0.2577
    },
-   "intercept": 0.4376,
-   "anchor_mae": 0.17,
-   "anchor_mae_leave_one_out": 0.18,
-   "anchor_rank_agreement": 0.88,
-   "anchors_off_by_0_3": 0
+   "intercept": 0.4833,
+   "anchor_mae": 0.12,
+   "anchor_mae_leave_one_out": 0.13,
+   "anchor_rank_agreement": 0.81,
+   "anchors_off_by_0_3": 1
   },
   {
    "id": "caves",
@@ -536,6 +536,12 @@
    "known_tube_tiles": 9,
    "plausible_tiles": 966,
    "no_tube_tiles": 2513
+  },
+  "cover_gate": {
+   "base": 0.8,
+   "slope": 2.0,
+   "rule": "composite <= base - slope * cover_nonlunar",
+   "share_pairs_lowered": 0.503
   }
  },
  "composite_categories": [
@@ -543,7 +549,6 @@
   "geology",
   "illumination",
   "water_ice",
-  "operations",
   "caves"
  ],
  "kept_terms": {
@@ -573,7 +578,7 @@
    "tephra"
   ],
   "biology": [
-   "ndvi",
+   "plant_cover",
    "precip"
   ],
   "caves": [

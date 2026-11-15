@@ -36,9 +36,14 @@ We score every (Moon target, Earth tile) pair per category on a -1..+1 scale, th
 2. **Per-term audit.** 14 scoring terms dropped (zero weight, worse leave-one-out, or weak data such as SoilGrids, aerosol, soil moisture, DINOv2 cosine). `KEEP_TERMS` in `ml/score_all.py` lists the kept terms and, in the comment above it, why each dropped term went.
 3. **Dust, biology, caves** were briefly removed, then restored: they compare Earth with known lunar constants (Apollo regolith, sterile Moon) or a known feature (Tranquillitatis pit).
 4. **Light-twin month.** Earth sun terms use the month whose noon sun is closest to the Moon target's. Illumination is its own category (noon sun + grazing share), fitted on 10 drafted anchors (`needs_review=1`, geometry-derived). Thermal (temperature) = night minimum + the same sun terms, shown as closest approach only.
-5. **Composite** = experiment-weighted mean of terrain, geology, illumination, water_ice, operations (+ caves for the pit). Thermal, dust and biology stay out (no Moon/Earth overlap, or identical for every target). A missing category takes the target's median.
+5. **Composite** = experiment-weighted mean of terrain, geology, illumination, water_ice (+ caves for the pit), capped by the ground-cover gate (item 8). Operations, thermal, dust and biology are not averaged in (operations is built from terrain + water_ice; the others have no Moon/Earth overlap or are identical for every target). A missing category takes the target's median.
 6. **Fixes for flagged anchors:** ice-sheet surface no longer counts as ice-cemented frozen ground; >= 500 mm/yr rain caps water_ice at 0; a dry Moon target (the pit) penalises icy Earth sites; caves "known" needs documented tubes (region match = plausible, 0.3); mostly-water tiles capped at -0.8 for operations; named sites with documented life (Svalbard springs, Rio Tinto, Lake Salda; `KNOWN_LIFE`) capped at -0.6 sterility; named regolith test sites count as >= 60% bare; geology text spells out map jargon and named sites lead with curated rock tags (45 texts re-embedded, no retraining). **Tried and reverted** (both worse): slope tail in terrain; ice-zone-only water_ice in operations.
 7. **Website:** thermal closest-approach percentile, "best light in <month>", per-experiment caveats, reliability table.
+8. **Sterility and composite review (afternoon).**
+   - *Sterility used raw NDVI*, but bare soil reads ~0.1-0.15 (median 0.116 on >= 90% bare tiles), so deserts counted as lightly vegetated and the category topped out at 0.44 (Atacama 0.28 vs label 0.55). Now `plant_cover = clip((NDVI - 0.10) / 0.70, 0, 1)` (`common.NDVI_SOIL/NDVI_VEG`; 0.10 is the baseline already in `config/categories.json`), plant-cover prior 2.0, `KNOWN_LIFE` anchors reported but not fitted (`calibrate(skip_fit=...)`). Atacama 0.40, Beacon Valley 0.45; LOO 0.134 on the 15 fitted anchors (old formula 0.158). Tried and rejected: soil baseline 0.15, frost-day-scaled "liquid" rainfall (both worse on the anchors).
+   - *Operations double-counted terrain and ice in the composite* (fitted as 0.58 terrain + 0.30 water_ice + 0.17 slope hazard; terrain drove ~43% of the composite). Removed from `COMPOSITE_CATS`; still a category and experiment requirement.
+   - *Nothing in the composite saw ground cover*: moss/lichen tundra (NW Greenland samples) ranked #1 for most polar targets. Ground-cover gate: composite <= 0.8 - 2 x `cover_nonlunar` (plants incl. moss/lichen, open water, built-up; Antarctic sea from the DEM). Moss in the polar top 20: 46% -> 1%; the gate binds on 5% of top-20 positions; top-20 overlap between targets unchanged (0.13 -> 0.12). Best named site per polar target is now Haughton (11), Dry Valleys (11) or Beacon Valley (5). Tried and rejected: gate on biology (NDVI barely sees moss) and on min(dust, biology) (dust needs ~85% bare ground, so it hit half-ice Antarctic tiles and dominated the top lists).
+   - Side effects: best composite per polar target ~0.2-0.3 (was 0.3-0.5); planetary-protection "sufficient" pairs 1,350 -> 30,060 (hyper-arid and polar tiles now reach sterility 0.4); new flagged anchor: Haughton biology (label -0.2, model 0.22: tundra patches the tile-level NDVI dilutes).
 
 ### Final calibration (leave-one-out error / LOO rank agreement; full table in `docs/ML_RESULTS.md`)
 
@@ -50,13 +55,13 @@ We score every (Moon target, Earth tile) pair per category on a -1..+1 scale, th
 | illumination | 10 | 0.097 | 0.728 |
 | water_ice | 20 | 0.134 | 0.851 |
 | dust | 18 | 0.143 | 0.893 |
-| biology | 18 | 0.185 | 0.866 |
+| biology | 18 (15 fitted) | 0.134 | 0.784 |
 | caves (rule levels) | 15 | 0.123 | 0.923 |
 | operations | 18 | 0.285 | 0.688 |
 
-**5 of 161 anchors** are off by > 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`):
+**6 of 161 anchors** are off by > 0.3 (`results/anchor_residuals.csv`, column `flag_gt_0.3`):
 geology: pit x Lonar, pit x Pinacate; water_ice: de Gerlache ice zone x Beacon Valley; operations: Black Point, Craters of
-the Moon. All five were judged to be model limits, not anchor errors (an anchor review on 2026-11-15 corrected 7 anchors:
+the Moon; biology: Haughton (added by the sterility fix, item 8). The first five were judged to be model limits, not anchor errors (an anchor review on 2026-11-15 corrected 7 anchors:
 two caves labels above the cap, two contradicting pairs at Concordia and the Dry Valleys, Haughton terrain, and two
 illumination rationales; changes are noted in each rationale). All anchors still need a site expert (needs_review=1).
 
@@ -107,7 +112,7 @@ Unzip into the repo root (`unzip -o ~/Downloads/earth_analog_ml_outputs.zip`). V
 - Per category: `calibrated = clip(intercept + sum_k w_k * term_k, -1, 1)`, **w_k >= 0** fitted on that category's anchors by ridge toward prior weights, using only the terms in `KEEP_TERMS`, then caps (`CAPS`): terrain 0.9, geology 0.8 (0.3 for minor anorthosite), thermal 0.4, illumination 0.7, water_ice 0.7, dust 0.7, biology 0.6, caves 0.5, operations 0.8, plus the rule caps listed in section 2 item 6.
 - Kept terms: terrain = relief/slope/roughness kernel; geology = lithology match + BGE text cosine; thermal = night minimum, grazing sun, noon sun; illumination = noon sun, grazing sun (light-twin month); water_ice = frozen ground, traverse to ice, no liquid water; dust = bare ground, tephra; biology = NDVI, precipitation; caves = rule levels (known documented tubes 0.5, region match / basaltic volcano 0.3, 0 else, negative for sedimentary/ice); operations = calibrated terrain + water_ice + slope hazard.
 - Moon targets: zones carry their own pixel-level thermal/ice/sun features; terrain features come from the 10 km window at the zone centroid.
-- Composite per (Moon target, Earth tile): weighted mean over `COMPOSITE_CATS` (terrain, geology, illumination, water_ice, operations, caves), weights = number of relevant experiments that require (1.0) or support (0.5) the category; missing category = target median.
+- Composite per (Moon target, Earth tile): weighted mean over `COMPOSITE_CATS` (terrain, geology, illumination, water_ice, caves), weights = number of relevant experiments that require (1.0) or support (0.5) the category; missing category = target median; then `min(mean, 0.8 - 2 x cover_nonlunar)` (`COVER_GATE_BASE`, `COVER_GATE_SLOPE`). `results/score_matrices.npz` keeps the ungated mean as `composite_ungated`.
 
 ## 6. Known data limits (also in `docs/DATA_REPORT.md`)
 

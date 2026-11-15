@@ -74,7 +74,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 11,
 async function load() {
   [meta, targets, tiles] = await Promise.all(['meta', 'moon_targets', 'earth_tiles'].map(f => fetch(`data/${f}.json`).then(r => r.json())));
   $('target').innerHTML = targets.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-  $('cat').innerHTML = `<option value="composite">Overall match to this Moon site: terrain, geology, sunlight, ice, operations (+ caves for the pit)</option>` +
+  $('cat').innerHTML = `<option value="composite">Overall match to this Moon site: terrain, geology, sunlight, ice (+ caves for the pit), capped for plant / water cover</option>` +
     meta.categories.map(c => `<option value="${c.id}">${c.label}</option>`).join('') +
     `<option value="thermal_pct">Temperature: closest approach (rank among Earth sites)</option>`;
   $('caveats').innerHTML = meta.earth_cannot_reproduce.map(c => `<span class="tag" title="Moon: ${c.moon}. Best on Earth: ${c.earth_best}. Cover with: ${c.cover_with}">${c.condition}</span>`).join('');

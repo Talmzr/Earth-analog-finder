@@ -28,7 +28,10 @@ LIMITS = """## 6. Deviations from the brief and known limits
 - **Thermal / illumination split:** temperature (night minimum, closest approach) is scored apart from **illumination**: sun height and grazing-sun share in the Earth **light-twin month**, the month whose noon sun is closest to the Moon target's; annual Earth values never reach lunar polar sun heights, one month does for ~35% of tiles (LOO error 0.128 -> 0.100). Swing, max temperature and polar night were dropped.
 - **Dry Moon targets:** where the Moon target has no ground ice (the Tranquillitatis pit) the frozen-ground term is two-sided, so icy Earth ground counts as a mismatch instead of a free match. No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (vegetation, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but stay out of the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.
+- **Lunar-constant categories:** dust/regolith (bare ground + volcanic tephra vs the known Apollo regolith) and biological sterility (plant cover, rainfall vs the sterile Moon) compare Earth with properties the whole Moon shares, so they rank Earth sites identically for every Moon target. They are scored and drive experiments (dust mitigation, planetary protection) but are not averaged into the composite. Caves (lava-tube rule) applies to the Tranquillitatis pit only.
+- **Sterility uses plant cover, not raw NDVI:** bare soil and rock read NDVI ~0.1-0.15 (median 0.116 on tiles that are >= 90% bare), so raw NDVI scored hyper-arid deserts as lightly vegetated and capped the whole category at 0.44. Plant cover = (NDVI - 0.10) / (0.80 - 0.10), clipped to 0-1, with the 0.10 bare-soil baseline from the category spec; plant-cover prior 2.0 to match the label range; the three KNOWN_LIFE sites (capped at -0.6 by rule) are reported but not fitted. Atacama 0.28 -> 0.40, Beacon Valley 0.26 -> 0.45.
+- **Composite without operations:** operations is fitted as ~0.58 terrain + 0.30 water/ice + 0.17 slope hazard, so in the composite it counted terrain and ice a second time (terrain ~43% of the composite). It stays a category and experiment requirement.
+- **Ground-cover gate:** composite <= 0.8 - 2 x (share of the tile under plants incl. moss/lichen, open water or towns; Antarctic sea from the DEM). Without it moss/lichen tundra filled 46% of the polar targets' top-20 lists (now 1%); the gate binds on 5% of top-20 positions and the targets' lists stay distinct (overlap 0.12 vs 0.13). Gating on sterility (NDVI barely sees moss) or on dust (needs ~85% bare ground, so half-ice polar tiles were treated like tundra) was tried and rejected.
 - **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.
@@ -124,12 +127,15 @@ def composite_section(params):
            "Terms kept per category after the 2026-11-15 audit (see `KEEP_TERMS` in `ml/score_all.py` for why each dropped "
            "term was removed):", "", "| Category | Terms used |", "|---|---|"]
     out += [f"| {c} | {', '.join(ks)} |" for c, ks in (params.get("kept_terms") or {}).items()]
+    g = params.get("cover_gate") or {}
     out += ["", f"Composite = weighted mean of **{', '.join(cc)}** only: the categories that use per-site Moon data, plus "
             "caves, which only the Tranquillitatis pit has. Each weight is the number of experiments relevant to that Moon "
-            "target that require (1.0) or support (0.5) the category, normalised. Dust and sterility (lunar constants, the "
-            "same for every target) and thermal (no temperature overlap) remain category scores and experiment requirements. "
-            "An all-category composite was compared and rejected: same expert agreement (0.85 vs 0.83) but 38% of every "
-            "target's ranking came from scores that are identical for all Moon targets. "
+            "target that require (1.0) or support (0.5) the category, normalised. Operations is left out because it is "
+            "built from terrain and water/ice (it counted them twice). Dust and sterility (lunar constants, the same for "
+            "every target) and thermal (no temperature overlap) remain category scores and experiment requirements. "
+            f"The composite is then capped by the ground-cover gate: {g.get('rule', 'n/a')} with base {g.get('base')} and "
+            f"slope {g.get('slope')} (lowers {100 * g.get('share_pairs_lowered', 0):.0f}% of all pairs, mostly vegetated, wet "
+            "or open-water tiles that are poor analogs anyway). "
             "Typical weights (median over targets):", "",
            "| " + " | ".join(w) + " |", "|" + "---|" * len(w),
            "| " + " | ".join(f"{np.median(v):.2f}" for v in w.values()) + " |", ""]
