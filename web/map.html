@@ -48,9 +48,9 @@
   <label>Moon target <select id="target"></select></label>
   <label>Colour Earth by <select id="cat"></select></label>
   <label>Colour scale <select id="scale">
-    <option value="rank">Relative: rank among Earth tiles for this Moon target</option>
-    <option value="abs">Absolute: score -1 to +1 (avoid / partial / sufficient)</option></select></label>
-  <div class="legend"><span id="lg-lo">bottom</span> <b></b> <span id="lg-hi">top 1%</span></div>
+    <option value="abs">Absolute: score -1 to +1 (avoid / partial / sufficient)</option>
+    <option value="rank">Relative: rank among Earth tiles for this Moon target</option></select></label>
+  <div class="legend"><span id="lg-lo">avoid</span> <b></b> <span id="lg-hi">sufficient</span></div>
 </header>
 <main>
   <div id="map"></div>
@@ -88,9 +88,9 @@ async function load() {
   const r = L.canvas({ padding: .5 });
   markers = tiles.id.map((id, i) => L.circleMarker([tiles.lat[i], tiles.lon[i]], { renderer: r, radius: 4, weight: 0, fillOpacity: .85 })
     .on('click', () => showTile(i)).addTo(map));
-  try { $('scale').value = localStorage.getItem('scale') || 'rank'; } catch (e) { /* storage blocked: keep default */ }
+  try { $('scale').value = localStorage.getItem('scale-v2') || 'abs'; } catch (e) { /* storage blocked: keep default */ }
   $('target').onchange = pick; $('cat').onchange = paint;
-  $('scale').onchange = () => { try { localStorage.setItem('scale', $('scale').value); } catch (e) { /* ignore */ } paint(); };
+  $('scale').onchange = () => { try { localStorage.setItem('scale-v2', $('scale').value); } catch (e) { /* ignore */ } paint(); };
   await pick();
 }
 async function pick() {
