@@ -43,7 +43,7 @@ def build_corpus():
     zt, zc = G.moon_texts_for(ent["moon_geo_unit"], ent["geo_frac_mare"], cat)
     ice = earth["x_surface_ice_frac"] if "x_surface_ice_frac" in earth else earth["wc_frac_snow_ice"]
     et = [G.earth_text(r) for r in earth.to_dict("records")]
-    ec = [G.earth_classes(t, s, i) for t, s, i in zip(et, earth["source"], ice)]
+    ec = [G.earth_classes(t, s, i, G.earth_primary_text(r)) for t, s, i, r in zip(et, earth["source"], ice, earth.to_dict("records"))]
     return moon, earth, zones, ent, mt, mc, zt, zc, et, ec
 
 

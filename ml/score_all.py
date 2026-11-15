@@ -155,7 +155,7 @@ def geology_terms(ent, E, earth, suffix, info):
     _, zc = G.moon_texts_for(ent["moon_geo_unit"], ent["geo_frac_mare"], cat)
     ice = col(earth, "x_surface_ice_frac")
     et = [G.earth_text(r) for r in earth.to_dict("records")]
-    ec = [G.earth_classes(t, s, i) for t, s, i in zip(et, earth["source"], ice)]
+    ec = [G.earth_classes(t, s, i, G.earth_primary_text(r)) for t, s, i, r in zip(et, earth["source"], ice, earth.to_dict("records"))]
     terms = {"lith_match": np.array([[G.lith_match(m, e) for e in ec] for m in zc], float)}
     prior = {"lith_match": 1.0}
     fm, fe = C.EMB / f"moon_entity_geology_384{suffix}.npy", C.EMB / f"earth_geology_384{suffix}.npy"

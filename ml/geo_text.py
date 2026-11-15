@@ -116,7 +116,12 @@ GVP_INTERMEDIATE = ("andesite", "trachyandesite")
 GVP_SILICIC = ("dacite", "rhyolite", "trachyte", "phonolite")
 
 
-def earth_classes(text: str, source: str = "", ice_frac: float = np.nan) -> dict:
+def earth_primary_text(r: dict) -> str:
+    """Name, primary rock type and catalog context: where a rock must appear to count as the tile's main lithology."""
+    return " ; ".join(str(r.get(k)) for k in ("name", "mstrat_lith", "context") if isinstance(r.get(k), str))
+
+
+def earth_classes(text: str, source: str = "", ice_frac: float = np.nan, primary: str | None = None) -> dict:
     t = (text or "").lower()
     if not t.strip():
         return dict(known=False, primary="unknown")
@@ -128,6 +133,11 @@ def earth_classes(text: str, source: str = "", ice_frac: float = np.nan) -> dict
         c["basalt"] = rock.startswith(GVP_BASALTIC)                 # catalog rock type beats free text
         c["intermediate"] = rock.startswith(GVP_INTERMEDIATE)
         c["silicic"] = rock.startswith(GVP_SILICIC)
+    # anorthosite listed only as a minor component of a long unit description (e.g. inside a gneiss complex)
+    # is a partial match, not the tile's lithology
+    strong = c["anorth"] and (primary is None or bool(RX["anorth"].search(primary.lower())))
+    c["anorth_minor"] = c["anorth"] and not strong
+    c["anorth"] = strong
     c["impact"] = c["impact"] or source == "impact_structure"
     c["ice"] = c["ice"] or (np.isfinite(ice_frac) and ice_frac >= 0.7)
     igneous_target = c["anorth"] or c["basalt"] or c["mafic_plut"] or c["granmet"] or c["silicic"] or c["intermediate"]
@@ -152,7 +162,7 @@ def relation(mc: dict, ec: dict) -> int:
     impact_match = mc["impact"] and ec["impact"] and not ec["impact_sed_target"]
     if comp_match or impact_match:
         return 1
-    partial = ((mc["impact"] and ec["impact"]) or ec["mafic_plut"] or ec["basalt"] or ec["anorth"]
+    partial = ((mc["impact"] and ec["impact"]) or ec["mafic_plut"] or ec["basalt"] or ec["anorth"] or ec.get("anorth_minor")
                or (mc["comp"] == "basaltic" and ec["intermediate"])
                or (ec["fragmental"] and not (ec["sed"] or ec["granmet"] or ec["ice"]))
                or ec["primary"] in ("uncons", "other"))
