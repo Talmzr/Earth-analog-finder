@@ -356,7 +356,7 @@ canvas{display:block}
   </div>
   <div id="score-legend">
     <h3 id="score-legend-t">Score</h3>
-    <div class="grad"></div><div class="ticks"><span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span></div>
+    <div class="grad"></div><div class="ticks" id="score-legend-ticks"><span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span></div>
     <div class="foot">Clusters show their best tile · grey = not scored</div>
   </div>
   <div id="zoom-controls"><button id="zoom-in-btn" title="Zoom in">+</button><button id="zoom-out-btn" title="Zoom out">−</button><button id="zoom-home-btn" title="Back to the starting view">⌂</button></div>
@@ -1111,11 +1111,27 @@ function refreshMarkerColors() {
   document.getElementById('legend').style.display = scoreMode ? 'none' : '';
   document.getElementById('score-legend').style.display = scoreMode ? 'block' : 'none';
   if (scoreMode) document.getElementById('score-legend-t').textContent =
-    (colorBy === 'composite' ? 'Overall match' : CAT[colorBy].label) + ' · ' + selectedMoonTarget.name;
+    (colorBy === 'composite' ? 'Overall match (rank among Earth tiles)' : CAT[colorBy].label) + ' · ' + selectedMoonTarget.name;
+}
+// Overall match is coloured by RANK among Earth tiles for the chosen Moon target: no Earth site fully matches the
+// lunar south pole (best overall scores are ~0.2-0.3, "partial"), so an absolute scale paints almost every tile pink.
+// Top 1% -> bright green, top 10% -> green, top half -> amber, bottom half -> pink. Scores and verdicts in the panels
+// stay absolute.
+function rankColumn(col) {
+  const idx = [], n = col.length; for (let i = 0; i < n; i++) if (!isNaN(col[i])) idx.push(i);
+  idx.sort((a, b) => col[b] - col[a]);
+  const out = new Float32Array(n).fill(NaN), m = idx.length;
+  idx.forEach((i, k) => { const r = m > 1 ? k / (m - 1) : 0;
+    out[i] = r <= 0.01 ? 0.85 : r <= 0.1 ? 0.5 + 0.35 * (0.1 - r) / 0.09 : r <= 0.5 ? 0.5 * (0.5 - r) / 0.4 : -0.6 * (r - 0.5) / 0.5; });
+  return out;
 }
 function setColorBy(v) {
   colorBy = v;
-  colorCol = v !== 'source' && selectedMoonTarget ? SC.column(selectedMoonTarget.id, v) : null;
+  const raw = v !== 'source' && selectedMoonTarget ? SC.column(selectedMoonTarget.id, v) : null;
+  colorCol = raw && v === 'composite' ? rankColumn(Array.from(raw, x => x === null ? NaN : x)) : raw;
+  const ticks = document.getElementById('score-legend-ticks');
+  if (ticks) ticks.innerHTML = v === 'composite' ? '<span>bottom</span><span>top half</span><span>top 10% · top 1%</span>'
+    : '<span>−1</span><span>avoid · 0 · partial</span><span>0.5 sufficient · +1</span>';
   refreshMarkerColors();
 }
 // Called whenever the chosen Moon target changes (Moon page, assessment)

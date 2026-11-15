@@ -175,6 +175,11 @@ def prepare_earth(earth: pd.DataFrame) -> pd.DataFrame:
     lat = e["center_lat"]
     e["soil_moist_frac"] = e["soil_moist_mean"] / 100.0                      # AMSR2 % -> m3/m3
     e["precip"] = e["precip_best_mm_yr"] if "precip_best_mm_yr" in e else e.get("precip_mm_yr")
+    # documented local rainfall where the 25-50 km grids are clearly wrong for a small or steep named site
+    ov_path = CFG / "site_climate_overrides.csv"
+    if ov_path.exists() and "patch_id" in e:
+        ov = pd.read_csv(ov_path).set_index("patch_id")["precip_mm_yr"]
+        e["precip"] = e["patch_id"].map(ov).fillna(e["precip"])
     e["fines_pct"] = e["sg_silt_pct"] + e["sg_clay_pct"]
     veg = _nsum(e, ["wc_frac_tree", "wc_frac_shrub", "wc_frac_grass", "wc_frac_crop", "wc_frac_moss_lichen",
                     "wc_frac_wetland", "wc_frac_mangrove"])

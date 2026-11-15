@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T17:25:07Z",
+ "generated_utc": "2026-11-15T17:48:26Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -98,13 +98,13 @@
    "cap": 0.7,
    "n_anchors": 20,
    "terms": {
-    "frozen_ground": 0.3477,
-    "traverse": 0.2173,
-    "no_liquid_water": 0.215
+    "frozen_ground": 0.3451,
+    "traverse": 0.2208,
+    "no_liquid_water": 0.2212
    },
-   "intercept": -0.0713,
+   "intercept": -0.073,
    "anchor_mae": 0.13,
-   "anchor_mae_leave_one_out": 0.16,
+   "anchor_mae_leave_one_out": 0.15,
    "anchor_rank_agreement": 0.9,
    "anchors_off_by_0_3": 2
   },
@@ -133,13 +133,13 @@
    "cap": 0.6,
    "n_anchors": 18,
    "terms": {
-    "plant_cover": 1.704,
-    "precip": 0.2506
+    "plant_cover": 1.7092,
+    "precip": 0.2368
    },
-   "intercept": 0.5165,
-   "anchor_mae": 0.09,
-   "anchor_mae_leave_one_out": 0.1,
-   "anchor_rank_agreement": 0.8,
+   "intercept": 0.5104,
+   "anchor_mae": 0.1,
+   "anchor_mae_leave_one_out": 0.11,
+   "anchor_rank_agreement": 0.76,
    "anchors_off_by_0_3": 0
   },
   {
@@ -166,13 +166,13 @@
    "cap": 0.8,
    "n_anchors": 18,
    "terms": {
-    "terrain": 0.2742,
-    "water_ice": 0.0123,
-    "slope_hazard": 0.0954,
-    "bare": 0.1371,
+    "terrain": 0.2741,
+    "water_ice": 0.0114,
+    "slope_hazard": 0.0953,
+    "bare": 0.1374,
     "clear": 0.3732
    },
-   "intercept": -0.1464,
+   "intercept": -0.1465,
    "anchor_mae": 0.14,
    "anchor_mae_leave_one_out": 0.19,
    "anchor_rank_agreement": 0.93,
@@ -201,11 +201,11 @@
    "id": "rover_mobility_navigation",
    "name": "Rover mobility & navigation",
    "required": {
-    "terrain": 0.5,
+    "operations": 0.4,
     "dust": 0.3
    },
    "supporting": {
-    "operations": 0.4,
+    "terrain": 0.3,
     "illumination": 0.0
    },
    "also_account_for": [
@@ -395,11 +395,11 @@
    "id": "geology_eva_training",
    "name": "Astronaut field-geology & EVA training",
    "required": {
-    "geology": 0.4,
-    "terrain": 0.3
+    "geology": 0.4
    },
    "supporting": {
-    "operations": 0.2
+    "operations": 0.3,
+    "terrain": 0.3
    },
    "also_account_for": [
     "Suit dexterity, EVA time limits and 1/6 g gait are not reproduced.",

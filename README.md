@@ -27,7 +27,7 @@ Every score runs from -1 to +1:
 | 0 to 0.5 | **partial** |
 | < 0 | **avoid** |
 
-Each experiment gets a verdict (sufficient / partial / avoid) plus an "also account for" list. Gravity, vacuum, radiation and the 25-110 K temperatures of permanent shadow can never be reproduced on Earth, so they always appear as caveats.
+Each experiment gets a verdict plus an "also account for" list: **sufficient** when every required category meets its minimum, **avoid** only when a required category is clearly misleading (below -0.5), **partial** otherwise. Real analog campaigns (Desert RATS, PANGAEA, Apollo geology training) use sites that match the tested aspect and only partly match the rest, so "partial" is the normal verdict for a good analog. Gravity, vacuum, radiation and the 25-110 K temperatures of permanent shadow can never be reproduced on Earth, so they always appear as caveats.
 
 ### Categories
 
@@ -65,6 +65,20 @@ The mean is then capped by a **ground-cover gate**: overall <= 0.8 - 2 x the sha
 | Terrain image | `facebook/dinov2-small` | Self-supervised (VICReg + CORAL) on 128 x 128 elevation patches | No: trained and evaluated, but added nothing over measured relief and slope |
 
 Fine-tuning ran on a Colab T4 GPU. Scoring runs on a laptop CPU in about 2 minutes.
+
+## How accurate is it?
+
+Three checks, all printed by `python -W ignore -m ml.evaluate` (results/scorecard.json):
+
+| Check | What it compares with | Result |
+|---|---|---|
+| Category accuracy | 161 expert anchors, site-grouped 5-fold cross-validation (a site is never seen while it is tested) | mean error 0.137 on the -1..+1 scale; 11 of 161 off by more than 0.3 |
+| Overall ranking | Dry Valleys, Beacon Valley, Haughton, Svalbard should outrank the other named sites for the 29 south-pole targets | 0.926 (0.5 = chance) |
+| Real-world site choices | 13 documented lunar analog tests (Desert RATS, RESOLVE, PANGAEA, BRAILLE, FINESSE, ARCHES, K10, Concordia) and a held-out set of 5 (Apollo geology training at Meteor Crater, Pinacate, Askja and Sudbury; CanMoon at Lanzarote), with sources in `config/real_world_uses*.csv` | not "avoid" for 85% (dev) and 97% (held-out) of their Moon targets, against 57% / 65% for an average Earth tile |
+
+Data checks: all 30 named Earth sites and 10 Moon targets sit at their published coordinates. Rainfall comes from 25-50 km grids and is replaced by documented local values where it was clearly wrong for a small or steep site (Mauna Kea saddle, Dallol: `config/site_climate_overrides.csv`).
+
+Why overall scores look low: no Earth site reproduces the lunar south pole (vacuum, 1/6 g, 25-110 K shadows, sun within a few degrees of the horizon), so the best overall matches are about 0.2-0.3 ("partial"). The globe and map therefore colour the overall match by **rank among Earth tiles** for the chosen Moon target; the panels keep the absolute score and verdict.
 
 ## Status: MVP with draft expert calibration
 

@@ -1,17 +1,17 @@
 {
   "version": "0.4-draft (2026-11-15)",
-  "_changes": "2026-11-15: dust_regolith, biology_sterility and caves_subsurface were briefly removed and then restored: they compare Earth sites with known lunar constants (Apollo regolith, sterile Moon) or a known Moon feature (the Tranquillitatis pit), which are valid analog tests even though they are the same for every Moon target.",
+  "_changes": "2026-11-15 (final): avoid only below -0.5 (clearly misleading); rover mobility and geology/EVA training require workable ground (ops_landing_mobility) instead of 10 km terrain-shape similarity, which becomes supporting; geology/EVA training requires geology only (workable ground supporting: Ries, Clearwater and Sudbury training happened at outcrops inside farmland/lake/forest tiles). Reason: 11 of 13 documented real-world lunar analog uses (config/real_world_uses.csv) were called avoid, blocked by terrain similarity or slightly negative scores. 2026-11-15: dust_regolith, biology_sterility and caves_subsurface were briefly removed and then restored: they compare Earth sites with known lunar constants (Apollo regolith, sterile Moon) or a known Moon feature (the Tranquillitatis pit), which are valid analog tests even though they are the same for every Moon target.",
   "_readme": "Inference rule table. For a (Moon location, Earth location) pair and each experiment: check moon_precondition, compare category scores (config/categories.json, range -1..1) with the minimums, emit sufficient / partial / avoid / not_applicable, and attach 'also account for' caveats. Expressions use the same helpers as categories.json and are evaluated on the Moon row (moon_precondition) or Earth row (earth_hint).",
 
   "decision_rule": {
     "not_applicable": "moon_precondition is false (e.g. no ice at this Moon location), or a required category score is NaN",
-    "avoid": "any required category score < avoid_below (default 0.0)",
+    "avoid": "any required category score < avoid_below (-0.5 since 2026-11-15): the site is clearly misleading for that aspect",
     "sufficient": "every required category score >= its minimum",
-    "partial": "otherwise: no required category below avoid_below, but at least one below its minimum. Report which required categories pass (those sub-tests are valid) and which do not",
+    "partial": "otherwise: no required category below avoid_below, but at least one below its minimum. Report which required categories pass (those sub-tests are valid) and which do not. Real analog campaigns routinely use sites that match the tested aspect and only partly match the rest (Desert RATS, PANGAEA, Apollo geology training)",
     "supporting": "supporting categories never block; a supporting score below its value adds the note 'weak on <category>'",
     "always_attach": "experiment.also_account_for + mandatory_caveats of every required category + the global conditions listed in always_include"
   },
-  "default_avoid_below": 0.0,
+  "default_avoid_below": -0.5,
   "always_include": ["gravity", "vacuum", "radiation", "psr_cryogenic"],
 
   "global_non_reproducible": [
@@ -55,7 +55,7 @@
        "Vegetation, buildings and DSM artefacts can create false hazards on Earth."]},
 
     {"id": "rover_mobility_navigation", "name": "Rover mobility & navigation",
-     "required": {"terrain": 0.5, "dust_regolith": 0.3}, "supporting": {"ops_landing_mobility": 0.4, "illumination": 0.0},
+     "required": {"ops_landing_mobility": 0.4, "dust_regolith": 0.3}, "supporting": {"terrain": 0.3, "illumination": 0.0},
      "moon_precondition": null,
      "also_account_for": [
        "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
@@ -155,7 +155,7 @@
        "Earth caves are humid, biologically active and shaped by water."]},
 
     {"id": "geology_eva_training", "name": "Astronaut field-geology & EVA training",
-     "required": {"geology": 0.4, "terrain": 0.3}, "supporting": {"ops_landing_mobility": 0.2},
+     "required": {"geology": 0.4}, "supporting": {"ops_landing_mobility": 0.3, "terrain": 0.3},
      "moon_precondition": null,
      "also_account_for": [
        "Suit dexterity, EVA time limits and 1/6 g gait are not reproduced.",
