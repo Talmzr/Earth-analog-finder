@@ -132,7 +132,8 @@ def earth_classes(text: str, source: str = "", ice_frac: float = np.nan) -> dict
     c["ice"] = c["ice"] or (np.isfinite(ice_frac) and ice_frac >= 0.7)
     igneous_target = c["anorth"] or c["basalt"] or c["mafic_plut"] or c["granmet"] or c["silicic"] or c["intermediate"]
     c["impact_sed_target"] = c["impact"] and c["sed"] and not igneous_target
-    c["basalt_strong"] = c["basalt"] and (source == "volcano" or not (c["sed"] or c["granmet"] or c["silicic"]))
+    # named analog sites: their curated tags are more reliable than the coarse bedrock map
+    c["basalt_strong"] = c["basalt"] and (source in ("volcano", "named_site") or not (c["sed"] or c["granmet"] or c["silicic"]))
     for name in ("anorth", "impact", "basalt_strong", "intermediate", "silicic", "sed", "granmet", "ice", "uncons"):
         if c.get(name):
             c["primary"] = {"basalt_strong": "basalt", "impact": "impact_sed" if c["impact_sed_target"] else "impact"}.get(name, name)

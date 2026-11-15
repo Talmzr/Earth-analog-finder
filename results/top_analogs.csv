@@ -1,0 +1,601 @@
+moon_zone_id,moon_kind,rank,earth_tile_id,name,source,stratum,center_lat,center_lon,composite,terrain,geology,thermal,water_ice,dust,biology,caves,operations,n_sufficient,n_partial,n_avoid
+shackleton_rim__landing,zone,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.072,0.186,-0.533,-0.648,0.469,0.5,0.343,,0.185,2,6,5
+shackleton_rim__landing,zone,2,lc_antarctic_ice_free_0342,antarctic_ice_free sample 342,landcover_sample,antarctic_ice_free,-84.783,170.41,0.071,0.684,,-0.645,0.48,-0.721,0.416,,0.51,4,0,6
+shackleton_rim__landing,zone,3,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,0.048,0.27,-0.617,-0.717,0.486,0.209,0.322,,0.451,2,6,5
+shackleton_rim__landing,zone,4,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.047,0.261,-0.432,-0.718,0.472,0.212,0.297,,0.295,1,7,5
+shackleton_rim__landing,zone,5,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.046,0.202,0.721,-0.648,0.35,-0.502,0.076,,0.358,3,4,6
+shackleton_rim__landing,zone,6,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,0.034,0.225,-0.617,-0.719,0.486,0.153,0.335,,0.481,2,6,5
+shackleton_rim__landing,zone,7,gvp_355161,Central Andean Arc at 25.1°S,volcano,volcano_field_cone,-25.078,-68.266,0.033,0.67,-0.449,-0.73,-0.644,0.484,0.242,,0.157,1,5,7
+shackleton_rim__landing,zone,8,lc_ice_edge_0273,ice_edge sample 273,landcover_sample,ice_edge,77.267,-67.959,0.026,0.773,-0.57,-0.639,0.371,-0.554,0.172,,0.705,2,2,9
+shackleton_rim__landing,zone,9,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.014,0.224,0.694,-0.647,0.34,-0.581,0.002,,0.29,2,5,6
+shackleton_rim__landing,zone,10,lc_ice_edge_0013,ice_edge sample 13,landcover_sample,ice_edge,37.283,74.385,0.004,0.58,-0.515,-0.719,0.454,-0.326,0.24,,0.424,3,1,9
+shackleton_rim__landing,zone,11,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,-0.001,-0.044,-0.443,-0.642,0.34,0.652,-0.008,,-0.003,1,2,10
+shackleton_rim__landing,zone,12,lc_ice_edge_0389,ice_edge sample 389,landcover_sample,ice_edge,34.469,79.327,-0.002,0.195,-0.617,-0.719,0.442,0.093,0.266,,0.431,2,6,5
+shackleton_rim__landing,zone,13,lc_sparse_cold_0163,sparse_cold sample 163,landcover_sample,sparse_cold,77.978,-21.636,-0.006,0.467,-0.286,-0.64,0.388,-0.468,0.152,,0.496,1,3,9
+shackleton_rim__landing,zone,14,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,-0.015,0.131,-0.43,-0.72,0.436,0.092,0.243,,0.256,1,7,5
+shackleton_rim__landing,zone,15,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,-0.016,0.021,-0.476,-0.725,-0.095,0.621,0.334,,0.07,1,5,7
+shackleton_rim__landing,zone,16,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,-0.017,-0.03,0.693,-0.644,0.332,-0.501,-0.018,,0.322,3,1,9
+shackleton_rim__landing,zone,17,lc_antarctic_ice_free_0253,antarctic_ice_free sample 253,landcover_sample,antarctic_ice_free,-84.943,175.545,-0.017,0.631,-0.48,-0.647,0.437,-0.785,0.373,,0.656,3,1,9
+shackleton_rim__landing,zone,18,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,-0.018,0.407,-0.426,-0.744,-0.643,0.673,0.22,,-0.095,2,2,9
+shackleton_rim__landing,zone,19,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,-0.019,0.132,-0.617,-0.713,0.453,0.165,0.3,,0.257,1,7,5
+shackleton_rim__landing,zone,20,gvp_355108,"Negrillar, La",volcano,volcano_field_cone,-24.319,-68.59,-0.021,0.347,-0.467,-0.731,-0.539,0.516,0.326,,0.061,2,4,7
+shackleton_rim__ice,zone,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.108,0.355,-0.533,-0.63,0.3,0.5,0.343,,0.32,3,5,5
+shackleton_rim__ice,zone,2,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.082,0.569,0.694,-0.655,0.293,-0.581,0.002,,0.337,3,4,6
+shackleton_rim__ice,zone,3,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.06,0.146,-0.443,-0.647,0.293,0.652,-0.008,,0.204,1,6,6
+shackleton_rim__ice,zone,4,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.034,0.326,-0.432,-0.745,0.3,0.212,0.297,,0.27,0,8,5
+shackleton_rim__ice,zone,5,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,0.025,0.335,0.721,-0.659,0.283,-0.576,-0.096,,0.298,2,4,7
+shackleton_rim__ice,zone,6,lc_antarctic_ice_free_0022,antarctic_ice_free sample 22,landcover_sample,antarctic_ice_free,-72.134,24.41,0.022,0.734,-0.433,-0.633,0.3,-0.482,0.309,,0.457,2,2,9
+shackleton_rim__ice,zone,7,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.018,0.408,-0.617,-0.746,0.3,0.165,0.3,,0.287,0,8,5
+shackleton_rim__ice,zone,8,lc_antarctic_ice_free_0414,antarctic_ice_free sample 414,landcover_sample,antarctic_ice_free,-70.869,67.946,0.014,0.678,-0.585,-0.646,0.3,-0.268,0.173,,0.431,2,2,9
+shackleton_rim__ice,zone,9,lc_antarctic_ice_free_0332,antarctic_ice_free sample 332,landcover_sample,antarctic_ice_free,-71.22,67.63,0.012,0.712,-0.362,-0.643,0.3,-0.523,0.278,,0.432,2,2,9
+shackleton_rim__ice,zone,10,lc_ice_edge_0013,ice_edge sample 13,landcover_sample,ice_edge,37.283,74.385,0.007,0.705,-0.515,-0.743,0.3,-0.326,0.24,,0.416,2,2,9
+shackleton_rim__ice,zone,11,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.005,0.198,0.721,-0.657,0.3,-0.502,0.076,,0.117,2,5,6
+shackleton_rim__ice,zone,12,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.004,0.341,-0.43,-0.738,0.3,0.092,0.243,,0.228,0,8,5
+shackleton_rim__ice,zone,13,lc_antarctic_ice_free_0020,antarctic_ice_free sample 20,landcover_sample,antarctic_ice_free,-86.264,-160.565,-0.001,0.412,,-0.607,0.3,-0.489,0.248,,0.33,1,3,6
+shackleton_rim__ice,zone,14,lc_antarctic_ice_free_0279,antarctic_ice_free sample 279,landcover_sample,antarctic_ice_free,-80.027,155.764,-0.003,0.42,-0.458,-0.627,0.3,-0.228,0.287,,0.393,1,3,9
+shackleton_rim__ice,zone,15,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,-0.004,0.478,-0.419,-0.629,0.3,-0.303,0.37,,0.32,1,3,9
+shackleton_rim__ice,zone,16,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,-0.005,0.006,-0.449,-0.648,0.295,0.541,-0.039,,0.116,1,6,6
+shackleton_rim__ice,zone,17,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,-0.007,0.07,-0.504,-0.631,0.3,0.287,0.359,,0.144,0,8,5
+shackleton_rim__ice,zone,18,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,-0.009,0.369,-0.541,-0.636,0.3,-0.081,0.368,,0.259,0,4,9
+shackleton_rim__ice,zone,19,lc_antarctic_ice_free_0221,antarctic_ice_free sample 221,landcover_sample,antarctic_ice_free,-76.166,161.767,-0.011,0.703,-0.416,-0.63,0.3,-0.594,0.302,,0.407,2,2,9
+shackleton_rim__ice,zone,20,lc_antarctic_ice_free_0349,antarctic_ice_free sample 349,landcover_sample,antarctic_ice_free,-72.032,25.699,-0.017,0.578,-0.37,-0.635,0.299,-0.469,0.198,,0.389,1,3,9
+peak_near_cabeus_b__landing,zone,1,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.22,0.485,-0.268,-0.73,0.452,0.44,0.272,,0.776,2,5,5
+peak_near_cabeus_b__landing,zone,2,lc_lichen_moss_0243,lichen_moss sample 243,landcover_sample,lichen_moss,70.862,-76.289,0.194,0.589,0.694,-0.635,0.328,-0.534,-0.079,,0.8,5,1,6
+peak_near_cabeus_b__landing,zone,3,lc_ice_edge_0379,ice_edge sample 379,landcover_sample,ice_edge,69.924,-72.365,0.194,0.545,0.721,-0.634,0.34,-0.548,-0.012,,0.797,5,1,6
+peak_near_cabeus_b__landing,zone,4,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.191,0.672,0.533,-0.631,0.321,-0.5,-0.102,,0.8,5,1,6
+peak_near_cabeus_b__landing,zone,5,lc_antarctic_ice_free_0327,antarctic_ice_free sample 327,landcover_sample,antarctic_ice_free,-84.462,168.533,0.184,0.71,,-0.591,0.44,-0.619,0.371,,0.8,3,1,5
+peak_near_cabeus_b__landing,zone,6,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.178,0.23,0.694,-0.636,0.328,-0.039,0.007,,0.581,3,4,5
+peak_near_cabeus_b__landing,zone,7,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.175,0.339,0.721,-0.635,0.329,-0.316,0.051,,0.664,4,3,5
+peak_near_cabeus_b__landing,zone,8,lc_bare_midlat_0355,bare_midlat sample 355,landcover_sample,bare_midlat,37.437,88.274,0.162,0.712,-0.646,-0.72,0.476,0.098,0.324,,0.8,3,4,5
+peak_near_cabeus_b__landing,zone,9,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.155,0.654,-0.468,-0.76,-0.271,0.656,0.269,,0.473,5,1,6
+peak_near_cabeus_b__landing,zone,10,gvp_225060,Bayuda Volcanic Field,volcano,volcano_field_cone,18.33,32.75,0.151,0.626,-0.43,-0.761,-0.257,0.66,0.281,,0.428,5,1,6
+peak_near_cabeus_b__landing,zone,11,crater_ouarkziz,Ouarkziz impact structure,impact_structure,impact_structure,29.012,-7.552,0.142,0.69,-0.192,-0.757,-0.3,0.343,0.243,,0.441,3,3,6
+peak_near_cabeus_b__landing,zone,12,lc_ice_edge_0391,ice_edge sample 391,landcover_sample,ice_edge,72.38,-75.212,0.137,0.465,0.703,-0.628,0.348,-0.617,-0.055,,0.651,4,2,6
+peak_near_cabeus_b__landing,zone,13,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.136,0.525,-0.617,-0.737,0.431,0.24,0.247,,0.783,3,4,5
+peak_near_cabeus_b__landing,zone,14,lc_bare_midlat_0018,bare_midlat sample 18,landcover_sample,bare_midlat,36.1,86.442,0.132,0.607,-0.659,-0.727,0.473,0.07,0.322,,0.8,3,4,5
+peak_near_cabeus_b__landing,zone,15,lanzarote,Lanzarote (Timanfaya / La Corona tube),named_site,named_site,29.0,-13.75,0.131,0.698,-0.507,-0.751,-0.235,0.463,0.242,,0.501,3,3,6
+peak_near_cabeus_b__landing,zone,16,lc_bare_midlat_0095,bare_midlat sample 95,landcover_sample,bare_midlat,36.196,87.742,0.13,0.597,-0.617,-0.725,0.472,0.034,0.321,,0.8,3,4,5
+peak_near_cabeus_b__landing,zone,17,lc_antarctic_ice_free_0021,antarctic_ice_free sample 21,landcover_sample,antarctic_ice_free,-85.054,163.122,0.127,0.555,,-0.586,0.494,-0.772,0.431,,0.8,4,0,5
+peak_near_cabeus_b__landing,zone,18,lc_bare_midlat_0111,bare_midlat sample 111,landcover_sample,bare_midlat,37.124,86.378,0.12,0.478,-0.617,-0.726,0.482,0.154,0.32,,0.759,2,5,5
+peak_near_cabeus_b__landing,zone,19,atacama_yungay,Atacama Desert (Yungay),named_site,named_site,-24.08,-69.93,0.11,0.732,-0.475,-0.758,-0.248,0.271,0.294,,0.483,2,4,6
+peak_near_cabeus_b__landing,zone,20,lc_bare_polar_0153,bare_polar sample 153,landcover_sample,bare_polar,79.515,-86.514,0.109,0.686,-0.39,-0.621,0.403,-0.351,0.152,,0.8,3,1,8
+peak_near_cabeus_b__ice,zone,1,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.178,0.418,-0.268,-0.746,0.452,0.44,0.272,,0.596,2,6,5
+peak_near_cabeus_b__ice,zone,2,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.157,0.713,0.533,-0.652,0.321,-0.5,-0.102,,0.764,5,1,7
+peak_near_cabeus_b__ice,zone,3,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.151,0.271,0.694,-0.657,0.328,-0.039,0.007,,0.467,3,4,6
+peak_near_cabeus_b__ice,zone,4,lc_bare_midlat_0355,bare_midlat sample 355,landcover_sample,bare_midlat,37.437,88.274,0.15,0.7,-0.646,-0.74,0.476,0.098,0.324,,0.8,3,5,5
+peak_near_cabeus_b__ice,zone,5,lc_antarctic_ice_free_0327,antarctic_ice_free sample 327,landcover_sample,antarctic_ice_free,-84.462,168.533,0.149,0.729,,-0.6,0.44,-0.619,0.371,,0.8,3,1,6
+peak_near_cabeus_b__ice,zone,6,lc_lichen_moss_0243,lichen_moss sample 243,landcover_sample,lichen_moss,70.862,-76.289,0.149,0.63,0.694,-0.655,0.328,-0.534,-0.079,,0.697,5,1,7
+peak_near_cabeus_b__ice,zone,7,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.136,0.376,0.721,-0.655,0.329,-0.316,0.051,,0.539,4,3,6
+peak_near_cabeus_b__ice,zone,8,lc_ice_edge_0379,ice_edge sample 379,landcover_sample,ice_edge,69.924,-72.365,0.135,0.549,0.721,-0.655,0.34,-0.548,-0.012,,0.649,5,1,7
+peak_near_cabeus_b__ice,zone,9,lc_bare_midlat_0018,bare_midlat sample 18,landcover_sample,bare_midlat,36.1,86.442,0.106,0.562,-0.659,-0.744,0.473,0.07,0.322,,0.732,3,5,5
+peak_near_cabeus_b__ice,zone,10,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.105,0.567,-0.617,-0.752,0.243,0.24,0.247,,0.671,2,6,5
+peak_near_cabeus_b__ice,zone,11,lc_ice_edge_0391,ice_edge sample 391,landcover_sample,ice_edge,72.38,-75.212,0.1,0.441,0.703,-0.649,0.348,-0.617,-0.055,,0.673,4,2,7
+peak_near_cabeus_b__ice,zone,12,lc_bare_midlat_0111,bare_midlat sample 111,landcover_sample,bare_midlat,37.124,86.378,0.098,0.444,-0.617,-0.744,0.482,0.154,0.32,,0.674,2,6,5
+peak_near_cabeus_b__ice,zone,13,lc_bare_midlat_0095,bare_midlat sample 95,landcover_sample,bare_midlat,36.196,87.742,0.095,0.526,-0.617,-0.743,0.472,0.034,0.321,,0.713,3,5,5
+peak_near_cabeus_b__ice,zone,14,lc_bare_polar_0004,bare_polar sample 4,landcover_sample,bare_polar,76.396,-93.82,0.089,0.752,-0.516,-0.637,0.348,-0.232,0.023,,0.8,2,2,9
+peak_near_cabeus_b__ice,zone,15,lc_bare_polar_0153,bare_polar sample 153,landcover_sample,bare_polar,79.515,-86.514,0.087,0.701,-0.39,-0.641,0.403,-0.351,0.152,,0.774,3,1,9
+peak_near_cabeus_b__ice,zone,16,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.086,0.448,-0.646,-0.746,0.454,0.167,0.28,,0.642,2,6,5
+peak_near_cabeus_b__ice,zone,17,lc_bare_midlat_0146,bare_midlat sample 146,landcover_sample,bare_midlat,35.492,85.618,0.078,0.455,-0.617,-0.744,0.47,0.082,0.319,,0.625,2,6,5
+peak_near_cabeus_b__ice,zone,18,lc_bare_midlat_0121,bare_midlat sample 121,landcover_sample,bare_midlat,36.194,88.301,0.076,0.477,-0.644,-0.742,0.456,0.065,0.294,,0.66,2,6,5
+peak_near_cabeus_b__ice,zone,19,lc_ice_edge_0312,ice_edge sample 312,landcover_sample,ice_edge,81.329,-53.276,0.076,0.871,-0.48,-0.632,0.419,-0.561,0.183,,0.8,3,1,9
+peak_near_cabeus_b__ice,zone,20,crater_hiawatha,Hiawatha impact structure,impact_structure,impact_structure,78.833,-67.3,0.066,0.543,0.073,-0.64,0.419,-0.63,0.19,,0.724,3,4,6
+haworth__landing,zone,1,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.088,0.305,-0.465,-0.743,0.085,0.621,0.334,,0.286,2,6,5
+haworth__landing,zone,2,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,0.044,0.277,-0.621,-0.724,0.486,0.153,0.335,,0.493,2,6,5
+haworth__landing,zone,3,gvp_355108,"Negrillar, La",volcano,volcano_field_cone,-24.319,-68.59,0.034,0.493,-0.467,-0.749,-0.401,0.516,0.326,,0.168,2,4,7
+haworth__landing,zone,4,gvp_221104,Asavyo,volcano,volcano_shield,13.098,41.599,0.028,0.596,-0.414,-0.761,-0.522,0.539,0.077,,0.158,3,3,7
+haworth__landing,zone,5,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,0.027,0.209,-0.621,-0.73,0.486,0.209,0.322,,0.402,2,6,5
+haworth__landing,zone,6,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.026,0.175,0.616,-0.641,0.332,-0.501,-0.018,,0.42,3,3,7
+haworth__landing,zone,7,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,0.02,0.472,-0.403,-0.761,-0.505,0.673,0.22,,-0.024,2,2,9
+haworth__landing,zone,8,lc_ice_edge_0288,ice_edge sample 288,landcover_sample,ice_edge,34.742,82.244,0.011,0.321,-0.621,-0.721,0.46,-0.026,0.278,,0.494,2,2,9
+haworth__landing,zone,9,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.004,0.101,0.636,-0.641,0.331,-0.569,-0.068,,0.471,3,3,7
+haworth__landing,zone,10,crater_monturaqui,Monturaqui impact structure,impact_structure,impact_structure,-23.933,-68.267,0.001,0.132,0.192,-0.754,-0.405,0.262,0.319,,0.132,0,8,5
+haworth__landing,zone,11,gvp_355161,Central Andean Arc at 25.1°S,volcano,volcano_field_cone,-25.078,-68.266,0.001,0.491,-0.441,-0.748,-0.506,0.484,0.242,,0.082,0,6,7
+haworth__landing,zone,12,lc_bare_midlat_0059,bare_midlat sample 59,landcover_sample,bare_midlat,37.307,88.346,0.0,0.149,-0.65,-0.724,0.466,0.098,0.306,,0.496,2,6,5
+haworth__landing,zone,13,lc_ice_edge_0389,ice_edge sample 389,landcover_sample,ice_edge,34.469,79.327,-0.002,0.206,-0.621,-0.726,0.442,0.093,0.266,,0.42,2,6,5
+haworth__landing,zone,14,lc_antarctic_ice_free_0011,antarctic_ice_free sample 11,landcover_sample,antarctic_ice_free,-78.423,165.709,-0.003,0.094,-0.479,-0.627,0.44,0.021,0.292,,0.413,2,6,5
+haworth__landing,zone,15,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,-0.009,0.041,0.649,-0.643,0.35,-0.502,0.076,,0.257,2,5,6
+haworth__landing,zone,16,gvp_221141,Dama Ali,volcano,volcano_shield,11.28,41.63,-0.009,0.523,-0.386,-0.76,-0.582,0.5,-0.054,,0.144,1,4,8
+haworth__landing,zone,17,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,-0.017,0.141,0.629,-0.641,0.34,-0.581,0.002,,0.236,2,5,6
+haworth__landing,zone,18,lc_antarctic_ice_free_0046,antarctic_ice_free sample 46,landcover_sample,antarctic_ice_free,-74.965,162.414,-0.018,0.555,-0.526,-0.629,0.36,-0.533,0.257,,0.566,2,2,9
+haworth__landing,zone,19,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,-0.019,-0.365,-0.263,-0.731,0.452,0.44,0.272,,0.244,1,4,8
+haworth__landing,zone,20,gvp_221090,Ale Bagu,volcano,volcano_strato_dome,13.512,40.631,-0.02,0.439,-0.436,-0.762,-0.566,0.626,0.076,,-0.032,2,2,9
+haworth__ice,zone,1,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.123,0.449,0.721,-0.662,0.3,-0.502,0.076,,0.615,4,3,6
+haworth__ice,zone,2,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.122,0.593,0.694,-0.66,0.298,-0.581,0.002,,0.598,4,3,6
+haworth__ice,zone,3,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.084,0.276,-0.443,-0.647,0.298,0.652,-0.008,,0.195,1,6,6
+haworth__ice,zone,4,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,0.05,0.643,-0.426,-0.771,-0.699,0.673,0.22,,0.13,3,3,7
+haworth__ice,zone,5,lc_ice_edge_0051,ice_edge sample 51,landcover_sample,ice_edge,36.047,78.45,0.045,0.416,-0.617,-0.744,0.3,0.146,0.287,,0.505,1,7,5
+haworth__ice,zone,6,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.041,0.492,-0.541,-0.642,0.3,-0.081,0.368,,0.457,1,3,9
+haworth__ice,zone,7,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.041,0.383,-0.43,-0.74,0.3,0.092,0.243,,0.433,1,7,5
+haworth__ice,zone,8,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,0.041,0.272,-0.617,-0.746,0.3,0.209,0.322,,0.565,1,7,5
+haworth__ice,zone,9,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.04,0.159,-0.476,-0.757,-0.11,0.621,0.334,,0.322,2,4,7
+haworth__ice,zone,10,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.027,0.102,0.693,-0.66,0.287,-0.501,-0.018,,0.502,2,4,7
+haworth__ice,zone,11,lc_lichen_moss_0070,lichen_moss sample 70,landcover_sample,lichen_moss,71.197,-74.881,0.017,0.664,-0.139,-0.66,0.291,-0.576,0.003,,0.577,2,2,9
+haworth__ice,zone,12,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.016,0.328,-0.617,-0.745,0.3,0.165,0.3,,0.385,1,7,5
+haworth__ice,zone,13,gvp_355112,Corrida de Cori Volcanic Field,volcano,volcano_strato_dome,-25.083,-68.367,0.014,0.614,-0.466,-0.757,-0.679,0.488,0.276,,0.148,1,5,7
+haworth__ice,zone,14,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.008,0.447,-0.419,-0.635,0.3,-0.303,0.37,,0.457,1,3,9
+haworth__ice,zone,15,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,0.007,0.547,-0.366,-0.633,0.3,-0.436,0.37,,0.439,2,2,9
+haworth__ice,zone,16,lc_antarctic_ice_free_0334,antarctic_ice_free sample 334,landcover_sample,antarctic_ice_free,-70.637,67.332,-0.001,0.499,-0.644,-0.65,0.3,-0.222,0.218,,0.545,1,3,9
+haworth__ice,zone,17,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,-0.002,-0.016,-0.533,-0.635,0.3,0.5,0.343,,0.049,1,4,8
+haworth__ice,zone,18,lc_antarctic_ice_free_0129,antarctic_ice_free sample 129,landcover_sample,antarctic_ice_free,-85.483,-156.029,-0.002,0.595,-0.366,-0.624,0.3,-0.548,0.291,,0.5,2,2,9
+haworth__ice,zone,19,lc_antarctic_ice_free_0259,antarctic_ice_free sample 259,landcover_sample,antarctic_ice_free,-73.302,68.439,-0.005,0.633,-0.559,-0.641,0.3,-0.5,0.376,,0.52,2,2,9
+haworth__ice,zone,20,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,-0.007,0.107,-0.617,-0.742,0.3,0.153,0.335,,0.52,1,7,5
+malapert_massif__landing,zone,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.15,0.554,-0.413,-0.628,0.483,0.325,0.363,,0.34,3,4,5
+malapert_massif__landing,zone,2,lc_ice_edge_0184,ice_edge sample 184,landcover_sample,ice_edge,37.466,75.277,0.041,0.726,-0.736,-0.702,0.449,-0.182,0.261,,0.437,3,1,8
+malapert_massif__landing,zone,3,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,0.04,0.46,-0.515,-0.702,0.487,0.031,0.318,,0.283,1,6,5
+malapert_massif__landing,zone,4,lc_ice_edge_0254,ice_edge sample 254,landcover_sample,ice_edge,-31.388,-69.958,0.017,0.557,-0.347,-0.71,0.145,-0.104,0.252,,0.201,0,4,8
+malapert_massif__landing,zone,5,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,0.012,0.456,-0.713,-0.708,0.479,0.045,0.322,,0.295,1,6,5
+malapert_massif__landing,zone,6,gvp_355125,"Incahuasi, Nevado de",volcano,volcano_strato_dome,-27.033,-68.296,0.01,0.56,-0.415,-0.715,-0.353,0.392,0.269,,-0.099,1,3,8
+malapert_massif__landing,zone,7,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.01,0.168,-0.413,-0.719,0.208,0.48,0.328,,0.026,0,7,5
+malapert_massif__landing,zone,8,gvp_357021,Maipo,volcano,volcano_caldera,-34.164,-69.832,0.007,0.525,-0.488,-0.709,0.081,0.094,0.176,,0.176,0,7,5
+malapert_massif__landing,zone,9,lc_antarctic_ice_free_0275,antarctic_ice_free sample 275,landcover_sample,antarctic_ice_free,-80.119,158.358,0.006,0.474,-0.376,-0.634,0.415,-0.343,0.352,,0.273,1,3,8
+malapert_massif__landing,zone,10,lc_antarctic_ice_free_0363,antarctic_ice_free sample 363,landcover_sample,antarctic_ice_free,-80.228,157.94,0.005,0.463,-0.376,-0.635,0.415,-0.32,0.352,,0.264,1,3,8
+malapert_massif__landing,zone,11,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,0.004,0.264,-0.375,-0.715,0.214,0.217,0.349,,0.093,0,7,5
+malapert_massif__landing,zone,12,gvp_355107,Pular,volcano,volcano_strato_dome,-24.188,-68.054,-0.0,0.63,-0.357,-0.718,-0.31,0.117,0.292,,-0.043,0,4,8
+malapert_massif__landing,zone,13,gvp_300261,Ushkovsky,volcano,volcano_strato_dome,56.113,160.509,-0.001,0.422,-0.384,-0.677,0.297,0.146,-0.198,,0.204,0,6,6
+malapert_massif__landing,zone,14,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,-0.009,0.24,-0.389,-0.707,0.441,0.012,0.319,,0.189,1,6,5
+malapert_massif__landing,zone,15,gvp_355110,Llullaillaco,volcano,volcano_strato_dome,-24.72,-68.53,-0.012,0.602,-0.402,-0.715,-0.31,0.12,0.321,,-0.059,0,4,8
+malapert_massif__landing,zone,16,gvp_355092,Licancabur,volcano,volcano_strato_dome,-22.83,-67.88,-0.013,0.462,-0.519,-0.717,-0.097,0.262,0.305,,-0.013,0,4,8
+malapert_massif__landing,zone,17,gvp_357072,Tromen Volcanic Plateau,volcano,volcano_strato_dome,-37.144,-70.033,-0.015,0.549,-0.454,-0.714,0.054,-0.034,0.04,,0.211,0,4,8
+malapert_massif__landing,zone,18,gvp_357060,"Azul, Cerro",volcano,volcano_strato_dome,-35.653,-70.761,-0.019,0.559,-0.417,-0.716,-0.43,0.387,0.087,,-0.122,1,3,8
+malapert_massif__landing,zone,19,gvp_355091,Sairecabur,volcano,volcano_strato_dome,-22.719,-67.891,-0.02,0.219,-0.446,-0.717,0.188,0.219,0.336,,0.092,0,7,5
+malapert_massif__landing,zone,20,lc_bare_hot_0296,bare_hot sample 296,landcover_sample,bare_hot,33.299,78.301,-0.021,0.535,-0.716,-0.704,0.375,-0.12,0.167,,0.305,1,3,8
+malapert_massif__ice,zone,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.054,0.189,-0.413,-0.632,0.483,0.325,0.363,,0.13,1,7,5
+malapert_massif__ice,zone,2,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,-0.01,-0.051,-0.477,-0.635,0.344,0.595,0.068,,-0.005,1,3,9
+malapert_massif__ice,zone,3,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,-0.033,0.283,-0.713,-0.734,0.479,0.045,0.322,,0.196,1,7,5
+malapert_massif__ice,zone,4,lc_antarctic_ice_free_0110,antarctic_ice_free sample 110,landcover_sample,antarctic_ice_free,-78.116,162.877,-0.039,0.139,-0.474,-0.618,0.469,-0.055,0.406,,0.091,2,2,9
+malapert_massif__ice,zone,5,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,-0.042,-0.184,-0.339,-0.632,0.483,0.287,0.359,,-0.058,1,3,9
+malapert_massif__ice,zone,6,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,-0.046,0.106,-0.389,-0.747,0.441,0.012,0.319,,0.114,1,7,5
+malapert_massif__ice,zone,7,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,-0.046,0.182,-0.515,-0.74,0.439,0.031,0.318,,0.106,1,7,5
+malapert_massif__ice,zone,8,lc_ice_edge_0096,ice_edge sample 96,landcover_sample,ice_edge,35.256,78.798,-0.047,0.329,-0.736,-0.74,0.44,-0.006,0.249,,0.209,1,3,9
+malapert_massif__ice,zone,9,gvp_300261,Ushkovsky,volcano,volcano_strato_dome,56.113,160.509,-0.055,0.235,-0.384,-0.701,0.27,0.146,-0.198,,0.087,0,7,6
+malapert_massif__ice,zone,10,lc_antarctic_ice_free_0133,antarctic_ice_free sample 133,landcover_sample,antarctic_ice_free,-72.106,24.908,-0.065,0.185,-0.398,-0.633,0.346,-0.152,0.259,,0.103,0,4,9
+malapert_massif__ice,zone,11,lc_antarctic_ice_free_0200,antarctic_ice_free sample 200,landcover_sample,antarctic_ice_free,-71.867,169.625,-0.067,0.378,-0.67,-0.634,0.296,-0.14,0.113,,0.203,0,4,9
+malapert_massif__ice,zone,12,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,-0.068,-0.043,-0.477,-0.632,0.392,0.02,0.289,,0.181,0,5,8
+malapert_massif__ice,zone,13,lc_antarctic_ice_free_0363,antarctic_ice_free sample 363,landcover_sample,antarctic_ice_free,-80.228,157.94,-0.071,0.208,-0.376,-0.626,0.415,-0.32,0.352,,0.118,1,3,9
+malapert_massif__ice,zone,14,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,-0.074,-0.013,-0.413,-0.756,-0.067,0.48,0.328,,-0.156,0,2,11
+malapert_massif__ice,zone,15,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,-0.075,0.132,-0.375,-0.754,-0.061,0.217,0.349,,-0.061,0,4,9
+malapert_massif__ice,zone,16,lc_bare_midlat_0286,bare_midlat sample 286,landcover_sample,bare_midlat,36.134,77.691,-0.077,0.181,-0.713,-0.743,0.407,0.077,0.232,,0.099,1,7,5
+malapert_massif__ice,zone,17,lc_antarctic_ice_free_0275,antarctic_ice_free sample 275,landcover_sample,antarctic_ice_free,-80.119,158.358,-0.079,0.195,-0.376,-0.626,0.415,-0.343,0.352,,0.113,1,3,9
+malapert_massif__ice,zone,18,lc_ice_edge_0138,ice_edge sample 138,landcover_sample,ice_edge,35.671,81.307,-0.081,0.353,-0.713,-0.739,0.448,-0.248,0.258,,0.231,1,3,9
+malapert_massif__ice,zone,19,beacon_valley,Beacon Valley (buried ice),named_site,named_site,-77.82,160.65,-0.086,-0.01,-0.443,-0.623,0.422,-0.021,0.276,,0.01,1,2,10
+malapert_massif__ice,zone,20,gvp_355091,Sairecabur,volcano,volcano_strato_dome,-22.719,-67.891,-0.087,0.125,-0.446,-0.755,-0.087,0.219,0.336,,-0.036,0,4,9
+mons_mouton__landing,zone,1,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.189,0.614,0.703,-0.632,0.331,-0.569,-0.068,,0.75,5,1,6
+mons_mouton__landing,zone,2,gvp_225005,Atakor Volcanic Field,volcano,volcano_field_cone,23.33,5.83,0.166,0.696,-0.458,-0.749,-0.31,0.658,0.297,,0.461,5,1,6
+mons_mouton__landing,zone,3,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.165,0.532,0.693,-0.632,0.332,-0.501,-0.018,,0.608,5,1,6
+mons_mouton__landing,zone,4,lc_bare_midlat_0266,bare_midlat sample 266,landcover_sample,bare_midlat,35.525,83.0,0.157,0.715,-0.646,-0.723,0.456,0.091,0.294,,0.8,3,4,5
+mons_mouton__landing,zone,5,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.128,0.426,0.533,-0.63,0.321,-0.5,-0.102,,0.728,4,2,6
+mons_mouton__landing,zone,6,lc_ice_edge_0158,ice_edge sample 158,landcover_sample,ice_edge,36.3,89.876,0.127,0.67,-0.644,-0.718,0.442,-0.011,0.269,,0.8,3,1,8
+mons_mouton__landing,zone,7,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.125,0.063,0.694,-0.635,0.328,-0.039,0.007,,0.461,3,4,5
+mons_mouton__landing,zone,8,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.109,0.13,0.721,-0.633,0.329,-0.316,0.051,,0.52,3,4,5
+mons_mouton__landing,zone,9,lc_ice_edge_0277,ice_edge sample 277,landcover_sample,ice_edge,78.262,-90.914,0.107,0.799,-0.453,-0.617,0.317,-0.292,-0.068,,0.8,2,1,9
+mons_mouton__landing,zone,10,lc_lichen_moss_0243,lichen_moss sample 243,landcover_sample,lichen_moss,70.862,-76.289,0.106,0.299,0.694,-0.634,0.328,-0.534,-0.079,,0.625,3,3,6
+mons_mouton__landing,zone,11,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.102,0.4,-0.617,-0.733,0.431,0.24,0.247,,0.733,2,5,5
+mons_mouton__landing,zone,12,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.101,0.426,-0.646,-0.724,0.454,0.167,0.28,,0.76,2,5,5
+mons_mouton__landing,zone,13,gvp_221125,Assab Volcanic Field,volcano,volcano_field_cone,12.95,42.43,0.099,0.568,-0.431,-0.758,-0.391,0.669,0.143,,0.312,4,2,6
+mons_mouton__landing,zone,14,lc_bare_polar_0026,bare_polar sample 26,landcover_sample,bare_polar,74.67,-90.561,0.096,0.623,-0.59,-0.622,0.351,-0.078,0.106,,0.746,2,2,8
+mons_mouton__landing,zone,15,gvp_323160,Ubehebe Craters,volcano,volcano_field_cone,37.02,-117.45,0.091,0.484,-0.383,-0.747,-0.338,0.631,0.244,,0.272,2,4,6
+mons_mouton__landing,zone,16,lc_ice_edge_0391,ice_edge sample 391,landcover_sample,ice_edge,72.38,-75.212,0.09,0.296,0.703,-0.627,0.348,-0.617,-0.055,,0.576,3,3,6
+mons_mouton__landing,zone,17,lc_lichen_moss_0028,lichen_moss sample 28,landcover_sample,lichen_moss,62.059,-74.382,0.089,0.544,0.693,-0.664,0.29,-0.681,-0.439,,0.617,4,2,6
+mons_mouton__landing,zone,18,lc_ice_edge_0379,ice_edge sample 379,landcover_sample,ice_edge,69.924,-72.365,0.084,0.193,0.721,-0.633,0.34,-0.548,-0.012,,0.569,3,3,6
+mons_mouton__landing,zone,19,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.08,0.23,-0.476,-0.739,0.249,0.621,0.334,,0.297,1,6,5
+mons_mouton__landing,zone,20,gvp_225009,"Toh, Tarso",volcano,volcano_field_cone,21.33,16.33,0.079,0.44,-0.495,-0.754,-0.291,0.647,0.314,,0.285,2,4,6
+mons_mouton__ice,zone,1,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.145,0.602,0.693,-0.64,0.315,-0.501,-0.018,,0.616,5,1,7
+mons_mouton__ice,zone,2,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.128,0.469,-0.476,-0.746,-0.022,0.621,0.334,,0.446,3,3,7
+mons_mouton__ice,zone,3,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.123,0.405,0.721,-0.644,0.349,-0.502,0.076,,0.623,4,3,6
+mons_mouton__ice,zone,4,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.104,0.446,0.694,-0.641,0.328,-0.581,0.002,,0.628,4,3,6
+mons_mouton__ice,zone,5,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,0.094,0.422,-0.617,-0.733,0.468,0.209,0.322,,0.602,2,6,5
+mons_mouton__ice,zone,6,lc_bare_polar_0237,bare_polar sample 237,landcover_sample,bare_polar,81.241,-72.069,0.089,0.643,-0.527,-0.627,0.383,-0.15,0.204,,0.692,2,2,9
+mons_mouton__ice,zone,7,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,0.081,0.428,-0.617,-0.728,0.468,0.153,0.335,,0.564,2,6,5
+mons_mouton__ice,zone,8,gvp_355108,"Negrillar, La",volcano,volcano_field_cone,-24.319,-68.59,0.08,0.75,-0.467,-0.751,-0.554,0.516,0.326,,0.256,3,3,7
+mons_mouton__ice,zone,9,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.078,0.445,0.703,-0.641,0.314,-0.569,-0.068,,0.474,4,2,7
+mons_mouton__ice,zone,10,lc_ice_edge_0288,ice_edge sample 288,landcover_sample,ice_edge,34.742,82.244,0.075,0.554,-0.617,-0.725,0.447,-0.026,0.278,,0.643,3,1,9
+mons_mouton__ice,zone,11,lc_ice_edge_0087,ice_edge sample 87,landcover_sample,ice_edge,36.497,91.197,0.064,0.518,-0.432,-0.723,0.409,-0.183,0.213,,0.712,3,1,9
+mons_mouton__ice,zone,12,lc_bare_midlat_0059,bare_midlat sample 59,landcover_sample,bare_midlat,37.307,88.346,0.055,0.428,-0.646,-0.727,0.447,0.098,0.306,,0.512,2,6,5
+mons_mouton__ice,zone,13,lc_ice_edge_0389,ice_edge sample 389,landcover_sample,ice_edge,34.469,79.327,0.052,0.401,-0.617,-0.729,0.424,0.093,0.266,,0.551,2,6,5
+mons_mouton__ice,zone,14,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.045,0.037,-0.443,-0.619,0.328,0.652,-0.008,,0.197,1,6,6
+mons_mouton__ice,zone,15,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.039,0.215,-0.43,-0.725,0.417,0.092,0.243,,0.543,2,6,5
+mons_mouton__ice,zone,16,lc_antarctic_ice_free_0122,antarctic_ice_free sample 122,landcover_sample,antarctic_ice_free,-84.951,163.784,0.038,0.456,,-0.601,0.501,-0.758,0.438,,0.603,3,1,6
+mons_mouton__ice,zone,17,lc_ice_edge_0051,ice_edge sample 51,landcover_sample,ice_edge,36.047,78.45,0.037,0.232,-0.617,-0.731,0.434,0.146,0.287,,0.584,2,6,5
+mons_mouton__ice,zone,18,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.029,0.254,-0.541,-0.627,0.483,-0.081,0.368,,0.543,2,2,9
+mons_mouton__ice,zone,19,lc_ice_edge_0002,ice_edge sample 2,landcover_sample,ice_edge,67.912,-67.563,0.026,0.654,-0.476,-0.648,0.292,-0.303,-0.107,,0.672,2,1,10
+mons_mouton__ice,zone,20,lc_antarctic_ice_free_0106,antarctic_ice_free sample 106,landcover_sample,antarctic_ice_free,-81.691,158.619,0.021,0.586,-0.504,-0.621,0.426,-0.522,0.363,,0.637,3,1,9
+mons_mouton_plateau__landing,zone,1,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.156,0.262,-0.268,-0.731,0.452,0.44,0.272,,0.635,2,6,5
+mons_mouton_plateau__landing,zone,2,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.14,0.543,-0.617,-0.737,0.431,0.24,0.247,,0.8,3,5,5
+mons_mouton_plateau__landing,zone,3,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.131,0.543,0.533,-0.635,0.321,-0.5,-0.102,,0.8,5,1,7
+mons_mouton_plateau__landing,zone,4,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.13,0.122,0.694,-0.64,0.328,-0.039,0.007,,0.508,3,4,6
+mons_mouton_plateau__landing,zone,5,lc_lichen_moss_0243,lichen_moss sample 243,landcover_sample,lichen_moss,70.862,-76.289,0.116,0.431,0.694,-0.639,0.328,-0.534,-0.079,,0.713,4,2,7
+mons_mouton_plateau__landing,zone,6,lc_bare_midlat_0355,bare_midlat sample 355,landcover_sample,bare_midlat,37.437,88.274,0.114,0.507,-0.646,-0.721,0.476,0.098,0.324,,0.788,3,5,5
+mons_mouton_plateau__landing,zone,7,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.113,0.214,0.721,-0.638,0.329,-0.316,0.051,,0.581,3,4,6
+mons_mouton_plateau__landing,zone,8,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.11,0.46,-0.646,-0.729,0.454,0.167,0.28,,0.782,2,6,5
+mons_mouton_plateau__landing,zone,9,lc_ice_edge_0379,ice_edge sample 379,landcover_sample,ice_edge,69.924,-72.365,0.104,0.355,0.721,-0.638,0.34,-0.548,-0.012,,0.675,4,2,7
+mons_mouton_plateau__landing,zone,10,gvp_221125,Assab Volcanic Field,volcano,volcano_field_cone,12.95,42.43,0.091,0.649,-0.431,-0.761,-0.499,0.669,0.143,,0.312,4,2,7
+mons_mouton_plateau__landing,zone,11,lc_bare_midlat_0018,bare_midlat sample 18,landcover_sample,bare_midlat,36.1,86.442,0.077,0.399,-0.659,-0.728,0.473,0.07,0.322,,0.734,2,6,5
+mons_mouton_plateau__landing,zone,12,lc_bare_midlat_0121,bare_midlat sample 121,landcover_sample,bare_midlat,36.194,88.301,0.074,0.397,-0.644,-0.724,0.456,0.065,0.294,,0.732,2,6,5
+mons_mouton_plateau__landing,zone,13,lc_bare_midlat_0266,bare_midlat sample 266,landcover_sample,bare_midlat,35.525,83.0,0.073,0.405,-0.646,-0.727,0.456,0.091,0.294,,0.689,2,6,5
+mons_mouton_plateau__landing,zone,14,lc_bare_midlat_0095,bare_midlat sample 95,landcover_sample,bare_midlat,36.196,87.742,0.072,0.386,-0.617,-0.726,0.472,0.034,0.321,,0.724,2,6,5
+mons_mouton_plateau__landing,zone,15,gvp_225005,Atakor Volcanic Field,volcano,volcano_field_cone,23.33,5.83,0.072,0.478,-0.458,-0.753,-0.418,0.658,0.297,,0.287,2,4,7
+mons_mouton_plateau__landing,zone,16,lc_bare_midlat_0111,bare_midlat sample 111,landcover_sample,bare_midlat,37.124,86.378,0.069,0.29,-0.617,-0.727,0.482,0.154,0.32,,0.66,2,6,5
+mons_mouton_plateau__landing,zone,17,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.068,0.477,-0.468,-0.76,-0.435,0.656,0.269,,0.311,3,3,7
+mons_mouton_plateau__landing,zone,18,lc_antarctic_ice_free_0327,antarctic_ice_free sample 327,landcover_sample,antarctic_ice_free,-84.462,168.533,0.062,0.416,,-0.603,0.44,-0.619,0.371,,0.697,2,2,6
+mons_mouton_plateau__landing,zone,19,lc_bare_polar_0004,bare_polar sample 4,landcover_sample,bare_polar,76.396,-93.82,0.061,0.592,-0.516,-0.622,0.348,-0.232,0.023,,0.8,2,2,9
+mons_mouton_plateau__landing,zone,20,gvp_225060,Bayuda Volcanic Field,volcano,volcano_field_cone,18.33,32.75,0.057,0.412,-0.43,-0.762,-0.421,0.66,0.281,,0.266,2,4,7
+mons_mouton_plateau__ice,zone,1,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.123,0.166,-0.268,-0.737,0.452,0.44,0.272,,0.541,2,6,5
+mons_mouton_plateau__ice,zone,2,lc_bare_midlat_0266,bare_midlat sample 266,landcover_sample,bare_midlat,35.525,83.0,0.117,0.555,-0.646,-0.734,0.456,0.091,0.294,,0.8,3,5,5
+mons_mouton_plateau__ice,zone,3,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.095,0.424,-0.646,-0.736,0.454,0.167,0.28,,0.734,2,6,5
+mons_mouton_plateau__ice,zone,4,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.084,0.359,0.703,-0.644,0.331,-0.569,-0.068,,0.625,4,2,7
+mons_mouton_plateau__ice,zone,5,lc_bare_midlat_0111,bare_midlat sample 111,landcover_sample,bare_midlat,37.124,86.378,0.083,0.363,-0.617,-0.734,0.482,0.154,0.32,,0.673,2,6,5
+mons_mouton_plateau__ice,zone,6,lc_bare_midlat_0355,bare_midlat sample 355,landcover_sample,bare_midlat,37.437,88.274,0.081,0.39,-0.646,-0.728,0.476,0.098,0.324,,0.721,2,6,5
+mons_mouton_plateau__ice,zone,7,gvp_225005,Atakor Volcanic Field,volcano,volcano_field_cone,23.33,5.83,0.081,0.578,-0.458,-0.758,-0.572,0.658,0.297,,0.337,4,2,7
+mons_mouton_plateau__ice,zone,8,lc_ice_edge_0158,ice_edge sample 158,landcover_sample,ice_edge,36.3,89.876,0.078,0.489,-0.644,-0.729,0.442,-0.011,0.269,,0.771,2,2,9
+mons_mouton_plateau__ice,zone,9,lc_bare_polar_0026,bare_polar sample 26,landcover_sample,bare_polar,74.67,-90.561,0.076,0.581,-0.59,-0.634,0.351,-0.078,0.106,,0.745,2,2,9
+mons_mouton_plateau__ice,zone,10,lc_ice_edge_0391,ice_edge sample 391,landcover_sample,ice_edge,72.38,-75.212,0.075,0.345,0.703,-0.639,0.348,-0.617,-0.055,,0.619,4,2,7
+mons_mouton_plateau__ice,zone,11,gvp_323160,Ubehebe Craters,volcano,volcano_field_cone,37.02,-117.45,0.074,0.591,-0.383,-0.754,-0.6,0.631,0.244,,0.28,3,3,7
+mons_mouton_plateau__ice,zone,12,gvp_221125,Assab Volcanic Field,volcano,volcano_field_cone,12.95,42.43,0.073,0.648,-0.431,-0.765,-0.653,0.669,0.143,,0.305,4,2,7
+mons_mouton_plateau__ice,zone,13,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.068,-0.08,0.694,-0.647,0.328,-0.039,0.007,,0.353,3,2,8
+mons_mouton_plateau__ice,zone,14,gvp_225009,"Toh, Tarso",volcano,volcano_field_cone,21.33,16.33,0.063,0.541,-0.495,-0.761,-0.553,0.647,0.314,,0.29,3,3,7
+mons_mouton_plateau__ice,zone,15,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.063,0.303,-0.476,-0.749,-0.064,0.621,0.334,,0.243,2,4,7
+mons_mouton_plateau__ice,zone,16,gvp_390013,"Pleiades, The",volcano,volcano_strato_dome,-72.67,165.5,0.061,0.526,-0.568,-0.623,0.383,-0.224,0.316,,0.728,2,2,9
+mons_mouton_plateau__ice,zone,17,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.054,0.404,-0.617,-0.743,0.109,0.24,0.247,,0.624,1,7,5
+mons_mouton_plateau__ice,zone,18,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.054,0.237,0.693,-0.644,0.332,-0.501,-0.018,,0.46,3,3,7
+mons_mouton_plateau__ice,zone,19,gvp_231110,"Haylan, Jabal",volcano,volcano_field_cone,15.4,45.1,0.049,0.727,-0.43,-0.764,-0.576,0.32,0.258,,0.377,2,4,7
+mons_mouton_plateau__ice,zone,20,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.048,0.001,0.721,-0.645,0.329,-0.316,0.051,,0.42,3,4,6
+nobile_rim_1__landing,zone,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.163,0.628,-0.482,-0.619,0.483,0.325,0.363,,0.384,3,4,5
+nobile_rim_1__landing,zone,2,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.085,0.422,-0.417,-0.74,0.227,0.48,0.328,,0.177,0,7,5
+nobile_rim_1__landing,zone,3,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,0.043,0.263,-0.525,-0.616,0.483,0.287,0.359,,0.196,1,6,5
+nobile_rim_1__landing,zone,4,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,0.042,0.2,-0.493,-0.608,0.344,0.595,0.068,,0.136,1,6,5
+nobile_rim_1__landing,zone,5,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,0.032,0.41,-0.437,-0.726,0.441,0.012,0.319,,0.286,1,6,5
+nobile_rim_1__landing,zone,6,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,0.029,0.403,-0.48,-0.735,0.233,0.217,0.349,,0.176,0,7,5
+nobile_rim_1__landing,zone,7,lc_antarctic_ice_free_0168,antarctic_ice_free sample 168,landcover_sample,antarctic_ice_free,-77.871,162.409,0.028,0.391,-0.46,-0.62,0.454,-0.03,0.325,,0.249,1,3,8
+nobile_rim_1__landing,zone,8,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.009,0.253,-0.479,-0.618,0.392,0.02,0.289,,0.332,1,6,5
+nobile_rim_1__landing,zone,9,gvp_355091,Sairecabur,volcano,volcano_strato_dome,-22.719,-67.891,0.006,0.323,-0.473,-0.737,0.208,0.219,0.336,,0.156,0,7,5
+nobile_rim_1__landing,zone,10,gvp_355092,Licancabur,volcano,volcano_strato_dome,-22.83,-67.88,0.006,0.522,-0.507,-0.737,-0.078,0.262,0.305,,0.025,0,6,6
+nobile_rim_1__landing,zone,11,lc_antarctic_ice_free_0232,antarctic_ice_free sample 232,landcover_sample,antarctic_ice_free,-84.32,167.366,0.0,0.437,-0.175,-0.611,0.454,-0.567,0.391,,0.277,1,3,8
+nobile_rim_1__landing,zone,12,beacon_valley,Beacon Valley (buried ice),named_site,named_site,-77.82,160.65,-0.003,0.323,-0.477,-0.621,0.422,-0.021,0.276,,0.2,1,3,8
+nobile_rim_1__landing,zone,13,lc_ice_edge_0274,ice_edge sample 274,landcover_sample,ice_edge,71.86,-28.182,-0.008,0.587,-0.275,-0.632,0.387,-0.553,0.1,,0.333,1,3,8
+nobile_rim_1__landing,zone,14,lc_antarctic_ice_free_0374,antarctic_ice_free sample 374,landcover_sample,antarctic_ice_free,-86.739,-147.911,-0.01,0.342,,-0.591,0.451,-0.61,0.388,,0.209,1,3,5
+nobile_rim_1__landing,zone,15,gvp_300261,Ushkovsky,volcano,volcano_strato_dome,56.113,160.509,-0.016,0.4,-0.44,-0.676,0.297,0.146,-0.198,,0.191,0,6,6
+nobile_rim_1__landing,zone,16,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,-0.02,0.303,-0.621,-0.711,0.479,0.045,0.322,,0.205,1,6,5
+nobile_rim_1__landing,zone,17,gvp_355012,Parinacota,volcano,volcano_strato_dome,-18.166,-69.142,-0.028,0.413,-0.545,-0.74,0.186,0.033,0.271,,0.147,0,7,5
+nobile_rim_1__landing,zone,18,lc_antarctic_ice_free_0133,antarctic_ice_free sample 133,landcover_sample,antarctic_ice_free,-72.106,24.908,-0.031,0.335,-0.461,-0.632,0.346,-0.152,0.259,,0.186,0,4,8
+nobile_rim_1__landing,zone,19,gvp_355011,Taapaca,volcano,volcano_strato_dome,-18.1,-69.5,-0.037,0.296,-0.43,-0.739,0.199,0.041,0.268,,0.12,0,7,5
+nobile_rim_1__landing,zone,20,lc_antarctic_ice_free_0007,antarctic_ice_free sample 7,landcover_sample,antarctic_ice_free,-79.746,158.725,-0.038,0.333,-0.426,-0.624,0.444,-0.332,0.331,,0.212,1,3,8
+nobile_rim_1__ice,zone,1,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,0.079,0.369,-0.534,-0.74,0.457,0.36,0.322,,0.289,1,7,5
+nobile_rim_1__ice,zone,2,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.058,0.089,-0.51,-0.618,0.469,0.5,0.343,,0.166,2,6,5
+nobile_rim_1__ice,zone,3,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,0.053,0.177,-0.493,-0.622,0.344,0.595,0.068,,0.132,1,7,5
+nobile_rim_1__ice,zone,4,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.05,0.373,-0.479,-0.62,0.392,0.02,0.289,,0.436,1,7,5
+nobile_rim_1__ice,zone,5,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,0.048,0.224,-0.493,-0.628,0.34,0.541,-0.039,,0.181,1,6,6
+nobile_rim_1__ice,zone,6,lc_ice_edge_0212,ice_edge sample 212,landcover_sample,ice_edge,71.994,-77.922,0.045,0.387,0.578,-0.645,0.351,-0.562,0.032,,0.349,4,3,6
+nobile_rim_1__ice,zone,7,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.041,0.176,-0.482,-0.621,0.476,0.325,0.363,,0.122,1,7,5
+nobile_rim_1__ice,zone,8,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,0.038,0.197,-0.525,-0.62,0.478,0.287,0.359,,0.167,1,7,5
+nobile_rim_1__ice,zone,9,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.021,0.332,-0.417,-0.752,-0.066,0.48,0.328,,0.047,0,6,7
+nobile_rim_1__ice,zone,10,lc_ice_edge_0164,ice_edge sample 164,landcover_sample,ice_edge,38.057,95.426,0.018,0.345,-0.621,-0.731,0.438,0.107,0.249,,0.376,2,6,5
+nobile_rim_1__ice,zone,11,lc_antarctic_ice_free_0168,antarctic_ice_free sample 168,landcover_sample,antarctic_ice_free,-77.871,162.409,0.003,0.29,-0.46,-0.618,0.454,-0.03,0.325,,0.199,1,3,9
+nobile_rim_1__ice,zone,12,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.0,-0.034,-0.504,-0.628,0.339,0.652,-0.008,,0.035,1,3,9
+nobile_rim_1__ice,zone,13,gvp_390017,Morning,volcano,volcano_shield,-78.5,163.53,-0.01,0.264,-0.388,-0.614,0.326,-0.122,0.216,,0.356,1,3,9
+nobile_rim_1__ice,zone,14,gvp_355220,Tipas,volcano,volcano_strato_dome,-27.196,-68.561,-0.01,0.383,-0.435,-0.741,0.448,-0.245,0.324,,0.375,2,2,9
+nobile_rim_1__ice,zone,15,lc_bare_midlat_0234,bare_midlat sample 234,landcover_sample,bare_midlat,37.241,86.797,-0.01,0.158,-0.621,-0.736,0.473,0.162,0.333,,0.282,1,7,5
+nobile_rim_1__ice,zone,16,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,-0.014,0.032,-0.45,-0.736,0.464,0.212,0.297,,0.214,1,7,5
+nobile_rim_1__ice,zone,17,lc_antarctic_ice_free_0271,antarctic_ice_free sample 271,landcover_sample,antarctic_ice_free,-85.149,170.45,-0.025,0.259,,-0.595,0.48,-0.55,0.416,,0.221,2,2,6
+nobile_rim_1__ice,zone,18,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,-0.034,0.169,-0.437,-0.74,0.441,0.012,0.319,,0.155,1,7,5
+nobile_rim_1__ice,zone,19,lc_ice_edge_0182,ice_edge sample 182,landcover_sample,ice_edge,81.052,-71.801,-0.034,0.374,-0.522,-0.634,0.401,-0.314,0.225,,0.388,2,2,9
+nobile_rim_1__ice,zone,20,beacon_valley,Beacon Valley (buried ice),named_site,named_site,-77.82,160.65,-0.035,0.184,-0.477,-0.612,0.422,-0.021,0.276,,0.125,1,3,9
+nobile_rim_2__landing,zone,1,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.136,0.58,0.629,-0.632,0.34,-0.581,0.002,,0.495,5,2,5
+nobile_rim_2__landing,zone,2,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.113,0.382,0.649,-0.635,0.35,-0.502,0.076,,0.461,4,3,5
+nobile_rim_2__landing,zone,3,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.082,0.552,-0.526,-0.638,0.483,-0.081,0.368,,0.48,3,1,8
+nobile_rim_2__landing,zone,4,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.082,0.488,-0.447,-0.717,0.435,0.092,0.243,,0.462,2,5,5
+nobile_rim_2__landing,zone,5,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.081,0.327,-0.504,-0.61,0.34,0.652,-0.008,,0.215,2,4,6
+nobile_rim_2__landing,zone,6,lc_ice_edge_0051,ice_edge sample 51,landcover_sample,ice_edge,36.047,78.45,0.071,0.479,-0.621,-0.723,0.452,0.146,0.287,,0.49,2,5,5
+nobile_rim_2__landing,zone,7,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.069,0.215,-0.51,-0.628,0.469,0.5,0.343,,0.203,2,5,5
+nobile_rim_2__landing,zone,8,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.068,0.587,-0.46,-0.628,0.476,-0.303,0.37,,0.519,3,1,8
+nobile_rim_2__landing,zone,9,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.061,0.447,-0.621,-0.725,0.453,0.165,0.3,,0.438,2,5,5
+nobile_rim_2__landing,zone,10,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.059,0.34,-0.45,-0.724,0.471,0.212,0.297,,0.339,2,5,5
+nobile_rim_2__landing,zone,11,gvp_355112,Corrida de Cori Volcanic Field,volcano,volcano_strato_dome,-25.083,-68.367,0.048,0.536,-0.421,-0.739,-0.351,0.488,0.276,,0.096,1,5,6
+nobile_rim_2__landing,zone,12,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,0.048,0.468,-0.403,-0.755,-0.371,0.673,0.22,,0.022,2,4,6
+nobile_rim_2__landing,zone,13,lc_antarctic_ice_free_0020,antarctic_ice_free sample 20,landcover_sample,antarctic_ice_free,-86.264,-160.565,0.038,0.476,,-0.599,0.34,-0.489,0.248,,0.304,1,3,5
+nobile_rim_2__landing,zone,14,lc_ice_edge_0331,ice_edge sample 331,landcover_sample,ice_edge,35.597,82.061,0.037,0.547,-0.621,-0.723,0.457,-0.157,0.284,,0.509,3,1,8
+nobile_rim_2__landing,zone,15,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,0.036,0.265,-0.534,-0.728,0.457,0.36,0.322,,0.208,1,6,5
+nobile_rim_2__landing,zone,16,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,0.034,0.526,-0.313,-0.629,0.433,-0.436,0.37,,0.402,3,1,8
+nobile_rim_2__landing,zone,17,lc_antarctic_ice_free_0259,antarctic_ice_free sample 259,landcover_sample,antarctic_ice_free,-73.302,68.439,0.024,0.616,-0.543,-0.636,0.49,-0.5,0.376,,0.489,3,1,8
+nobile_rim_2__landing,zone,18,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,0.017,0.26,0.649,-0.636,0.333,-0.576,-0.096,,0.201,2,4,6
+nobile_rim_2__landing,zone,19,lc_antarctic_ice_free_0207,antarctic_ice_free sample 207,landcover_sample,antarctic_ice_free,-72.756,68.526,0.013,0.533,-0.526,-0.638,0.465,-0.47,0.402,,0.483,4,0,8
+nobile_rim_2__landing,zone,20,lc_antarctic_ice_free_0139,antarctic_ice_free sample 139,landcover_sample,antarctic_ice_free,-72.089,23.94,0.013,0.532,-0.282,-0.641,0.405,-0.578,0.294,,0.459,3,1,8
+nobile_rim_2__ice,zone,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.126,0.241,-0.51,-0.627,0.446,0.5,0.343,,0.464,3,5,5
+nobile_rim_2__ice,zone,2,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.12,0.281,-0.504,-0.61,0.313,0.652,-0.008,,0.457,2,5,6
+nobile_rim_2__ice,zone,3,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.103,0.625,0.629,-0.632,0.313,-0.581,0.002,,0.443,5,2,6
+nobile_rim_2__ice,zone,4,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,0.08,0.246,-0.534,-0.721,0.433,0.36,0.322,,0.467,2,6,5
+nobile_rim_2__ice,zone,5,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.08,0.556,-0.526,-0.637,0.467,-0.081,0.368,,0.496,3,1,9
+nobile_rim_2__ice,zone,6,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.075,0.448,0.649,-0.634,0.333,-0.502,0.076,,0.298,3,4,6
+nobile_rim_2__ice,zone,7,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,0.065,0.609,-0.313,-0.628,0.43,-0.436,0.37,,0.614,3,1,9
+nobile_rim_2__ice,zone,8,lc_ice_edge_0051,ice_edge sample 51,landcover_sample,ice_edge,36.047,78.45,0.06,0.504,-0.621,-0.715,0.418,0.146,0.287,,0.374,2,6,5
+nobile_rim_2__ice,zone,9,lc_antarctic_ice_free_0259,antarctic_ice_free sample 259,landcover_sample,antarctic_ice_free,-73.302,68.439,0.057,0.727,-0.543,-0.636,0.49,-0.5,0.376,,0.671,3,1,9
+nobile_rim_2__ice,zone,10,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.057,0.446,-0.447,-0.709,0.402,0.092,0.243,,0.366,2,6,5
+nobile_rim_2__ice,zone,11,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.045,0.561,-0.46,-0.628,0.469,-0.303,0.37,,0.471,3,1,9
+nobile_rim_2__ice,zone,12,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.044,0.255,-0.45,-0.716,0.438,0.212,0.297,,0.323,2,6,5
+nobile_rim_2__ice,zone,13,lc_antarctic_ice_free_0020,antarctic_ice_free sample 20,landcover_sample,antarctic_ice_free,-86.264,-160.565,0.042,0.441,,-0.598,0.34,-0.489,0.248,,0.514,1,3,6
+nobile_rim_2__ice,zone,14,lc_antarctic_ice_free_0414,antarctic_ice_free sample 414,landcover_sample,antarctic_ice_free,-70.869,67.946,0.035,0.629,-0.61,-0.644,0.365,-0.268,0.173,,0.623,2,2,9
+nobile_rim_2__ice,zone,15,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.033,0.372,-0.621,-0.717,0.419,0.165,0.3,,0.333,2,6,5
+nobile_rim_2__ice,zone,16,lc_antarctic_ice_free_0349,antarctic_ice_free sample 349,landcover_sample,antarctic_ice_free,-72.032,25.699,0.028,0.636,-0.36,-0.642,0.319,-0.469,0.198,,0.607,2,2,9
+nobile_rim_2__ice,zone,17,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,0.017,0.244,0.649,-0.632,0.3,-0.576,-0.096,,0.396,3,3,7
+nobile_rim_2__ice,zone,18,lc_antarctic_ice_free_0022,antarctic_ice_free sample 22,landcover_sample,antarctic_ice_free,-72.134,24.41,0.015,0.565,-0.461,-0.641,0.378,-0.482,0.309,,0.616,2,2,9
+nobile_rim_2__ice,zone,19,lc_lichen_moss_0070,lichen_moss sample 70,landcover_sample,lichen_moss,71.197,-74.881,0.01,0.676,-0.175,-0.632,0.305,-0.576,0.003,,0.512,2,2,9
+nobile_rim_2__ice,zone,20,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,0.006,-0.156,-0.493,-0.613,0.344,0.595,0.068,,0.248,1,4,8
+de_gerlache_rim_2__landing,zone,1,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.189,0.865,-0.496,-0.629,0.392,0.02,0.289,,0.684,2,5,5
+de_gerlache_rim_2__landing,zone,2,gvp_390017,Morning,volcano,volcano_shield,-78.5,163.53,0.065,0.551,-0.417,-0.635,0.326,-0.122,0.216,,0.479,2,2,8
+de_gerlache_rim_2__landing,zone,3,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.059,0.192,-0.533,-0.629,0.469,0.5,0.343,,0.193,2,5,5
+de_gerlache_rim_2__landing,zone,4,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.035,0.214,-0.49,-0.63,0.483,0.325,0.363,,0.142,1,6,5
+de_gerlache_rim_2__landing,zone,5,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.019,0.192,-0.432,-0.719,0.472,0.212,0.297,,0.261,1,6,5
+de_gerlache_rim_2__landing,zone,6,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,0.018,0.163,-0.449,-0.625,0.344,0.541,-0.039,,0.129,1,5,6
+de_gerlache_rim_2__landing,zone,7,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.009,0.186,-0.46,-0.737,0.208,0.48,0.328,,0.06,0,7,5
+de_gerlache_rim_2__landing,zone,8,lc_ice_edge_0212,ice_edge sample 212,landcover_sample,ice_edge,71.994,-77.922,0.007,0.153,0.634,-0.632,0.351,-0.562,0.032,,0.189,2,5,5
+de_gerlache_rim_2__landing,zone,9,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,0.006,0.066,-0.449,-0.625,0.344,0.595,0.068,,0.057,1,6,5
+de_gerlache_rim_2__landing,zone,10,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,0.004,0.126,-0.504,-0.626,0.483,0.287,0.359,,0.116,1,6,5
+de_gerlache_rim_2__landing,zone,11,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,-0.004,0.151,0.721,-0.636,0.333,-0.576,-0.096,,0.142,2,4,6
+de_gerlache_rim_2__landing,zone,12,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,-0.009,0.107,-0.529,-0.724,0.457,0.36,0.322,,0.119,1,6,5
+de_gerlache_rim_2__landing,zone,13,lc_antarctic_ice_free_0168,antarctic_ice_free sample 168,landcover_sample,antarctic_ice_free,-77.871,162.409,-0.011,0.244,-0.419,-0.63,0.454,-0.03,0.325,,0.163,1,3,8
+de_gerlache_rim_2__landing,zone,14,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,-0.017,-0.023,-0.443,-0.624,0.34,0.652,-0.008,,0.013,1,2,9
+de_gerlache_rim_2__landing,zone,15,lc_ice_edge_0164,ice_edge sample 164,landcover_sample,ice_edge,38.057,95.426,-0.02,0.237,-0.617,-0.714,0.445,0.107,0.249,,0.288,1,6,5
+de_gerlache_rim_2__landing,zone,16,lc_bare_midlat_0234,bare_midlat sample 234,landcover_sample,bare_midlat,37.241,86.797,-0.024,0.156,-0.617,-0.719,0.48,0.162,0.333,,0.244,1,6,5
+de_gerlache_rim_2__landing,zone,17,lc_antarctic_ice_free_0271,antarctic_ice_free sample 271,landcover_sample,antarctic_ice_free,-85.149,170.45,-0.028,0.232,,-0.621,0.48,-0.55,0.416,,0.191,2,2,5
+de_gerlache_rim_2__landing,zone,18,lc_ice_edge_0019,ice_edge sample 19,landcover_sample,ice_edge,-21.938,-68.428,-0.03,0.455,-0.49,-0.741,-0.16,0.147,0.336,,0.023,0,6,6
+de_gerlache_rim_2__landing,zone,19,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,-0.049,0.142,-0.489,-0.733,0.214,0.217,0.349,,0.045,0,7,5
+de_gerlache_rim_2__landing,zone,20,gvp_355220,Tipas,volcano,volcano_strato_dome,-27.196,-68.561,-0.06,0.227,-0.481,-0.724,0.448,-0.245,0.324,,0.262,1,3,8
+de_gerlache_rim_2__ice,zone,1,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.057,0.441,-0.46,-0.757,0.006,0.48,0.328,,0.148,0,8,5
+de_gerlache_rim_2__ice,zone,2,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,0.048,0.156,-0.449,-0.65,0.344,0.595,0.068,,0.104,1,7,5
+de_gerlache_rim_2__ice,zone,3,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.043,0.197,-0.49,-0.642,0.483,0.325,0.363,,0.131,1,7,5
+de_gerlache_rim_2__ice,zone,4,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,0.02,0.393,-0.469,-0.749,0.441,0.012,0.319,,0.27,1,7,5
+de_gerlache_rim_2__ice,zone,5,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,0.014,0.411,-0.617,-0.737,0.479,0.045,0.322,,0.264,1,7,5
+de_gerlache_rim_2__ice,zone,6,lc_antarctic_ice_free_0168,antarctic_ice_free sample 168,landcover_sample,antarctic_ice_free,-77.871,162.409,0.012,0.316,-0.419,-0.64,0.454,-0.03,0.325,,0.203,1,3,9
+de_gerlache_rim_2__ice,zone,7,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,0.008,0.092,-0.504,-0.642,0.483,0.287,0.359,,0.093,1,7,5
+de_gerlache_rim_2__ice,zone,8,gvp_355091,Sairecabur,volcano,volcano_strato_dome,-22.719,-67.891,-0.003,0.402,-0.509,-0.756,0.011,0.219,0.336,,0.173,0,8,5
+de_gerlache_rim_2__ice,zone,9,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,-0.019,0.347,-0.489,-0.755,0.013,0.217,0.349,,0.103,0,8,5
+de_gerlache_rim_2__ice,zone,10,beacon_valley,Beacon Valley (buried ice),named_site,named_site,-77.82,160.65,-0.024,0.259,-0.511,-0.633,0.422,-0.021,0.276,,0.161,1,3,9
+de_gerlache_rim_2__ice,zone,11,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,-0.032,-0.019,-0.529,-0.749,0.457,0.36,0.322,,0.04,1,4,8
+de_gerlache_rim_2__ice,zone,12,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,-0.032,-0.199,-0.533,-0.64,0.469,0.5,0.343,,-0.038,2,2,9
+de_gerlache_rim_2__ice,zone,13,lc_antarctic_ice_free_0007,antarctic_ice_free sample 7,landcover_sample,antarctic_ice_free,-79.746,158.725,-0.033,0.366,-0.407,-0.644,0.444,-0.332,0.331,,0.229,1,3,9
+de_gerlache_rim_2__ice,zone,14,lc_ice_edge_0062,ice_edge sample 62,landcover_sample,ice_edge,38.298,89.228,-0.038,0.377,-0.617,-0.74,0.485,-0.19,0.314,,0.269,1,3,9
+de_gerlache_rim_2__ice,zone,15,lc_antarctic_ice_free_0133,antarctic_ice_free sample 133,landcover_sample,antarctic_ice_free,-72.106,24.908,-0.045,0.282,-0.433,-0.64,0.346,-0.152,0.259,,0.153,0,4,9
+de_gerlache_rim_2__ice,zone,16,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,-0.05,-0.131,-0.449,-0.655,0.344,0.541,-0.039,,-0.047,1,2,10
+de_gerlache_rim_2__ice,zone,17,gvp_355011,Taapaca,volcano,volcano_strato_dome,-18.1,-69.5,-0.05,0.356,-0.439,-0.759,0.002,0.041,0.268,,0.128,0,8,5
+de_gerlache_rim_2__ice,zone,18,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,-0.05,0.187,-0.55,-0.742,0.439,0.031,0.318,,0.106,1,7,5
+de_gerlache_rim_2__ice,zone,19,lc_antarctic_ice_free_0114,antarctic_ice_free sample 114,landcover_sample,antarctic_ice_free,-79.941,156.465,-0.051,0.327,-0.534,-0.639,0.411,-0.243,0.283,,0.209,1,3,9
+de_gerlache_rim_2__ice,zone,20,lc_ice_edge_0212,ice_edge sample 212,landcover_sample,ice_edge,71.994,-77.922,-0.053,0.025,0.634,-0.66,0.351,-0.562,0.032,,0.106,2,5,6
+slater_plain__landing,zone,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.112,0.318,-0.533,-0.624,0.469,0.5,0.343,,0.264,3,5,5
+slater_plain__landing,zone,2,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.066,0.342,-0.432,-0.736,0.472,0.212,0.297,,0.34,2,6,5
+slater_plain__landing,zone,3,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.031,0.067,-0.443,-0.638,0.34,0.652,-0.008,,0.062,1,6,6
+slater_plain__landing,zone,4,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.026,0.286,-0.43,-0.728,0.436,0.092,0.243,,0.346,2,6,5
+slater_plain__landing,zone,5,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.014,0.222,0.694,-0.643,0.34,-0.581,0.002,,0.289,2,5,6
+slater_plain__landing,zone,6,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.013,0.317,-0.541,-0.627,0.483,-0.081,0.368,,0.346,2,2,9
+slater_plain__landing,zone,7,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.006,0.237,-0.617,-0.737,0.453,0.165,0.3,,0.317,2,6,5
+slater_plain__landing,zone,8,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.002,0.04,0.721,-0.646,0.35,-0.502,0.076,,0.265,2,5,6
+slater_plain__landing,zone,9,lc_ice_edge_0051,ice_edge sample 51,landcover_sample,ice_edge,36.047,78.45,-0.001,0.212,-0.617,-0.734,0.452,0.146,0.287,,0.336,2,6,5
+slater_plain__landing,zone,10,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,-0.001,0.349,-0.419,-0.624,0.476,-0.303,0.37,,0.383,2,2,9
+slater_plain__landing,zone,11,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,-0.005,0.207,-0.496,-0.624,0.392,0.02,0.289,,0.295,0,8,5
+slater_plain__landing,zone,12,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,-0.009,0.442,-0.426,-0.767,-0.627,0.673,0.22,,-0.072,2,2,9
+slater_plain__landing,zone,13,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,-0.025,-0.018,-0.476,-0.75,-0.063,0.621,0.334,,0.058,1,2,10
+slater_plain__landing,zone,14,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,-0.03,-0.001,-0.617,-0.736,0.486,0.209,0.322,,0.291,1,4,8
+slater_plain__landing,zone,15,lc_antarctic_ice_free_0139,antarctic_ice_free sample 139,landcover_sample,antarctic_ice_free,-72.089,23.94,-0.036,0.427,-0.307,-0.629,0.405,-0.578,0.294,,0.401,2,2,9
+slater_plain__landing,zone,16,lc_antarctic_ice_free_0022,antarctic_ice_free sample 22,landcover_sample,antarctic_ice_free,-72.134,24.41,-0.038,0.467,-0.433,-0.63,0.378,-0.482,0.309,,0.341,1,3,9
+slater_plain__landing,zone,17,lc_antarctic_ice_free_0113,antarctic_ice_free sample 113,landcover_sample,antarctic_ice_free,-83.16,164.669,-0.039,0.528,-0.651,-0.627,0.458,-0.495,0.395,,0.368,2,2,9
+slater_plain__landing,zone,18,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,-0.039,0.335,-0.366,-0.623,0.433,-0.436,0.37,,0.292,1,3,9
+slater_plain__landing,zone,19,lc_ice_edge_0331,ice_edge sample 331,landcover_sample,ice_edge,35.597,82.061,-0.04,0.292,-0.617,-0.734,0.457,-0.157,0.284,,0.362,2,2,9
+slater_plain__landing,zone,20,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,-0.04,-0.057,-0.529,-0.74,0.457,0.36,0.322,,0.02,1,4,8
+slater_plain__ice,zone,1,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.079,0.355,-0.476,-0.75,-0.088,0.621,0.334,,0.304,3,3,7
+slater_plain__ice,zone,2,lc_sparse_cold_0049,sparse_cold sample 49,landcover_sample,sparse_cold,70.079,-71.105,0.056,0.223,0.721,-0.647,0.35,-0.502,0.076,,0.395,3,4,6
+slater_plain__ice,zone,3,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.055,0.111,-0.533,-0.629,0.469,0.5,0.343,,0.148,2,6,5
+slater_plain__ice,zone,4,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,0.055,0.68,-0.426,-0.766,-0.652,0.673,0.22,,0.074,3,3,7
+slater_plain__ice,zone,5,lc_bare_midlat_0148,bare_midlat sample 148,landcover_sample,bare_midlat,38.128,88.354,0.049,0.272,-0.617,-0.737,0.482,0.209,0.322,,0.48,2,6,5
+slater_plain__ice,zone,6,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.038,0.3,0.694,-0.644,0.34,-0.581,0.002,,0.351,3,4,6
+slater_plain__ice,zone,7,lc_ice_edge_0013,ice_edge sample 13,landcover_sample,ice_edge,37.283,74.385,0.03,0.681,-0.515,-0.734,0.45,-0.326,0.24,,0.489,3,1,9
+slater_plain__ice,zone,8,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,0.027,0.576,-0.366,-0.628,0.433,-0.436,0.37,,0.441,3,1,9
+slater_plain__ice,zone,9,lc_antarctic_ice_free_0221,antarctic_ice_free sample 221,landcover_sample,antarctic_ice_free,-76.166,161.767,0.024,0.715,-0.416,-0.63,0.405,-0.594,0.302,,0.562,3,1,9
+slater_plain__ice,zone,10,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,0.022,0.174,-0.617,-0.731,0.482,0.153,0.335,,0.487,2,6,5
+slater_plain__ice,zone,11,lc_ice_edge_0389,ice_edge sample 389,landcover_sample,ice_edge,34.469,79.327,0.007,0.215,-0.617,-0.733,0.437,0.093,0.266,,0.478,2,6,5
+slater_plain__ice,zone,12,lc_antarctic_ice_free_0342,antarctic_ice_free sample 342,landcover_sample,antarctic_ice_free,-84.783,170.41,0.006,0.465,,-0.626,0.48,-0.721,0.416,,0.396,3,1,6
+slater_plain__ice,zone,13,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.0,0.099,-0.432,-0.736,0.467,0.212,0.297,,0.205,1,7,5
+slater_plain__ice,zone,14,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,-0.004,-0.062,-0.443,-0.639,0.34,0.652,-0.008,,-0.01,1,2,10
+slater_plain__ice,zone,15,gvp_221104,Asavyo,volcano,volcano_shield,13.098,41.599,-0.005,0.548,-0.441,-0.767,-0.669,0.539,0.077,,0.135,3,3,7
+slater_plain__ice,zone,16,gvp_355161,Central Andean Arc at 25.1°S,volcano,volcano_field_cone,-25.078,-68.266,-0.005,0.536,-0.449,-0.755,-0.653,0.484,0.242,,0.105,1,5,7
+slater_plain__ice,zone,17,lc_antarctic_ice_free_0259,antarctic_ice_free sample 259,landcover_sample,antarctic_ice_free,-73.302,68.439,-0.006,0.557,-0.559,-0.63,0.49,-0.5,0.376,,0.466,3,1,9
+slater_plain__ice,zone,18,lc_antarctic_ice_free_0411,antarctic_ice_free sample 411,landcover_sample,antarctic_ice_free,-71.377,67.896,-0.006,0.549,-0.362,-0.635,0.444,-0.606,0.359,,0.475,3,1,9
+slater_plain__ice,zone,19,lc_antarctic_ice_free_0122,antarctic_ice_free sample 122,landcover_sample,antarctic_ice_free,-84.951,163.784,-0.006,0.39,,-0.626,0.501,-0.758,0.438,,0.445,3,1,6
+slater_plain__ice,zone,20,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,-0.007,-0.012,0.693,-0.643,0.329,-0.501,-0.018,,0.372,3,1,9
+moon_shackleton__tile,tile,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.113,0.428,-0.428,-0.68,0.3,0.325,0.363,,0.428,1,7,5
+moon_shackleton__tile,tile,2,lc_antarctic_ice_free_0110,antarctic_ice_free sample 110,landcover_sample,antarctic_ice_free,-78.116,162.877,0.1,0.61,-0.483,-0.676,0.3,-0.055,0.406,,0.634,3,1,9
+moon_shackleton__tile,tile,3,lc_antarctic_ice_free_0048,antarctic_ice_free sample 48,landcover_sample,antarctic_ice_free,-86.227,-158.471,0.04,0.52,-0.396,-0.663,0.274,-0.186,0.213,,0.544,2,2,9
+moon_shackleton__tile,tile,4,gvp_390020,Erebus,volcano,volcano_strato_dome,-77.53,167.17,0.039,0.521,-0.33,-0.678,0.3,-0.229,0.341,,0.445,2,2,9
+moon_shackleton__tile,tile,5,lc_ice_edge_0102,ice_edge sample 102,landcover_sample,ice_edge,65.304,146.065,0.032,0.183,-0.4,-0.707,0.258,0.373,-0.037,,0.399,1,6,6
+moon_shackleton__tile,tile,6,lc_antarctic_ice_free_0363,antarctic_ice_free sample 363,landcover_sample,antarctic_ice_free,-80.228,157.94,0.016,0.482,-0.455,-0.683,0.3,-0.32,0.352,,0.588,1,3,9
+moon_shackleton__tile,tile,7,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,0.011,0.376,-0.49,-0.769,0.3,0.031,0.318,,0.355,1,7,5
+moon_shackleton__tile,tile,8,gvp_300261,Ushkovsky,volcano,volcano_strato_dome,56.113,160.509,-0.007,0.32,-0.348,-0.737,0.216,0.146,-0.198,,0.36,1,6,6
+moon_shackleton__tile,tile,9,gvp_357010,Tupungatito,volcano,volcano_strato_dome,-33.425,-69.797,-0.009,0.582,-0.335,-0.772,-0.223,-0.168,0.24,,0.494,2,1,10
+moon_shackleton__tile,tile,10,lc_ice_edge_0253,ice_edge sample 253,landcover_sample,ice_edge,35.216,77.761,-0.01,0.471,-0.551,-0.768,0.3,-0.223,0.18,,0.572,1,3,9
+moon_shackleton__tile,tile,11,lc_ice_edge_0240,ice_edge sample 240,landcover_sample,ice_edge,37.721,72.504,-0.018,0.385,-0.437,-0.769,0.29,-0.244,0.249,,0.511,1,3,9
+moon_shackleton__tile,tile,12,lc_antarctic_ice_free_0170,antarctic_ice_free sample 170,landcover_sample,antarctic_ice_free,-72.335,169.764,-0.022,0.555,-0.553,-0.687,0.268,-0.441,0.184,,0.606,2,2,9
+moon_shackleton__tile,tile,13,lc_ice_edge_0254,ice_edge sample 254,landcover_sample,ice_edge,-31.388,-69.958,-0.023,0.592,-0.475,-0.775,-0.235,-0.104,0.252,,0.432,2,1,10
+moon_shackleton__tile,tile,14,gvp_300240,Tolbachik,volcano,volcano_shield,55.832,160.326,-0.026,0.568,-0.228,-0.739,-0.09,-0.115,-0.327,,0.434,2,0,11
+moon_shackleton__tile,tile,15,lc_ice_edge_0146,ice_edge sample 146,landcover_sample,ice_edge,39.323,96.978,-0.031,0.354,-0.596,-0.77,0.3,-0.145,0.182,,0.52,1,3,9
+moon_shackleton__tile,tile,16,lc_ice_edge_0232,ice_edge sample 232,landcover_sample,ice_edge,36.422,74.881,-0.036,0.358,-0.572,-0.773,0.3,-0.186,0.148,,0.534,1,3,9
+moon_shackleton__tile,tile,17,lc_ice_edge_0321,ice_edge sample 321,landcover_sample,ice_edge,35.7,77.226,-0.04,0.493,-0.551,-0.768,0.3,-0.416,0.203,,0.576,1,3,9
+moon_shackleton__tile,tile,18,lc_ice_edge_0151,ice_edge sample 151,landcover_sample,ice_edge,31.384,78.907,-0.04,0.224,-0.422,-0.772,0.161,0.054,0.11,,0.334,1,7,5
+moon_shackleton__tile,tile,19,lc_ice_edge_0092,ice_edge sample 92,landcover_sample,ice_edge,34.47,77.231,-0.041,0.324,-0.49,-0.769,0.268,-0.149,0.114,,0.452,1,3,9
+moon_shackleton__tile,tile,20,lc_ice_edge_0302,ice_edge sample 302,landcover_sample,ice_edge,38.428,73.163,-0.043,0.287,-0.572,-0.768,0.3,-0.131,0.292,,0.409,1,3,9
+moon_peak_cabeus_b__tile,tile,1,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.16,0.536,-0.466,-0.732,-0.056,0.621,0.334,,0.579,5,1,7
+moon_peak_cabeus_b__tile,tile,2,lc_antarctic_ice_free_0011,antarctic_ice_free sample 11,landcover_sample,antarctic_ice_free,-78.423,165.709,0.151,0.611,-0.477,-0.63,0.44,0.021,0.292,,0.8,3,5,5
+moon_peak_cabeus_b__tile,tile,3,lc_lichen_moss_0112,lichen_moss sample 112,landcover_sample,lichen_moss,72.934,-80.852,0.136,0.756,0.53,-0.628,0.36,-0.688,-0.152,,0.8,5,1,7
+moon_peak_cabeus_b__tile,tile,4,lc_bare_midlat_0059,bare_midlat sample 59,landcover_sample,bare_midlat,37.307,88.346,0.093,0.483,-0.673,-0.714,0.466,0.098,0.306,,0.71,2,6,5
+moon_peak_cabeus_b__tile,tile,5,lc_ice_edge_0344,ice_edge sample 344,landcover_sample,ice_edge,34.643,81.518,0.093,0.691,-0.649,-0.716,0.456,-0.17,0.266,,0.8,3,1,9
+moon_peak_cabeus_b__tile,tile,6,lc_antarctic_ice_free_0035,antarctic_ice_free sample 35,landcover_sample,antarctic_ice_free,-80.044,156.529,0.082,0.552,-0.461,-0.63,0.411,-0.16,0.284,,0.651,3,1,9
+moon_peak_cabeus_b__tile,tile,7,lc_ice_edge_0288,ice_edge sample 288,landcover_sample,ice_edge,34.742,82.244,0.077,0.473,-0.649,-0.718,0.46,-0.026,0.278,,0.784,2,2,9
+moon_peak_cabeus_b__tile,tile,8,gvp_323160,Ubehebe Craters,volcano,volcano_field_cone,37.02,-117.45,0.073,0.589,-0.352,-0.739,-0.603,0.631,0.244,,0.234,3,3,7
+moon_peak_cabeus_b__tile,tile,9,gvp_225009,"Toh, Tarso",volcano,volcano_field_cone,21.33,16.33,0.072,0.622,-0.503,-0.745,-0.556,0.647,0.314,,0.24,3,3,7
+moon_peak_cabeus_b__tile,tile,10,lc_ice_edge_0325,ice_edge sample 325,landcover_sample,ice_edge,34.352,82.053,0.07,0.715,-0.649,-0.718,0.458,-0.309,0.268,,0.8,3,1,9
+moon_peak_cabeus_b__tile,tile,11,lc_antarctic_ice_free_0355,antarctic_ice_free sample 355,landcover_sample,antarctic_ice_free,-77.538,163.637,0.069,0.674,-0.556,-0.629,0.508,-0.494,0.4,,0.8,3,1,9
+moon_peak_cabeus_b__tile,tile,12,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.066,0.235,0.634,-0.634,0.332,-0.501,-0.018,,0.595,3,3,7
+moon_peak_cabeus_b__tile,tile,13,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.063,0.335,0.642,-0.634,0.331,-0.569,-0.068,,0.558,4,2,7
+moon_peak_cabeus_b__tile,tile,14,gvp_231070,"Rahat, Harrat",volcano,volcano_field_cone,23.08,39.78,0.062,0.512,-0.43,-0.748,-0.561,0.65,0.288,,0.26,3,3,7
+moon_peak_cabeus_b__tile,tile,15,lc_antarctic_ice_free_0079,antarctic_ice_free sample 79,landcover_sample,antarctic_ice_free,-84.508,179.261,0.061,0.56,,-0.608,0.401,-0.771,0.338,,0.759,3,1,6
+moon_peak_cabeus_b__tile,tile,16,lc_antarctic_ice_free_0354,antarctic_ice_free sample 354,landcover_sample,antarctic_ice_free,-84.209,160.316,0.06,0.595,-0.295,-0.61,0.526,-0.696,0.463,,0.786,4,0,9
+moon_peak_cabeus_b__tile,tile,17,gvp_390013,"Pleiades, The",volcano,volcano_strato_dome,-72.67,165.5,0.057,0.53,-0.545,-0.645,0.383,-0.224,0.316,,0.69,2,2,9
+moon_peak_cabeus_b__tile,tile,18,gvp_231040,"Lunayyir, Harrat",volcano,volcano_field_cone,25.17,37.75,0.056,0.648,-0.408,-0.748,-0.555,0.384,0.304,,0.363,2,4,7
+moon_peak_cabeus_b__tile,tile,19,lc_antarctic_ice_free_0357,antarctic_ice_free sample 357,landcover_sample,antarctic_ice_free,-79.881,158.895,0.052,0.6,-0.448,-0.63,0.415,-0.398,0.3,,0.672,3,1,9
+moon_peak_cabeus_b__tile,tile,20,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.046,-0.042,-0.255,-0.72,0.452,0.44,0.272,,0.247,1,4,8
+moon_haworth__tile,tile,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,-0.019,0.053,-0.482,-0.636,0.3,0.325,0.363,,0.009,0,8,5
+moon_haworth__tile,tile,2,lc_ice_edge_0124,ice_edge sample 124,landcover_sample,ice_edge,83.435,-32.685,-0.053,-0.208,-0.493,-0.629,0.3,0.595,0.068,,-0.054,1,3,9
+moon_haworth__tile,tile,3,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,-0.086,-0.107,-0.479,-0.635,0.3,0.02,0.289,,0.217,0,5,8
+moon_haworth__tile,tile,4,gvp_390020,Erebus,volcano,volcano_strato_dome,-77.53,167.17,-0.091,0.09,-0.401,-0.639,0.3,-0.229,0.341,,0.144,0,4,9
+moon_haworth__tile,tile,5,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,-0.099,-0.098,-0.417,-0.749,-0.108,0.48,0.328,,-0.184,0,2,11
+moon_haworth__tile,tile,6,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,-0.103,-0.33,-0.493,-0.635,0.3,0.541,-0.039,,-0.098,1,2,10
+moon_haworth__tile,tile,7,gvp_355130,"Ojos del Salado, Nevados",volcano,volcano_strato_dome,-27.109,-68.541,-0.106,-0.054,-0.437,-0.737,0.3,0.012,0.319,,0.056,0,5,8
+moon_haworth__tile,tile,8,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,-0.107,0.031,-0.621,-0.723,0.3,0.045,0.322,,0.048,0,8,5
+moon_haworth__tile,tile,9,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,-0.109,0.0,-0.541,-0.73,0.3,0.031,0.318,,0.028,0,8,5
+moon_haworth__tile,tile,10,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,-0.109,-0.25,-0.525,-0.633,0.3,0.287,0.359,,-0.119,0,4,9
+moon_haworth__tile,tile,11,gvp_300261,Ushkovsky,volcano,volcano_strato_dome,56.113,160.509,-0.121,0.025,-0.44,-0.69,0.244,0.146,-0.198,,-0.025,0,5,8
+moon_haworth__tile,tile,12,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,-0.122,-0.49,-0.51,-0.636,0.3,0.5,0.343,,-0.177,1,3,9
+moon_haworth__tile,tile,13,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,-0.126,-0.008,-0.48,-0.746,-0.101,0.217,0.349,,-0.104,0,2,11
+moon_haworth__tile,tile,14,lc_antarctic_ice_free_0168,antarctic_ice_free sample 168,landcover_sample,antarctic_ice_free,-77.871,162.409,-0.13,-0.108,-0.46,-0.637,0.3,-0.03,0.325,,-0.069,0,2,11
+moon_haworth__tile,tile,15,gvp_390015,Melbourne,volcano,volcano_strato_dome,-74.35,164.7,-0.131,0.393,-0.42,-0.64,-0.274,-0.284,0.266,,0.014,0,3,10
+moon_haworth__tile,tile,16,lc_antarctic_ice_free_0133,antarctic_ice_free sample 133,landcover_sample,antarctic_ice_free,-72.106,24.908,-0.133,-0.015,-0.461,-0.647,0.3,-0.152,0.259,,0.004,0,3,10
+moon_haworth__tile,tile,17,beacon_valley,Beacon Valley (buried ice),named_site,named_site,-77.82,160.65,-0.134,-0.102,-0.477,-0.638,0.3,-0.021,0.276,,-0.064,0,2,11
+moon_haworth__tile,tile,18,gvp_355091,Sairecabur,volcano,volcano_strato_dome,-22.719,-67.891,-0.134,-0.064,-0.473,-0.747,-0.127,0.219,0.336,,-0.061,0,2,11
+moon_haworth__tile,tile,19,lc_ice_edge_0102,ice_edge sample 102,landcover_sample,ice_edge,65.304,146.065,-0.136,-0.278,-0.49,-0.663,0.279,0.373,-0.037,,-0.134,0,3,10
+moon_haworth__tile,tile,20,lc_antarctic_ice_free_0110,antarctic_ice_free sample 110,landcover_sample,antarctic_ice_free,-78.116,162.877,-0.138,-0.109,-0.514,-0.641,0.3,-0.055,0.406,,-0.078,1,1,11
+moon_malapert_massif__tile,tile,1,dry_valleys_wright,McMurdo Dry Valleys (Wright Valley),named_site,named_site,-77.52,161.6,0.117,0.382,-0.413,-0.655,0.483,0.325,0.363,,0.443,1,5,5
+moon_malapert_massif__tile,tile,2,gvp_355125,"Incahuasi, Nevado de",volcano,volcano_strato_dome,-27.033,-68.296,0.112,0.608,-0.415,-0.731,-0.234,0.392,0.269,,0.362,2,4,5
+moon_malapert_massif__tile,tile,3,gvp_355107,Pular,volcano,volcano_strato_dome,-24.188,-68.054,0.096,0.647,-0.357,-0.731,-0.191,0.117,0.292,,0.454,2,4,5
+moon_malapert_massif__tile,tile,4,lc_ice_edge_0386,ice_edge sample 386,landcover_sample,ice_edge,39.294,93.872,0.095,0.492,-0.515,-0.729,0.487,0.031,0.318,,0.686,1,5,5
+moon_malapert_massif__tile,tile,5,gvp_355110,Llullaillaco,volcano,volcano_strato_dome,-24.72,-68.53,0.078,0.592,-0.402,-0.731,-0.191,0.12,0.321,,0.43,2,4,5
+moon_malapert_massif__tile,tile,6,lc_ice_edge_0184,ice_edge sample 184,landcover_sample,ice_edge,37.466,75.277,0.073,0.678,-0.736,-0.728,0.449,-0.182,0.261,,0.8,2,1,8
+moon_malapert_massif__tile,tile,7,gvp_357021,Maipo,volcano,volcano_caldera,-34.164,-69.832,0.057,0.464,-0.488,-0.729,0.2,0.094,0.176,,0.559,1,5,5
+moon_malapert_massif__tile,tile,8,gvp_357060,"Azul, Cerro",volcano,volcano_strato_dome,-35.653,-70.761,0.057,0.541,-0.417,-0.727,-0.311,0.387,0.087,,0.253,1,5,5
+moon_malapert_massif__tile,tile,9,lc_ice_edge_0254,ice_edge sample 254,landcover_sample,ice_edge,-31.388,-69.958,0.049,0.526,-0.347,-0.735,0.265,-0.104,0.252,,0.474,2,1,8
+moon_malapert_massif__tile,tile,10,lc_ice_edge_0091,ice_edge sample 91,landcover_sample,ice_edge,36.896,84.806,0.046,0.428,-0.713,-0.736,0.479,0.045,0.322,,0.639,1,5,5
+moon_malapert_massif__tile,tile,11,gvp_355100,Lascar,volcano,volcano_strato_dome,-23.37,-67.73,0.046,0.118,-0.413,-0.73,0.327,0.48,0.328,,0.302,1,5,5
+moon_malapert_massif__tile,tile,12,lc_bare_hot_0296,bare_hot sample 296,landcover_sample,bare_hot,33.299,78.301,0.045,0.561,-0.716,-0.731,0.375,-0.12,0.167,,0.774,2,1,8
+moon_malapert_massif__tile,tile,13,gvp_355160,Aracar,volcano,volcano_strato_dome,-24.29,-67.783,0.041,0.569,-0.438,-0.729,-0.271,0.189,0.191,,0.293,0,6,5
+moon_malapert_massif__tile,tile,14,gvp_355090,Putana,volcano,volcano_strato_dome,-22.557,-67.853,0.035,0.219,-0.375,-0.732,0.333,0.217,0.349,,0.362,1,5,5
+moon_malapert_massif__tile,tile,15,gvp_357072,Tromen Volcanic Plateau,volcano,volcano_strato_dome,-37.144,-70.033,0.035,0.519,-0.454,-0.729,0.173,-0.034,0.04,,0.567,2,1,8
+moon_malapert_massif__tile,tile,16,gvp_357040,Planchon-Peteroa,volcano,volcano_strato_dome,-35.223,-70.568,0.027,0.534,-0.353,-0.73,-0.008,-0.112,0.039,,0.543,2,1,8
+moon_malapert_massif__tile,tile,17,lc_antarctic_ice_free_0275,antarctic_ice_free sample 275,landcover_sample,antarctic_ice_free,-80.119,158.358,0.025,0.466,-0.376,-0.659,0.415,-0.343,0.352,,0.535,1,2,8
+moon_malapert_massif__tile,tile,18,lc_antarctic_ice_free_0363,antarctic_ice_free sample 363,landcover_sample,antarctic_ice_free,-80.228,157.94,0.021,0.452,-0.376,-0.66,0.415,-0.32,0.352,,0.502,1,2,8
+moon_malapert_massif__tile,tile,19,gvp_355190,"Condor, El",volcano,volcano_strato_dome,-26.632,-68.361,0.014,0.445,-0.392,-0.73,-0.222,0.172,0.292,,0.189,0,6,5
+moon_malapert_massif__tile,tile,20,lc_ice_edge_0096,ice_edge sample 96,landcover_sample,ice_edge,35.256,78.798,0.014,0.358,-0.736,-0.729,0.44,-0.006,0.249,,0.656,1,2,8
+moon_mons_mouton__tile,tile,1,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.179,0.722,0.703,-0.641,0.331,-0.569,-0.068,,0.8,5,1,7
+moon_mons_mouton__tile,tile,2,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.174,0.648,0.693,-0.64,0.332,-0.501,-0.018,,0.745,5,1,7
+moon_mons_mouton__tile,tile,3,lc_bare_midlat_0266,bare_midlat sample 266,landcover_sample,bare_midlat,35.525,83.0,0.139,0.669,-0.646,-0.731,0.454,0.091,0.294,,0.8,3,5,5
+moon_mons_mouton__tile,tile,4,lc_ice_edge_0158,ice_edge sample 158,landcover_sample,ice_edge,36.3,89.876,0.118,0.675,-0.644,-0.726,0.44,-0.011,0.269,,0.8,3,1,9
+moon_mons_mouton__tile,tile,5,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.11,0.359,-0.476,-0.746,0.096,0.621,0.334,,0.379,3,5,5
+moon_mons_mouton__tile,tile,6,gvp_225005,Atakor Volcanic Field,volcano,volcano_field_cone,23.33,5.83,0.101,0.593,-0.458,-0.755,-0.463,0.658,0.297,,0.377,4,2,7
+moon_mons_mouton__tile,tile,7,lc_lichen_moss_0028,lichen_moss sample 28,landcover_sample,lichen_moss,62.059,-74.382,0.094,0.65,0.693,-0.673,0.288,-0.681,-0.439,,0.749,4,2,7
+moon_mons_mouton__tile,tile,8,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.081,-0.012,0.694,-0.643,0.327,-0.039,0.007,,0.347,3,2,8
+moon_mons_mouton__tile,tile,9,lc_bare_polar_0026,bare_polar sample 26,landcover_sample,bare_polar,74.67,-90.561,0.079,0.567,-0.59,-0.63,0.351,-0.078,0.106,,0.784,2,2,9
+moon_mons_mouton__tile,tile,10,lc_antarctic_ice_free_0407,antarctic_ice_free sample 407,landcover_sample,antarctic_ice_free,-83.324,162.438,0.075,0.647,-0.504,-0.612,0.465,-0.463,0.402,,0.8,4,0,9
+moon_mons_mouton__tile,tile,11,lc_ice_edge_0277,ice_edge sample 277,landcover_sample,ice_edge,78.262,-90.914,0.074,0.736,-0.453,-0.625,0.317,-0.292,-0.068,,0.8,2,1,10
+moon_mons_mouton__tile,tile,12,gvp_323160,Ubehebe Craters,volcano,volcano_field_cone,37.02,-117.45,0.073,0.504,-0.383,-0.752,-0.491,0.631,0.244,,0.311,4,2,7
+moon_mons_mouton__tile,tile,13,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.065,0.288,-0.617,-0.741,0.43,0.24,0.247,,0.62,2,6,5
+moon_mons_mouton__tile,tile,14,lc_bare_midlat_0059,bare_midlat sample 59,landcover_sample,bare_midlat,37.307,88.346,0.065,0.36,-0.646,-0.727,0.464,0.098,0.306,,0.669,2,6,5
+moon_mons_mouton__tile,tile,15,gvp_225009,"Toh, Tarso",volcano,volcano_field_cone,21.33,16.33,0.062,0.451,-0.495,-0.759,-0.444,0.647,0.314,,0.319,3,3,7
+moon_mons_mouton__tile,tile,16,lc_bare_midlat_0226,bare_midlat sample 226,landcover_sample,bare_midlat,37.026,85.711,0.061,0.318,-0.617,-0.728,0.485,0.153,0.335,,0.561,2,6,5
+moon_mons_mouton__tile,tile,17,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.061,0.328,0.533,-0.638,0.321,-0.5,-0.102,,0.599,4,2,7
+moon_mons_mouton__tile,tile,18,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.059,0.316,-0.646,-0.732,0.452,0.167,0.28,,0.624,2,6,5
+moon_mons_mouton__tile,tile,19,gvp_221125,Assab Volcanic Field,volcano,volcano_field_cone,12.95,42.43,0.055,0.501,-0.431,-0.763,-0.544,0.669,0.143,,0.297,3,3,7
+moon_mons_mouton__tile,tile,20,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.054,0.047,0.721,-0.642,0.329,-0.316,0.051,,0.4,3,4,6
+moon_mons_mouton_plateau__tile,tile,1,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.148,0.247,-0.268,-0.728,0.452,0.44,0.272,,0.595,2,6,5
+moon_mons_mouton_plateau__tile,tile,2,lc_sparse_hot_0237,sparse_hot sample 237,landcover_sample,sparse_hot,32.634,82.908,0.146,0.568,-0.617,-0.735,0.431,0.24,0.247,,0.8,3,5,5
+moon_mons_mouton_plateau__tile,tile,3,lc_lichen_moss_0051,lichen_moss sample 51,landcover_sample,lichen_moss,70.373,-75.517,0.126,0.125,0.694,-0.638,0.328,-0.039,0.007,,0.471,3,4,6
+moon_mons_mouton_plateau__tile,tile,4,lc_lichen_moss_0251,lichen_moss sample 251,landcover_sample,lichen_moss,71.419,-78.445,0.124,0.533,0.533,-0.632,0.321,-0.5,-0.102,,0.763,5,1,7
+moon_mons_mouton_plateau__tile,tile,5,lc_bare_midlat_0355,bare_midlat sample 355,landcover_sample,bare_midlat,37.437,88.274,0.115,0.501,-0.646,-0.719,0.476,0.098,0.324,,0.8,3,5,5
+moon_mons_mouton_plateau__tile,tile,6,lc_bare_midlat_0247,bare_midlat sample 247,landcover_sample,bare_midlat,35.03,83.413,0.11,0.474,-0.646,-0.727,0.454,0.167,0.28,,0.762,2,6,5
+moon_mons_mouton_plateau__tile,tile,7,lc_lichen_moss_0243,lichen_moss sample 243,landcover_sample,lichen_moss,70.862,-76.289,0.11,0.427,0.694,-0.636,0.328,-0.534,-0.079,,0.68,4,2,7
+moon_mons_mouton_plateau__tile,tile,8,lc_lichen_moss_0285,lichen_moss sample 285,landcover_sample,lichen_moss,70.596,-75.567,0.109,0.219,0.721,-0.636,0.329,-0.316,0.051,,0.545,3,4,6
+moon_mons_mouton_plateau__tile,tile,9,lc_ice_edge_0379,ice_edge sample 379,landcover_sample,ice_edge,69.924,-72.365,0.099,0.354,0.721,-0.635,0.34,-0.548,-0.012,,0.636,4,2,7
+moon_mons_mouton_plateau__tile,tile,10,gvp_221125,Assab Volcanic Field,volcano,volcano_field_cone,12.95,42.43,0.091,0.652,-0.431,-0.759,-0.545,0.669,0.143,,0.34,4,2,7
+moon_mons_mouton_plateau__tile,tile,11,lc_bare_midlat_0266,bare_midlat sample 266,landcover_sample,bare_midlat,35.525,83.0,0.085,0.425,-0.646,-0.725,0.456,0.091,0.294,,0.74,2,6,5
+moon_mons_mouton_plateau__tile,tile,12,lc_bare_midlat_0018,bare_midlat sample 18,landcover_sample,bare_midlat,36.1,86.442,0.079,0.403,-0.659,-0.725,0.473,0.07,0.322,,0.742,2,6,5
+moon_mons_mouton_plateau__tile,tile,13,gvp_225005,Atakor Volcanic Field,volcano,volcano_field_cone,23.33,5.83,0.076,0.496,-0.458,-0.751,-0.464,0.658,0.297,,0.324,3,3,7
+moon_mons_mouton_plateau__tile,tile,14,lc_bare_midlat_0111,bare_midlat sample 111,landcover_sample,bare_midlat,37.124,86.378,0.073,0.307,-0.617,-0.725,0.482,0.154,0.32,,0.666,2,6,5
+moon_mons_mouton_plateau__tile,tile,15,lc_bare_midlat_0095,bare_midlat sample 95,landcover_sample,bare_midlat,36.196,87.742,0.073,0.384,-0.617,-0.723,0.472,0.034,0.321,,0.73,2,6,5
+moon_mons_mouton_plateau__tile,tile,16,lc_bare_midlat_0121,bare_midlat sample 121,landcover_sample,bare_midlat,36.194,88.301,0.069,0.387,-0.644,-0.722,0.456,0.065,0.294,,0.711,2,6,5
+moon_mons_mouton_plateau__tile,tile,17,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.067,0.289,0.703,-0.635,0.331,-0.569,-0.068,,0.587,3,3,7
+moon_mons_mouton_plateau__tile,tile,18,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.064,0.493,-0.468,-0.758,-0.481,0.656,0.269,,0.292,2,4,7
+moon_mons_mouton_plateau__tile,tile,19,lc_antarctic_ice_free_0327,antarctic_ice_free sample 327,landcover_sample,antarctic_ice_free,-84.462,168.533,0.062,0.407,,-0.606,0.44,-0.619,0.371,,0.718,2,2,6
+moon_mons_mouton_plateau__tile,tile,20,lc_bare_polar_0026,bare_polar sample 26,landcover_sample,bare_polar,74.67,-90.561,0.061,0.521,-0.59,-0.625,0.351,-0.078,0.106,,0.713,2,2,9
+moon_nobile_rim__tile,tile,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.139,0.292,-0.51,-0.623,0.469,0.5,0.343,,0.47,3,5,5
+moon_nobile_rim__tile,tile,2,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.127,0.339,-0.504,-0.617,0.34,0.652,-0.008,,0.411,3,4,6
+moon_nobile_rim__tile,tile,3,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.106,0.342,-0.45,-0.726,0.465,0.212,0.297,,0.635,2,6,5
+moon_nobile_rim__tile,tile,4,gvp_221100,Dubbi,volcano,volcano_strato_dome,13.579,41.809,0.105,0.683,-0.403,-0.758,-0.576,0.673,0.22,,0.339,4,2,7
+moon_nobile_rim__tile,tile,5,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.088,0.401,-0.621,-0.727,0.446,0.165,0.3,,0.672,2,6,5
+moon_nobile_rim__tile,tile,6,lc_antarctic_ice_free_0085,antarctic_ice_free sample 85,landcover_sample,antarctic_ice_free,-77.804,163.644,0.087,0.536,-0.46,-0.623,0.476,-0.303,0.37,,0.798,3,1,9
+moon_nobile_rim__tile,tile,7,lc_ice_edge_0397,ice_edge sample 397,landcover_sample,ice_edge,71.081,-74.285,0.08,0.367,0.629,-0.636,0.34,-0.581,0.002,,0.619,4,3,6
+moon_nobile_rim__tile,tile,8,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,0.077,0.339,-0.447,-0.719,0.429,0.092,0.243,,0.647,2,6,5
+moon_nobile_rim__tile,tile,9,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.076,0.361,-0.526,-0.631,0.483,-0.081,0.368,,0.719,2,2,9
+moon_nobile_rim__tile,tile,10,gvp_225021,"Koussi, Emi",volcano,volcano_shield,19.8,18.53,0.064,0.579,-0.5,-0.75,-0.482,0.574,0.308,,0.288,3,3,7
+moon_nobile_rim__tile,tile,11,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,0.06,0.227,-0.534,-0.731,0.457,0.36,0.322,,0.343,2,6,5
+moon_nobile_rim__tile,tile,12,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,0.058,0.369,0.649,-0.64,0.327,-0.576,-0.096,,0.503,4,2,7
+moon_nobile_rim__tile,tile,13,lc_antarctic_ice_free_0020,antarctic_ice_free sample 20,landcover_sample,antarctic_ice_free,-86.264,-160.565,0.051,0.478,,-0.6,0.34,-0.489,0.248,,0.516,1,3,6
+moon_nobile_rim__tile,tile,14,gvp_355124,Falso Azufre,volcano,volcano_strato_dome,-26.8,-68.37,0.047,0.536,-0.319,-0.737,-0.536,0.488,0.305,,0.19,1,5,7
+moon_nobile_rim__tile,tile,15,lc_bare_midlat_0234,bare_midlat sample 234,landcover_sample,bare_midlat,37.241,86.797,0.047,0.256,-0.621,-0.726,0.473,0.162,0.333,,0.542,2,6,5
+moon_nobile_rim__tile,tile,16,gvp_355112,Corrida de Cori Volcanic Field,volcano,volcano_strato_dome,-25.083,-68.367,0.044,0.579,-0.421,-0.741,-0.555,0.488,0.276,,0.255,1,5,7
+moon_nobile_rim__tile,tile,17,gvp_355093,Guayaques,volcano,volcano_strato_dome,-22.895,-67.566,0.044,0.531,-0.444,-0.742,-0.501,0.523,0.301,,0.239,3,3,7
+moon_nobile_rim__tile,tile,18,lc_antarctic_ice_free_0161,antarctic_ice_free sample 161,landcover_sample,antarctic_ice_free,-76.858,161.707,0.041,0.439,-0.313,-0.623,0.433,-0.436,0.37,,0.668,2,2,9
+moon_nobile_rim__tile,tile,19,gvp_225010,"Tousside, Tarso",volcano,volcano_strato_dome,21.041,16.473,0.041,0.701,-0.608,-0.752,-0.476,0.364,0.309,,0.35,2,4,7
+moon_nobile_rim__tile,tile,20,lc_antarctic_ice_free_0414,antarctic_ice_free sample 414,landcover_sample,antarctic_ice_free,-70.869,67.946,0.04,0.577,-0.61,-0.637,0.372,-0.268,0.173,,0.72,2,2,9
+moon_de_gerlache_rim2__tile,tile,1,gvp_390021,Royal Society Range,volcano,volcano_field_cone,-78.25,163.33,0.223,0.54,-0.379,-0.641,0.3,0.5,0.343,,0.736,5,3,5
+moon_de_gerlache_rim2__tile,tile,2,lc_ice_edge_0343,ice_edge sample 343,landcover_sample,ice_edge,83.152,-39.136,0.155,0.374,-0.471,-0.636,0.293,0.652,-0.008,,0.583,3,4,6
+moon_de_gerlache_rim2__tile,tile,3,lc_sparse_cold_0140,sparse_cold sample 140,landcover_sample,sparse_cold,37.787,90.235,0.079,0.329,-0.43,-0.73,0.3,0.212,0.297,,0.567,1,7,5
+moon_de_gerlache_rim2__tile,tile,4,lc_antarctic_ice_free_0233,antarctic_ice_free sample 233,landcover_sample,antarctic_ice_free,-78.313,164.872,0.063,0.452,-0.389,-0.641,0.3,0.02,0.289,,0.426,1,7,5
+moon_de_gerlache_rim2__tile,tile,5,lc_lichen_moss_0210,lichen_moss sample 210,landcover_sample,lichen_moss,70.278,-71.952,0.044,0.319,0.528,-0.646,0.283,-0.576,-0.096,,0.633,3,3,7
+moon_de_gerlache_rim2__tile,tile,6,gvp_355131,"Solo, El",volcano,volcano_strato_dome,-27.105,-68.713,0.037,0.109,-0.46,-0.734,0.3,0.36,0.322,,0.387,1,7,5
+moon_de_gerlache_rim2__tile,tile,7,lc_bare_polar_0236,bare_polar sample 236,landcover_sample,bare_polar,81.285,-71.459,0.033,0.397,-0.425,-0.64,0.3,-0.148,0.252,,0.579,1,3,9
+moon_de_gerlache_rim2__tile,tile,8,lc_antarctic_ice_free_0008,antarctic_ice_free sample 8,landcover_sample,antarctic_ice_free,-73.077,68.372,0.024,0.3,-0.443,-0.644,0.3,-0.081,0.368,,0.506,1,3,9
+moon_de_gerlache_rim2__tile,tile,9,gvp_225021,"Koussi, Emi",volcano,volcano_shield,19.8,18.53,0.023,0.469,-0.44,-0.752,-0.594,0.574,0.308,,0.172,2,4,7
+moon_de_gerlache_rim2__tile,tile,10,lc_antarctic_ice_free_0279,antarctic_ice_free sample 279,landcover_sample,antarctic_ice_free,-80.027,155.764,0.021,0.401,-0.399,-0.649,0.3,-0.228,0.287,,0.553,1,3,9
+moon_de_gerlache_rim2__tile,tile,11,lc_antarctic_ice_free_0295,antarctic_ice_free sample 295,landcover_sample,antarctic_ice_free,-84.448,173.542,0.018,0.468,,-0.641,0.3,-0.74,0.334,,0.693,1,3,6
+moon_de_gerlache_rim2__tile,tile,12,lc_antarctic_ice_free_0020,antarctic_ice_free sample 20,landcover_sample,antarctic_ice_free,-86.264,-160.565,0.016,0.36,,-0.631,0.3,-0.489,0.248,,0.525,1,3,6
+moon_de_gerlache_rim2__tile,tile,13,lc_ice_edge_0297,ice_edge sample 297,landcover_sample,ice_edge,38.748,73.592,0.01,0.213,-0.551,-0.731,0.3,0.165,0.3,,0.419,1,7,5
+moon_de_gerlache_rim2__tile,tile,14,lc_ice_edge_0322,ice_edge sample 322,landcover_sample,ice_edge,83.27,-30.556,0.005,-0.078,-0.437,-0.637,0.295,0.541,-0.039,,0.276,1,3,9
+moon_de_gerlache_rim2__tile,tile,15,lc_antarctic_ice_free_0042,antarctic_ice_free sample 42,landcover_sample,antarctic_ice_free,-85.938,-158.519,0.004,0.306,,-0.633,0.3,-0.483,0.213,,0.545,1,3,6
+moon_de_gerlache_rim2__tile,tile,16,lc_antarctic_ice_free_0414,antarctic_ice_free sample 414,landcover_sample,antarctic_ice_free,-70.869,67.946,0.002,0.42,-0.535,-0.648,0.3,-0.268,0.173,,0.657,1,3,9
+moon_de_gerlache_rim2__tile,tile,17,lc_antarctic_ice_free_0370,antarctic_ice_free sample 370,landcover_sample,antarctic_ice_free,-71.887,24.404,-0.003,0.411,-0.436,-0.647,0.3,-0.446,0.309,,0.689,1,3,9
+moon_de_gerlache_rim2__tile,tile,18,lc_ice_edge_0019,ice_edge sample 19,landcover_sample,ice_edge,-21.938,-68.428,-0.005,0.498,-0.421,-0.749,-0.412,0.147,0.336,,0.35,1,5,7
+moon_de_gerlache_rim2__tile,tile,19,lc_ice_edge_0374,ice_edge sample 374,landcover_sample,ice_edge,38.287,95.768,-0.006,0.175,-0.432,-0.722,0.3,0.092,0.243,,0.37,1,7,5
+moon_de_gerlache_rim2__tile,tile,20,lc_antarctic_ice_free_0078,antarctic_ice_free sample 78,landcover_sample,antarctic_ice_free,-77.313,161.693,-0.006,0.033,-0.484,-0.638,0.3,0.287,0.359,,0.192,0,8,5
+moon_slater_plain__tile,tile,1,lc_antarctic_ice_free_0011,antarctic_ice_free sample 11,landcover_sample,antarctic_ice_free,-78.423,165.709,0.167,0.789,-0.496,-0.635,0.3,0.021,0.292,,0.8,2,6,5
+moon_slater_plain__tile,tile,2,lc_lichen_moss_0112,lichen_moss sample 112,landcover_sample,lichen_moss,72.934,-80.852,0.112,0.646,0.601,-0.653,0.3,-0.688,-0.152,,0.776,5,1,7
+moon_slater_plain__tile,tile,3,gvp_355094,Purico Complex,volcano,volcano_shield,-23.0,-67.75,0.094,0.386,-0.476,-0.753,-0.153,0.621,0.334,,0.419,3,3,7
+moon_slater_plain__tile,tile,4,gvp_225009,"Toh, Tarso",volcano,volcano_field_cone,21.33,16.33,0.084,0.688,-0.495,-0.764,-0.62,0.647,0.314,,0.288,3,3,7
+moon_slater_plain__tile,tile,5,gvp_390013,"Pleiades, The",volcano,volcano_strato_dome,-72.67,165.5,0.082,0.66,-0.568,-0.641,0.3,-0.224,0.316,,0.773,2,2,9
+moon_slater_plain__tile,tile,6,lc_ice_edge_0391,ice_edge sample 391,landcover_sample,ice_edge,72.38,-75.212,0.073,0.39,0.703,-0.651,0.292,-0.617,-0.055,,0.594,3,3,7
+moon_slater_plain__tile,tile,7,lc_lichen_moss_0175,lichen_moss sample 175,landcover_sample,lichen_moss,71.262,-75.695,0.07,0.356,0.703,-0.655,0.274,-0.569,-0.068,,0.583,3,3,7
+moon_slater_plain__tile,tile,8,lc_antarctic_ice_free_0079,antarctic_ice_free sample 79,landcover_sample,antarctic_ice_free,-84.508,179.261,0.069,0.639,,-0.63,0.3,-0.771,0.338,,0.8,2,2,6
+moon_slater_plain__tile,tile,9,lc_antarctic_ice_free_0035,antarctic_ice_free sample 35,landcover_sample,antarctic_ice_free,-80.044,156.529,0.061,0.552,-0.458,-0.639,0.3,-0.16,0.284,,0.591,2,2,9
+moon_slater_plain__tile,tile,10,lc_antarctic_ice_free_0184,antarctic_ice_free sample 184,landcover_sample,antarctic_ice_free,-72.255,1.259,0.054,0.76,-0.358,-0.642,0.3,-0.638,0.306,,0.8,2,2,9
+moon_slater_plain__tile,tile,11,lc_lichen_moss_0269,lichen_moss sample 269,landcover_sample,lichen_moss,71.35,-76.582,0.052,0.185,0.693,-0.655,0.275,-0.501,-0.018,,0.573,2,4,7
+moon_slater_plain__tile,tile,12,lc_antarctic_ice_free_0355,antarctic_ice_free sample 355,landcover_sample,antarctic_ice_free,-77.538,163.637,0.046,0.656,-0.532,-0.635,0.3,-0.494,0.4,,0.8,2,2,9
+moon_slater_plain__tile,tile,13,lc_bare_midlat_0059,bare_midlat sample 59,landcover_sample,bare_midlat,37.307,88.346,0.046,0.382,-0.646,-0.735,0.3,0.098,0.306,,0.633,1,7,5
+moon_slater_plain__tile,tile,14,lc_antarctic_ice_free_0317,antarctic_ice_free sample 317,landcover_sample,antarctic_ice_free,-82.53,160.004,0.046,0.733,-0.504,-0.637,0.3,-0.571,0.352,,0.8,2,2,9
+moon_slater_plain__tile,tile,15,gvp_231040,"Lunayyir, Harrat",volcano,volcano_field_cone,25.17,37.75,0.045,0.663,-0.432,-0.766,-0.619,0.384,0.304,,0.355,2,4,7
+moon_slater_plain__tile,tile,16,lc_bare_polar_0026,bare_polar sample 26,landcover_sample,bare_polar,74.67,-90.561,0.043,0.494,-0.59,-0.647,0.294,-0.078,0.106,,0.686,1,3,9
+moon_slater_plain__tile,tile,17,gvp_304030,Ashikule Volcanic Field,volcano,volcano_field_cone,35.742,81.646,0.042,0.032,-0.268,-0.742,0.3,0.44,0.272,,0.266,0,8,5
+moon_slater_plain__tile,tile,18,crater_monturaqui,Monturaqui impact structure,impact_structure,impact_structure,-23.933,-68.267,0.041,0.543,0.056,-0.762,-0.617,0.262,0.319,,0.156,0,8,5
+moon_slater_plain__tile,tile,19,lc_antarctic_ice_free_0301,antarctic_ice_free sample 301,landcover_sample,antarctic_ice_free,-83.542,-54.9,0.041,0.728,-0.541,-0.634,0.3,-0.599,0.42,,0.8,3,1,9
+moon_slater_plain__tile,tile,20,lc_ice_edge_0344,ice_edge sample 344,landcover_sample,ice_edge,34.643,81.518,0.038,0.506,-0.617,-0.737,0.3,-0.17,0.266,,0.767,2,2,9
+moon_tranquillitatis_pit__tile,tile,1,gvp_231071,"Kishb, Harrat",volcano,volcano_field_cone,22.8,41.38,0.437,0.416,0.383,0.062,0.384,0.682,0.284,0.3,0.712,4,8,0
+moon_tranquillitatis_pit__tile,tile,2,gvp_231050,"Ithnayn, Harrat",volcano,volcano_field_cone,26.58,40.2,0.421,0.264,0.47,0.137,0.425,0.617,0.319,0.5,0.637,4,8,0
+moon_tranquillitatis_pit__tile,tile,3,lc_sparse_hot_0137,sparse_hot sample 137,landcover_sample,sparse_hot,23.399,39.893,0.351,0.331,0.338,0.063,0.442,0.395,0.264,0.0,0.71,2,10,0
+moon_tranquillitatis_pit__tile,tile,4,gvp_231072,"Birk, Harrat al",volcano,volcano_field_cone,18.37,41.63,0.347,0.175,0.344,0.065,0.351,0.673,0.187,0.3,0.553,3,9,0
+moon_tranquillitatis_pit__tile,tile,5,gvp_231001,"Ash Shaam, Harrat",volcano,volcano_field_cone,32.333,37.583,0.343,0.291,0.402,0.164,0.392,0.25,0.277,0.3,0.653,2,10,0
+moon_tranquillitatis_pit__tile,tile,6,lc_bare_hot_0400,bare_hot sample 400,landcover_sample,bare_hot,31.361,38.271,0.342,0.434,0.337,0.185,0.346,0.128,0.284,0.0,0.732,2,10,0
+moon_tranquillitatis_pit__tile,tile,7,gvp_225006,Manzaz Volcanic Field,volcano,volcano_field_cone,23.92,5.83,0.311,0.001,0.416,0.077,0.412,0.621,0.291,0.3,0.441,3,9,0
+moon_tranquillitatis_pit__tile,tile,8,gvp_221124,Gufa,volcano,volcano_field_cone,12.55,42.53,0.304,0.026,0.396,0.065,0.287,0.7,0.149,0.3,0.421,2,10,0
+moon_tranquillitatis_pit__tile,tile,9,lc_bare_hot_0261,bare_hot sample 261,landcover_sample,bare_hot,11.208,42.54,0.291,0.372,0.153,0.063,0.223,0.352,0.099,0.0,0.671,1,11,0
+moon_tranquillitatis_pit__tile,tile,10,lc_bare_hot_0239,bare_hot sample 239,landcover_sample,bare_hot,30.444,65.253,0.289,0.83,-0.698,0.212,0.306,0.389,0.201,-0.5,0.8,3,5,4
+moon_tranquillitatis_pit__tile,tile,11,gvp_231060,"Khaybar, Harrat",volcano,volcano_field_cone,25.5,40.0,0.276,-0.014,0.362,0.111,0.447,0.4,0.307,0.5,0.439,3,4,5
+moon_tranquillitatis_pit__tile,tile,12,gvp_221122,Manda-Inakir,volcano,volcano_field_cone,12.38,42.2,0.272,-0.034,0.393,0.067,0.268,0.651,0.118,0.3,0.375,2,5,5
+moon_tranquillitatis_pit__tile,tile,13,lanzarote,Lanzarote (Timanfaya / La Corona tube),named_site,named_site,29.0,-13.75,0.262,-0.107,0.399,0.185,0.446,0.463,0.242,0.5,0.337,3,4,5
+moon_tranquillitatis_pit__tile,tile,14,gvp_231170,Balhaf-Bir Ali Volcanic Field,volcano,volcano_field_cone,14.067,48.3,0.252,-0.166,0.385,0.066,0.386,0.656,0.269,0.3,0.29,2,5,5
+moon_tranquillitatis_pit__tile,tile,15,gvp_324020,Craters of the Moon,volcano,volcano_field_cone,43.371,-113.493,0.245,0.435,0.477,-0.114,0.199,-0.169,-0.012,0.5,0.661,3,3,6
+moon_tranquillitatis_pit__tile,tile,16,gvp_221115,Manda Hararo,volcano,volcano_shield,12.17,40.82,0.243,0.184,0.388,0.064,0.135,0.283,-0.087,0.3,0.504,1,10,1
+moon_tranquillitatis_pit__tile,tile,17,lc_bare_hot_0189,bare_hot sample 189,landcover_sample,bare_hot,19.321,1.976,0.243,0.438,-0.528,0.067,0.392,0.415,0.251,0.0,0.747,1,8,3
+moon_tranquillitatis_pit__tile,tile,18,lc_bare_hot_0255,bare_hot sample 255,landcover_sample,bare_hot,20.023,52.707,0.242,0.714,-0.735,0.066,0.37,0.363,0.242,-0.5,0.8,3,5,4
+moon_tranquillitatis_pit__tile,tile,19,lc_bare_hot_0407,bare_hot sample 407,landcover_sample,bare_hot,25.224,61.165,0.24,0.693,-0.79,0.101,0.339,0.37,0.306,-0.5,0.8,3,5,4
+moon_tranquillitatis_pit__tile,tile,20,gvp_221120,Kurub,volcano,volcano_shield,11.88,41.208,0.234,0.17,0.284,0.065,0.138,0.345,-0.035,0.3,0.465,1,10,1

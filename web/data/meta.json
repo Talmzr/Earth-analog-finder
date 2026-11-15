@@ -1,0 +1,543 @@
+{
+ "generated_utc": "2026-11-15T03:38:53Z",
+ "n_moon_targets": 30,
+ "n_earth_tiles": 4310,
+ "score": {
+  "range": [
+   -1,
+   1
+  ],
+  "bands": {
+   "sufficient": ">= 0.5",
+   "partial": "0 to 0.5",
+   "avoid": "< 0"
+  },
+  "stored_as": "integer = score x 100"
+ },
+ "readiness_codes": {
+  "3": "sufficient",
+  "2": "partial",
+  "1": "avoid",
+  "0": "not available",
+  "-1": "experiment not relevant for this Moon target"
+ },
+ "categories": [
+  {
+   "id": "terrain",
+   "config_id": "terrain",
+   "label": "Terrain & topography",
+   "how": "DINOv2-small fine-tuned self-supervised on Moon + Earth elevation patches, blended with measured relief / slope / roughness",
+   "cap": 0.9,
+   "n_anchors": 21,
+   "terms": {
+    "kernel": 0.7295,
+    "ssl_cos": 0.4633
+   },
+   "intercept": -0.0305,
+   "anchor_mae": 0.15,
+   "anchor_mae_leave_one_out": 0.16,
+   "anchor_rank_agreement": 0.94,
+   "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "geology",
+   "config_id": "geology",
+   "label": "Geology & surface materials",
+   "how": "BGE-small text encoder fine-tuned contrastively on lunar map units vs Earth lithology, plus a lithology-match term",
+   "cap": 0.8,
+   "n_anchors": 22,
+   "terms": {
+    "lith_match": 0.8923,
+    "text_cos": 0.9695
+   },
+   "intercept": -0.3637,
+   "anchor_mae": 0.17,
+   "anchor_mae_leave_one_out": 0.18,
+   "anchor_rank_agreement": 0.93,
+   "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "thermal",
+   "config_id": "thermal_illumination",
+   "label": "Temperature & illumination",
+   "how": "Physics terms (temperature swing / min / max, grazing sun, noon sun, polar night). Closest approach: no Earth site is thermally lunar",
+   "cap": 0.4,
+   "n_anchors": 19,
+   "terms": {
+    "swing": 0.0,
+    "t_min": 0.2442,
+    "t_max": 0.0246,
+    "grazing_sun": 0.2755,
+    "noon_sun": 0.2376,
+    "polar_night": 0.0029
+   },
+   "intercept": -0.0562,
+   "anchor_mae": 0.12,
+   "anchor_mae_leave_one_out": 0.14,
+   "anchor_rank_agreement": 0.64,
+   "anchors_off_by_0_3": 0
+  },
+  {
+   "id": "water_ice",
+   "config_id": "water_ice",
+   "label": "Water, ice & permafrost",
+   "how": "Frozen ground, surface ice, distance from flat bare ground to ice, absence of liquid water",
+   "cap": 0.7,
+   "n_anchors": 20,
+   "terms": {
+    "frozen_ground": 0.244,
+    "surface_ice": 0.0329,
+    "traverse": 0.3117,
+    "no_liquid_water": 0.1474
+   },
+   "intercept": -0.1739,
+   "anchor_mae": 0.14,
+   "anchor_mae_leave_one_out": 0.18,
+   "anchor_rank_agreement": 0.95,
+   "anchors_off_by_0_3": 2
+  },
+  {
+   "id": "dust",
+   "config_id": "dust_regolith",
+   "label": "Dust & regolith",
+   "how": "Earth soil vs a fixed lunar-regolith reference (grain size, density, bare ground, dryness, volcanic tephra)",
+   "cap": 0.7,
+   "n_anchors": 18,
+   "terms": {
+    "fines": 0.1053,
+    "bulk_density": 0.1285,
+    "coarse": 0.0,
+    "bare": 0.3845,
+    "dryness": 0.1793,
+    "aerosol": 0.0,
+    "tephra": 0.305
+   },
+   "intercept": -0.2261,
+   "anchor_mae": 0.15,
+   "anchor_mae_leave_one_out": 0.2,
+   "anchor_rank_agreement": 0.91,
+   "anchors_off_by_0_3": 0
+  },
+  {
+   "id": "biology",
+   "config_id": "biology_sterility",
+   "label": "Biological sterility",
+   "how": "How lifeless the Earth site is (vegetation, rainfall, soil moisture, trees). Earth-only ranking, capped at 0.6",
+   "cap": 0.6,
+   "n_anchors": 18,
+   "terms": {
+    "ndvi": 1.0451,
+    "precip": 0.653,
+    "soil_moisture": 0.9755,
+    "tree_cover": 0.434
+   },
+   "intercept": 0.4985,
+   "anchor_mae": 0.18,
+   "anchor_mae_leave_one_out": 0.2,
+   "anchor_rank_agreement": 0.88,
+   "anchors_off_by_0_3": 1
+  },
+  {
+   "id": "caves",
+   "config_id": "caves_subsurface",
+   "label": "Caves & lava tubes",
+   "how": "Rule: known lava-tube region / basaltic volcano / no tubes. Only for the Tranquillitatis pit target",
+   "cap": 0.5,
+   "n_anchors": 15,
+   "terms": {
+    "rule": 1.0
+   },
+   "intercept": 0.0,
+   "anchor_mae": 0.14,
+   "anchor_mae_leave_one_out": 0.14,
+   "anchor_rank_agreement": 0.91,
+   "anchors_off_by_0_3": 1
+  },
+  {
+   "id": "operations",
+   "config_id": "ops_landing_mobility",
+   "label": "Landing & operations",
+   "how": "Calibrated terrain + temperature + ice scores, slope hazard, traverse, penalty for forest / towns",
+   "cap": 0.8,
+   "n_anchors": 18,
+   "terms": {
+    "terrain": 0.5813,
+    "thermal": 0.0833,
+    "water_ice": 0.2834,
+    "slope_hazard": 0.263,
+    "traverse": 0.1095
+   },
+   "intercept": 0.0793,
+   "anchor_mae": 0.23,
+   "anchor_mae_leave_one_out": 0.28,
+   "anchor_rank_agreement": 0.74,
+   "anchors_off_by_0_3": 4
+  }
+ ],
+ "experiments": [
+  {
+   "id": "landing_hazard_detection",
+   "name": "Landing hazard detection & terrain-relative navigation",
+   "required": {
+    "terrain": 0.5,
+    "operations": 0.4
+   },
+   "supporting": {
+    "thermal": 0.0
+   },
+   "also_account_for": [
+    "Lander-scale hazards (boulders, small craters) are below the 500 m slope baseline; verify with metre-scale DEMs.",
+    "Plume-surface interaction in vacuum (high-speed ejecta, no drag) cannot be reproduced outdoors on Earth.",
+    "Optical and lidar hazard detection must be tested under low-sun, no-skylight lighting (night tests with artificial light).",
+    "Vegetation, buildings and DSM artefacts can create false hazards on Earth."
+   ]
+  },
+  {
+   "id": "rover_mobility_navigation",
+   "name": "Rover mobility & navigation",
+   "required": {
+    "terrain": 0.5,
+    "dust": 0.3
+   },
+   "supporting": {
+    "operations": 0.4,
+    "thermal": 0.0
+   },
+   "also_account_for": [
+    "1/6 g lowers wheel normal load: traction and sinkage change non-linearly; add mass-scaled or offloaded tests on a geotechnical simulant (e.g. GRC-3).",
+    "Moist, vegetated or rounded-grain Earth soils differ from dry, angular, compact lunar regolith.",
+    "No GNSS on the Moon: switch GPS off and navigate visually or by terrain-relative methods.",
+    "Low sun and black shadows degrade stereo vision; ~1.3 s latency and line-of-sight loss at the pole."
+   ]
+  },
+  {
+   "id": "ice_prospecting_instruments",
+   "name": "Ice prospecting (GPR, neutron spectrometer, drill-based detection)",
+   "required": {
+    "water_ice": 0.4
+   },
+   "supporting": {
+    "geology": 0.0,
+    "terrain": 0.2
+   },
+   "also_account_for": [
+    "Ice at 250-273 K (Earth) vs 25-110 K (Moon) changes GPR velocity/attenuation and drill response.",
+    "Earth's atmosphere blocks the cosmic-ray neutron source used for passive lunar neutron spectroscopy; Earth field tests need an active neutron source.",
+    "Earth permafrost contains liquid films, salts and organics; lunar ice carries other volatiles (CO, CO2, NH3, H2S, CH3OH).",
+    "Lunar ice distribution is set by sublimation in vacuum, not by climate or hydrology."
+   ]
+  },
+  {
+   "id": "isru_ice_extraction",
+   "name": "ISRU: excavation and extraction of icy regolith",
+   "required": {
+    "water_ice": 0.5,
+    "dust": 0.3
+   },
+   "supporting": {
+    "thermal": 0.0
+   },
+   "also_account_for": [
+    "In vacuum ice sublimates instead of melting: heating and vapour capture must be validated in a thermal-vacuum chamber.",
+    "Ice-cemented regolith at cryogenic temperature is much harder than Earth permafrost near 0 C.",
+    "Volatile contaminants (H2S, NH3, CO2 ...) need handling.",
+    "PSR operations: no sunlight for power, extreme cold soak."
+   ]
+  },
+  {
+   "id": "regolith_excavation_construction",
+   "name": "Regolith excavation, berms, landing pads, sintering",
+   "required": {
+    "dust": 0.5,
+    "terrain": 0.3
+   },
+   "supporting": {
+    "geology": 0.2,
+    "operations": 0.3
+   },
+   "also_account_for": [
+    "1/6 g reduces excavator weight and reaction force; lunar regolith is very compact below ~30 cm with interlocking angular grains.",
+    "Sintering and microwave heating depend on glass and nanophase iron absent from Earth tephra.",
+    "No water for concrete; binders outgas in vacuum."
+   ]
+  },
+  {
+   "id": "thermal_power_extreme_cold_long_night",
+   "name": "Thermal control & power survival (extreme cold, long shadow/night)",
+   "required": {
+    "thermal": 0.4
+   },
+   "supporting": {
+    "operations": 0.0
+   },
+   "also_account_for": [
+    "No convection in vacuum: radiative loss dominates; Earth wind chill is the wrong heat-transfer mode.",
+    "PSR 25-110 K and long cold soaks cannot be reached outdoors (Earth minimum ~180 K): qualify in cryo-TVAC.",
+    "Earth polar night is seasonal and comes with an atmosphere; lunar shadow periods are set by topography."
+   ]
+  },
+  {
+   "id": "illumination_power_planning",
+   "name": "Illumination & solar-power planning, low-sun-angle vision",
+   "required": {
+    "thermal": 0.3,
+    "terrain": 0.4
+   },
+   "supporting": {},
+   "also_account_for": [
+    "Lunar south-pole sun stays within ~1.5 deg of the horizon; use LOLA illumination maps for numbers and Earth sites for procedures only.",
+    "No atmospheric scattering on the Moon: shadows are black.",
+    "Clouds and weather cut Earth solar input; the Moon has none."
+   ]
+  },
+  {
+   "id": "habitat_human_ops_isolation",
+   "name": "Habitat, human operations, crew isolation",
+   "required": {
+    "operations": 0.3
+   },
+   "supporting": {
+    "thermal": 0.0,
+    "biology": 0.0
+   },
+   "also_account_for": [
+    "Isolation/remoteness is not scored by any category: prefer sites tagged 'isolation' (e.g. Concordia, HMP, MDRS).",
+    "No Earth site forces suited EVA and airlock cycles.",
+    "Lunar surface radiation ~1.4 mSv/day; ~3-day return to Earth; ~2.6 s round-trip comms."
+   ]
+  },
+  {
+   "id": "dust_mitigation",
+   "name": "Dust mitigation (seals, coatings, filters, suits)",
+   "required": {
+    "dust": 0.5
+   },
+   "supporting": {
+    "biology": 0.0
+   },
+   "also_account_for": [
+    "Lunar dust is charged and moved by plume ejecta and electrostatics, not wind; Earth dust is wind-driven and moist.",
+    "Sharp glassy agglutinates are more abrasive than weathered Earth dust.",
+    "Verify seals and mechanisms in dirty-vacuum chambers with simulant."
+   ]
+  },
+  {
+   "id": "instrument_spectrometers_mineralogy",
+   "name": "Instrument field tests: spectrometers / mineralogy (VNIR, Raman, LIBS, XRF)",
+   "required": {
+    "geology": 0.5
+   },
+   "supporting": {
+    "dust": 0.0,
+    "biology": 0.0
+   },
+   "also_account_for": [
+    "No space weathering on Earth (no nanophase-iron darkening and reddening).",
+    "Terrestrial anorthosite is more sodic than lunar ferroan anorthosite.",
+    "Atmospheric water bands (VNIR) and different LIBS plasma at 1 atm; lichen/biofilm coatings on Earth rocks."
+   ]
+  },
+  {
+   "id": "instrument_gpr_drill_subsurface",
+   "name": "Instrument field tests: GPR and drilling",
+   "required": {
+    "geology": 0.3,
+    "water_ice": 0.3
+   },
+   "supporting": {
+    "dust": 0.3
+   },
+   "also_account_for": [
+    "Drilling in vacuum: no air cooling or flushing of cuttings; ice cuttings sublimate.",
+    "Cryogenic ice-regolith is much harder than Earth permafrost.",
+    "Earth subsurface moisture and salts dominate GPR attenuation."
+   ]
+  },
+  {
+   "id": "planetary_protection_contamination_blanks",
+   "name": "Planetary protection, contamination blanks, life-detection false positives",
+   "required": {
+    "biology": 0.4
+   },
+   "supporting": {
+    "dust": 0.0
+   },
+   "also_account_for": [
+    "No Earth surface is sterile; every blank still carries microbes and organics.",
+    "Stations and camps raise local contamination.",
+    "COSPAR policy for lunar polar / PSR missions asks for an organic-materials inventory (check the current category definitions)."
+   ]
+  },
+  {
+   "id": "cave_pit_robotics",
+   "name": "Cave / pit robotics (skylight descent, mapping, comms)",
+   "required": {
+    "caves": 0.5
+   },
+   "supporting": {
+    "geology": 0.3
+   },
+   "also_account_for": [
+    "Lunar pits/tubes may be far larger than terrestrial tubes.",
+    "Diviner-based studies estimate the shaded Tranquillitatis pit floor stays near ~290 K (verify before quoting).",
+    "Underground: no comms or GNSS; skylight descent by tether.",
+    "Earth caves are humid, biologically active and shaped by water."
+   ]
+  },
+  {
+   "id": "geology_eva_training",
+   "name": "Astronaut field-geology & EVA training",
+   "required": {
+    "geology": 0.4,
+    "terrain": 0.3
+   },
+   "supporting": {
+    "operations": 0.2
+   },
+   "also_account_for": [
+    "Suit dexterity, EVA time limits and 1/6 g gait are not reproduced.",
+    "Low sun and black shadows at the pole change what can be seen.",
+    "Earth outcrops are weathered and often vegetated."
+   ]
+  }
+ ],
+ "earth_cannot_reproduce": [
+  {
+   "id": "gravity",
+   "condition": "Gravity",
+   "moon": "1.62 m/s2 (0.165 g)",
+   "earth_best": "9.81 m/s2 everywhere",
+   "consequence": "traction, sinkage, plume ejecta ballistics, excavation reaction forces, structural loads, human gait and EVA workload all differ",
+   "cover_with": "gravity-offload rigs, mass-scaled rovers, parabolic flights, simulation"
+  },
+  {
+   "id": "vacuum",
+   "condition": "Hard vacuum",
+   "moon": "surface exosphere ~1e-10 Pa",
+   "earth_best": "~60-65 kPa at the highest analog sites (e.g. Dome C at 3,233 m)",
+   "consequence": "no convective cooling, ice sublimates instead of melting, outgassing, cold welding, electrostatic dust, no wind; LIBS and other instruments behave differently",
+   "cover_with": "thermal-vacuum (TVAC) and dirty-vacuum chambers with regolith simulant"
+  },
+  {
+   "id": "radiation",
+   "condition": "Unshielded radiation",
+   "moon": "galactic cosmic rays + solar particle events; ~1.4 mSv/day dose equivalent measured by Chang'e-4 (~200x Earth surface background)",
+   "earth_best": "atmosphere and magnetosphere shield every Earth site",
+   "consequence": "electronics single-event effects, materials ageing, crew dose limits",
+   "cover_with": "particle-beam tests, shielding analysis"
+  },
+  {
+   "id": "psr_cryogenic",
+   "condition": "Permanently shadowed region temperatures",
+   "moon": "~25-110 K (Diviner; this dataset reaches ~26 K)",
+   "earth_best": "~180-190 K surface minimum on the East Antarctic plateau",
+   "consequence": "material embrittlement, lubricant and battery failure, cryogenic ice strength, volatile trapping",
+   "cover_with": "cryo-vacuum chambers, LN2 (77 K) cold plates"
+  },
+  {
+   "id": "illumination_geometry",
+   "condition": "Polar illumination",
+   "moon": "sun within ~1.5 deg of the horizon plus topography; black shadows with no skylight",
+   "earth_best": "atmospheric scattering fills shadows; sun never that low for long except near the poles",
+   "consequence": "vision, navigation and solar-power results do not transfer",
+   "cover_with": "night tests with low-angle artificial light; ray-traced lunar illumination (LOLA)"
+  },
+  {
+   "id": "regolith_space_weathering",
+   "condition": "Space-weathered regolith",
+   "moon": "agglutinates, glass, nanophase iron, sharp angular grains, very compact below ~30 cm",
+   "earth_best": "chemically weathered, rounded, moist soils with organics",
+   "consequence": "abrasion, sintering, spectra, geotechnics",
+   "cover_with": "certified simulants (e.g. LHS-1 / NU-LHT highland, LMS-1 / JSC-1A mare, GRC-3 geotechnical)"
+  },
+  {
+   "id": "dust_charging",
+   "condition": "Electrostatic dust",
+   "moon": "UV photoemission and solar-wind plasma charge the surface",
+   "earth_best": "none outdoors",
+   "consequence": "dust adhesion and levitation behave differently",
+   "cover_with": "UV/plasma vacuum chambers"
+  },
+  {
+   "id": "sterility",
+   "condition": "No liquid water, no biosphere",
+   "moon": "sterile",
+   "earth_best": "every Earth surface hosts microbes",
+   "consequence": "contamination blanks and life-detection false positives",
+   "cover_with": "procedural blanks, sterilised tools"
+  },
+  {
+   "id": "comms_latency",
+   "condition": "Communications",
+   "moon": "~1.3 s one-way light time; no direct-to-Earth line of sight behind south-pole terrain",
+   "earth_best": "real-time comms",
+   "consequence": "teleoperation and EVA support differ",
+   "cover_with": "simulated latency and blackout windows in analog ops"
+  }
+ ],
+ "models": {
+  "terrain_ssl_variants": [
+   {
+    "model": "vicreg",
+    "variant": "pooled",
+    "agreement": 0.515,
+    "per_feature": [
+     0.558,
+     0.511,
+     0.476
+    ],
+    "n_moon": 871,
+    "n_earth": 679
+   },
+   {
+    "model": "vicreg",
+    "variant": "per_body",
+    "agreement": 0.604,
+    "per_feature": [
+     0.66,
+     0.578,
+     0.576
+    ],
+    "n_moon": 871,
+    "n_earth": 679
+   },
+   {
+    "model": "vicreg",
+    "variant": "inlp8",
+    "agreement": 0.462,
+    "per_feature": [
+     0.503,
+     0.473,
+     0.412
+    ],
+    "n_moon": 871,
+    "n_earth": 679
+   }
+  ],
+  "terrain_ssl_chosen": {
+   "model": "vicreg",
+   "variant": "inlp8",
+   "agreement": 0.462
+  },
+  "geology_embeddings": "fine-tuned BGE",
+  "dust_reference": {
+   "fines_pct": 45.0,
+   "bulk_density": 1.5,
+   "coarse_pct": 5.0,
+   "note": "fines = % finer than 50 um; lunar soil median grain size ~70 um (the brief's '70-80% sand-sized' would be fines ~25%; kept the 45% of categories.json)"
+  },
+  "caves": {
+   "known_tube_tiles": 97,
+   "plausible_tiles": 878,
+   "no_tube_tiles": 2513
+  }
+ },
+ "limitations": [
+  "No ground truth exists for analog quality: the -1..+1 scale is set by draft expert anchors (all still marked needs_review).",
+  "Temperature and sun angle never overlap between Moon and Earth: thermal scores are closest-approach, not similarity.",
+  "Earth climate layers are coarser (5-50 km) than the 10 km tiles; Antarctica lacks land-cover, soil and rainfall layers.",
+  "Lunar geology comes from a 1:5M map plus the known composition of mare vs highland crust, not per-tile mineralogy.",
+  "Thermal scores for the Tranquillitatis pit are extrapolated (thermal anchors are all polar).",
+  "Gravity, vacuum, radiation and 25-110 K shadowed temperatures cannot be reproduced on Earth and are never scored."
+ ]
+}

@@ -1,0 +1,192 @@
+{
+ "args": {
+  "epochs": 20,
+  "lr": 2e-05,
+  "tau": 0.07,
+  "bm": 16,
+  "be": 40,
+  "seed": 0,
+  "smoke": false
+ },
+ "n_train": 3527,
+ "n_val": 675,
+ "history": [
+  {
+   "epoch": 1,
+   "moon_to_earth": 0.5922,
+   "earth_to_moon": 0.7639,
+   "earth_earth": 0.9492,
+   "min": 0.3
+  },
+  {
+   "epoch": 2,
+   "moon_to_earth": 0.2458,
+   "earth_to_moon": 0.2405,
+   "earth_earth": 0.5465,
+   "min": 0.5
+  },
+  {
+   "epoch": 3,
+   "moon_to_earth": 0.0725,
+   "earth_to_moon": 0.0458,
+   "earth_earth": 0.3629,
+   "min": 0.8
+  },
+  {
+   "epoch": 4,
+   "moon_to_earth": 0.0427,
+   "earth_to_moon": 0.0166,
+   "earth_earth": 0.2724,
+   "min": 1.0
+  },
+  {
+   "epoch": 5,
+   "moon_to_earth": 0.0269,
+   "earth_to_moon": 0.0072,
+   "earth_earth": 0.2687,
+   "min": 1.3,
+   "val": {
+    "heldout_map": 0.704,
+    "n_queries": 46,
+    "anchor_spearman": 0.826,
+    "n_anchor_pairs": 22
+   }
+  },
+  {
+   "epoch": 6,
+   "moon_to_earth": 0.0208,
+   "earth_to_moon": 0.0284,
+   "earth_earth": 0.1957,
+   "min": 1.5
+  },
+  {
+   "epoch": 7,
+   "moon_to_earth": 0.0189,
+   "earth_to_moon": 0.0132,
+   "earth_earth": 0.1975,
+   "min": 1.8
+  },
+  {
+   "epoch": 8,
+   "moon_to_earth": 0.0126,
+   "earth_to_moon": 0.0038,
+   "earth_earth": 0.1546,
+   "min": 2.0
+  },
+  {
+   "epoch": 9,
+   "moon_to_earth": 0.0113,
+   "earth_to_moon": 0.0046,
+   "earth_earth": 0.1848,
+   "min": 2.3
+  },
+  {
+   "epoch": 10,
+   "moon_to_earth": 0.0095,
+   "earth_to_moon": 0.0071,
+   "earth_earth": 0.1781,
+   "min": 2.6,
+   "val": {
+    "heldout_map": 0.752,
+    "n_queries": 46,
+    "anchor_spearman": 0.814,
+    "n_anchor_pairs": 22
+   }
+  },
+  {
+   "epoch": 11,
+   "moon_to_earth": 0.0072,
+   "earth_to_moon": 0.0026,
+   "earth_earth": 0.1653,
+   "min": 2.8
+  },
+  {
+   "epoch": 12,
+   "moon_to_earth": 0.0079,
+   "earth_to_moon": 0.0015,
+   "earth_earth": 0.1682,
+   "min": 3.1
+  },
+  {
+   "epoch": 13,
+   "moon_to_earth": 0.0067,
+   "earth_to_moon": 0.006,
+   "earth_earth": 0.1466,
+   "min": 3.3
+  },
+  {
+   "epoch": 14,
+   "moon_to_earth": 0.0072,
+   "earth_to_moon": 0.0031,
+   "earth_earth": 0.1145,
+   "min": 3.6
+  },
+  {
+   "epoch": 15,
+   "moon_to_earth": 0.0043,
+   "earth_to_moon": 0.0039,
+   "earth_earth": 0.1544,
+   "min": 3.8,
+   "val": {
+    "heldout_map": 0.775,
+    "n_queries": 46,
+    "anchor_spearman": 0.843,
+    "n_anchor_pairs": 22
+   }
+  },
+  {
+   "epoch": 16,
+   "moon_to_earth": 0.0052,
+   "earth_to_moon": 0.0067,
+   "earth_earth": 0.1479,
+   "min": 4.1
+  },
+  {
+   "epoch": 17,
+   "moon_to_earth": 0.0059,
+   "earth_to_moon": 0.0017,
+   "earth_earth": 0.1331,
+   "min": 4.4
+  },
+  {
+   "epoch": 18,
+   "moon_to_earth": 0.0073,
+   "earth_to_moon": 0.0016,
+   "earth_earth": 0.1225,
+   "min": 4.6
+  },
+  {
+   "epoch": 19,
+   "moon_to_earth": 0.0064,
+   "earth_to_moon": 0.0018,
+   "earth_earth": 0.1478,
+   "min": 4.9
+  },
+  {
+   "epoch": 20,
+   "moon_to_earth": 0.0049,
+   "earth_to_moon": 0.002,
+   "earth_earth": 0.1445,
+   "min": 5.1,
+   "val": {
+    "heldout_map": 0.756,
+    "n_queries": 46,
+    "anchor_spearman": 0.883,
+    "n_anchor_pairs": 22
+   }
+  }
+ ],
+ "before": {
+  "heldout_map": 0.171,
+  "n_queries": 46,
+  "anchor_spearman": 0.588,
+  "n_anchor_pairs": 22
+ },
+ "after": {
+  "heldout_map": 0.756,
+  "n_queries": 46,
+  "anchor_spearman": 0.883,
+  "n_anchor_pairs": 22
+ },
+ "train_minutes": 5.1
+}
