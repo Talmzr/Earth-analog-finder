@@ -12,7 +12,7 @@ No place on Earth reproduces the lunar south pole: vacuum, 1/6 g, 25-110 K perma
 
 - **Artemis III south-pole regions:** ice-free ground in Antarctica (around the McMurdo Dry Valleys, the Royal Society Range and Dronning Maud Land nunataks) and High Arctic polar deserts (Canadian Arctic Archipelago, northern Greenland, Svalbard) lead almost every list. They match low sun in their best month, frozen ground and dry, bare surfaces. Their rocks do **not** match lunar highland anorthosite: geology is negative for nearly all of them, and anorthosite sites such as Mistastin are the geology analogs instead.
 - **Tranquillitatis pit (mare lava-tube skylight):** young basaltic volcanic fields with documented lava tubes in hot deserts (Arabian harrats such as Harrat Kishb, and Afar). They match lava-tube basalt, not the pit's vacuum or depth.
-- **Best overall scores are about 0.2-0.3 ("partial")** on a -1..+1 scale. Colours: for the overall match, sufficient places are green (light green at -0.15, deeper as the score rises) and partial or avoid places are pink-red; individual categories use the score scale (green above 0, pink-red below). About 2.9% of places are sufficient, 11% partial and 86% avoid; the Dry Valleys, Haughton and Beacon Valley are sufficient for 11-17 of the 29 south-pole targets. The 2-D map can switch to a relative view (rank among Earth tiles).
+- **Best overall scores are about 0.2-0.3 ("partial")** on a -1..+1 scale. Colours: for the overall match, sufficient places are green (light green at -0.15, deeper as the score rises), partial places pink and avoid places dark red; individual categories use the score scale. Across all Moon targets about 1.9% of places are sufficient, 12% partial and 86% avoid; the Dry Valleys, Haughton and Beacon Valley are sufficient for 10-17 of the 29 south-pole targets.
 
 ## What it does
 
@@ -79,7 +79,7 @@ All numbers come from `python -W ignore -m ml.evaluate` (`results/scorecard.json
 | Check | What it compares with | Result |
 |---|---|---|
 | Category accuracy | 161 **draft** anchors (team-written labels; 22 revised by a blind, model-assisted review), site-grouped 5-fold CV | mean error **0.137** on the -1..+1 scale vs **0.474** for predicting the average label; 11 of 161 off by more than 0.3 |
-| Overall ranking (sanity check) | The 4 pre-named polar analogs (Dry Valleys, Beacon Valley, Haughton, Svalbard) vs the other 26 named sites, 29 south-pole targets | AUC **0.944** (0.5 = chance) |
+| Overall ranking (sanity check) | The 4 pre-named polar analogs (Dry Valleys, Beacon Valley, Haughton, Svalbard) vs the other 26 named sites, 29 south-pole targets | AUC **0.939** (0.5 = chance) |
 | Real-world site choices (consistency check) | 13 documented lunar analog tests (Desert RATS, RESOLVE, PANGAEA, BRAILLE, FINESSE, ARCHES, K10, Concordia) and 5 held-out ones (Apollo geology training at Meteor Crater, Pinacate, Askja, Sudbury; CanMoon at Lanzarote); sources in `config/real_world_uses*.csv` | not rated "avoid" for **85%** (dev) and **97%** (held-out) of their Moon targets, vs 74% / 89% for the other named sites and 57% / 65% for an average tile |
 
 How to read these numbers honestly:
