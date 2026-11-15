@@ -58,7 +58,7 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | Category | Min | Median | Max | Earth-tile pairs >= 0.5 |
 |---|---|---|---|---|
 | terrain | -1.00 | -0.49 | 0.90 | 1,650 |
-| geology | -0.84 | -0.52 | 0.80 | 1,093 |
+| geology | -0.84 | -0.52 | 0.80 | 137 |
 | thermal | -0.79 | -0.72 | 0.40 | 0 |
 | water_ice | -0.89 | -0.43 | 0.55 | 193 |
 | dust | -0.93 | -0.49 | 0.70 | 810 |
@@ -77,11 +77,11 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | illumination_power_planning | 0 | 704 | 128,596 |
 | habitat_human_ops_isolation | 8,221 | 13,493 | 107,586 |
 | dust_mitigation | 810 | 26,760 | 101,730 |
-| instrument_spectrometers_mineralogy | 1,093 | 2,915 | 123,372 |
-| instrument_gpr_drill_subsurface | 520 | 1,183 | 125,677 |
+| instrument_spectrometers_mineralogy | 137 | 3,810 | 123,433 |
+| instrument_gpr_drill_subsurface | 100 | 1,570 | 125,710 |
 | planetary_protection_contamination_blanks | 2,970 | 56,880 | 69,450 |
 | cave_pit_robotics | 97 | 1,700 | 2,513 |
-| geology_eva_training | 70 | 360 | 126,950 |
+| geology_eva_training | 5 | 421 | 126,954 |
 
 Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for isru_ice_extraction, illumination_power_planning: water/ice is capped at 0.3 against cold-trap zones and no Earth site reaches lunar thermal conditions.
 
@@ -94,16 +94,16 @@ Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for isru
 | peak_near_cabeus_b__landing | Ashikule Volcanic Field | volcano_field_cone | 35.74, 81.65 | 0.22 | 0.48 | -0.27 | -0.73 | 0.45 | 0.44 | 0.78 |
 | peak_near_cabeus_b__ice | Ashikule Volcanic Field | volcano_field_cone | 35.74, 81.65 | 0.18 | 0.42 | -0.27 | -0.75 | 0.45 | 0.44 | 0.60 |
 | haworth__landing | Purico Complex | volcano_shield | -23.00, -67.75 | 0.09 | 0.30 | -0.47 | -0.74 | 0.09 | 0.62 | 0.29 |
-| haworth__ice | sparse_cold sample 49 | sparse_cold | 70.08, -71.11 | 0.12 | 0.45 | 0.72 | -0.66 | 0.30 | -0.50 | 0.61 |
+| haworth__ice | ice_edge sample 343 | ice_edge | 83.15, -39.14 | 0.08 | 0.28 | -0.44 | -0.65 | 0.30 | 0.65 | 0.20 |
 | malapert_massif__landing | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.15 | 0.55 | -0.41 | -0.63 | 0.48 | 0.33 | 0.34 |
 | malapert_massif__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.05 | 0.19 | -0.41 | -0.63 | 0.48 | 0.33 | 0.13 |
-| mons_mouton__landing | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.19 | 0.61 | 0.70 | -0.63 | 0.33 | -0.57 | 0.75 |
-| mons_mouton__ice | lichen_moss sample 269 | lichen_moss | 71.35, -76.58 | 0.14 | 0.60 | 0.69 | -0.64 | 0.32 | -0.50 | 0.62 |
+| mons_mouton__landing | Atakor Volcanic Field | volcano_field_cone | 23.33, 5.83 | 0.17 | 0.70 | -0.46 | -0.75 | -0.31 | 0.66 | 0.46 |
+| mons_mouton__ice | Purico Complex | volcano_shield | -23.00, -67.75 | 0.13 | 0.47 | -0.48 | -0.75 | -0.02 | 0.62 | 0.45 |
 | mons_mouton_plateau__landing | Ashikule Volcanic Field | volcano_field_cone | 35.74, 81.65 | 0.16 | 0.26 | -0.27 | -0.73 | 0.45 | 0.44 | 0.64 |
 | mons_mouton_plateau__ice | Ashikule Volcanic Field | volcano_field_cone | 35.74, 81.65 | 0.12 | 0.17 | -0.27 | -0.74 | 0.45 | 0.44 | 0.54 |
 | nobile_rim_1__landing | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.16 | 0.63 | -0.48 | -0.62 | 0.48 | 0.33 | 0.38 |
 | nobile_rim_1__ice | Solo, El | volcano_strato_dome | -27.11, -68.71 | 0.08 | 0.37 | -0.53 | -0.74 | 0.46 | 0.36 | 0.29 |
-| nobile_rim_2__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.14 | 0.58 | 0.63 | -0.63 | 0.34 | -0.58 | 0.49 |
+| nobile_rim_2__landing | antarctic_ice_free sample 8 | antarctic_ice_free | -73.08, 68.37 | 0.08 | 0.55 | -0.53 | -0.64 | 0.48 | -0.08 | 0.48 |
 | nobile_rim_2__ice | Royal Society Range | volcano_field_cone | -78.25, 163.33 | 0.13 | 0.24 | -0.51 | -0.63 | 0.45 | 0.50 | 0.46 |
 | de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.19 | 0.86 | -0.50 | -0.63 | 0.39 | 0.02 | 0.68 |
 | de_gerlache_rim_2__ice | Lascar | volcano_strato_dome | -23.37, -67.73 | 0.06 | 0.44 | -0.46 | -0.76 | 0.01 | 0.48 | 0.15 |
@@ -113,7 +113,7 @@ Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for isru
 | moon_peak_cabeus_b__tile | Purico Complex | volcano_shield | -23.00, -67.75 | 0.16 | 0.54 | -0.47 | -0.73 | -0.06 | 0.62 | 0.58 |
 | moon_haworth__tile | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | -0.02 | 0.05 | -0.48 | -0.64 | 0.30 | 0.33 | 0.01 |
 | moon_malapert_massif__tile | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.12 | 0.38 | -0.41 | -0.66 | 0.48 | 0.33 | 0.44 |
-| moon_mons_mouton__tile | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.18 | 0.72 | 0.70 | -0.64 | 0.33 | -0.57 | 0.80 |
+| moon_mons_mouton__tile | bare_midlat sample 266 | bare_midlat | 35.52, 83.00 | 0.14 | 0.67 | -0.65 | -0.73 | 0.45 | 0.09 | 0.80 |
 | moon_mons_mouton_plateau__tile | Ashikule Volcanic Field | volcano_field_cone | 35.74, 81.65 | 0.15 | 0.25 | -0.27 | -0.73 | 0.45 | 0.44 | 0.59 |
 | moon_nobile_rim__tile | Royal Society Range | volcano_field_cone | -78.25, 163.33 | 0.14 | 0.29 | -0.51 | -0.62 | 0.47 | 0.50 | 0.47 |
 | moon_de_gerlache_rim2__tile | Royal Society Range | volcano_field_cone | -78.25, 163.33 | 0.22 | 0.54 | -0.38 | -0.64 | 0.30 | 0.50 | 0.74 |

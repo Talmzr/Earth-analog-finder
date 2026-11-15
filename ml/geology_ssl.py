@@ -139,6 +139,10 @@ def main():
     ap.add_argument("--be", type=int, default=40, help="Earth texts per batch")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--max-len", type=int, default=0, help="token limit while TRAINING (0 = 256); embeddings always use 256")
+    ap.add_argument("--eval-every", type=int, default=5, help="held-out evaluation every N epochs (and after the last)")
+    ap.add_argument("--before", type=json.loads, default=None,
+                    help="reuse a known pretrained-baseline metrics dict (JSON) instead of re-evaluating; saves a full pass on CPU")
     a = ap.parse_args()
     C.ensure_dirs()
     torch.manual_seed(a.seed)
@@ -187,6 +191,9 @@ def main():
     enc = Encoder().to(device)
     if a.smoke and device.type == "cpu":
         enc.max_len = 96
+    full_len = enc.max_len
+    if a.max_len:
+        enc.max_len = a.max_len
     params = [p for p in enc.bert.parameters() if p.requires_grad]
     C.log(f"params {sum(p.numel() for p in enc.bert.parameters()) / 1e6:.1f}M, trainable {sum(p.numel() for p in params) / 1e6:.1f}M")
     opt = torch.optim.AdamW([dict(params=params, lr=a.lr), dict(params=enc.head.parameters(), lr=a.lr * 20)], weight_decay=0.01)
@@ -200,7 +207,7 @@ def main():
     ent_text = dict(zip(ent["entity_id"], zt))
     ev = lambda: evaluate(enc, device, amp, u_text, R, et, va_idx, ent_text, anchors, earth["patch_id"].tolist())  # noqa: E731
     metrics = dict(args=vars(a), n_train=int(len(tr_idx)), n_val=int(len(va_idx)), history=[])
-    metrics["before"] = ev()
+    metrics["before"] = a.before if a.before else ev()
     C.log("BEFORE fine-tuning (pretrained BGE):", metrics["before"])
     ee_code = {k: i for i, k in enumerate(EE_CLASSES)}
     t0 = time.time()
@@ -242,7 +249,9 @@ def main():
         agg /= steps_per_epoch
         rec = dict(epoch=ep + 1, moon_to_earth=round(float(agg[0]), 4), earth_to_moon=round(float(agg[1]), 4),
                    earth_earth=round(float(agg[2]), 4), min=round((time.time() - t0) / 60, 1))
-        if (ep + 1) % 5 == 0 or ep + 1 == epochs:
+        if ep + 1 == epochs:
+            enc.max_len = full_len                                  # evaluate + embed at the full length
+        if (ep + 1) % a.eval_every == 0 or ep + 1 == epochs:
             rec["val"] = ev()
         metrics["history"].append(rec)
         C.log(rec)

@@ -54,8 +54,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 172,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -142,10 +142,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 73,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 4,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 2
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -164,14 +164,14 @@
     "composite": 0.11
    },
    {
-    "name": "ice_edge sample 397",
-    "id": "lc_ice_edge_0397",
-    "composite": 0.08
-   },
-   {
     "name": "ice_edge sample 343",
     "id": "lc_ice_edge_0343",
     "composite": 0.06
+   },
+   {
+    "name": "sparse_cold sample 140",
+    "id": "lc_sparse_cold_0140",
+    "composite": 0.03
    }
   ]
  },
@@ -228,10 +228,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 608,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 8
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.212,
@@ -250,14 +250,14 @@
     "composite": 0.22
    },
    {
-    "name": "lichen_moss sample 243",
-    "id": "lc_lichen_moss_0243",
-    "composite": 0.19
+    "name": "antarctic_ice_free sample 327",
+    "id": "lc_antarctic_ice_free_0327",
+    "composite": 0.18
    },
    {
-    "name": "ice_edge sample 379",
-    "id": "lc_ice_edge_0379",
-    "composite": 0.19
+    "name": "bare_midlat sample 355",
+    "id": "lc_bare_midlat_0355",
+    "composite": 0.16
    }
   ]
  },
@@ -316,10 +316,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 460,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 7
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -338,13 +338,13 @@
     "composite": 0.18
    },
    {
-    "name": "lichen_moss sample 251",
-    "id": "lc_lichen_moss_0251",
-    "composite": 0.16
+    "name": "bare_midlat sample 355",
+    "id": "lc_bare_midlat_0355",
+    "composite": 0.15
    },
    {
-    "name": "lichen_moss sample 51",
-    "id": "lc_lichen_moss_0051",
+    "name": "antarctic_ice_free sample 327",
+    "id": "lc_antarctic_ice_free_0327",
     "composite": 0.15
    }
   ]
@@ -404,8 +404,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 211,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -492,10 +492,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 275,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 4,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 3
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -509,19 +509,19 @@
   },
   "top3": [
    {
+    "name": "ice_edge sample 343",
+    "id": "lc_ice_edge_0343",
+    "composite": 0.08
+   },
+   {
     "name": "sparse_cold sample 49",
     "id": "lc_sparse_cold_0049",
-    "composite": 0.12
+    "composite": 0.06
    },
    {
     "name": "ice_edge sample 397",
     "id": "lc_ice_edge_0397",
-    "composite": 0.12
-   },
-   {
-    "name": "ice_edge sample 343",
-    "id": "lc_ice_edge_0343",
-    "composite": 0.08
+    "composite": 0.06
    }
   ]
  },
@@ -547,7 +547,7 @@
   "landing_to_ice_km": 1.29,
   "best_score": {
    "terrain": 0.73,
-   "geology": 0.8,
+   "geology": 0.78,
    "thermal": -0.49,
    "water_ice": 0.53,
    "dust": 0.7,
@@ -578,8 +578,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 6,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 3,
+   "instrument_gpr_drill_subsurface": 19,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -633,7 +633,7 @@
   "landing_to_ice_km": 1.29,
   "best_score": {
    "terrain": 0.5,
-   "geology": 0.8,
+   "geology": 0.78,
    "thermal": -0.5,
    "water_ice": 0.53,
    "dust": 0.7,
@@ -666,8 +666,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 20,
+   "instrument_spectrometers_mineralogy": 3,
+   "instrument_gpr_drill_subsurface": 18,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -752,10 +752,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 505,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 4
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.212,
@@ -769,19 +769,19 @@
   },
   "top3": [
    {
-    "name": "lichen_moss sample 175",
-    "id": "lc_lichen_moss_0175",
-    "composite": 0.19
-   },
-   {
     "name": "Atakor Volcanic Field",
     "id": "gvp_225005",
     "composite": 0.17
    },
    {
-    "name": "lichen_moss sample 269",
-    "id": "lc_lichen_moss_0269",
+    "name": "bare_midlat sample 266",
+    "id": "lc_bare_midlat_0266",
     "composite": 0.16
+   },
+   {
+    "name": "ice_edge sample 158",
+    "id": "lc_ice_edge_0158",
+    "composite": 0.13
    }
   ]
  },
@@ -840,10 +840,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 297,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 17,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 6
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -857,19 +857,19 @@
   },
   "top3": [
    {
-    "name": "lichen_moss sample 269",
-    "id": "lc_lichen_moss_0269",
-    "composite": 0.14
-   },
-   {
     "name": "Purico Complex",
     "id": "gvp_355094",
     "composite": 0.13
    },
    {
-    "name": "sparse_cold sample 49",
-    "id": "lc_sparse_cold_0049",
-    "composite": 0.12
+    "name": "bare_midlat sample 148",
+    "id": "lc_bare_midlat_0148",
+    "composite": 0.09
+   },
+   {
+    "name": "bare_polar sample 237",
+    "id": "lc_bare_polar_0237",
+    "composite": 0.09
    }
   ]
  },
@@ -928,10 +928,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 510,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 4
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -955,9 +955,9 @@
     "composite": 0.14
    },
    {
-    "name": "lichen_moss sample 251",
-    "id": "lc_lichen_moss_0251",
-    "composite": 0.13
+    "name": "bare_midlat sample 355",
+    "id": "lc_bare_midlat_0355",
+    "composite": 0.11
    }
   ]
  },
@@ -1016,10 +1016,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 429,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 4
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -1102,8 +1102,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 4,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1190,10 +1190,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 16,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 19,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 1
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -1276,10 +1276,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 167,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 2
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.212,
@@ -1293,18 +1293,18 @@
   },
   "top3": [
    {
-    "name": "ice_edge sample 397",
-    "id": "lc_ice_edge_0397",
-    "composite": 0.14
-   },
-   {
-    "name": "sparse_cold sample 49",
-    "id": "lc_sparse_cold_0049",
-    "composite": 0.11
-   },
-   {
     "name": "antarctic_ice_free sample 8",
     "id": "lc_antarctic_ice_free_0008",
+    "composite": 0.08
+   },
+   {
+    "name": "ice_edge sample 374",
+    "id": "lc_ice_edge_0374",
+    "composite": 0.08
+   },
+   {
+    "name": "ice_edge sample 343",
+    "id": "lc_ice_edge_0343",
     "composite": 0.08
    }
   ]
@@ -1364,10 +1364,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 155,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 7,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 3
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -1391,9 +1391,9 @@
     "composite": 0.12
    },
    {
-    "name": "ice_edge sample 397",
-    "id": "lc_ice_edge_0397",
-    "composite": 0.1
+    "name": "Solo, El",
+    "id": "gvp_355131",
+    "composite": 0.08
    }
   ]
  },
@@ -1450,8 +1450,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 5,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1538,8 +1538,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 2,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 20,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1626,8 +1626,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 81,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1714,8 +1714,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 239,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 19,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1736,14 +1736,14 @@
     "composite": 0.08
    },
    {
-    "name": "sparse_cold sample 49",
-    "id": "lc_sparse_cold_0049",
-    "composite": 0.06
-   },
-   {
     "name": "Royal Society Range",
     "id": "gvp_390021",
     "composite": 0.06
+   },
+   {
+    "name": "Dubbi",
+    "id": "gvp_221100",
+    "composite": 0.05
    }
   ]
  },
@@ -1802,8 +1802,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 74,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 24,
-   "instrument_gpr_drill_subsurface": 2,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 1,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -1890,10 +1890,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 330,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 20,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 3
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -1917,9 +1917,9 @@
     "composite": 0.15
    },
    {
-    "name": "lichen_moss sample 112",
-    "id": "lc_lichen_moss_0112",
-    "composite": 0.14
+    "name": "bare_midlat sample 59",
+    "id": "lc_bare_midlat_0059",
+    "composite": 0.09
    }
   ]
  },
@@ -1978,8 +1978,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 0,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 6,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -2033,7 +2033,7 @@
   "landing_to_ice_km": 1.29,
   "best_score": {
    "terrain": 0.69,
-   "geology": 0.8,
+   "geology": 0.78,
    "thermal": -0.5,
    "water_ice": 0.53,
    "dust": 0.7,
@@ -2062,8 +2062,8 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 177,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 3,
+   "instrument_gpr_drill_subsurface": 19,
    "planetary_protection_contamination_blanks": 99,
    "geology_eva_training": 0
   },
@@ -2150,10 +2150,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 435,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 5
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -2167,19 +2167,19 @@
   },
   "top3": [
    {
-    "name": "lichen_moss sample 175",
-    "id": "lc_lichen_moss_0175",
-    "composite": 0.18
-   },
-   {
-    "name": "lichen_moss sample 269",
-    "id": "lc_lichen_moss_0269",
-    "composite": 0.17
-   },
-   {
     "name": "bare_midlat sample 266",
     "id": "lc_bare_midlat_0266",
     "composite": 0.14
+   },
+   {
+    "name": "ice_edge sample 158",
+    "id": "lc_ice_edge_0158",
+    "composite": 0.12
+   },
+   {
+    "name": "lichen_moss sample 175",
+    "id": "lc_lichen_moss_0175",
+    "composite": 0.12
    }
   ]
  },
@@ -2238,10 +2238,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 493,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 21,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 4
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -2265,9 +2265,9 @@
     "composite": 0.15
    },
    {
-    "name": "lichen_moss sample 51",
-    "id": "lc_lichen_moss_0051",
-    "composite": 0.13
+    "name": "bare_midlat sample 355",
+    "id": "lc_bare_midlat_0355",
+    "composite": 0.12
    }
   ]
  },
@@ -2326,10 +2326,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 281,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 37,
-   "instrument_gpr_drill_subsurface": 19,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 2
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -2414,10 +2414,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 190,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 24,
-   "instrument_gpr_drill_subsurface": 5,
+   "instrument_spectrometers_mineralogy": 4,
+   "instrument_gpr_drill_subsurface": 1,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 2
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -2502,10 +2502,10 @@
    "illumination_power_planning": 0,
    "habitat_human_ops_isolation": 335,
    "dust_mitigation": 27,
-   "instrument_spectrometers_mineralogy": 39,
-   "instrument_gpr_drill_subsurface": 1,
+   "instrument_spectrometers_mineralogy": 5,
+   "instrument_gpr_drill_subsurface": 0,
    "planetary_protection_contamination_blanks": 99,
-   "geology_eva_training": 5
+   "geology_eva_training": 0
   },
   "composite_weights": {
    "terrain": 0.193,
@@ -2524,14 +2524,14 @@
     "composite": 0.17
    },
    {
-    "name": "lichen_moss sample 112",
-    "id": "lc_lichen_moss_0112",
-    "composite": 0.11
-   },
-   {
     "name": "Purico Complex",
     "id": "gvp_355094",
     "composite": 0.09
+   },
+   {
+    "name": "Toh, Tarso",
+    "id": "gvp_225009",
+    "composite": 0.08
    }
   ]
  },
