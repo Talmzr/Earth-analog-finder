@@ -37,6 +37,8 @@ Every category score runs from -1 to +1:
 
 Each experiment gets a verdict plus an "also account for" list: **sufficient** when every required category meets its minimum, **avoid** only when a required category is clearly misleading (below -0.5), **partial** otherwise. Real analog campaigns (Desert RATS, PANGAEA, Apollo geology training) use sites that match the tested aspect and only partly match the rest, so "partial" is the normal verdict for a good analog. Gravity, vacuum, radiation and the 25-110 K temperatures of permanent shadow can never be reproduced on Earth, so they always appear as caveats.
 
+**Place verdict (the badge on the globe):** a place (Moon target x Earth tile) is **sufficient** if at least one experiment is sufficient there, **partial** if none is sufficient but at least one is partial, and **avoid** only if no experiment is even partly possible. The overall score (colour) shows how close the place is overall; the badge shows whether it is usable for at least one test.
+
 ### Categories
 
 CV = site-grouped 5-fold cross-validation against the 161 draft anchors (mean absolute error / rank agreement); naive = predicting the average label.

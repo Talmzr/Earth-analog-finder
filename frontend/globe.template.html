@@ -564,6 +564,15 @@ const CAT = Object.fromEntries(META.categories.map(c => [c.id, c]));        // c
 const EXP = Object.fromEntries(META.experiments.map(e => [e.id, e]));       // experiment id -> metadata
 // Project verdict bands: >= 0.5 sufficient, 0..0.5 partial, < 0 avoid
 const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'sufficient' : v >= 0 ? 'partial' : 'avoid';
+// Overall verdict of a place (Moon target x Earth tile), from its experiment verdicts rather than the overall score:
+// sufficient = at least one experiment is sufficient there; partial = none sufficient but at least one partial;
+// avoid = no experiment is even partly possible. (No Earth site matches the Moon overall, so a negative overall score
+// alone would call almost every place 'avoid', including established analog test sites.)
+const overallVerdict = (tid, j) => {
+  if (tid == null || j == null) return 'n/a';
+  const r = Object.values(SC.readyAll(tid, j));
+  return r.includes(3) ? 'sufficient' : r.includes(2) ? 'partial' : r.includes(1) ? 'avoid' : 'n/a';
+};
 const READY = { '-1': 'not relevant', 0: 'not available', 1: 'avoid', 2: 'partial', 3: 'sufficient' };
 
 const SC = (() => {
@@ -725,7 +734,7 @@ function renderEarthScore(t) {
   const m = selectedMoonTarget;
   if (!m) {
     const b = bestMoonFor(t);
-    box.innerHTML = b ? `<div class="row"><span class="lbl">Best Moon match (of 30 targets)</span><span class="vd ${tone(b.v)}">${verdictOf(b.v)}</span></div>
+    box.innerHTML = b ? `<div class="row"><span class="lbl">Best Moon match (of 30 targets)</span><span class="vd ${overallVerdict(b.id, t.idx).replace("/", "")}">${overallVerdict(b.id, t.idx)}</span></div>
       <div class="row"><span class="sub"><b>${esc(MT[b.id].name)}</b></span><span class="big">${fmtScore(b.v)}</span></div>
       <div class="sub">Choose a Moon target to see this tile's category scores and experiment verdicts.</div>` : '<div class="sub">No scores for this tile.</div>';
     return;
@@ -734,7 +743,7 @@ function renderEarthScore(t) {
   const nS = Object.values(rd).filter(x => x === 3).length, nP = Object.values(rd).filter(x => x === 2).length;
   const rank = (m.top || []).findIndex(x => x.tile === t.idx);
   const order = [...META.composite_categories, ...META.categories.map(c => c.id).filter(c => !META.composite_categories.includes(c))];
-  box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${tone(sc.composite)}">${verdictOf(sc.composite)}</span></div>
+  box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${overallVerdict(m.id, t.idx).replace("/", "")}">${overallVerdict(m.id, t.idx)}</span></div>
     <div class="row"><span class="sub">${rank >= 0 ? `<b>#${rank + 1}</b> of 4,310 Earth tiles` : 'Experiment-weighted mean of the comparable categories'}</span><span class="big">${sc.composite === null ? '—' : fmtScore(sc.composite)}</span></div>
     ${order.filter(c => !(c === 'caves' && sc.caves === null)).map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
     <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}. * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
