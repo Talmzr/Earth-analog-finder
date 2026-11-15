@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-15T11:03:56Z",
+ "generated_utc": "2026-11-15T11:09:35Z",
  "n_moon_targets": 30,
  "n_earth_tiles": 4310,
  "score": {
@@ -178,23 +178,6 @@
     "Ice-cemented regolith at cryogenic temperature is much harder than Earth permafrost near 0 C.",
     "Volatile contaminants (H2S, NH3, CO2 ...) need handling.",
     "PSR operations: no sunlight for power, extreme cold soak."
-   ]
-  },
-  {
-   "id": "regolith_excavation_construction",
-   "name": "Regolith excavation, berms, landing pads, sintering",
-   "required": {
-    "terrain": 0.3
-   },
-   "supporting": {
-    "geology": 0.2,
-    "operations": 0.3
-   },
-   "also_account_for": [
-    "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
-    "1/6 g reduces excavator weight and reaction force; lunar regolith is very compact below ~30 cm with interlocking angular grains.",
-    "Sintering and microwave heating depend on glass and nanophase iron absent from Earth tephra.",
-    "No water for concrete; binders outgas in vacuum."
    ]
   },
   {

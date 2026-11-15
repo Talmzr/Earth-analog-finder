@@ -1,6 +1,6 @@
 {
   "version": "0.2-draft (2026-11-15)",
-  "_changes": "2026-11-15: removed categories dust_regolith, biology_sterility, caves_subsurface (no Moon data: identical score for every Moon target) and the experiments that needed only them (dust_mitigation, planetary_protection_contamination_blanks, cave_pit_robotics).",
+  "_changes": "2026-11-15: removed categories dust_regolith, biology_sterility, caves_subsurface (no Moon data: identical score for every Moon target) and the experiments that needed only them (dust_mitigation, planetary_protection_contamination_blanks, cave_pit_robotics); regolith_excavation_construction removed too (without dust only a terrain check was left, not a regolith test).",
   "_readme": "Inference rule table. For a (Moon location, Earth location) pair and each experiment: check moon_precondition, compare category scores (config/categories.json, range -1..1) with the minimums, emit sufficient / partial / avoid / not_applicable, and attach 'also account for' caveats. Expressions use the same helpers as categories.json and are evaluated on the Moon row (moon_precondition) or Earth row (earth_hint).",
 
   "decision_rule": {
@@ -82,15 +82,6 @@
        "Ice-cemented regolith at cryogenic temperature is much harder than Earth permafrost near 0 C.",
        "Volatile contaminants (H2S, NH3, CO2 ...) need handling.",
        "PSR operations: no sunlight for power, extreme cold soak."]},
-
-    {"id": "regolith_excavation_construction", "name": "Regolith excavation, berms, landing pads, sintering",
-     "required": {"terrain": 0.3}, "supporting": {"geology": 0.2, "ops_landing_mobility": 0.3},
-     "moon_precondition": null,
-     "also_account_for": [
-       "Regolith and dust behaviour are not scored (there is no per-site lunar dust data to compare with): test with a lunar regolith simulant or in a regolith bin.",
-       "1/6 g reduces excavator weight and reaction force; lunar regolith is very compact below ~30 cm with interlocking angular grains.",
-       "Sintering and microwave heating depend on glass and nanophase iron absent from Earth tephra.",
-       "No water for concrete; binders outgas in vacuum."]},
 
     {"id": "thermal_power_extreme_cold_long_night", "name": "Thermal control & power survival (extreme cold, long shadow/night)",
      "required": {"thermal_illumination": 0.4}, "supporting": {"ops_landing_mobility": 0.0},

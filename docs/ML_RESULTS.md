@@ -64,7 +64,6 @@ Terrain embeddings stay separable by body, so pooled training alone does not giv
 | rover_mobility_navigation | 1,101 | 19,381 | 108,818 |
 | ice_prospecting_instruments | 4,241 | 34,559 | 81,880 |
 | isru_ice_extraction | 80 | 29,932 | 64,808 |
-| regolith_excavation_construction | 5,723 | 14,759 | 108,818 |
 | thermal_power_extreme_cold_long_night | 17 | 1,876 | 127,407 |
 | illumination_power_planning | 0 | 671 | 128,629 |
 | habitat_human_ops_isolation | 5,513 | 11,835 | 111,952 |
@@ -80,29 +79,29 @@ Counts are (Moon target, Earth tile) pairs. No Earth tile is sufficient for illu
 |---|---|---|---|---|---|---|---|---|---|
 | shackleton_rim__landing | sparse_cold sample 49 | sparse_cold | 70.08, -71.11 | 0.30 | 0.29 | 0.28 | -0.66 | 0.34 | 0.32 |
 | shackleton_rim__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.32 | 0.46 | 0.25 | -0.65 | 0.30 | 0.22 |
-| peak_near_cabeus_b__landing | lichen_moss sample 243 | lichen_moss | 70.86, -76.29 | 0.45 | 0.49 | 0.25 | -0.64 | 0.32 | 0.65 |
-| peak_near_cabeus_b__ice | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.42 | 0.52 | 0.07 | -0.63 | 0.41 | 0.62 |
+| peak_near_cabeus_b__landing | lichen_moss sample 243 | lichen_moss | 70.86, -76.29 | 0.44 | 0.49 | 0.25 | -0.64 | 0.32 | 0.65 |
+| peak_near_cabeus_b__ice | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.41 | 0.52 | 0.07 | -0.63 | 0.41 | 0.62 |
 | haworth__landing | lichen_moss sample 269 | lichen_moss | 71.35, -76.58 | 0.28 | 0.27 | 0.17 | -0.65 | 0.32 | 0.38 |
-| haworth__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.42 | 0.55 | 0.25 | -0.65 | 0.30 | 0.49 |
-| malapert_massif__landing | ice_edge sample 184 | ice_edge | 37.47, 75.28 | 0.20 | 0.66 | -0.74 | -0.72 | 0.44 | 0.37 |
-| malapert_massif__ice | bare_polar sample 29 | bare_polar | 65.14, 145.39 | 0.11 | 0.32 | -0.32 | -0.66 | 0.28 | 0.12 |
+| haworth__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.41 | 0.55 | 0.25 | -0.65 | 0.30 | 0.49 |
+| malapert_massif__landing | ice_edge sample 184 | ice_edge | 37.47, 75.28 | 0.19 | 0.66 | -0.74 | -0.72 | 0.44 | 0.37 |
+| malapert_massif__ice | McMurdo Dry Valleys (Wright Valley) | named_site | -77.52, 161.60 | 0.11 | 0.26 | -0.41 | -0.63 | 0.48 | 0.13 |
 | mons_mouton__landing | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.41 | 0.46 | 0.26 | -0.65 | 0.32 | 0.56 |
 | mons_mouton__ice | lichen_moss sample 269 | lichen_moss | 71.35, -76.58 | 0.35 | 0.39 | 0.25 | -0.65 | 0.32 | 0.41 |
 | mons_mouton_plateau__landing | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.40 | 0.46 | 0.07 | -0.63 | 0.41 | 0.65 |
-| mons_mouton_plateau__ice | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.40 | 0.42 | 0.26 | -0.65 | 0.32 | 0.55 |
+| mons_mouton_plateau__ice | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.39 | 0.42 | 0.26 | -0.65 | 0.32 | 0.55 |
 | nobile_rim_1__landing | ice_edge sample 274 | ice_edge | 71.86, -28.18 | 0.24 | 0.56 | -0.28 | -0.65 | 0.38 | 0.27 |
 | nobile_rim_1__ice | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.23 | 0.52 | -0.48 | -0.63 | 0.38 | 0.45 |
 | nobile_rim_2__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.35 | 0.47 | 0.18 | -0.65 | 0.33 | 0.36 |
 | nobile_rim_2__ice | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.34 | 0.49 | 0.18 | -0.65 | 0.33 | 0.30 |
-| de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.27 | 0.62 | -0.50 | -0.64 | 0.38 | 0.48 |
-| de_gerlache_rim_2__ice | Ojos del Salado, Nevados | volcano_strato_dome | -27.11, -68.54 | 0.14 | 0.37 | -0.47 | -0.73 | 0.43 | 0.22 |
-| slater_plain__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.28 | 0.31 | 0.25 | -0.65 | 0.33 | 0.26 |
+| de_gerlache_rim_2__landing | antarctic_ice_free sample 233 | antarctic_ice_free | -78.31, 164.87 | 0.26 | 0.62 | -0.50 | -0.64 | 0.38 | 0.48 |
+| de_gerlache_rim_2__ice | Ojos del Salado, Nevados | volcano_strato_dome | -27.11, -68.54 | 0.15 | 0.37 | -0.47 | -0.73 | 0.43 | 0.22 |
+| slater_plain__landing | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.29 | 0.31 | 0.25 | -0.65 | 0.33 | 0.26 |
 | slater_plain__ice | sparse_cold sample 49 | sparse_cold | 70.08, -71.11 | 0.32 | 0.32 | 0.28 | -0.66 | 0.34 | 0.36 |
-| moon_shackleton__tile | antarctic_ice_free sample 110 | antarctic_ice_free | -78.12, 162.88 | 0.25 | 0.55 | -0.48 | -0.65 | 0.30 | 0.51 |
+| moon_shackleton__tile | antarctic_ice_free sample 110 | antarctic_ice_free | -78.12, 162.88 | 0.24 | 0.55 | -0.48 | -0.65 | 0.30 | 0.51 |
 | moon_peak_cabeus_b__tile | lichen_moss sample 112 | lichen_moss | 72.93, -80.85 | 0.47 | 0.64 | 0.08 | -0.64 | 0.35 | 0.72 |
 | moon_haworth__tile | ice_edge sample 274 | ice_edge | 71.86, -28.18 | 0.05 | 0.17 | -0.28 | -0.66 | 0.30 | 0.01 |
 | moon_malapert_massif__tile | Adams | volcano_strato_dome | 46.21, -121.49 | 0.30 | 0.59 | -0.36 | -0.73 | 0.19 | 0.55 |
-| moon_mons_mouton__tile | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.48 | 0.58 | 0.26 | -0.65 | 0.32 | 0.69 |
+| moon_mons_mouton__tile | lichen_moss sample 175 | lichen_moss | 71.26, -75.69 | 0.47 | 0.58 | 0.26 | -0.65 | 0.32 | 0.69 |
 | moon_mons_mouton_plateau__tile | Hiawatha impact structure | impact_structure | 78.83, -67.30 | 0.40 | 0.45 | 0.07 | -0.63 | 0.41 | 0.67 |
 | moon_nobile_rim__tile | ice_edge sample 397 | ice_edge | 71.08, -74.28 | 0.41 | 0.49 | 0.18 | -0.65 | 0.33 | 0.59 |
 | moon_de_gerlache_rim2__tile | lichen_moss sample 210 | lichen_moss | 70.28, -71.95 | 0.26 | 0.22 | 0.08 | -0.66 | 0.30 | 0.47 |
@@ -125,7 +124,7 @@ Composite = weighted mean of **terrain, geology, water_ice, operations** only (t
 
 | terrain | geology | thermal | water_ice | operations |
 |---|---|---|---|---|
-| 0.33 | 0.24 | 0.00 | 0.18 | 0.24 |
+| 0.31 | 0.24 | 0.00 | 0.21 | 0.24 |
 
 ## 6. Deviations from the brief and known limits
 
@@ -135,7 +134,7 @@ Composite = weighted mean of **terrain, geology, water_ice, operations** only (t
 - **Geology:** an Earth tile counts as anorthositic only when anorthosite/norite/troctolite is its first-listed Macrostrat lithology, its name, or a curated site tag. Granite/gneiss units that mention anorthosite later in the description are a partial match only, and their geology score is capped at 0.3 (the text encoder was fine-tuned before this rule and still rates them close to highland text).
 - **Thermal:** night minimum, grazing sun and noon sun height only (swing, max temperature and polar night were dropped). No Earth site reaches lunar temperatures, so the absolute thermal score is always low; `thermal_percentile` in the web bundle gives the closest-approach rank among Earth tiles instead. Scores for the Tranquillitatis pit are extrapolated: all thermal anchors are polar.
 - **Water/ice:** permafrost under a tile counts as ice at distance zero; a liquid-water term was added.
-- **Removed categories:** dust/regolith, biological sterility and caves/lava tubes were dropped with the experiments that needed only them (dust mitigation, planetary protection blanks, cave/pit robotics). None of them used Moon data: every Moon target got the same score for a given Earth site. Experiments that listed dust as a requirement now carry a caveat to test regolith behaviour with a simulant.
+- **Removed categories:** dust/regolith, biological sterility and caves/lava tubes were dropped with the experiments that needed only them (dust mitigation, planetary protection blanks, cave/pit robotics). Regolith excavation was removed too: without dust it was only a terrain check. None of them used Moon data: every Moon target got the same score for a given Earth site. Experiments that listed dust as a requirement now carry a caveat to test regolith behaviour with a simulant.
 - **Missing data in the composite:** when an Earth tile has no data for a category (e.g. no bedrock map in Antarctica), the composite uses that Moon target's median for the category instead of skipping it; skipping gave data-poor tiles a free pass and put Antarctic samples at #1 for nearly every target. Category scores themselves stay n/a.
 - **Files:** `category_scores` and `experiment_readiness` are gzip CSV when no parquet engine is installed; `results/score_matrices.npz` holds the same numbers as arrays.
 - **Not scored, always a caveat:** 1/6 gravity, vacuum, radiation, 25-110 K shadowed temperatures.
