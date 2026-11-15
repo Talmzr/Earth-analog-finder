@@ -571,7 +571,7 @@ const verdictOf = v => v === null || v === undefined ? 'n/a' : v >= 0.5 ? 'suffi
 // 'Sufficient' needs an experiment that depends on THIS Moon target: tests whose required categories are only lunar
 // constants (dust mitigation, planetary protection: same for every Moon target, any dry desert passes) can make a
 // place 'partial' but not 'sufficient'.
-const INVARIANT_REQ = new Set(['dust_regolith', 'biology_sterility']);
+const INVARIANT_REQ = new Set(['dust', 'biology', 'dust_regolith', 'biology_sterility']);   // web data uses the short names
 const TARGET_FREE_EXP = new Set(META.experiments.filter(e => Object.keys(e.required || {}).every(c => INVARIANT_REQ.has(c))).map(e => e.id));
 // 'Sufficient' also needs an overall score of at least SUFFICIENT_MIN: a place that passes one test but is far from
 // the Moon target overall is labelled 'partial'.
@@ -751,12 +751,16 @@ function renderEarthScore(t) {
   }
   const sc = SC.scores(m.id, t.idx), rd = SC.readyAll(m.id, t.idx);
   const nS = Object.values(rd).filter(x => x === 3).length, nP = Object.values(rd).filter(x => x === 2).length;
+  // sufficient tests split into Moon-target-specific ones (these earn the 'sufficient' label) and general ones
+  // (sterility / dust: same for every Moon target, they never earn it)
+  const sufSpec = Object.entries(rd).filter(([e, x]) => x === 3 && !TARGET_FREE_EXP.has(e)).map(([e]) => EXP[e] ? EXP[e].name : e);
+  const sufGen = Object.entries(rd).filter(([e, x]) => x === 3 && TARGET_FREE_EXP.has(e)).map(([e]) => EXP[e] ? EXP[e].name : e);
   const rank = (m.top || []).findIndex(x => x.tile === t.idx);
   const order = [...META.composite_categories, ...META.categories.map(c => c.id).filter(c => !META.composite_categories.includes(c))];
   box.innerHTML = `<div class="row"><span class="lbl">Overall match · ${esc(m.name)}</span><span class="vd ${overallVerdict(m.id, t.idx).replace("/", "")}">${overallVerdict(m.id, t.idx)}</span></div>
     <div class="row"><span class="sub">${rank >= 0 ? `<b>#${rank + 1}</b> of 4,310 Earth tiles` : 'Experiment-weighted mean of the comparable categories'}</span><span class="big">${sc.composite === null ? '—' : fmtScore(sc.composite)}</span></div>
     ${order.filter(c => !(c === 'caves' && sc.caves === null)).map(c => miniBar(CAT[c].short + (CAT[c].in_composite ? '' : ' *'), sc[c], CAT[c].label + ': ' + CAT[c].how)).join('')}
-    <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}. * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
+    <div class="sub">Experiments: <b>${nS}</b> sufficient · <b>${nP}</b> partial of ${(m.relevant || []).length}.${sufSpec.length ? ` Sufficient for this target: ${esc(sufSpec.join(', '))}.` : ''}${sufGen.length ? ` General only (does not count toward the label): ${esc(sufGen.join(', '))}.` : ''} * not in the overall score. Full breakdown in 📊 Similarity Assessment.</div>`;
 }
 
 // ══════════════════════════════════════
